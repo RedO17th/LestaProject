@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class BasePlayer : MonoBehaviour
 {
-    [SerializeField] private Animator _aController = null;
     [SerializeField] private List<BasePlayerContoller> _controllers;
 
     #region Public Properties

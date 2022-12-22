@@ -6,9 +6,6 @@ using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class MovementController : BasePlayerContoller
 {
-    //Test
-    public Animator a;
-
      //TODO: Transfer to Settings system
     [Range(5f, 25f)]
     [SerializeField] private float _speedMovement = 5f;
@@ -42,19 +39,8 @@ public class MovementController : BasePlayerContoller
 
 
 
-        if (Input.GetKey(KeyCode.W))
-        {
-            a.SetBool("Walk", true);
-        }
-        else
-        { 
-            a.SetBool("Walk", false);
-        }
-
-
-
-        //_direction = _input.Read();
-        //_player.Move(_direction * _speedMovement * Time.deltaTime);
+        _direction = _input.Read();
+        _player.Move(_direction * _speedMovement * Time.deltaTime);
     }
 
     private void CalcuateRotation()
