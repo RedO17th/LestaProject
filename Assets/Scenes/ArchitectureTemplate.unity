@@ -132,8 +132,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 199805487}
+  - component: {fileID: 199805488}
   m_Layer: 0
-  m_Name: Environtment
+  m_Name: Environtment_!
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -166,6 +167,35 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &199805488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 199805486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.13333334
+  m_BuildHeightMesh: 0
+  m_NavMeshData: {fileID: 23800000, guid: 77a8908fd478a9f44820d87caf210988, type: 2}
 --- !u!1 &236143486
 GameObject:
   m_ObjectHideFlags: 0
@@ -339,8 +369,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 297425787}
-  m_LocalRotation: {x: -0.23201668, y: 0.67128754, z: -0.2346757, w: -0.66367817}
-  m_LocalPosition: {x: 10.288261, y: 8.046552, z: -0.12517461}
+  m_LocalRotation: {x: -0.37703285, y: -0.054956585, z: 0.022452654, w: -0.92429537}
+  m_LocalPosition: {x: -3.5981114, y: 14.567892, z: -16.768898}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -468,7 +498,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 393695040}
   m_LocalRotation: {x: -0, y: -0.92387944, z: -0, w: 0.38268372}
-  m_LocalPosition: {x: 8.3935, y: -0.25, z: -8.3781}
+  m_LocalPosition: {x: 8.378216, y: 0.25, z: -8.393775}
   m_LocalScale: {x: 3.7191532, y: 0.5, z: 49.977997}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1563,8 +1593,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6378634188168283053, guid: cbc58a18f1aac9a4c8d7947d405a4bee, type: 3}
+      propertyPath: _navMeshAgent
+      value: 
+      objectReference: {fileID: 1437986107866967634}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cbc58a18f1aac9a4c8d7947d405a4bee, type: 3}
+--- !u!195 &1437986107866967634 stripped
+NavMeshAgent:
+  m_CorrespondingSourceObject: {fileID: 9210229231687253681, guid: cbc58a18f1aac9a4c8d7947d405a4bee, type: 3}
+  m_PrefabInstance: {fileID: 1437986107866967633}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6294595698182612778
 PrefabInstance:
   m_ObjectHideFlags: 0
