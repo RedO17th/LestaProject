@@ -6,13 +6,11 @@ using UnityEngine;
 
 public enum GameStateType { None = -1, Menu, Pause, GamePlay, Exit }
 
-public enum SubSystemType { None = -1, UI, Sound, Settings, Military, Time }
-
 public class ProjectSystem : MonoBehaviour
 {
     [SerializeField] private GameStateType _standartGameState = GameStateType.None;
 
-    [SerializeField] private List<BaseProjectSubSystem> _subsystems;
+    [SerializeField] private List<BaseProjectSubSystem> _subSystems;
 
     #region Singleton instance
     public static ProjectSystem Instance => _instance;
@@ -57,7 +55,7 @@ public class ProjectSystem : MonoBehaviour
     }
     private void InitializeSubSystems()
     {
-        foreach (var s in _subsystems)
+        foreach (var s in _subSystems)
             s.Initialize(this);
     }
     #endregion
@@ -83,10 +81,21 @@ public class ProjectSystem : MonoBehaviour
         return result;
     }
 
-    public BaseProjectSubSystem GetSubSystemBy(SubSystemType type)
+    public BaseProjectSubSystem GetSubSystemBy(Type systemType)
     {
-        return _subsystems.Where(s => s.Type == type) as BaseProjectSubSystem;
-    }
+        BaseProjectSubSystem system = null;
+
+        foreach (var s in _subSystems)
+        {
+            if (s.GetType() == systemType)
+            {
+                system = s;
+                break;
+            }
+        }
+
+        return system;
+    } 
 
     private void Update()
     {

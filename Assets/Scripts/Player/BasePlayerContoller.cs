@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics.Tracing;
 using UnityEngine;
 
-public enum PlayerControllerType { None = -1, Movement, Ability, Inventory, Animator }
+public enum PlayerControllerType { None = -1, Movement, Ability, Inventory, Animator, Damage }
 
 public abstract class BasePlayerContoller : MonoBehaviour
 {
