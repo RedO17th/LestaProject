@@ -9,6 +9,7 @@ public abstract class BasePlayerContoller : MonoBehaviour
 
     public bool IsEnabled { get; protected set; } = true;
     public PlayerControllerType Type => _type;
+    public BasePlayer Player => _player;
 
     protected BasePlayer _player = null;
 

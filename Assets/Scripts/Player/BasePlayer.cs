@@ -11,8 +11,6 @@ public class BasePlayer : MonoBehaviour
     #region Public Properties
     public Quaternion Rotation => transform.rotation;
     #endregion
-
-    //private CharacterController _characterController = null;
     
     private void Awake()
     {
@@ -23,7 +21,7 @@ public class BasePlayer : MonoBehaviour
 
     public void Initialize()
     {
-        //_characterController = GetComponent<CharacterController>();
+
     }
 
     #region Systems part
@@ -56,10 +54,6 @@ public class BasePlayer : MonoBehaviour
     }
 
     #region MovementPart
-    public void Move(Vector3 way)
-    {
-        //_characterController.Move(way);
-    }
     public void Rotate(Quaternion rotation)
     {
         transform.rotation = rotation;

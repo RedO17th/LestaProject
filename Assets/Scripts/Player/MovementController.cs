@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using static UnityEditor.Experimental.GraphView.GraphView;
@@ -19,66 +20,74 @@ public class MovementController : BasePlayerContoller
     public event Action OnPlayerMove;
     public NavMeshAgent NavMeshAgent => _navMeshAgent;
 
-    //private BaseMovementMechanic _currentMovementMechanic = null;
-    //private BaseMovementMechanic _currentMovementMechanic = null;
-    //private BaseMovementMechanic[] _movementMechanics = null;
-
-    private BaseMovementMechanic _mouseMovement = null;
-    private BaseMovementMechanic _axisMovement = null;
-
-    private Vector3 _direction = Vector3.zero;
+    private BaseMovementMechanic[] _movementMechanics = null;
+    private BaseMovementMechanic _currentMovementMechanic = null;
 
     public override void Initialize(BasePlayer player)
     {
         base.Initialize(player);
 
-        //_movementMechanics = new BaseMovementMechanic[]
-        //{
-        //    new MouseMovement(this),
-        //    new AxisMovement(this)
-        //};
+        _movementMechanics = new BaseMovementMechanic[]
+        {
+            new AxisMovement(this),
+            new MouseMovement(this)
+        };
 
-        _mouseMovement = new MouseMovement(this);
-        _axisMovement = new AxisMovement(this);
+        _currentMovementMechanic = _movementMechanics[0];
     }
 
     void Update()
     {
-        //if (_currentMovementMechanic.IsInput)
-        //    _currentMovementMechanic.Move();
-
-        if (_axisMovement.IsInput)
-        {
-            _mouseMovement.Stop();
-            _axisMovement.Move(Time.deltaTime);
-        }
-
-        if (_mouseMovement.IsInput)
-        {
-            _mouseMovement.Move(Time.deltaTime);
-        }
-
+        Move();
     }
 
-    private void ProcessingMovement() { }
-    private void ProcessingRotation()
+    private void Move()
     {
-        var directionRotation = new Vector3(_direction.x, 0f, _direction.z);
-        if (directionRotation.magnitude != 0f)
-        {
-            var rotation = Quaternion.LookRotation(directionRotation);
-            var targetRotation = Quaternion.Slerp(_player.Rotation, rotation, Time.deltaTime * _speedRotation);
+        var mechanic = DefineMovementMechanic();
 
-            _player.Rotate(targetRotation);
+        PerformMovementMechanic(mechanic);
+    }
+
+    private BaseMovementMechanic DefineMovementMechanic()
+    {
+        BaseMovementMechanic mechanic = null;
+
+        foreach (var mech in _movementMechanics)
+        {
+            if (mech.IsInput)
+                return mech;
+        }
+
+        return mechanic;
+    }
+
+    private void PerformMovementMechanic(BaseMovementMechanic mechanic)
+    {
+        if (mechanic != null)
+        {
+            
+            if (mechanic.Type != _currentMovementMechanic.Type)
+            {
+                _currentMovementMechanic.Stop();
+                _currentMovementMechanic = mechanic;
+            }
+
+            _currentMovementMechanic.Rotate();
+            _currentMovementMechanic.Move();
         }
     }
 }
 
+//Transfer to...
+public enum MechanicType { None = -1, Axis, Mouse}
+
 public abstract class BaseMovementMechanic
 {
+    public MechanicType Type { get; protected set; } = MechanicType.None;
     public bool IsInput => _input.IsInput();
 
     protected MovementController _movementController = null;
+
     protected NavMeshAgent _navMeshAgent = null;
 
     protected BaseInputOfMovement _input = null;
@@ -89,28 +98,39 @@ public abstract class BaseMovementMechanic
         _navMeshAgent = controller.NavMeshAgent;
     }
 
-    public virtual void Move(float deltaTime)
-    {
-        if (_navMeshAgent.isStopped)
-            _navMeshAgent.isStopped = false;
-    }
+    public abstract void Move();
+    public abstract void Rotate();
 
     public virtual void Stop() { }
 }
 
 public class MouseMovement : BaseMovementMechanic
 {
+    private Vector3 _targetPoint = Vector3.zero;
+
     public MouseMovement(MovementController controller) : base(controller) 
     {
-        _input = new MouseInputOfMovement();
+        Type = MechanicType.Mouse;
+
+        _input = controller.GetComponent<MouseInputOfMovement>();
     }
 
-    public override void Move(float deltaTime)
+    public override void Move()
     {
-        base.Move(deltaTime);
+        var point = _input.Read();
 
-        _navMeshAgent.SetDestination(_input.Read());
+        if (_targetPoint != point)
+        {
+            if (_navMeshAgent.isStopped)
+                _navMeshAgent.isStopped = false;
+
+            _targetPoint = point;
+
+            _navMeshAgent.SetDestination(_targetPoint);
+        }
     }
+
+    public override void Rotate() { }
 
     public override void Stop()
     {
@@ -120,13 +140,32 @@ public class MouseMovement : BaseMovementMechanic
 
 public class AxisMovement : BaseMovementMechanic
 {
+    private BasePlayer _player = null;
+
     public AxisMovement(MovementController controller) : base(controller)
     {
-        _input = new AxisInputOfMovement();
+        Type = MechanicType.Axis;
+
+        _player = _movementController.Player;
+
+        _input = controller.GetComponent<AxisInputOfMovement>();
     }
 
-    public override void Move(float deltaTime)
+    public override void Move()
     {
-        _navMeshAgent.Move(_input.Read() * deltaTime);
-    } 
+        _navMeshAgent.Move(_input.Read() * Time.deltaTime);
+    }
+
+    public override void Rotate()
+    {
+        var inputDirection = _input.Read();
+        var directionRotation = new Vector3(inputDirection.x, 0f, inputDirection.z);
+        if (directionRotation.magnitude != 0f)
+        {
+            var rotation = Quaternion.LookRotation(directionRotation);
+            var targetRotation = Quaternion.Slerp(_player.Rotation, rotation, Time.deltaTime * 5f);
+
+            _player.Rotate(targetRotation);
+        }
+    }
 }
