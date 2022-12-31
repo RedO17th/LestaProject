@@ -2,26 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.AI;
 
-public class BasePlayer : MonoBehaviour
+public class GamePlayer : BasePlayer
 {
     [SerializeField] private List<BasePlayerContoller> _controllers;
 
     #region Public Properties
     public Quaternion Rotation => transform.rotation;
     #endregion
-    
-    private void Awake()
+
+    public override void Initialize(PlayerSubSystem system)
     {
-        Initialize();
+        base.Initialize(system);
+
         InitializeControllers();
-
-    }
-
-    public void Initialize()
-    {
-
+        PreparingControllers();
     }
 
     #region Systems part
@@ -29,6 +24,12 @@ public class BasePlayer : MonoBehaviour
     {
         foreach (var controller in _controllers)
             controller.Initialize(this);
+    }
+
+    private void PreparingControllers()
+    {
+        foreach (var controller in _controllers)
+            controller.Prepare();
     }
 
     private void EnableControllers()
@@ -44,7 +45,18 @@ public class BasePlayer : MonoBehaviour
 
     public BasePlayerContoller GetControllerBy(PlayerControllerType type)
     {
-        return _controllers.Where(c => c.Type == type) as BasePlayerContoller;
+        BasePlayerContoller pController = null;
+
+        foreach (var controller in _controllers)
+        {
+            if (controller.Type == type)
+            {
+                pController = controller;
+                break;
+            }
+        }
+
+        return pController;
     }
     #endregion
 
