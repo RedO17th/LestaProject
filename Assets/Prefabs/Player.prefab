@@ -57,6 +57,8 @@ GameObject:
   - component: {fileID: 6378634188168283053}
   - component: {fileID: 6660424135801773961}
   - component: {fileID: 7940255449964649003}
+  - component: {fileID: 4090566717664502589}
+  - component: {fileID: 2791618744177554722}
   - component: {fileID: 5048067600944083958}
   - component: {fileID: 3834972649416215630}
   m_Layer: 0
@@ -96,10 +98,10 @@ MonoBehaviour:
   _type: 0
   _movementMechanics:
   - {fileID: 7940255449964649003}
-  - {fileID: 3834972649416215630}
+  - {fileID: 2791618744177554722}
   _navMeshAgent: {fileID: 9210229231687253681}
-  _speedMovement: 5
-  _speedRun: 5
+  _walkSpeed: 5
+  _runSpeed: 10
   _speedRotation: 25
 --- !u!114 &6660424135801773961
 MonoBehaviour:
@@ -126,6 +128,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 0
+--- !u!114 &4090566717664502589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 964836734764388197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64f70bf3498381d4aa558323235cef93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2791618744177554722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 964836734764388197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8b1466cfa1f28d43a925dec3d8cf2d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _type: 2
 --- !u!114 &5048067600944083958
 MonoBehaviour:
   m_ObjectHideFlags: 0

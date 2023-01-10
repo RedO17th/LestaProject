@@ -13,16 +13,28 @@ public class MovementController : BasePlayerContoller
 
     //TODO: Transfer to Settings system
     [Range(5f, 25f)]
-    [SerializeField] private float _speedMovement = 5f;
+    [SerializeField] private float _walkSpeed = 5f;
     [Range(5f, 25f)]
-    [SerializeField] private float _speedRun = 5f;
+    [SerializeField] private float _runSpeed = 5f;
     [Range(5f, 50f)]
     [SerializeField] private float _speedRotation = 5f;
     //..
 
     public NavMeshAgent NavMeshAgent => _navMeshAgent;
+    public float WalkSpeed => _walkSpeed;
+    public float RunSpeed => _runSpeed;
+    public float NormalizedMovementSpeed
+    {
+        get 
+        {
+            var minSpeed = 0f;
+            var maxSpeed = _runSpeed;
 
-    private AnimatorController _animatorController = null;
+            var currentSpeed = (float)(_currentMovementMechanic?.Speed);
+
+            return (currentSpeed - minSpeed) / (maxSpeed - minSpeed);
+        }
+    }
 
     private BaseMovementMechanic _currentMovementMechanic = null;
 
@@ -41,10 +53,7 @@ public class MovementController : BasePlayerContoller
             mech.Initialize(this);
     }
 
-    public override void Prepare()
-    {
-        _animatorController = _player.GetControllerBy(PlayerControllerType.Animator) as AnimatorController;
-    }
+    public override void Prepare() { }
 
     void Update()
     {
@@ -64,8 +73,11 @@ public class MovementController : BasePlayerContoller
 
         foreach (var mech in _movementMechanics)
         {
+            //if (mech.IsInput)
+            //    return mech;
+
             if (mech.IsInput)
-                return mech;
+                mechanic = mech;
         }
 
         return mechanic;
@@ -75,7 +87,7 @@ public class MovementController : BasePlayerContoller
     {
         if (mechanic != null)
         {
-            
+
             if (mechanic.Type != _currentMovementMechanic.Type)
             {
                 _currentMovementMechanic.Stop();
@@ -84,14 +96,16 @@ public class MovementController : BasePlayerContoller
 
             _currentMovementMechanic.Rotate();
             _currentMovementMechanic.Move();
-
-            //Можно возвращаться скорость из _currentMovementMechanic и передевать ее в _animatorController и в его Update передавать в дерево аниматора
+        }
+        else
+        {
+            _currentMovementMechanic.Stop();
         }
     }
 }
 
 //Transfer to...
-public enum MechanicType { None = -1, AxisWalk, MouseWalk }
+public enum MechanicType { None = -1, AxisWalk, MouseWalk, AxisRun, MouseRun }
 
 public abstract class BaseMovementMechanic : MonoBehaviour
 {
@@ -99,6 +113,7 @@ public abstract class BaseMovementMechanic : MonoBehaviour
 
     public MechanicType Type => _type;
     public bool IsInput => _input.IsInput();
+    public float Speed => _currentSpeed;
 
     protected MovementController _movementController = null;
 
@@ -106,14 +121,17 @@ public abstract class BaseMovementMechanic : MonoBehaviour
 
     protected BaseInputOfMovement _input = null;
 
+    protected float _currentSpeed = 0f;
+
     public virtual void Initialize(BasePlayerContoller controller)
     {
         _movementController = controller as MovementController;
         _navMeshAgent = _movementController.NavMeshAgent;
     }
 
-    public abstract void Move();
+    public virtual void Move() { }
+
     public abstract void Rotate();
 
-    public virtual void Stop() { }
+    public virtual void Stop() { _currentSpeed = 0f; }
 }

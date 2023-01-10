@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class AxisInputOfMovement : BaseInputOfMovement
+public class AxisInputOfWalkMovement : BaseInputOfMovement
 {
     private Vector3 _inputVector = Vector3.zero;
 

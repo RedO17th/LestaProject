@@ -1,10 +1,10 @@
-﻿using UnityEngine;
+using UnityEngine;
 
-public class AxisWalkMovement : BaseMovementMechanic
+public class AxisRunMovement : BaseMovementMechanic
 {
     private GamePlayer _player = null;
-    
-    private float _walkSpeed = 0f;
+
+    private float _runSpeed = 0f;
 
     public override void Initialize(BasePlayerContoller controller)
     {
@@ -12,14 +12,14 @@ public class AxisWalkMovement : BaseMovementMechanic
 
         _player = _movementController.Player;
 
-        _input = controller.GetComponent<AxisInputOfWalkMovement>();
+        _input = controller.GetComponent<AxisInputOfRunMovement>();
 
-        _walkSpeed = _movementController.WalkSpeed;
+        _runSpeed = _movementController.RunSpeed;
     }
 
     public override void Move()
     {
-        _currentSpeed = _walkSpeed;
+        _currentSpeed = _runSpeed;
 
         _navMeshAgent.Move(_input.Read() * _currentSpeed * Time.deltaTime);
     }
