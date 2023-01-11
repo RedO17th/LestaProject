@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LoadSubSystem : BaseProjectSubSystem
+public class LoadSubSystem : BaseSubSystem
 {
 
 }

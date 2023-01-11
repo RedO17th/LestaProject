@@ -179,6 +179,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 042271aeedff32340a7548d6d4bd7b5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &4927095735731968069
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8081604450411727342}
+  - component: {fileID: 3664518248166713984}
+  m_Layer: 0
+  m_Name: DiceTwentySubSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8081604450411727342
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4927095735731968069}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6294595696765306750}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3664518248166713984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4927095735731968069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7ce6ba566521d8458a2dd2a29699e4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5823730383227973767
 GameObject:
   m_ObjectHideFlags: 0
@@ -267,6 +311,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d37d3f3248fac6e48a2a561f092b686f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _dataContainers:
+  - {fileID: 11400000, guid: 953cb7d50b62ec941a82a32c4f5981b5, type: 2}
 --- !u!1 &6294595696765306745
 GameObject:
   m_ObjectHideFlags: 0
@@ -304,6 +350,7 @@ Transform:
   - {fileID: 928815537}
   - {fileID: 1012111114}
   - {fileID: 4864089010427035292}
+  - {fileID: 8081604450411727342}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -329,6 +376,7 @@ MonoBehaviour:
   - {fileID: 928815538}
   - {fileID: 5663088256639769546}
   - {fileID: 620583100}
+  - {fileID: 3664518248166713984}
 --- !u!1 &6661227299224694243
 GameObject:
   m_ObjectHideFlags: 0

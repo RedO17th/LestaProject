@@ -10,7 +10,7 @@ public class ProjectSystem : MonoBehaviour
 {
     [SerializeField] private GameStateType _standartGameState = GameStateType.None;
 
-    [SerializeField] private List<BaseProjectSubSystem> _subSystems;
+    [SerializeField] private List<BaseSubSystem> _subSystems;
 
     #region Singleton instance
     public static ProjectSystem Instance => _instance;
@@ -31,6 +31,7 @@ public class ProjectSystem : MonoBehaviour
         SetStandartGameState();
 
         InitializeSubSystems();
+        PrepareSubSystems();
     }
 
 
@@ -58,6 +59,12 @@ public class ProjectSystem : MonoBehaviour
         foreach (var s in _subSystems)
             s.Initialize(this);
     }
+
+    private void PrepareSubSystems()
+    {
+        foreach (var s in _subSystems)
+            s.Prepare();
+    }
     #endregion
 
     private void SetStandartGameState()
@@ -81,9 +88,9 @@ public class ProjectSystem : MonoBehaviour
         return result;
     }
 
-    public BaseProjectSubSystem GetSubSystemBy(Type systemType)
+    public BaseSubSystem GetSubSystemBy(Type systemType)
     {
-        BaseProjectSubSystem system = null;
+        BaseSubSystem system = null;
 
         foreach (var s in _subSystems)
         {

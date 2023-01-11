@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UISubSystem : BaseSubSystem
+public class DiceTwentySubSystem : BaseSubSystem
 {
     
 }
