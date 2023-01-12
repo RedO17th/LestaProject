@@ -11,24 +11,17 @@ public class MovementController : BasePlayerContoller
     [SerializeField] private BaseMovementMechanic[] _movementMechanics = null;
     [SerializeField] private NavMeshAgent _navMeshAgent = null;
 
-    //TODO: Transfer to Settings system
-    [Range(5f, 25f)]
-    [SerializeField] private float _walkSpeed = 5f;
-    [Range(5f, 25f)]
-    [SerializeField] private float _runSpeed = 5f;
     [Range(5f, 50f)]
     [SerializeField] private float _speedRotation = 5f;
-    //..
 
     public NavMeshAgent NavMeshAgent => _navMeshAgent;
-    public float WalkSpeed => _walkSpeed;
-    public float RunSpeed => _runSpeed;
+    public PlayerDataContainer PlayerData => _playerData;
     public float NormalizedMovementSpeed
     {
         get 
         {
             var minSpeed = 0f;
-            var maxSpeed = _runSpeed;
+            var maxSpeed = _playerData.RunSpeed;
 
             var currentSpeed = (float)(_currentMovementMechanic?.Speed);
 
@@ -36,15 +29,24 @@ public class MovementController : BasePlayerContoller
         }
     }
 
+    public PlayerDataContainer _playerData = null;
     private BaseMovementMechanic _currentMovementMechanic = null;
 
     public override void Initialize(BasePlayer player)
     {
         base.Initialize(player);
 
+        InitializeData();
         InitializeMovementMechanics();
 
         _currentMovementMechanic = _movementMechanics[0];
+    }
+
+    private void InitializeData()
+    {
+        var settingsSystem = ProjectSystem.Instance.GetSubSystemByType(typeof(SettingsSubSystem)) as SettingsSubSystem;
+
+        _playerData = settingsSystem.GetDataContainerByType(typeof(PlayerDataContainer)) as PlayerDataContainer;
     }
 
     private void InitializeMovementMechanics()
@@ -60,6 +62,7 @@ public class MovementController : BasePlayerContoller
         Move();
     }
 
+    #region Move part
     private void Move()
     {
         var mechanic = DefineMovementMechanic();
@@ -102,9 +105,10 @@ public class MovementController : BasePlayerContoller
             _currentMovementMechanic.Stop();
         }
     }
+    #endregion
 }
 
-//Transfer to...
+//TODO: Transfer to...
 public enum MechanicType { None = -1, AxisWalk, MouseWalk, AxisRun, MouseRun }
 
 public abstract class BaseMovementMechanic : MonoBehaviour

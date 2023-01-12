@@ -88,7 +88,7 @@ public class ProjectSystem : MonoBehaviour
         return result;
     }
 
-    public BaseSubSystem GetSubSystemBy(Type systemType)
+    public BaseSubSystem GetSubSystemByType(Type systemType)
     {
         BaseSubSystem system = null;
 

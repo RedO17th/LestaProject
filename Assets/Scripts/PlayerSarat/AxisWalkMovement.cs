@@ -5,6 +5,7 @@ public class AxisWalkMovement : BaseMovementMechanic
     private GamePlayer _player = null;
     
     private float _walkSpeed = 0f;
+    private float _speedRotation = 0f;
 
     public override void Initialize(BasePlayerContoller controller)
     {
@@ -14,7 +15,8 @@ public class AxisWalkMovement : BaseMovementMechanic
 
         _input = controller.GetComponent<AxisInputOfWalkMovement>();
 
-        _walkSpeed = _movementController.WalkSpeed;
+        _walkSpeed = _movementController.PlayerData.WalkSpeed;
+        _speedRotation = _movementController.PlayerData.SpeedRotation;
     }
 
     public override void Move()
@@ -31,7 +33,7 @@ public class AxisWalkMovement : BaseMovementMechanic
         if (directionRotation.magnitude != 0f)
         {
             var rotation = Quaternion.LookRotation(directionRotation);
-            var targetRotation = Quaternion.Slerp(_player.Rotation, rotation, Time.deltaTime * 5f);
+            var targetRotation = Quaternion.Slerp(_player.Rotation, rotation, Time.deltaTime * _speedRotation);
 
             _player.Rotate(targetRotation);
         }

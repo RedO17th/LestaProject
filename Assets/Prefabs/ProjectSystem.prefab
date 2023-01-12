@@ -313,6 +313,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dataContainers:
   - {fileID: 11400000, guid: 953cb7d50b62ec941a82a32c4f5981b5, type: 2}
+  - {fileID: 11400000, guid: 8f008dcb58531444eaedccfa9d5abeca, type: 2}
 --- !u!1 &6294595696765306745
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,7 +7,6 @@ public class PlayerSubSystem : BaseSubSystem
     [SerializeField] private BasePlayer[] _players = null;
 
     private WalletOfPoints _walletOfPoints = null;
-
     private CharacteristicsContainer _characteristics = null;
 
     public override void Initialize(ProjectSystem system)
@@ -28,7 +27,7 @@ public class PlayerSubSystem : BaseSubSystem
 
     public override void Prepare()
     {
-        var settingsSystem = _projectSystem.GetSubSystemBy(typeof(SettingsSubSystem)) as SettingsSubSystem;
+        var settingsSystem = _projectSystem.GetSubSystemByType(typeof(SettingsSubSystem)) as SettingsSubSystem;
 
         _characteristics = settingsSystem?.GetDataContainerByType(typeof(CharacteristicsContainer)) as CharacteristicsContainer;
     }
@@ -41,11 +40,16 @@ public class PlayerSubSystem : BaseSubSystem
     #endregion
 
     #region Wallet part
+    [ContextMenu("TestAddPoints")]
+    public void TestAddPoints()
+    {
+        AddPoints(10);
+    }
+
     public void AddPoints(int points)
     {
         _walletOfPoints.Add(points);
     }
-
     #endregion
 
     #region Clear part
