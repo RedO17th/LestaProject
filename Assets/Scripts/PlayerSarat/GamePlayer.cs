@@ -20,6 +20,7 @@ public class GamePlayer : BasePlayer
     }
 
     #region Systems part
+    //Возможно все это дело необходимо вынести в PlayerSubSystem... А здесь только делегирование
     private void InitializeControllers()
     {
         foreach (var controller in _controllers)
@@ -72,13 +73,14 @@ public class GamePlayer : BasePlayer
     }
     #endregion
 
-    public void Deactivate() 
+    public void Deactivate()
     {
         DisableControllers();
     }
 
-    public void SetDamage()
-    { 
-        
-    }
+    #region Wallet part
+
+    //Переопределить при необходимости...
+
+    #endregion
 }

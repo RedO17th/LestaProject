@@ -10,5 +10,6 @@ public abstract class BaseSubSystem : MonoBehaviour
     }
 
     public virtual void Prepare() { }
+    public virtual void Clear() { }
 }
 

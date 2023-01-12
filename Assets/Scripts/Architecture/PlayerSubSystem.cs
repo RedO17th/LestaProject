@@ -6,6 +6,8 @@ public class PlayerSubSystem : BaseSubSystem
 {
     [SerializeField] private BasePlayer[] _players = null;
 
+    private WalletOfPoints _walletOfPoints = null;
+
     private CharacteristicsContainer _characteristics = null;
 
     public override void Initialize(ProjectSystem system)
@@ -13,6 +15,9 @@ public class PlayerSubSystem : BaseSubSystem
         base.Initialize(system);
 
         InitializePlayers();
+
+        //Test: При этом данное значение необходимо откуда либо брать...
+        _walletOfPoints = new WalletOfPoints(100);
     }
 
     private void InitializePlayers()
@@ -32,6 +37,27 @@ public class PlayerSubSystem : BaseSubSystem
     public BaseCharacteristic GetCharacteristicByType(CharacterisicType type)
     {
         return _characteristics.GetCharacteristicByType(type);
+    }
+    #endregion
+
+    #region Wallet part
+    public void AddPoints(int points)
+    {
+        _walletOfPoints.Add(points);
+    }
+
+    #endregion
+
+    #region Clear part
+    public override void Clear()
+    {
+        ClearWallet();
+    }
+
+    private void ClearWallet()
+    {
+        _walletOfPoints.RemoveAll();
+        _walletOfPoints = null;
     }
     #endregion
 }
