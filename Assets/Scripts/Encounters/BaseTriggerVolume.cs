@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class BaseTriggerVolume : MonoBehaviour
 {
-    public event Action OnEnter;
-    public event Action OnExit;
+    public event Action<GamePlayer> OnEnter;
+    public event Action<GamePlayer> OnExit;
 
     protected Collider _trigger = null;
 
@@ -28,7 +28,7 @@ public class BaseTriggerVolume : MonoBehaviour
 
         if (player)
         {
-            OnEnter?.Invoke();
+            OnEnter?.Invoke(player);
         }
     }
 
@@ -40,7 +40,7 @@ public class BaseTriggerVolume : MonoBehaviour
 
         if (player)
         {
-            OnExit?.Invoke();
+            OnExit?.Invoke(player);
         }
     }
 

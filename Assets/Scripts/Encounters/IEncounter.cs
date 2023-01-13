@@ -8,3 +8,4 @@ public interface IEncounter
     void Interact();
     void Deactivate();
 }
+

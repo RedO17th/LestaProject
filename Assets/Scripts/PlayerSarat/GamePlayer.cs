@@ -83,4 +83,29 @@ public class GamePlayer : BasePlayer
     //Переопределить при необходимости...
 
     #endregion
+
+    //Interact part (test)
+
+    private IEncounter _encounter = null;
+
+    //А вообще есть смысл передавать encounter'a...
+    public void SetEncounter(IEncounter encounter)
+    {
+        _encounter = encounter;
+    }
+
+    private void Update()
+    {
+        if (_encounter != null && Input.GetKeyDown(KeyCode.E))
+        {
+            _encounter.Interact();
+        }
+    }
+
+    public void RemoveEncounter()
+    {
+        _encounter = null;
+    }
+
+
 }

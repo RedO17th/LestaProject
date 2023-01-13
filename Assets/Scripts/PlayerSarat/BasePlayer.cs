@@ -12,7 +12,6 @@ public class BasePlayer : MonoBehaviour
     }
 
     #region Health part
-
     //TODO: Если не пригодится, то убрать...
     public virtual void SetDamage() { }
 

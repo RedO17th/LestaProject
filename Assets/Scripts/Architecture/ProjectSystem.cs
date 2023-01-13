@@ -23,6 +23,7 @@ public class ProjectSystem : MonoBehaviour
     private BaseGameState _currentGameState = null;
     private List<BaseGameState> _gameStates = null;
 
+    //Awake period
     private void Awake()
     {
         InitializeSystem();
@@ -33,7 +34,6 @@ public class ProjectSystem : MonoBehaviour
         InitializeSubSystems();
         PrepareSubSystems();
     }
-
 
     #region Initialize region
     private void InitializeSystem()
@@ -102,7 +102,20 @@ public class ProjectSystem : MonoBehaviour
         }
 
         return system;
-    } 
+    }
+
+    //Start period
+    private void Start()
+    {
+        StartSystems();
+    }
+
+    private void StartSystems()
+    {
+        foreach (var system in _subSystems)
+            system.StartSystem();
+    }
+
 
     private void Update()
     {
