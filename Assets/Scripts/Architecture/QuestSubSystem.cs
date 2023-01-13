@@ -101,7 +101,6 @@ public abstract class BaseQuest : MonoBehaviour
     }
 
     public virtual void Prepare() { }
-
     public abstract void Launch();
 
     protected virtual void CheckCompliting()

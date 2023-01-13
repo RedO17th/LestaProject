@@ -479,6 +479,8 @@ GameObject:
   - component: {fileID: 2191664499318371677}
   - component: {fileID: 3670974318390832832}
   - component: {fileID: 1185146023807828870}
+  - component: {fileID: 4788483498927086098}
+  - component: {fileID: 8947096474197534893}
   m_Layer: 0
   m_Name: QuestSubSystem
   m_TagString: Untagged
@@ -516,6 +518,8 @@ MonoBehaviour:
   _questID: 1
   _quests:
   - {fileID: 1185146023807828870}
+  - {fileID: 4788483498927086098}
+  - {fileID: 8947096474197534893}
 --- !u!114 &1185146023807828870
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -528,4 +532,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ef981e53a25ec74cb8a9d040141b866, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _encounters: []
+  _encounters:
+  - {fileID: 0}
+--- !u!114 &4788483498927086098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9065341825160764845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 091f2dd565cc3f447b0a6c4e6f655230, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _triggerVolume: {fileID: 0}
+--- !u!114 &8947096474197534893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9065341825160764845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2c1683baaca8c442bed6a21c48a9a7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _encounters:
+  - {fileID: 0}
