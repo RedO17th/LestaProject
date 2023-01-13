@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class BaseEncounter : MonoBehaviour, IEncounter
@@ -5,18 +6,14 @@ public class BaseEncounter : MonoBehaviour, IEncounter
     [SerializeField] protected BasePointer _pointer;
     [SerializeField] protected BaseTriggerVolume _triggerVolume;
 
+    public event Action<BaseEncounter> OnInteracted;
+
+    protected BaseQuest _quest = null;
     protected GamePlayer _player = null;
 
-    //Test
-    private void Awake()
+    public virtual void Initialize(BaseQuest quest)
     {
-        Activate();
-    }
-    //
-
-    public virtual void Initialize(Component manager)
-    { 
-        
+        _quest = quest;
     }
 
     public virtual void Activate()
@@ -41,13 +38,18 @@ public class BaseEncounter : MonoBehaviour, IEncounter
         _pointer.Enable();
     }
    
-
-    //Основной метод взаимодействия
     public virtual void Interact()
     {
         Debug.Log($"BaseEncounter.Interact");
 
         _pointer.Disable();
+
+        CheckCompliting();
+    }
+
+    protected virtual void CheckCompliting()
+    {
+        OnInteracted?.Invoke(this);
     }
 
     protected virtual void CancelInteraction(GamePlayer player)

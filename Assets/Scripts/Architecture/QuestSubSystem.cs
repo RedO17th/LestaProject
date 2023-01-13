@@ -34,7 +34,6 @@ public class QuestSubSystem : BaseSubSystem
     }
 
     #region Cycle of switching quests
-
     public override void StartSystem()
     {
         LaunchQuest();
@@ -45,11 +44,13 @@ public class QuestSubSystem : BaseSubSystem
         if (_currentQuest)
         {
             _currentQuest.OnCompleted += SwitchToNextQuest;
+            _currentQuest.Prepare();
             _currentQuest.Launch();
         }
         else
-        { 
-            // весты закончились, решить, что делать дальше...
+        {
+            //[ForMe]  весты закончились, решить, что делать дальше...
+            Debug.Log($"QuestSubSystem.LaunchQuest: quests are over");
         }
     }
 
@@ -63,7 +64,6 @@ public class QuestSubSystem : BaseSubSystem
         DefineNextQuest();
         LaunchQuest();
     }
-
     private void DefineNextQuest()
     {
         foreach (var quest in _quests)
@@ -100,7 +100,18 @@ public abstract class BaseQuest : MonoBehaviour
         _questSubSystem = system;
     }
 
+    public virtual void Prepare() { }
+
     public abstract void Launch();
-    protected virtual bool CheckCompleteCondition() { return false; }
+
+    protected virtual void CheckCompliting()
+    {
+        if (CheckConditionOfCompliting())
+        {
+            OnCompleted?.Invoke();
+        }
+    }
+
+    protected virtual bool CheckConditionOfCompliting() { return false; }
     public abstract void Complete();
 }
