@@ -6,17 +6,16 @@ public class BaseEncounter : MonoBehaviour, IEncounter
     [SerializeField] protected BasePointer _pointer;
     [SerializeField] protected BaseTriggerVolume _triggerVolume;
 
-    public event Action<BaseEncounter> OnInteracted;
+    public BaseQuestLink _qestLink = null;
 
-    protected BaseQuest _quest = null;
     protected GamePlayer _player = null;
 
-    public virtual void Initialize(BaseQuest quest)
+    public virtual void SetQuestLink(BaseQuestLink link)
     {
-        _quest = quest;
+        _qestLink = link;
     }
 
-    public virtual void Activate()
+    public virtual void Activate() 
     {
         PrepareTriggerVolume();
     }
@@ -44,12 +43,7 @@ public class BaseEncounter : MonoBehaviour, IEncounter
 
         _pointer.Disable();
 
-        CheckCompliting();
-    }
-
-    protected virtual void CheckCompliting()
-    {
-        OnInteracted?.Invoke(this);
+        _qestLink.Complete();
     }
 
     protected virtual void CancelInteraction(GamePlayer player)
@@ -59,6 +53,8 @@ public class BaseEncounter : MonoBehaviour, IEncounter
             //TODO: Отчистить все обоюдные ссылки...
             _player.RemoveEncounter();
             _player = null;
+
+            _pointer.Disable();
         }
     }
 

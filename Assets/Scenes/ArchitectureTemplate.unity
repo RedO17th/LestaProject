@@ -1905,11 +1905,15 @@ PrefabInstance:
       propertyPath: _players.Array.data[1]
       value: 
       objectReference: {fileID: 1613714422}
-    - target: {fileID: 1185146023807828870, guid: 8364672ad827ed64586a666157504801, type: 3}
+    - target: {fileID: 0}
       propertyPath: _encounters.Array.data[0]
       value: 
       objectReference: {fileID: 951496057}
-    - target: {fileID: 4788483498927086098, guid: 8364672ad827ed64586a666157504801, type: 3}
+    - target: {fileID: 3670974318390832832, guid: 8364672ad827ed64586a666157504801, type: 3}
+      propertyPath: "_quest\u0421ontainers.Array.data[0]._encounters.Array.data[0]"
+      value: 
+      objectReference: {fileID: 951496057}
+    - target: {fileID: 0}
       propertyPath: _triggerVolume
       value: 
       objectReference: {fileID: 1883738681}
@@ -1961,7 +1965,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8947096474197534893, guid: 8364672ad827ed64586a666157504801, type: 3}
+    - target: {fileID: 0}
       propertyPath: _encounters.Array.data[0]
       value: 
       objectReference: {fileID: 439245384}

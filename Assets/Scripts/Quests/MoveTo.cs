@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 
-public class MoveTo : BaseQuest
+public class MoveTo : Quest
 {
     [SerializeField] protected BaseTriggerVolume _triggerVolume;
 

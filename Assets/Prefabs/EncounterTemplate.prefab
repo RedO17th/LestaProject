@@ -162,6 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb68d2e125b32f843bc6e481e7e8c0f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _qestLink: {fileID: 11400000, guid: 58a50bd5f8b095444969ffafaeb8e5c2, type: 2}
   _pointer: {fileID: 3838329819790780734}
   _triggerVolume: {fileID: 3838329817994945317}
 --- !u!1001 &1508489619106586005

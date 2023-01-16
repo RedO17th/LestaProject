@@ -1,15 +1,16 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 
 public class QuestSubSystem : BaseSubSystem
 {
     [Range(1, 21)]
     [SerializeField] private int _questID = 0;
-    [SerializeField] private List<BaseQuest> _quests;
+    [SerializeField] private List<QuestContainer> _quest—ontainers;
 
-    private BaseQuest _currentQuest = null;
+    private QuestContainer _currentQuestContainer = null;
 
     public override void Initialize(ProjectSystem system)
     {
@@ -20,17 +21,17 @@ public class QuestSubSystem : BaseSubSystem
 
     private void InitializeQuests()
     {
-        foreach (var q in _quests)
-            q.Initialize(this);
+        foreach (var container in _quest—ontainers)
+            container.Quest.Initialize(this);
     }
 
     public override void Prepare()
     {
-        SetFirstQuestByID();
+        SetFirstQuestContainerByID();
     }
-    private void SetFirstQuestByID()
+    private void SetFirstQuestContainerByID()
     {
-        _currentQuest = _quests[--_questID];
+        _currentQuestContainer = _quest—ontainers[--_questID];
     }
 
     #region Cycle of switching quests
@@ -41,11 +42,16 @@ public class QuestSubSystem : BaseSubSystem
 
     private void LaunchQuest()
     {
-        if (_currentQuest)
+        if (_currentQuestContainer != null)
         {
-            _currentQuest.OnCompleted += SwitchToNextQuest;
-            _currentQuest.Prepare();
-            _currentQuest.Launch();
+            _currentQuestContainer.SetLinksToEncounter();
+            _currentQuestContainer.ActivateEncouners();
+
+            var quest = _currentQuestContainer.Quest;
+
+            quest.OnCompleted += SwitchToNextQuest;
+            quest.Prepare();
+            quest.Launch();
         }
         else
         {
@@ -56,21 +62,23 @@ public class QuestSubSystem : BaseSubSystem
 
     private void SwitchToNextQuest()
     {
-        _currentQuest?.SetCompletedState();
-        _currentQuest?.Complete();
+        _currentQuestContainer.DeactivateEncouners();
 
-        _currentQuest = null;
+        _currentQuestContainer.Quest.SetCompletedState();
+        _currentQuestContainer.Quest.Complete();
+
+        _currentQuestContainer = null;
 
         DefineNextQuest();
         LaunchQuest();
     }
     private void DefineNextQuest()
     {
-        foreach (var quest in _quests)
+        foreach (var container in _quest—ontainers)
         {
-            if(quest.IsCompleted == false)
+            if (container.Quest.IsCompleted == false)
             {
-                _currentQuest = quest;
+                _currentQuestContainer = container;
                 break;
             }
         }
@@ -81,5 +89,33 @@ public class QuestSubSystem : BaseSubSystem
     public override void Clear()
     {
         base.Clear();
+    }
+}
+
+[System.Serializable]
+public class QuestContainer
+{
+    [SerializeField] private BaseQuest _quest;
+    [SerializeField] private BaseQuestLink _link;
+    [SerializeField] private List<BaseEncounter> _encounters;
+
+    public BaseQuest Quest => _quest;
+
+    public void SetLinksToEncounter()
+    {
+        foreach (var encounter in _encounters)
+            encounter.SetQuestLink(_link);
+    }
+
+    public void ActivateEncouners()
+    {
+        foreach (var encounter in _encounters)
+            encounter.Activate();
+    }
+
+    public void DeactivateEncouners()
+    {
+        foreach (var encounter in _encounters)
+            encounter.Deactivate();
     }
 }

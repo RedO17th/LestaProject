@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public abstract class BaseQuest : MonoBehaviour
+public abstract class Quest : MonoBehaviour
 {
     public event Action OnCompleted;
 

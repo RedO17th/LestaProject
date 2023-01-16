@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TalkWith : BaseQuest
+public class TalkWith : Quest
 {
     [SerializeField] protected List<BaseEncounter> _encounters;
 
@@ -22,8 +22,8 @@ public class TalkWith : BaseQuest
 
     private void InitializeEncounters()
     {
-        foreach (var encounter in _encounters)
-            encounter.Initialize(this);
+        //foreach (var encounter in _encounters)
+        //    encounter.Initialize(this);
     }
 
     public override void Launch()
@@ -33,16 +33,16 @@ public class TalkWith : BaseQuest
 
     private void ActivateEncounters()
     {
-        foreach (var encounter in _encounters)
-        {
-            encounter.OnInteracted += CheckCompletedEncounter;
-            encounter.Activate();
-        }
+        //foreach (var encounter in _encounters)
+        //{
+        //    encounter.OnInteracted += CheckCompletedEncounter;
+        //    encounter.Activate();
+        //}
     }
 
     private void CheckCompletedEncounter(BaseEncounter encounter)
     {
-        encounter.OnInteracted -= CheckCompletedEncounter;
+        //encounter.OnInteracted -= CheckCompletedEncounter;
 
         CheckCompliting();
     }
@@ -63,10 +63,10 @@ public class TalkWith : BaseQuest
 
     private void DeactivateEncounters()
     {
-        foreach (var encounter in _encounters)
-        {
-            encounter.OnInteracted -= CheckCompletedEncounter;
-            encounter.Deactivate();
-        }
+        //foreach (var encounter in _encounters)
+        //{
+        //    encounter.OnInteracted -= CheckCompletedEncounter;
+        //    encounter.Deactivate();
+        //}
     }
 }
