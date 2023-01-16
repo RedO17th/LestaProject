@@ -17,8 +17,11 @@ public class DiceTwentySubSystem : BaseSubSystem
     [SerializeField] private int _baseSkillBonus = 2;
     [SerializeField] private int _skillBonusStep = 4;
 
-    [Header("Dice")]
-    [SerializeField] private int _diceMax = 20;
+    [Header("For tests")]
+    [SerializeField] private int _difficult = 10;
+    [SerializeField] private CheckMode _checkMode = CheckMode.None;
+    [SerializeField] private CharacterisicType _characterisicType = CharacterisicType.None;
+    [SerializeField] private SkillType _skillType = SkillType.None;
 
     private CharacteristicsContainer _characteristics = null;
     private SkillsContainer _skills = null;
@@ -39,23 +42,16 @@ public class DiceTwentySubSystem : BaseSubSystem
     }
 
     #region Characteristics part
-    public BaseCharacteristic GetCharacteristicByType(CharacterisicType type)
+    public bool CheckByCharacterisicType(CharacterisicType characterisic, int difficult)
     {
-        return _characteristics.GetCharacteristicByType(type);
+        return (Dice.D20(1) + GetCharacteristicModificator(characterisic)) >= difficult;
     }
 
-    public bool Check(CharacterisicType characterisic, int difficult)
+    private int GetCharacteristicModificator(CharacterisicType type)
     {
+        var characteristic = _characteristics.GetCharacteristicByType(type);
 
-        if (DiceRoll() + GetCharacteristicModificator(characterisic) >= difficult)
-            return true;
-
-        return false;
-    }
-
-    public int GetCharacteristicModificator(CharacterisicType characterisic)
-    {
-        var value = GetCharacteristicByType(characterisic).Value;
+        var value = characteristic.Value;
 
         int modificator = (value - _subtractKoef) / _divideKoef;
 
@@ -69,26 +65,16 @@ public class DiceTwentySubSystem : BaseSubSystem
     #endregion
 
     #region Skills part
-    public BaseSkill GetSkillByType(SkillType type)
+    public bool CheckBySkillType(SkillType skill, int difficult)
     {
-        return _skills.GetSkillByType(type);
-    }
-
-    public bool Check(SkillType skill, int difficult)
-    {
-        if (DiceRoll() + GetSkillModificator(skill) >= difficult)
-            return true;
-
-        return false;
+        return (Dice.D20(1) + GetSkillModificator(skill)) >= difficult;
     }
 
     private int GetSkillModificator(SkillType type)
     {
-        var skill = GetSkillByType(type);
+        var skill = _skills.GetSkillByType(type);
 
-        int modificator = GetSkillBonus(skill) + GetCharacteristicModificator(skill.CharacterisicType);
-
-        return modificator;
+        return GetSkillBonus(skill) + GetCharacteristicModificator(skill.CharacterisicType);
     }
 
     private int GetSkillBonus(BaseSkill skill)
@@ -96,20 +82,48 @@ public class DiceTwentySubSystem : BaseSubSystem
         if (skill.IsLearn == false)
             return 0;
 
-        int level = _playerData.Level;
-
-        int skillBonus = (level - 1) / _skillBonusStep + _baseSkillBonus;
-
-        return skillBonus;
+        return (_playerData.Level - 1) / _skillBonusStep + _baseSkillBonus;
     }
     #endregion
 
-    private int DiceRoll()
+    #region Test part
+#if UNITY_EDITOR
+    [ContextMenu("TestCheck")]
+    private void TestCheck()
     {
-        int rollValue = Random.Range(0, 20) + 1;
+        if (_checkMode == CheckMode.None)
+        {
+            Debug.LogError("Не выбран режим проверки");
+            return;
+        }
 
-        Debug.Log(rollValue);
-
-        return rollValue;
+        if (_checkMode == CheckMode.Characteristics)
+        {
+            if (_characterisicType == CharacterisicType.None)
+            {
+                Debug.LogError("Не выбрана характеристика для проверки");
+                return;
+            }
+            else
+            {
+                bool result = CheckByCharacterisicType(_characterisicType, _difficult);
+                Debug.Log(result ? "Success" : "Failure");
+            }
+        }
+        if (_checkMode == CheckMode.Skill)
+        {
+            if (_skillType == SkillType.None)
+            {
+                Debug.LogError("Не выбран навык для проверки");
+                return;
+            }
+            else
+            {
+                bool result = CheckBySkillType(_skillType, _difficult);
+                Debug.Log(result ? "Success" : "Failure");
+            }
+        }
     }
+#endif
+    #endregion
 }

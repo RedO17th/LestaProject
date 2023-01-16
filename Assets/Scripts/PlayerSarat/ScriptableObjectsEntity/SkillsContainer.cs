@@ -21,14 +21,4 @@ public class SkillsContainer : BaseDataContainer
 
         return skill;
     }
-
-    public override List<string> GetAllNames()
-    {
-        List<string> names = new List<string>();
-
-        for(int i = 0; i < _skills.Length; i++)
-            names.Add(_skills[i].Name);
-
-        return names;
-    }
 }

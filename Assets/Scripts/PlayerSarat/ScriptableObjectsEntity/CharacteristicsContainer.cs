@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,15 +20,5 @@ public class CharacteristicsContainer : BaseDataContainer
         }
 
         return characteristic;
-    }
-
-    public override List<string> GetAllNames()
-    {
-        List<string> names = new List<string>();
-
-        for (int i = 0; i < _characteristics.Count; i++)
-            names.Add(_characteristics[i].Name);
-
-        return names;
     }
 }
