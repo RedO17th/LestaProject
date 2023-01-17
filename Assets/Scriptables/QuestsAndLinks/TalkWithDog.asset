@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08132ef27a90d394e99429ce5ccc2714, type: 3}
   m_Name: TalkWithDog
   m_EditorClassIdentifier: 
-  _name: TalkWithDog
   _isCompleted: 0
+  _name: TalkWithDog
   _description: TalkWithDogQuestDescription
   _links: []

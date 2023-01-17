@@ -23,8 +23,6 @@ public abstract class BaseQuestEntity : MonoBehaviour
 
 public class BaseConditionalQuestEntity : BaseQuestEntity
 {
-    public event Action OnComplete;
-
     public override void Activate() { }
 
     protected virtual bool CheckConditional() => true;
@@ -33,8 +31,6 @@ public class BaseConditionalQuestEntity : BaseQuestEntity
     {
         if (CheckConditional())
         {
-            OnComplete?.Invoke();
-
             _questLink.Complete();
         }
     }

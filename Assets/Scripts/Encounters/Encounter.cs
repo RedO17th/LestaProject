@@ -1,21 +1,30 @@
 using System;
 using UnityEngine;
 
-public class BaseEncounter : MonoBehaviour, IEncounter
+//Это "все" объекты с которыми мы можем взаимодействовать внутри конкретного Quest'a
+//Очень маленький и базовый функционал - s_O_lid.
+public abstract class BaseEncounter : MonoBehaviour, IEncounter
 {
     [Header("Quest settings")]
     [SerializeField] protected BaseQuestLink _questLink = null;
 
+    public BaseQuestLink QuestLink => _questLink;
+
+    public abstract void Activate();
+    public virtual void Interact() { }
+    public abstract void Deactivate();
+}
+
+public class Encounter : BaseEncounter
+{
     [Space]
     [Header("Encounter settings")]
     [SerializeField] protected BasePointer _pointer;
     [SerializeField] protected BaseTriggerVolume _triggerVolume;
 
-    public BaseQuestLink QuestLink => _questLink;
-
     protected GamePlayer _player = null;
 
-    public virtual void Activate() 
+    public override void Activate() 
     {
         PrepareTriggerVolume();
     }
@@ -37,9 +46,9 @@ public class BaseEncounter : MonoBehaviour, IEncounter
         _pointer.Enable();
     }
    
-    public virtual void Interact()
+    public override void Interact()
     {
-        Debug.Log($"BaseEncounter.Interact");
+        Debug.Log($"Encounter.Interact");
 
         _pointer.Disable();
 
@@ -58,7 +67,7 @@ public class BaseEncounter : MonoBehaviour, IEncounter
         }
     }
 
-    public virtual void Deactivate()
+    public override void Deactivate()
     {
         ClearTriggerVolume();
 

@@ -98,8 +98,6 @@ public class QuestContainer
     [SerializeField] private BaseQuest _quest;
     [SerializeField] private List<BaseEncounter> _encounters;
 
-    [SerializeField] private List<BaseQuestEntity> _questEntity;
-
     public BaseQuest Quest => _quest;
 
     public void AddLinksToQuest()

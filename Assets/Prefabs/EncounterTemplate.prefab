@@ -159,7 +159,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3838329819068151144}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb68d2e125b32f843bc6e481e7e8c0f5, type: 3}
+  m_Script: {fileID: 11500000, guid: 7fb2c4c70c445ad47b20af07a8cb03dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _questLink: {fileID: 11400000, guid: 58a50bd5f8b095444969ffafaeb8e5c2, type: 2}

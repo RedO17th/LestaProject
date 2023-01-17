@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class DistanationVolume : BaseConditionalQuestEntity
+public class DistanationVolume : BaseEncounter
 {
     [Space]
     [Header("Base settings")]
@@ -13,7 +13,12 @@ public class DistanationVolume : BaseConditionalQuestEntity
         _triggerVolume.OnEnter += PlayerCameUp;
     }
 
-    private void PlayerCameUp(GamePlayer player) => Complete();
+    private void PlayerCameUp(GamePlayer player)
+    {
+        _questLink.Complete();
+    }
+
+    public override void Interact() { }
 
     public override void Deactivate()
     {

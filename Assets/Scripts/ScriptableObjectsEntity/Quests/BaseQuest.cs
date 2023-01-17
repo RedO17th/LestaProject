@@ -25,6 +25,9 @@ public class BaseQuest : ScriptableObject
     public virtual void Initialize(QuestSubSystem system)
     {
         _questSubSystem = system;
+
+        _isCompleted = false;
+        _links.Clear();
     }
 
     public virtual void AddLink(BaseQuestLink link)
