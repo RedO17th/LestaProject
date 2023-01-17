@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class BaseQuest : ScriptableObject
 {
-    [SerializeField] protected string _name = string.Empty;
     [SerializeField] protected bool _isCompleted = false;
+    [SerializeField] protected string _name = string.Empty;
     [TextArea]
     [SerializeField] protected string _description = string.Empty;
 
-    [Header("Quest links")]
-    [SerializeField] protected List<BaseQuestLink> _links;
+    [Header("Quest links (Test)")]
+    public List<BaseQuestLink> _links = new List<BaseQuestLink>();
 
     public event Action OnCompleted;
 
@@ -25,6 +25,11 @@ public class BaseQuest : ScriptableObject
     public virtual void Initialize(QuestSubSystem system)
     {
         _questSubSystem = system;
+    }
+
+    public virtual void AddLink(BaseQuestLink link)
+    {
+        _links.Add(link);
     }
 
     public virtual void Prepare() 

@@ -3,17 +3,17 @@ using UnityEngine;
 
 public class BaseEncounter : MonoBehaviour, IEncounter
 {
+    [Header("Quest settings")]
+    [SerializeField] protected BaseQuestLink _questLink = null;
+
+    [Space]
+    [Header("Encounter settings")]
     [SerializeField] protected BasePointer _pointer;
     [SerializeField] protected BaseTriggerVolume _triggerVolume;
 
-    public BaseQuestLink _qestLink = null;
+    public BaseQuestLink QuestLink => _questLink;
 
     protected GamePlayer _player = null;
-
-    public virtual void SetQuestLink(BaseQuestLink link)
-    {
-        _qestLink = link;
-    }
 
     public virtual void Activate() 
     {
@@ -43,7 +43,7 @@ public class BaseEncounter : MonoBehaviour, IEncounter
 
         _pointer.Disable();
 
-        _qestLink.Complete();
+        _questLink.Complete();
     }
 
     protected virtual void CancelInteraction(GamePlayer player)

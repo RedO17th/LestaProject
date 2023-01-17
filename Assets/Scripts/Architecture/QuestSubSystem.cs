@@ -44,7 +44,7 @@ public class QuestSubSystem : BaseSubSystem
     {
         if (_currentQuestContainer != null)
         {
-            _currentQuestContainer.SetLinksToEncounter();
+            _currentQuestContainer.AddLinksToQuest();
             _currentQuestContainer.ActivateEncouners();
 
             var quest = _currentQuestContainer.Quest;
@@ -96,23 +96,22 @@ public class QuestSubSystem : BaseSubSystem
 public class QuestContainer
 {
     [SerializeField] private BaseQuest _quest;
-    [SerializeField] private BaseQuestLink _link;
     [SerializeField] private List<BaseEncounter> _encounters;
+
+    [SerializeField] private List<BaseQuestEntity> _questEntity;
 
     public BaseQuest Quest => _quest;
 
-    public void SetLinksToEncounter()
+    public void AddLinksToQuest()
     {
         foreach (var encounter in _encounters)
-            encounter.SetQuestLink(_link);
+            _quest.AddLink(encounter.QuestLink);
     }
-
     public void ActivateEncouners()
     {
         foreach (var encounter in _encounters)
             encounter.Activate();
     }
-
     public void DeactivateEncouners()
     {
         foreach (var encounter in _encounters)
