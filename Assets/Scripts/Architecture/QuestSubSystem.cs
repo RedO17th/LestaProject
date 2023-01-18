@@ -10,6 +10,8 @@ public class QuestSubSystem : BaseSubSystem
     [SerializeField] private int _questID = 0;
     [SerializeField] private List<QuestContainer> _quest—ontainers;
 
+    public event Action<BaseQuest> OnQuestActivated;
+
     private QuestContainer _currentQuestContainer = null;
 
     public override void Initialize(ProjectSystem system)
@@ -52,6 +54,8 @@ public class QuestSubSystem : BaseSubSystem
             quest.OnCompleted += SwitchToNextQuest;
             quest.Prepare();
             quest.Launch();
+
+            OnQuestActivated?.Invoke(quest);
         }
         else
         {

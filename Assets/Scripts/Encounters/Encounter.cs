@@ -15,6 +15,7 @@ public abstract class BaseEncounter : MonoBehaviour, IEncounter
     public abstract void Deactivate();
 }
 
+
 public class Encounter : BaseEncounter
 {
     [Space]

@@ -10,11 +10,13 @@ public class BaseQuest : ScriptableObject
     [TextArea]
     [SerializeField] protected string _description = string.Empty;
 
+    //[TODO] Transfer to protected modificator
     [Header("Quest links (Test)")]
     public List<BaseQuestLink> _links = new List<BaseQuestLink>();
 
     public event Action OnCompleted;
 
+    public Type Type => GetType();  
     public bool IsCompleted => _isCompleted;
 
     protected QuestSubSystem _questSubSystem = null;
