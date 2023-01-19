@@ -1882,6 +1882,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1613714422}
     - target: {fileID: 3670974318390832832, guid: 8364672ad827ed64586a666157504801, type: 3}
+      propertyPath: "_quest\u0421ontainers.Array.size"
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3670974318390832832, guid: 8364672ad827ed64586a666157504801, type: 3}
+      propertyPath: "_quest\u0421ontainers.Array.data[0]._ss.Array.size"
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3670974318390832832, guid: 8364672ad827ed64586a666157504801, type: 3}
+      propertyPath: "_quest\u0421ontainers.Array.data[0]._encounters.Array.size"
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3670974318390832832, guid: 8364672ad827ed64586a666157504801, type: 3}
       propertyPath: "_quest\u0421ontainers.Array.data[0]._encounters.Array.data[0]"
       value: 
       objectReference: {fileID: 1671161892}
@@ -1893,6 +1905,10 @@ PrefabInstance:
       propertyPath: "_quest\u0421ontainers.Array.data[2]._encounters.Array.data[0]"
       value: 
       objectReference: {fileID: 8651791205549806960}
+    - target: {fileID: 3670974318390832832, guid: 8364672ad827ed64586a666157504801, type: 3}
+      propertyPath: "_quest\u0421ontainers.Array.data[0]._settingsForQuest.Array.data[0]._encounter"
+      value: 
+      objectReference: {fileID: 1671161892}
     - target: {fileID: 5193268257920135529, guid: 8364672ad827ed64586a666157504801, type: 3}
       propertyPath: _dialogEncounters.Array.data[0]
       value: 

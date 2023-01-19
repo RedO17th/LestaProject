@@ -5,10 +5,13 @@ using UnityEngine;
 //Очень маленький и базовый функционал - s_O_lid.
 public abstract class BaseEncounter : MonoBehaviour, IEncounter
 {
-    [Header("Quest settings")]
-    [SerializeField] protected BaseQuestLink _questLink = null;
+    //[TODO] Transfer to protected
+    public BaseQuestLink _questLink = null;
 
-    public BaseQuestLink QuestLink => _questLink;
+    public void SetQuestLink(BaseQuestLink link)
+    {
+        _questLink = link;
+    }
 
     public abstract void Activate();
     public virtual void Interact() { }

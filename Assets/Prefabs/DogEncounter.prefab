@@ -130,7 +130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13be3db910b78ec4cbac98ae26381a94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _questLink: {fileID: 11400000, guid: 58a50bd5f8b095444969ffafaeb8e5c2, type: 2}
+  _questLink: {fileID: 0}
   _pointer: {fileID: 3260176781164070982}
   _triggerVolume: {fileID: 3260176779671306845}
   _dialogContaner: {fileID: 11400000, guid: 32a242194393ca34e9f8fe30b3000d70, type: 2}

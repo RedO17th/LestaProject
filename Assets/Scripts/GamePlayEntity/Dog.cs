@@ -12,11 +12,11 @@ public interface IDialogable
 public class Dog : Encounter, IDialogable
 {
     //[ForMe] Может сие вынести в отдельный Интерфейс
-    [Space]
-    [SerializeField] private QuestAndDialogsContaner _dialogContaner = null;
+    //[Space]
+    //[SerializeField] private QuestAndDialogsContaner _dialogContaner = null;
 
     private DialogSubSystem _dialogSystem = null;
-    private BaseDialogController _dialogController = null;
+    //private BaseDialogController _dialogController = null;
     //...
 
     public void Initialize(Component manager)
@@ -31,8 +31,8 @@ public class Dog : Encounter, IDialogable
 
         if (_dialogSystem)
         { 
-            _dialogController = new BaseDialogController(_dialogSystem);
-            _dialogController.SetDialogContainer(_dialogContaner);            
+            //_dialogController = new BaseDialogController(_dialogSystem);
+            //_dialogController.SetDialogContainer(_dialogContaner);            
         }
     }
 

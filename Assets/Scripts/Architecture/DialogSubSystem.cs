@@ -21,19 +21,19 @@ public class DialogSubSystem : BaseSubSystem
         _questSubSystem = _projectSystem.GetSubSystemByType(typeof(QuestSubSystem)) as QuestSubSystem;
         _questSubSystem.OnQuestActivated += DefineQuestInDialogEncounters;
 
-        InitializeDialogEncounters();
+        //InitializeDialogEncounters();
     }
 
-    private void InitializeDialogEncounters()
-    {
-        foreach (var encounter in _dialogEncounters)
-        {
-            if (encounter is IDialogable dialogEncouner)
-            {
-                dialogEncouner.Initialize(this);
-            }
-        }
-    }
+    //private void InitializeDialogEncounters()
+    //{
+    //    foreach (var encounter in _dialogEncounters)
+    //    {
+    //        if (encounter is IDialogable dialogEncouner)
+    //        {
+    //            dialogEncouner.Initialize(this);
+    //        }
+    //    }
+    //}
 
     public override void StartSystem()
     {
