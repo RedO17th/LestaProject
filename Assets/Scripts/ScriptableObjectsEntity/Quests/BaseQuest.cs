@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class BaseQuest : ScriptableObject
 {
+    [SerializeField] protected int _id = 0;
+
     [SerializeField] protected bool _isCompleted = false;
     [SerializeField] protected string _name = string.Empty;
     [TextArea]

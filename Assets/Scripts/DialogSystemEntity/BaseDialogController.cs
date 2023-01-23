@@ -2,51 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-[System.Serializable]
-public class QuestAndDialogs
+public abstract class BaseDialogController : MonoBehaviour
 {
-    [SerializeField] private BaseQuest _quest = null;
-    [SerializeField] private List<BaseDialog> _dialogs;
-
-    public Type QuestType => _quest.GetType();
-
-    public void GetDialogs(ref List<BaseDialog> newList)
-    {
-        foreach (var dialog in _dialogs)
-            newList.Add(dialog);
-    }
-}
-
-public class BaseDialogController
-{ 
     protected DialogSubSystem _dialogSubSystem = null;
-    protected QuestAndDialogsContaner _dialogContaner = null;
 
-    protected List<BaseDialog> _currentDialogs = new List<BaseDialog>();
-
-    public BaseDialogController(DialogSubSystem system)
+    public virtual void Initialize(DialogSubSystem system)
     {
         _dialogSubSystem = system;
-        _dialogSubSystem.OnQuestActivated += SetCurrentDialogsByQuest;
     }
 
-    public virtual void SetDialogContainer(QuestAndDialogsContaner contaner)
-    {
-        _dialogContaner = contaner;
-    }
+    public virtual void SetDialog(BaseDialog dialog) { }
 
-    protected virtual void SetCurrentDialogsByQuest(BaseQuest quest)
-    {
-        Debug.Log($"BaseDialogController: Quest is { quest.GetType() } ");
-
-        _currentDialogs.Clear();
-        _currentDialogs = _dialogContaner.GetDialogsByQuestType(quest.Type);
-    }
+    public virtual void ActivateDialog() { }
 
     public virtual void Clear()
     {
-        _dialogSubSystem.OnQuestActivated -= SetCurrentDialogsByQuest;
         _dialogSubSystem = null;
     }
 }

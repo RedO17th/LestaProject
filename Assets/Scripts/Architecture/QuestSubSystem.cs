@@ -10,6 +10,7 @@ public class QuestSubSystem : BaseSubSystem
     [SerializeField] private int _questID = 0;
     [SerializeField] private List<QuestContainer> _quest—ontainers;
 
+    public event Action<Type> OnQuestWillActivated;
     public event Action<BaseQuest> OnQuestActivated;
 
     private QuestContainer _currentQuestContainer = null;
@@ -20,7 +21,6 @@ public class QuestSubSystem : BaseSubSystem
 
         InitializeQuests();
     }
-
     private void InitializeQuests()
     {
         foreach (var container in _quest—ontainers)
@@ -49,19 +49,15 @@ public class QuestSubSystem : BaseSubSystem
             _currentQuestContainer.AddLinksToQuest();
             _currentQuestContainer.AddLinksToEncounters();
 
-            //»ÌËˆË‡ÎËÁ‡ˆËˇ ›ÌÍÓÛÌÚÂ‡ ‰Ë‡ÎÓ„ÓÏ, ËÏÂÌÌÓ ÚÛÚ
-
-
-
-            //..
+            OnQuestWillActivated?.Invoke(_currentQuestContainer.Quest.Type);
 
             _currentQuestContainer.ActivateEncouners();
 
             var quest = _currentQuestContainer.Quest;
 
-            quest.OnCompleted += SwitchToNextQuest;
-            quest.Prepare();
-            quest.Launch();
+                quest.OnCompleted += SwitchToNextQuest;
+                quest.Prepare();
+                quest.Launch();
 
             OnQuestActivated?.Invoke(quest);
         }
@@ -98,10 +94,7 @@ public class QuestSubSystem : BaseSubSystem
 
     #endregion
 
-    public override void Clear()
-    {
-        base.Clear();
-    }
+    public override void Clear() { }
 }
 
 [System.Serializable]
@@ -129,16 +122,6 @@ public class QuestContainer
             settings.ActivateEncounter();
     }
 
-    //..
-    public void GetDialogEncounter()
-    {
-        foreach (var settings in _settingsForQuest)
-        {
-            var encounter = settings.GetDialogEncounter();
-        }
-    }
-    //..
-
     public void DeactivateEncouners()
     {
         //foreach (var encounter in _encounters)
@@ -151,29 +134,10 @@ public class EncounterSettingsForQuest
 {
     [SerializeField] private BaseEncounter _encounter = null;
     [SerializeField] private BaseQuestLink _questLink = null;
-    [SerializeField] private BaseDialog _dialog = null;
 
     public BaseQuestLink QuestLink => _questLink;
-
     public BaseEncounter Encounter => _encounter;
-    public BaseDialog Dialog => _dialog;
 
     public void ActivateEncounter() => _encounter.Activate();
     public void AddLinkToEncounter() => _encounter.SetQuestLink(_questLink);
-
-    public DialogEncounterData GetDialogEncounter()
-    {
-        return new DialogEncounterData(_encounter, _dialog);
-    }
-}
-
-public class DialogEncounterData
-{
-    public BaseEncounter Encounter { get; private set; } = null;
-    public BaseDialog Dialog { get; private set; } = null;
-    public DialogEncounterData(BaseEncounter encounter, BaseDialog dialog)
-    {
-        Encounter = encounter;
-        Dialog = dialog;
-    }
 }

@@ -1,13 +1,16 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+
+//[Note] ≈сли вынести инициализацию "диалоговых энкаунтеров" в данную подсистему,
+//как функционал, то уже она будет решать, есть ли эти самые
+//сущности внутри определенного quest'a и выполн€ть определенную логику
 
 public class DialogSubSystem : BaseSubSystem
 {
-    [SerializeField] private List<Encounter> _dialogEncounters;
-
-    public event Action<BaseQuest> OnQuestActivated;
+    [SerializeField] private List<DialogContainer> _dialogContainers;
 
     private QuestSubSystem _questSubSystem = null;
 
@@ -15,41 +18,87 @@ public class DialogSubSystem : BaseSubSystem
     {
         base.Initialize(system);
     }
-
     public override void Prepare()
     {
         _questSubSystem = _projectSystem.GetSubSystemByType(typeof(QuestSubSystem)) as QuestSubSystem;
-        _questSubSystem.OnQuestActivated += DefineQuestInDialogEncounters;
-
-        //InitializeDialogEncounters();
+        _questSubSystem.OnQuestWillActivated += InitializeDialogEncountersByQuestType;
     }
 
-    //private void InitializeDialogEncounters()
-    //{
-    //    foreach (var encounter in _dialogEncounters)
-    //    {
-    //        if (encounter is IDialogable dialogEncouner)
-    //        {
-    //            dialogEncouner.Initialize(this);
-    //        }
-    //    }
-    //}
-
-    public override void StartSystem()
+    private void InitializeDialogEncountersByQuestType(Type questType)
     {
-        
-        
+        var currentDialogContainer = GetDialogContainerByQuestType(questType);
 
+        InitializeDialogEncounters(currentDialogContainer);
     }
 
-    private void DefineQuestInDialogEncounters(BaseQuest quest)
+    private DialogContainer GetDialogContainerByQuestType(Type questType)
     {
-        OnQuestActivated?.Invoke(quest);
+        DialogContainer currentDialogContainer = null;
+
+        foreach (var container in _dialogContainers)
+        {
+            if (container.IsEqual(questType))
+            {
+                currentDialogContainer = container;
+                break;
+            }
+        }
+
+        return currentDialogContainer;
     }
+
+    private void InitializeDialogEncounters(DialogContainer dialogContainer)
+    {
+        var dialogEncounterPair = dialogContainer.GetDialogEncounters();
+
+        foreach (var pair in dialogEncounterPair)
+        {
+            var encounter = pair.Encounter;
+            var dialog = pair.Dialog;
+
+            if (encounter is IDialogable dEncounter)
+            {
+                dEncounter.InitializeDialogable(this);
+                dEncounter.SetDialog(dialog);
+            }
+        }
+    }
+
+    public override void StartSystem() { }
 
     public override void Clear()
     {
-        _questSubSystem.OnQuestActivated -= DefineQuestInDialogEncounters;
+        _questSubSystem.OnQuestWillActivated -= InitializeDialogEncountersByQuestType;
         _questSubSystem = null;
     }
+}
+
+[System.Serializable]
+public class DialogContainer
+{
+    [SerializeField] private BaseQuest _quest = null;
+    [SerializeField] private List<DialogEncounter> _dialogEncounter;
+
+    public bool IsEqual(Type questType) => _quest.Type == questType;
+
+    public List<DialogEncounter> GetDialogEncounters()
+    {
+        List<DialogEncounter> list = new List<DialogEncounter>();
+
+        foreach (var encounter in _dialogEncounter)
+            list.Add(encounter);
+
+        return list;
+    }
+
+}
+
+[System.Serializable]
+public class DialogEncounter
+{
+    [SerializeField] private BaseEncounter _encounter = null;
+    [SerializeField] private BaseDialog _dialog = null;
+
+    public BaseEncounter Encounter => _encounter;
+    public BaseDialog Dialog => _dialog;
 }

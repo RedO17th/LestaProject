@@ -223,8 +223,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e006e1ca61bec7044821ca63e6cc6ee5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dialogEncounters:
-  - {fileID: 0}
+  _dialogContainers:
+  - _quest: {fileID: 11400000, guid: 4056320cd9d04ed4ea127fa496da3be7, type: 2}
+    _dialogEncounter:
+    - _encounter: {fileID: 0}
+      _dialog: {fileID: 11400000, guid: a0809375bb4ecdd409a4e1f262011ff2, type: 2}
 --- !u!1 &4927095735731968069
 GameObject:
   m_ObjectHideFlags: 0
@@ -566,14 +569,7 @@ MonoBehaviour:
     _settingsForQuest:
     - _encounter: {fileID: 0}
       _questLink: {fileID: 11400000, guid: 58a50bd5f8b095444969ffafaeb8e5c2, type: 2}
-      _dialog: {fileID: 11400000, guid: a0809375bb4ecdd409a4e1f262011ff2, type: 2}
-    _encounters:
-    - {fileID: 0}
   - _quest: {fileID: 11400000, guid: 9ece3734291e0ee4da412dfeed6cd9ba, type: 2}
     _settingsForQuest: []
-    _encounters:
-    - {fileID: 0}
   - _quest: {fileID: 11400000, guid: f0f9c3a44cd12184685a4da7b1a6c7c4, type: 2}
     _settingsForQuest: []
-    _encounters:
-    - {fileID: 0}

@@ -18,15 +18,23 @@ public abstract class BaseEncounter : MonoBehaviour, IEncounter
     public abstract void Deactivate();
 }
 
+public interface IInvokable
+{ 
+    event Action OnInvoke;
+}
 
-public class Encounter : BaseEncounter
+public class Encounter : BaseEncounter, IInvokable
 {
     [Space]
     [Header("Encounter settings")]
     [SerializeField] protected BasePointer _pointer;
     [SerializeField] protected BaseTriggerVolume _triggerVolume;
 
+    public event Action OnInvoke;
+
     protected GamePlayer _player = null;
+
+    protected virtual void Awake() { }
 
     public override void Activate() 
     {

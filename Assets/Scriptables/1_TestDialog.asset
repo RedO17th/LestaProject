@@ -10,6 +10,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 95ea077c9c76c7140974a93c81ccfff6, type: 3}
-  m_Name: Test_DialogThree
+  m_Name: 1_TestDialog
   m_EditorClassIdentifier: 
-  _dialogID: 2

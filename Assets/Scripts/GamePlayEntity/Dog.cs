@@ -1,46 +1,64 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering.VirtualTexturing;
 
-//[ForMe] При необходимости "накидать" интерфейсов
 public interface IDialogable
 {
-    void Initialize(Component manager);
+    void InitializeDialogable(DialogSubSystem system);
+    void SetDialog(BaseDialog dialog);
 }
 
-public class Dog : Encounter, IDialogable
+public interface ITalkable : IDialogable
 {
-    //[ForMe] Может сие вынести в отдельный Интерфейс
-    //[Space]
-    //[SerializeField] private QuestAndDialogsContaner _dialogContaner = null;
+    void Talk();
+}
 
-    private DialogSubSystem _dialogSystem = null;
-    //private BaseDialogController _dialogController = null;
-    //...
+public class Dog : Encounter, ITalkable
+{
+    //Данный контроллер может быть разным, под каждый отдельный диалог -
+    // - свой собственный
+    private BaseDialogController _dialogController = null;
 
-    public void Initialize(Component manager)
+    protected override void Awake()
     {
-        if (manager is DialogSubSystem system)
-            _dialogSystem = system;
+        _dialogController = GetComponent<BaseDialogController>();
     }
+
+    public void InitializeDialogable(DialogSubSystem system)
+    {
+        _dialogController.Initialize(system); 
+    }
+    public void SetDialog(BaseDialog dialog)
+    {
+        _dialogController.SetDialog(dialog);
+    }
+
 
     public override void Activate()
     {
         base.Activate();
+    }
 
-        if (_dialogSystem)
-        { 
-            //_dialogController = new BaseDialogController(_dialogSystem);
-            //_dialogController.SetDialogContainer(_dialogContaner);            
-        }
+    //А взаимодействие может быть только каким-то одним форматом?
+    public override void Interact()
+    {
+        Debug.Log($"Dog.Interact");
+
+        _pointer.Disable();
+
+        //_questLink.Complete();
+        Talk();
+    }
+
+    public void Talk()
+    {
+        _dialogController.ActivateDialog();
+
+
     }
 
     public override void Deactivate()
     {
         base.Deactivate();
-
-        //_dialogController.Clear();
-        //_dialogController = null;
     }
 }
