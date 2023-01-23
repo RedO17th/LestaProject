@@ -11,8 +11,9 @@ public class PlayerDataContainer : BaseDataContainer
     [SerializeField] private int _maxHealth = 100;
 
     [Space]
-    [Header("WalletOfpoints")]
-    [SerializeField] private int _walletOfpoints = 100;
+    [Header("WalletOfPoints")] //на сколько € помню, это опыт. ћожет лучше это не "кошелек с очками", а общеприн€тое "Experience",
+    [SerializeField] private int _walletOfPoints = 100;
+    [SerializeField] private int _level = 1;
 
     [Space]
     [Header("Movement")]
@@ -25,7 +26,8 @@ public class PlayerDataContainer : BaseDataContainer
 
     public int MaxHealth => _maxHealth;
 
-    public int WalletOfpoints => _walletOfpoints;
+    public int WalletOfpoints => _walletOfPoints;
+    public int Level => _level;
 
     public float WalkSpeed => _walkSpeed;
     public float RunSpeed => _runSpeed;

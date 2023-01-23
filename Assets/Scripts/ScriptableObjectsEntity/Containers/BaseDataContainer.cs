@@ -1,3 +1,5 @@
 using UnityEngine;
 
-public class BaseDataContainer : ScriptableObject { }
+public class BaseDataContainer : ScriptableObject
+{
+}
