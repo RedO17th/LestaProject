@@ -10,6 +10,9 @@ public class QuestSubSystem : BaseSubSystem
     [SerializeField] private int _questID = 0;
     [SerializeField] private List<QuestContainer> _quest—ontainers;
 
+    public event Action<Type> OnQuestWillActivated;
+    public event Action<BaseQuest> OnQuestActivated;
+
     private QuestContainer _currentQuestContainer = null;
 
     public override void Initialize(ProjectSystem system)
@@ -18,7 +21,6 @@ public class QuestSubSystem : BaseSubSystem
 
         InitializeQuests();
     }
-
     private void InitializeQuests()
     {
         foreach (var container in _quest—ontainers)
@@ -45,13 +47,19 @@ public class QuestSubSystem : BaseSubSystem
         if (_currentQuestContainer != null)
         {
             _currentQuestContainer.AddLinksToQuest();
+            _currentQuestContainer.AddLinksToEncounters();
+
+            OnQuestWillActivated?.Invoke(_currentQuestContainer.Quest.Type);
+
             _currentQuestContainer.ActivateEncouners();
 
             var quest = _currentQuestContainer.Quest;
 
-            quest.OnCompleted += SwitchToNextQuest;
-            quest.Prepare();
-            quest.Launch();
+                quest.OnCompleted += SwitchToNextQuest;
+                quest.Prepare();
+                quest.Launch();
+
+            OnQuestActivated?.Invoke(quest);
         }
         else
         {
@@ -62,7 +70,7 @@ public class QuestSubSystem : BaseSubSystem
 
     private void SwitchToNextQuest()
     {
-        _currentQuestContainer.DeactivateEncouners();
+        //_currentQuestContainer.DeactivateEncouners();
 
         _currentQuestContainer.Quest.SetCompletedState();
         _currentQuestContainer.Quest.Complete();
@@ -86,33 +94,50 @@ public class QuestSubSystem : BaseSubSystem
 
     #endregion
 
-    public override void Clear()
-    {
-        base.Clear();
-    }
+    public override void Clear() { }
 }
 
 [System.Serializable]
 public class QuestContainer
 {
     [SerializeField] private BaseQuest _quest;
-    [SerializeField] private List<BaseEncounter> _encounters;
+    [SerializeField] private List<EncounterSettingsForQuest> _settingsForQuest;
 
     public BaseQuest Quest => _quest;
 
     public void AddLinksToQuest()
     {
-        foreach (var encounter in _encounters)
-            _quest.AddLink(encounter.QuestLink);
+        foreach (var settings in _settingsForQuest)
+            settings.AddLinkToEncounter();
     }
+    public void AddLinksToEncounters()
+    {
+        foreach (var settings in _settingsForQuest)
+            _quest.AddLink(settings.QuestLink);
+    }
+
     public void ActivateEncouners()
     {
-        foreach (var encounter in _encounters)
-            encounter.Activate();
+        foreach (var settings in _settingsForQuest)
+            settings.ActivateEncounter();
     }
+
     public void DeactivateEncouners()
     {
-        foreach (var encounter in _encounters)
-            encounter.Deactivate();
+        //foreach (var encounter in _encounters)
+        //    encounter.Deactivate();
     }
+}
+
+[System.Serializable]
+public class EncounterSettingsForQuest
+{
+    [SerializeField] private BaseEncounter _encounter = null;
+    [SerializeField] private BaseQuestLink _questLink = null;
+
+    public BaseQuestLink QuestLink => _questLink;
+    public BaseEncounter Encounter => _encounter;
+
+    public void ActivateEncounter() => _encounter.Activate();
+    public void AddLinkToEncounter() => _encounter.SetQuestLink(_questLink);
 }

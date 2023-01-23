@@ -30,12 +30,8 @@ public class ProjectSystem : MonoBehaviour
 
         InitializeGameStates();
         SetStandartGameState();
-
-        InitializeSubSystems();
-        PrepareSubSystems();
     }
 
-    #region Initialize region
     private void InitializeSystem()
     {
         if (_instance == null) _instance = this;
@@ -54,23 +50,12 @@ public class ProjectSystem : MonoBehaviour
         
         };
     }
-    private void InitializeSubSystems()
-    {
-        foreach (var s in _subSystems)
-            s.Initialize(this);
-    }
-
-    private void PrepareSubSystems()
-    {
-        foreach (var s in _subSystems)
-            s.Prepare();
-    }
-    #endregion
 
     private void SetStandartGameState()
     {
         _currentGameState = GetGameStateBy(_standartGameState);
     }
+    //..
 
     private BaseGameState GetGameStateBy(GameStateType type) 
     {
@@ -107,15 +92,28 @@ public class ProjectSystem : MonoBehaviour
     //Start period
     private void Start()
     {
+        InitializeSubSystems();
+        PrepareSubSystems();
+
         StartSystems();
     }
 
+    private void InitializeSubSystems()
+    {
+        foreach (var s in _subSystems)
+            s.Initialize(this);
+    }
+    private void PrepareSubSystems()
+    {
+        foreach (var s in _subSystems)
+            s.Prepare();
+    }
     private void StartSystems()
     {
         foreach (var system in _subSystems)
             system.StartSystem();
     }
-
+    //..
 
     private void Update()
     {
