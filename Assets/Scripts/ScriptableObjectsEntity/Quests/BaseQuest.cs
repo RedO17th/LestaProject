@@ -1,88 +1,37 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum QuestState { None = -1, Opened, Closed, Activated, InProgress, Complete, Failed }
+
+[CreateAssetMenu]
 public class BaseQuest : ScriptableObject
 {
-    [SerializeField] protected int _id = 0;
+    [SerializeField] protected QuestState _state = QuestState.Closed;
 
-    [SerializeField] protected bool _isCompleted = false;
+    [SerializeField] protected string _idName = string.Empty;
+
     [SerializeField] protected string _name = string.Empty;
-    [TextArea]
     [SerializeField] protected string _description = string.Empty;
 
-    //[TODO] Transfer to protected modificator
-    [Header("Quest links (Test)")]
-    public List<BaseQuestLink> _links = new List<BaseQuestLink>();
-
-    public event Action OnCompleted;
-
-    public Type Type => GetType();  
-    public bool IsCompleted => _isCompleted;
+    public string IDName => _idName;
 
     protected QuestSubSystem _questSubSystem = null;
 
-    public virtual void SetCompletedState() => _isCompleted = true;
-    public virtual void SetUnCompletedState() => _isCompleted = false;
+    public virtual void Initialize(QuestSubSystem system) { }
 
-    public virtual void Initialize(QuestSubSystem system)
+    public bool StateIs(QuestState checkableState)
     {
-        _questSubSystem = system;
-
-        _isCompleted = false;
-        _links.Clear();
+        return _state == checkableState;
     }
 
-    public virtual void AddLink(BaseQuestLink link)
-    {
-        _links.Add(link);
-    }
+    public virtual void Prepare() { Debug.Log($"BaseQuest.Prepare"); }
+    public virtual void Activate() { Debug.Log($"BaseQuest.Activate"); }
 
-    public virtual void Prepare() 
-    {
-        InitializeLinks();
-    }
+    protected virtual void Complete() { }
+    protected virtual void CheckCompliting() { }
+    protected virtual bool CheckConditionOfCompliting() { return false; }
 
-    protected virtual void InitializeLinks()
-    {
-        foreach (var link in _links)
-            link.OnCompleted += CheckCompliting;
-    }
-
-    public virtual void Launch() { }
-
-    protected virtual void CheckCompliting(BaseQuestLink link)
-    {
-        link.OnCompleted -= CheckCompliting;
-
-        if (CheckConditionOfCompliting())
-        {
-            OnCompleted?.Invoke();
-        }
-    }
-
-    protected virtual bool CheckConditionOfCompliting()
-    {
-        bool result = true;
-
-        foreach (var link in _links)
-        {
-            if (link.IsCompleted == false)
-                result = false;
-        }
-
-        return result;
-    }
-
-    public virtual void Complete() 
-    {
-        DeactivateQuestLinks();
-    }
-
-    protected virtual void DeactivateQuestLinks()
-    {
-        foreach (var link in _links)
-            link.UsualCompletion();
-    }
+    public virtual void Dectivate() { }
+    protected virtual void Clear() { }
 }

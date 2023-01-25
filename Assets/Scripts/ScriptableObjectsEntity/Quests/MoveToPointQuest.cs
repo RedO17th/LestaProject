@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "MoveToPoint", menuName = "ScriptableObjects/Quests/MoveToPoint")]
-public class MoveToPointQuest : BaseQuest
+public class MoveToPointQuest : Quest
 {
     public override void Complete()
     {

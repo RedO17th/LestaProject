@@ -95,7 +95,7 @@ public class ProjectSystem : MonoBehaviour
         InitializeSubSystems();
         PrepareSubSystems();
 
-        StartSystems();
+        StartSubSystems();
     }
 
     private void InitializeSubSystems()
@@ -108,7 +108,7 @@ public class ProjectSystem : MonoBehaviour
         foreach (var s in _subSystems)
             s.Prepare();
     }
-    private void StartSystems()
+    private void StartSubSystems()
     {
         foreach (var system in _subSystems)
             system.StartSystem();
@@ -117,7 +117,7 @@ public class ProjectSystem : MonoBehaviour
 
     private void Update()
     {
-        ProcessingGameStates();
+        //ProcessingGameStates();
 
 
         //and more...

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "TalkWithDog", menuName = "ScriptableObjects/Quests/TalkWithDog")]
-public class TalkWithDogQuest : BaseQuest
+public class TalkWithDogQuest : Quest
 {
     public override void Complete()
     {

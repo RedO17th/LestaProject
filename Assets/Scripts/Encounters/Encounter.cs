@@ -18,19 +18,12 @@ public abstract class BaseEncounter : MonoBehaviour, IEncounter
     public abstract void Deactivate();
 }
 
-public interface IInvokable
-{ 
-    event Action OnInvoke;
-}
-
-public class Encounter : BaseEncounter, IInvokable
+public class Encounter : BaseEncounter
 {
     [Space]
     [Header("Encounter settings")]
     [SerializeField] protected BasePointer _pointer;
     [SerializeField] protected BaseTriggerVolume _triggerVolume;
-
-    public event Action OnInvoke;
 
     protected GamePlayer _player = null;
 

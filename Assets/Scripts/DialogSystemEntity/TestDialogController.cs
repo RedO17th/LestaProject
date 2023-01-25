@@ -5,7 +5,7 @@ using UnityEngine;
 public class TestDialogController : BaseDialogController
 {
     private BaseDialog _dialog = null;
-    
+
     public override void Initialize(DialogSubSystem system)
     {
         base.Initialize(system);

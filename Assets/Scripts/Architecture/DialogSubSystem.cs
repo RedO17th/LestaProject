@@ -21,7 +21,7 @@ public class DialogSubSystem : BaseSubSystem
     public override void Prepare()
     {
         _questSubSystem = _projectSystem.GetSubSystemByType(typeof(QuestSubSystem)) as QuestSubSystem;
-        _questSubSystem.OnQuestWillActivated += InitializeDialogEncountersByQuestType;
+        //_questSubSystem.OnQuestWillActivated += InitializeDialogEncountersByQuestType;
     }
 
     private void InitializeDialogEncountersByQuestType(Type questType)
@@ -68,7 +68,7 @@ public class DialogSubSystem : BaseSubSystem
 
     public override void Clear()
     {
-        _questSubSystem.OnQuestWillActivated -= InitializeDialogEncountersByQuestType;
+        //_questSubSystem.OnQuestWillActivated -= InitializeDialogEncountersByQuestType;
         _questSubSystem = null;
     }
 }
@@ -76,7 +76,7 @@ public class DialogSubSystem : BaseSubSystem
 [System.Serializable]
 public class DialogContainer
 {
-    [SerializeField] private BaseQuest _quest = null;
+    [SerializeField] private Quest _quest = null;
     [SerializeField] private List<DialogEncounter> _dialogEncounter;
 
     public bool IsEqual(Type questType) => _quest.Type == questType;
