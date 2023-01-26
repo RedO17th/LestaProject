@@ -8,6 +8,8 @@ public class QuestSubSystem : BaseSubSystem
 {
     [SerializeField] private List<BaseQuest> _quests;
 
+    private QuestContext _currentQuestContext = null;
+
     public override void Initialize(ProjectSystem system)
     {
         base.Initialize(system);
@@ -22,28 +24,22 @@ public class QuestSubSystem : BaseSubSystem
 
     public override void Prepare()
     {
-        ProjectBus.Instance.OnSignal += ProcessSignal;
+        ProjectBus.Instance.OnQuestContextSignal += ProcessSignal;
     }
 
     #region Cycle of switching quests
     public override void StartSystem() { }
 
-    private void ProcessSignal(SignalContext context)
+    private void ProcessSignal(QuestContext context)
     {
-        if (IsTheQuestContext(context))
-        {
-            ActivateQuestByIDName("ID");
-        }
+        _currentQuestContext = context;
+
+        ActivateQuestByIDName();
     }
 
-    private bool IsTheQuestContext(SignalContext context)
+    private void ActivateQuestByIDName()
     {
-        return context.Type == typeof(QuestContext);
-    }
-
-    private void ActivateQuestByIDName(string name)
-    {
-        var quest = GetQuestByIDName(name);
+        var quest = GetQuestByIDName(_currentQuestContext.IDName);
             quest?.Prepare();
             quest?.Activate();
     }

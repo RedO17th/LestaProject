@@ -22,19 +22,41 @@ public class ProjectBus
 
     #endregion
 
-    public event Action<SignalContext> OnSignal;
+    public event Action<QuestContext> OnQuestContextSignal;
+    public event Action<DialogContext> OnDialogContextSignal;
 
-    public void SendSignalByContext(SignalContext context)
+    public event Action<SomeContext> OnSomeContextSignal;
+
+    public void SendSignalByContext(QuestContext context)
     {
-        OnSignal?.Invoke(context);
+        OnQuestContextSignal?.Invoke(context);
+    }
+    public void SendSignalByContext(DialogContext context)
+    {
+        OnDialogContextSignal?.Invoke(context);
+    }
+    public void SendSignalByContext(SomeContext context)
+    {
+        OnSomeContextSignal?.Invoke(context);
     }
 }
 
-public abstract class SignalContext 
-{
-    public Type Type => GetType(); 
-}
+public abstract class SignalContext { }
 
-public class QuestContext : SignalContext { }
 public class SomeContext : SignalContext { }
+public class DialogContext : SignalContext { }
+
+public class QuestContext : SignalContext 
+{
+    public string IDName { get; private set; }
+
+    public QuestContext() { }
+
+    public void SetIDName(string name)
+    {
+        IDName = name;
+    }
+
+
+}
 

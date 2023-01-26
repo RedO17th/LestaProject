@@ -4,17 +4,24 @@ using UnityEngine;
 
 public class VolumeQuestInvoker : QuestInvoker
 {
-    [SerializeField] private QuestSubSystem _questSubSystem;
+    [SerializeField] protected bool _isEnabled = false;
+    [SerializeField] protected TriggerVolumeByPlayer _triggerVolume = null;
 
-    [SerializeField] private BaseTriggerVolume _triggerVolume = null;
-
-    private void Awake()
+    protected virtual void Awake()
     {
-        _triggerVolume.Enable();
-        _triggerVolume.OnEnter += ProcessEnterInVolume;
+        ProcessEnable();
     }
 
-    private void ProcessEnterInVolume(GamePlayer obj)
+    protected virtual void ProcessEnable()
+    {
+        if (_isEnabled)
+        {
+            _triggerVolume.Enable();
+            _triggerVolume.OnEnter += ProcessEnterInVolume;
+        }
+    }
+
+    protected virtual void ProcessEnterInVolume(GamePlayer obj)
     {
         _triggerVolume.OnEnter -= ProcessEnterInVolume;
         _triggerVolume.Disable();
@@ -24,8 +31,9 @@ public class VolumeQuestInvoker : QuestInvoker
 
     protected override void ProcessInvoke() 
     {
-        //_questSubSystem.SomeMeth(_questIDName);
+        var context = new QuestContext();
+            context.SetIDName(_questIDName);
 
-        ProjectBus.Instance.SendSignalByContext(new QuestContext());
+        ProjectBus.Instance.SendSignalByContext(context);
     }
 }

@@ -4,7 +4,7 @@ public class DistanationVolume : BaseEncounter
 {
     [Space]
     [Header("Base settings")]
-    [SerializeField] protected BaseTriggerVolume _triggerVolume;
+    [SerializeField] protected TriggerVolumeByPlayer _triggerVolume;
 
     public override void Activate()
     {

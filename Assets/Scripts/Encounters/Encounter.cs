@@ -23,7 +23,7 @@ public class Encounter : BaseEncounter
     [Space]
     [Header("Encounter settings")]
     [SerializeField] protected BasePointer _pointer;
-    [SerializeField] protected BaseTriggerVolume _triggerVolume;
+    [SerializeField] protected TriggerVolumeByPlayer _triggerVolume;
 
     protected GamePlayer _player = null;
 

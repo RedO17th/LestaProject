@@ -10,11 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 2426111932774137527}
   - component: {fileID: 2426111932774137521}
-  - component: {fileID: 2426111932774137520}
+  - component: {fileID: 4153297800002324446}
   m_Layer: 0
-  m_Name: TriggerVolume
+  m_Name: TriggerVolumeByPlayer
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -46,7 +46,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0.5, z: 0}
---- !u!114 &2426111932774137520
+--- !u!114 &4153297800002324446
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -55,6 +55,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 2426111932774137526}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7cfe796d666abec42a099f1bf367270d, type: 3}
+  m_Script: {fileID: 11500000, guid: 8f83ebe4658a2324495491165aaf2296, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
