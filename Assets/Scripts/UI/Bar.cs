@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Bar : MonoBehaviour
+public class Bar : BaseBar
 {
     [SerializeField]
     private Slider slider;
@@ -14,5 +14,5 @@ public class Bar : MonoBehaviour
         slider.value = maxValue;
     }
 
-    public void ChangeValue(float changing) => slider.value = slider.value + changing;
+    public override void ChangeValue(float newValue) => slider.value = newValue;
 }

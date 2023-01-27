@@ -1,11 +1,7 @@
 using UnityEngine;
 
-public abstract class BaseBar : MonoBehaviour, IBaseBar
+public abstract class BaseBar : MonoBehaviour
 {
-    public abstract void ChangeValue(float changing);
+    public abstract void ChangeValue(float newValue);
 }
 
-public interface IBaseBar
-{
-    void ChangeValue(float changing);
-}

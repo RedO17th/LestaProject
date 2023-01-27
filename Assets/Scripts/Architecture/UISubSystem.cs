@@ -16,7 +16,13 @@ public class UISubSystem : BaseSubSystem
     public void InitializeWindows()
     {
         foreach (var window in _windows)
-            window.Initialize(this);
+            window.Initialize();
+    }
+
+
+    public override void Prepare()
+    {
+        
     }
 
 }

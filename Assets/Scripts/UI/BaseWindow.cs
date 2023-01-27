@@ -4,10 +4,5 @@ using UnityEngine;
 
 public abstract class BaseWindow : MonoBehaviour
 {
-    protected UISubSystem _UISubSystem = null;
-
-    public virtual void Initialize(UISubSystem system)
-    {
-        _UISubSystem = system;
-    }
+    public virtual void Initialize() { }
 }

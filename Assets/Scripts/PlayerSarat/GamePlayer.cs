@@ -83,4 +83,9 @@ public class GamePlayer : BasePlayer
     //Переопределить при необходимости...
 
     #endregion
+
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space)) Health.CurrentValue -= 10;
+    }
 }

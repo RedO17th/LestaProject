@@ -159,7 +159,7 @@ public class MenuGameState : BaseGameState
 
     public override GameStateType Tick()
     {
-        Debug.Log($"MenuGameState.Tick");
+        //Debug.Log($"MenuGameState.Tick");
 
         //Заглушка
         return GameStateType.Menu;
