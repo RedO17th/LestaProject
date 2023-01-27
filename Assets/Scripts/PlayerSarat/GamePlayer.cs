@@ -86,10 +86,10 @@ public class GamePlayer : BasePlayer
 
     //Interact part (test)
 
-    private IEncounter _encounter = null;
+    private Encounter _encounter = null;
 
     //А вообще есть смысл передавать encounter'a...
-    public void SetEncounter(IEncounter encounter)
+    public void SetEncounter(Encounter encounter)
     {
         _encounter = encounter;
     }

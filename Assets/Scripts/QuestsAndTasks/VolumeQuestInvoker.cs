@@ -33,7 +33,7 @@ public class VolumeQuestInvoker : QuestInvoker
     {
         var context = new QuestContext();
             context.SetCommand(QuestCommand.Activate);
-            context.SetIDName(_questIDName);
+            context.SetID(_questID);
 
         ProjectBus.Instance.SendSignalByContext(context);
     }

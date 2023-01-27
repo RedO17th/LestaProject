@@ -2,5 +2,5 @@
 
 public class QuestInvoker : BaseContextInvoker
 {
-    [SerializeField] protected string _questIDName = string.Empty;
+    [SerializeField] protected string _questID = string.Empty;
 }

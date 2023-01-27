@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IEncounter : IInteractable
-{
+public interface IEncounter
+{ 
     void Activate();
     void Deactivate();
 }

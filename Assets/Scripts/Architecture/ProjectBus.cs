@@ -59,7 +59,7 @@ public class QuestContext : SignalContext
     {
         Command = command;
     }
-    public void SetIDName(string name)
+    public void SetID(string name)
     {
         IDName = name;
     }

@@ -3,10 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
+using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 
 public class QuestSubSystem : BaseSubSystem
 {
-    [SerializeField] private List<BaseQuest> _quests;
+    [SerializeField] private List<QuestAndEncounters> _questContainer;
 
     private QuestContext _questContext = null;
 
@@ -50,21 +51,29 @@ public class QuestSubSystem : BaseSubSystem
 
     private void ActivateQuestByIDName()
     {
-        var quest = GetQuestByIDName(_questContext.IDName);
-            quest?.Initialize(this);
-            quest?.Prepare();
-            quest?.Activate();
+        var container = GetContainerByQuestID(_questContext.IDName);
+
+        if (container != null)
+        {
+            var quest = CreateQuest(container);
+
+                quest.AddEncounters(container.GetEncouners());
+
+                quest.Initialize(this);
+                quest.Prepare();
+                quest.Activate();
+        }
     }
 
-    private BaseQuest GetQuestByIDName(string name)
+    private QuestAndEncounters GetContainerByQuestID(string name)
     {
-        BaseQuest result = null;
+        QuestAndEncounters result = null;
 
-        foreach (var quest in _quests)
+        foreach (var container in _questContainer)
         {
-            if (quest.IDName == name)
+            if (container.QuestID == name)
             {
-                result = quest;
+                result = container;
                 break;
             }
         }
@@ -72,11 +81,37 @@ public class QuestSubSystem : BaseSubSystem
         return result;
     }
 
+    private BaseQuest CreateQuest(QuestAndEncounters container)
+    {
+        return Instantiate(container.QuestPrefab, transform);
+    }
+
+
 
     #endregion
 
     public override void Clear()
     {
         ProjectBus.Instance.OnQuestContextSignal -= ProcessSignal;
+    }
+}
+
+[System.Serializable]
+public class QuestAndEncounters
+{
+    [SerializeField] private BaseQuest _questPrefab;
+    [SerializeField] private List<BaseEncounter> _encounters;
+
+    public string QuestID => _questPrefab.IDName;
+    public BaseQuest QuestPrefab => _questPrefab;
+
+    public List<BaseEncounter> GetEncouners()
+    {
+        List<BaseEncounter> result = new List<BaseEncounter>();
+
+        foreach (var encounter in _encounters)
+            result.Add(encounter);
+
+        return result;
     }
 }

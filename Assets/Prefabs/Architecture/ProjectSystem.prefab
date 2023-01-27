@@ -563,5 +563,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51fe7ff7e33be7a4ebed7c1111244f7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _quests:
-  - {fileID: 11400000, guid: 7fe39678bed72a3499ccb4df9bc4375e, type: 2}
+  _questContainer:
+  - _questPrefab: {fileID: 7902951450737505079, guid: ab0ab56053b2ac940ada0ddb4f3c8913, type: 3}
+    _encounters:
+    - {fileID: 0}
+    - {fileID: 0}

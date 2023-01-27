@@ -1,10 +1,14 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
-public class DistanationVolume : BaseEncounter
+public class QuestDistanationVolume : BaseEncounter, INameble
 {
-    [Space]
-    [Header("Base settings")]
+    [SerializeField] protected string _encounterName = string.Empty;
     [SerializeField] protected TriggerVolumeByPlayer _triggerVolume;
+
+    public string Name => _encounterName;
+
+    public event Action OnDestinationReached;
 
     public override void Activate()
     {
@@ -15,10 +19,8 @@ public class DistanationVolume : BaseEncounter
 
     private void PlayerCameUp(GamePlayer player)
     {
-        _questLink.Complete();
+        OnDestinationReached?.Invoke();
     }
-
-    public override void Interact() { }
 
     public override void Deactivate()
     {

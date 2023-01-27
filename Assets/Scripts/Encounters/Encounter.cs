@@ -5,20 +5,11 @@ using UnityEngine;
 //Очень маленький и базовый функционал - s_O_lid.
 public abstract class BaseEncounter : MonoBehaviour, IEncounter
 {
-    //[TODO] Transfer to protected
-    public BaseQuestLink _questLink = null;
-
-    public void SetQuestLink(BaseQuestLink link)
-    {
-        _questLink = link;
-    }
-
     public abstract void Activate();
-    public virtual void Interact() { }
     public abstract void Deactivate();
 }
 
-public class Encounter : BaseEncounter
+public class Encounter : BaseEncounter, IInteractable
 {
     [Space]
     [Header("Encounter settings")]
@@ -51,13 +42,11 @@ public class Encounter : BaseEncounter
         _pointer.Enable();
     }
    
-    public override void Interact()
+    public virtual void Interact()
     {
         Debug.Log($"Encounter.Interact");
 
         _pointer.Disable();
-
-        _questLink.Complete();
     }
 
     protected virtual void CancelInteraction(GamePlayer player)
