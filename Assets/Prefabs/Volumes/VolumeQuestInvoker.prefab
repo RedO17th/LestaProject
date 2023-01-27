@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _questIDName: ID
+  _isEnabled: 1
   _triggerVolume: {fileID: 7210175455769099282}
 --- !u!1001 &6749992284308618188
 PrefabInstance:

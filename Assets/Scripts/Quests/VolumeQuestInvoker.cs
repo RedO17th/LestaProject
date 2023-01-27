@@ -32,6 +32,7 @@ public class VolumeQuestInvoker : QuestInvoker
     protected override void ProcessInvoke() 
     {
         var context = new QuestContext();
+            context.SetCommand(QuestCommand.Activate);
             context.SetIDName(_questIDName);
 
         ProjectBus.Instance.SendSignalByContext(context);

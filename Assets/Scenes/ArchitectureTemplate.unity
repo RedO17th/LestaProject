@@ -1671,7 +1671,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1437986109242297404, guid: cbc58a18f1aac9a4c8d7947d405a4bee, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.87
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1437986109242297404, guid: cbc58a18f1aac9a4c8d7947d405a4bee, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1679,7 +1679,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1437986109242297404, guid: cbc58a18f1aac9a4c8d7947d405a4bee, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7.33
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1437986109242297404, guid: cbc58a18f1aac9a4c8d7947d405a4bee, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2050,10 +2050,6 @@ PrefabInstance:
     - target: {fileID: 6749992285000558341, guid: 5f7831d4e1fb24040bea95519fa27528, type: 3}
       propertyPath: m_Name
       value: VolumeQuestInvoker
-      objectReference: {fileID: 0}
-    - target: {fileID: 6749992285000558343, guid: 5f7831d4e1fb24040bea95519fa27528, type: 3}
-      propertyPath: _isEnabled
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5f7831d4e1fb24040bea95519fa27528, type: 3}

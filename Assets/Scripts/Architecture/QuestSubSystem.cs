@@ -8,18 +8,11 @@ public class QuestSubSystem : BaseSubSystem
 {
     [SerializeField] private List<BaseQuest> _quests;
 
-    private QuestContext _currentQuestContext = null;
+    private QuestContext _questContext = null;
 
     public override void Initialize(ProjectSystem system)
     {
         base.Initialize(system);
-
-        InitializeQuests();
-    }
-    private void InitializeQuests()
-    {
-        foreach (var quest in _quests)
-            quest.Initialize(this);
     }
 
     public override void Prepare()
@@ -32,14 +25,33 @@ public class QuestSubSystem : BaseSubSystem
 
     private void ProcessSignal(QuestContext context)
     {
-        _currentQuestContext = context;
+        _questContext = context;
 
-        ActivateQuestByIDName();
+        ProcessCommandFromSignal();
+    }
+
+    //[TODO] Описать менеджеров в соответствии с командами
+    private void ProcessCommandFromSignal()
+    {
+        switch (_questContext.Command)
+        {
+            case QuestCommand.Open: 
+            case QuestCommand.Close:
+            case QuestCommand.Deactivate:
+            case QuestCommand.Complete:
+            case QuestCommand.Fail:
+            case QuestCommand.Activate:
+            {
+                ActivateQuestByIDName();
+                break; 
+            }
+        }
     }
 
     private void ActivateQuestByIDName()
     {
-        var quest = GetQuestByIDName(_currentQuestContext.IDName);
+        var quest = GetQuestByIDName(_questContext.IDName);
+            quest?.Initialize(this);
             quest?.Prepare();
             quest?.Activate();
     }
@@ -63,5 +75,8 @@ public class QuestSubSystem : BaseSubSystem
 
     #endregion
 
-    public override void Clear() { }
+    public override void Clear()
+    {
+        ProjectBus.Instance.OnQuestContextSignal -= ProcessSignal;
+    }
 }

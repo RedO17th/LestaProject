@@ -46,12 +46,19 @@ public abstract class SignalContext { }
 public class SomeContext : SignalContext { }
 public class DialogContext : SignalContext { }
 
+//[ForMe] Можно будет добавить флаги на:
+//Открытие, Активацию, Завершение, Не корректное завершение
 public class QuestContext : SignalContext 
 {
+    public QuestCommand Command { get; private set; }
     public string IDName { get; private set; }
 
     public QuestContext() { }
 
+    public void SetCommand(QuestCommand command)
+    {
+        Command = command;
+    }
     public void SetIDName(string name)
     {
         IDName = name;
