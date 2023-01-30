@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 214a76b1388b8c64c826a0a2057bc7a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: -1
+  _type: 4
 --- !u!1 &964836734764388197
 GameObject:
   m_ObjectHideFlags: 0
@@ -100,9 +100,8 @@ MonoBehaviour:
   - {fileID: 7940255449964649003}
   - {fileID: 2791618744177554722}
   _navMeshAgent: {fileID: 9210229231687253681}
-  _walkSpeed: 5
-  _runSpeed: 10
   _speedRotation: 25
+  _playerData: {fileID: 0}
 --- !u!114 &6660424135801773961
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -90,7 +90,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _players:
   - {fileID: 0}
-  - {fileID: 0}
 --- !u!1 &1012111113
 GameObject:
   m_ObjectHideFlags: 0
@@ -223,6 +222,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7ce6ba566521d8458a2dd2a29699e4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _subtractKoef: 10
+  _divideKoef: 2
+  _baseSkillBonus: 2
+  _skillBonusStep: 4
+  _difficult: 10
+  _checkMode: -1
+  _characterisicType: -1
+  _skillType: -1
 --- !u!1 &5823730383227973767
 GameObject:
   m_ObjectHideFlags: 0
