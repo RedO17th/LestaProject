@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8708125255280072660}
   - component: {fileID: 8708125255280072663}
   m_Layer: 0
-  m_Name: TestQuestTask_0
+  m_Name: TaskMoveToQuest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _state: 0
-  _name: TestSomeTask_0
-  _description: TestSomeDescription
-  _distanationVolumeName: FirstQuestionDistanation0
+  _idName: MoveTo
+  _name: MoveToName
+  _description: MoveToDescription
+  _distanationVolumeName: FirstVolume

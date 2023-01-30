@@ -130,9 +130,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13be3db910b78ec4cbac98ae26381a94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _questLink: {fileID: 0}
+  _encounterName: Dog
   _pointer: {fileID: 3260176781164070982}
-  _triggerVolume: {fileID: 0}
+  _triggerVolume: {fileID: 3834327075176807219}
 --- !u!1 &3596420959599341901
 GameObject:
   m_ObjectHideFlags: 0
@@ -227,6 +227,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2426111932774137527, guid: 8354fafe5e9568a4fbb5432b098a6126, type: 3}
   m_PrefabInstance: {fileID: 906699554687007981}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3834327075176807219 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4153297800002324446, guid: 8354fafe5e9568a4fbb5432b098a6126, type: 3}
+  m_PrefabInstance: {fileID: 906699554687007981}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f83ebe4658a2324495491165aaf2296, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5245509629155686154
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -6,7 +6,6 @@ using UnityEngine;
 public enum QuestCommand { None = -1, Open, Close, Activate, Deactivate, Complete, Fail }
 public enum QuestState { None = -1, Opened, Closed, Activated, Completed, Failed }
 
-[CreateAssetMenu]
 public class BaseQuest : MonoBehaviour
 {
     [SerializeField] protected QuestState _state = QuestState.Closed;
@@ -22,30 +21,28 @@ public class BaseQuest : MonoBehaviour
 
     protected QuestSubSystem _questSubSystem = null;
 
-    public List<BaseEncounter> _encounters = null;
-    public List<BaseQuestTask> _tasks = null;
+    protected List<BaseQuestTask> _tasks = null;
+    protected List<IEncounter> _encounters = null;
 
     public bool StateIs(QuestState checkableState)
     {
         return _state == checkableState;
     }
 
-    public virtual void AddEncounters(List<BaseEncounter> encounters)
+    public virtual void AddEncounters(List<IEncounter> encounters)
     {
         _encounters = encounters;
     }
-    public virtual BaseEncounter GetEncounterByName(string name)
+    public virtual IEncounter GetEncounterByName(string name)
     {
-        BaseEncounter result = null;
+        IEncounter result = null;
+
         foreach (var encounter in _encounters)
         {
-            if (encounter is INameble nameble)
+            if (encounter.Name == name)
             {
-                if (nameble.Name == name)
-                {
-                    result = encounter;
-                    break;
-                }
+                result = encounter;
+                break;
             }
         }
 
@@ -166,12 +163,7 @@ public class BaseQuest : MonoBehaviour
 
     protected virtual void ContinueCompletingTasks() => StartTaskExecution();
 
-    protected virtual void ProcessFailedCompletion()
-    { 
-        
-
-
-    }
+    protected virtual void ProcessFailedCompletion() { }
 
     public virtual void Dectivate() { }
     protected virtual void Clear() { }

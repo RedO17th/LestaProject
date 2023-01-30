@@ -5,20 +5,31 @@ using UnityEngine;
 //Очень маленький и базовый функционал - s_O_lid.
 public abstract class BaseEncounter : MonoBehaviour, IEncounter
 {
+    [SerializeField] protected string _encounterName = string.Empty;
+
+    public string Name => _encounterName;
+
+    public abstract void SetTask(IQuestTask task);
     public abstract void Activate();
     public abstract void Deactivate();
+
 }
 
 public class Encounter : BaseEncounter, IInteractable
 {
-    [Space]
     [Header("Encounter settings")]
     [SerializeField] protected BasePointer _pointer;
     [SerializeField] protected TriggerVolumeByPlayer _triggerVolume;
 
     protected GamePlayer _player = null;
+    protected IQuestTask _task = null;
 
     protected virtual void Awake() { }
+
+    public override void SetTask(IQuestTask task)
+    {
+        _task = task;
+    }
 
     public override void Activate() 
     {
@@ -35,11 +46,10 @@ public class Encounter : BaseEncounter, IInteractable
 
     protected virtual void PrepareToInteraction(GamePlayer player)
     {
-        //TODO: Прокинуть все обоюдные ссылки...
-        _player = player;
-        _player.SetEncounter(this);
-
         _pointer.Enable();
+
+        _player = player;
+        _player.SetInteractable(this);
     }
    
     public virtual void Interact()
@@ -51,14 +61,10 @@ public class Encounter : BaseEncounter, IInteractable
 
     protected virtual void CancelInteraction(GamePlayer player)
     {
-        if (_player == player)
-        {
-            //TODO: Отчистить все обоюдные ссылки...
-            _player.RemoveEncounter();
-            _player = null;
+        _pointer.Disable();
 
-            _pointer.Disable();
-        }
+        _player.RemoveEncounter();
+        _player = null;
     }
 
     public override void Deactivate()

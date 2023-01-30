@@ -1,64 +1,63 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IDialogable
+public class Dog : Encounter
 {
-    void InitializeDialogable(DialogSubSystem system);
-    void SetDialog(BaseDialog dialog);
-}
+    protected override void Awake() { }
 
-public interface ITalkable : IDialogable
-{
-    void Talk();
-}
-
-public class Dog : Encounter, ITalkable
-{
-    //ƒанный контроллер может быть разным, под каждый отдельный диалог -
-    // - свой собственный
-    private BaseDialogController _dialogController = null;
-
-    protected override void Awake()
+    private void OnEnable()
     {
-        _dialogController = GetComponent<BaseDialogController>();
+        PrepareTriggerVolume();
+    }
+    private void OnDisable()
+    {
+        ClearTriggerVolume();
     }
 
-    public void InitializeDialogable(DialogSubSystem system)
-    {
-        _dialogController.Initialize(system); 
-    }
-    public void SetDialog(BaseDialog dialog)
-    {
-        _dialogController.SetDialog(dialog);
-    }
+    //public override void InitializeDialog()
+    //{
+    //    Debug.Log($"Dog.InitializeDialog");
 
+    //    _dialog = "Some dialog";
+    //}
 
-    public override void Activate()
-    {
-        base.Activate();
-    }
+    public override void Activate() { }
 
-    //ј взаимодействие может быть только каким-то одним форматом?
     public override void Interact()
     {
         Debug.Log($"Dog.Interact");
 
         _pointer.Disable();
 
-        //_questLink.Complete();
-        Talk();
-    }
-
-    public void Talk()
-    {
-        _dialogController.ActivateDialog();
-
-
+        StartCoroutine(DialogTimer());
     }
 
     public override void Deactivate()
     {
         base.Deactivate();
     }
+
+    //[Test]
+
+    private IEnumerator DialogTimer()
+    {
+        yield return new WaitForSeconds(3f);
+
+        if (_task != null)
+        {
+            var context = new TaskContext();
+                context.SetCommand(TaskCommand.Complete);
+                context.SetID(_task.IDName);
+
+            ProjectBus.Instance.SendSignalByContext(context);
+        }
+    }
 }
+//[ForMe]
+//ќбщий контейнер в котором лежит тип DialogByQuestTask (DialogByTask) - 
+//в нем указываетс€ сам файл диалога и его idname, 
+//по команде InitializeDialog из IDialogable сущность ищет файл диалога
+//и инициализируетс€ им...
+

@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
-using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 
 public class QuestSubSystem : BaseSubSystem
 {
@@ -105,9 +104,9 @@ public class QuestAndEncounters
     public string QuestID => _questPrefab.IDName;
     public BaseQuest QuestPrefab => _questPrefab;
 
-    public List<BaseEncounter> GetEncouners()
+    public List<IEncounter> GetEncouners()
     {
-        List<BaseEncounter> result = new List<BaseEncounter>();
+        List<IEncounter> result = new List<IEncounter>();
 
         foreach (var encounter in _encounters)
             result.Add(encounter);

@@ -86,26 +86,24 @@ public class GamePlayer : BasePlayer
 
     //Interact part (test)
 
-    private Encounter _encounter = null;
+    private IInteractable _interactable = null;
 
     //А вообще есть смысл передавать encounter'a...
-    public void SetEncounter(Encounter encounter)
+    public void SetInteractable(IInteractable encounter)
     {
-        _encounter = encounter;
+        _interactable = encounter;
     }
 
     private void Update()
     {
-        if (_encounter != null && Input.GetKeyDown(KeyCode.E))
+        if (_interactable != null && Input.GetKeyDown(KeyCode.E))
         {
-            _encounter.Interact();
+            _interactable.Interact();
         }
     }
 
     public void RemoveEncounter()
     {
-        _encounter = null;
+        _interactable = null;
     }
-
-
 }

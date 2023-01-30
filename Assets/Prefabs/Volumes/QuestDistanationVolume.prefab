@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba69bed17916bbb4dbe90e7ffee0b3fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _encounterName: FirstQuestionDistanation0
+  _encounterName: FirstVolume
   _triggerVolume: {fileID: 18492106151631768}
 --- !u!1001 &4171116248787967046
 PrefabInstance:

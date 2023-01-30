@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class VolumeQuestInvoker : QuestInvoker
 {
+    //Флаг должен кто-то включать!!!
     [SerializeField] protected bool _isEnabled = false;
     [SerializeField] protected TriggerVolumeByPlayer _triggerVolume = null;
 

@@ -23,6 +23,8 @@ public class ProjectBus
     #endregion
 
     public event Action<QuestContext> OnQuestContextSignal;
+    public event Action<TaskContext> OnTaskContextSignal;
+
     public event Action<DialogContext> OnDialogContextSignal;
 
     public event Action<SomeContext> OnSomeContextSignal;
@@ -31,6 +33,11 @@ public class ProjectBus
     {
         OnQuestContextSignal?.Invoke(context);
     }
+    public void SendSignalByContext(TaskContext context)
+    {
+        OnTaskContextSignal?.Invoke(context);
+    }
+
     public void SendSignalByContext(DialogContext context)
     {
         OnDialogContextSignal?.Invoke(context);
@@ -42,12 +49,9 @@ public class ProjectBus
 }
 
 public abstract class SignalContext { }
-
 public class SomeContext : SignalContext { }
 public class DialogContext : SignalContext { }
 
-//[ForMe] Можно будет добавить флаги на:
-//Открытие, Активацию, Завершение, Не корректное завершение
 public class QuestContext : SignalContext 
 {
     public QuestCommand Command { get; private set; }
@@ -63,7 +67,22 @@ public class QuestContext : SignalContext
     {
         IDName = name;
     }
+}
 
+public class TaskContext : SignalContext
+{
+    public TaskCommand Command { get; private set; }
+    public string IDName { get; private set; }
 
+    public TaskContext() { }
+
+    public void SetCommand(TaskCommand command)
+    {
+        Command = command;
+    }
+    public void SetID(string name)
+    {
+        IDName = name;
+    }
 }
 
