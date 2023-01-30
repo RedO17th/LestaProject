@@ -1,18 +1,19 @@
 ﻿using System;
 using UnityEngine;
 
-public class TaskDistanationVolume : BaseEncounter
+public class TaskDistanationVolume : BaseEncounter, ITaskEncounter
 {
+    [SerializeField] protected string _encounterName = string.Empty;
+
     [SerializeField] protected TriggerVolumeByPlayer _triggerVolume;
 
-    private IQuestTask _questTask = null;
+    public string Name => _encounterName;
 
-    public override void SetTask(IQuestTask task)
-    {
-        _questTask = task;
-    }
+    protected IQuestTask _questTask = null;
 
-    public override void Activate()
+    public virtual void SetTask(IQuestTask task) => _questTask = task;
+
+    public void Activate()
     {
         _triggerVolume.Enable();
 
@@ -30,7 +31,7 @@ public class TaskDistanationVolume : BaseEncounter
         ProjectBus.Instance.SendSignalByContext(context);
     }
 
-    public override void Deactivate()
+    public void Deactivate()
     {
         _triggerVolume.OnEnter -= PlayerCameUp;
 

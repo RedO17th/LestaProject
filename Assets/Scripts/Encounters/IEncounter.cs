@@ -4,43 +4,59 @@ using UnityEngine;
 
 public interface IEncounter
 {
+    //string Name { get; }
+
+    //void SetTask(IQuestTask task);
+    //void Activate();
+    //void Deactivate();
+}
+public abstract class BaseEncounter : MonoBehaviour, IEncounter
+{
+    //[SerializeField] protected string _encounterName = string.Empty;
+
+    //public string Name => _encounterName;
+
+    //public abstract void SetTask(IQuestTask task);
+    //public abstract void Activate();
+    //public abstract void Deactivate();
+}
+
+public interface ITaskEncounter : IEncounter
+{
     string Name { get; }
 
     void SetTask(IQuestTask task);
+
     void Activate();
     void Deactivate();
 }
 
-//public interface ITaskableEncounter : IEncounter
-//{
-//    void SetTask(IQuestTask task);
-
-//    void Activate();
-//    void Deactivate();
-//}
-
-public interface IHintableEncounter : IEncounter
+public interface IHintableEncounter : ITaskEncounter
 {
     void Hint();
 }
-
 public interface IDialogableEncounter : IHintableEncounter
 {
     void InitializeDialog();
 }
 
-public class EncounterWithD : BaseEncounter, IDialogableEncounter
+public class Encounter : SimpleEncounter, ITaskEncounter
 {
-    [SerializeField] protected BasePointer _pointer = null;
-    [SerializeField] protected string _dialog = string.Empty;
+    public string Name => _name;
 
-    public override void SetTask(IQuestTask task) { }
+    protected IQuestTask _task = null;
 
-    public virtual void InitializeDialog() { }
+    public virtual void SetTask(IQuestTask task) { _task = task; }
 
-    public virtual void Hint() { }
+    public virtual void Activate()
+    {
+        PrepareTriggerVolume();
+    }
 
-    public override void Activate() { }
+    public virtual void Deactivate()
+    {
+        ClearTriggerVolume();
 
-    public override void Deactivate() { }
+        _pointer.Disable();
+    }
 }

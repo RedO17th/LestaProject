@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Dog : Encounter
+public class Dog : EncounterWithDialog
 {
     protected override void Awake() { }
 
@@ -16,14 +16,15 @@ public class Dog : Encounter
         ClearTriggerVolume();
     }
 
-    //public override void InitializeDialog()
-    //{
-    //    Debug.Log($"Dog.InitializeDialog");
+    public override void InitializeDialog()
+    {
+        _dialog = "Some dialog";
 
-    //    _dialog = "Some dialog";
-    //}
+        Debug.Log($"Dog.InitializeDialog: { _dialog } ");
+    }
 
-    public override void Activate() { }
+    public override void Hint() => base.Hint();
+    public override void Activate() => base.Activate();
 
     public override void Interact()
     {
@@ -40,7 +41,6 @@ public class Dog : Encounter
     }
 
     //[Test]
-
     private IEnumerator DialogTimer()
     {
         yield return new WaitForSeconds(3f);
@@ -55,6 +55,7 @@ public class Dog : Encounter
         }
     }
 }
+
 //[ForMe]
 //Общий контейнер в котором лежит тип DialogByQuestTask (DialogByTask) - 
 //в нем указывается сам файл диалога и его idname, 

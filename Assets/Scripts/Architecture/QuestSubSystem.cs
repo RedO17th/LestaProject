@@ -104,12 +104,15 @@ public class QuestAndEncounters
     public string QuestID => _questPrefab.IDName;
     public BaseQuest QuestPrefab => _questPrefab;
 
-    public List<IEncounter> GetEncouners()
+    public List<ITaskEncounter> GetEncouners()
     {
-        List<IEncounter> result = new List<IEncounter>();
+        List<ITaskEncounter> result = new List<ITaskEncounter>();
 
         foreach (var encounter in _encounters)
-            result.Add(encounter);
+        {
+            if (encounter is IEncounter e)
+                result.Add((ITaskEncounter)e);
+        }
 
         return result;
     }

@@ -1,37 +1,28 @@
 using System;
 using UnityEngine;
 
-//Это "все" объекты с которыми мы можем взаимодействовать внутри конкретного Quest'a
-//Очень маленький и базовый функционал - s_O_lid.
-public abstract class BaseEncounter : MonoBehaviour, IEncounter
+public class SomeEncounter : BaseEncounter, ITaskEncounter, IInteractable
 {
     [SerializeField] protected string _encounterName = string.Empty;
 
-    public string Name => _encounterName;
-
-    public abstract void SetTask(IQuestTask task);
-    public abstract void Activate();
-    public abstract void Deactivate();
-
-}
-
-public class Encounter : BaseEncounter, IInteractable
-{
-    [Header("Encounter settings")]
+    [Header("Other settings")]
     [SerializeField] protected BasePointer _pointer;
     [SerializeField] protected TriggerVolumeByPlayer _triggerVolume;
+
+    public string Name => _encounterName;
 
     protected GamePlayer _player = null;
     protected IQuestTask _task = null;
 
+
     protected virtual void Awake() { }
 
-    public override void SetTask(IQuestTask task)
+    public virtual void SetTask(IQuestTask task)
     {
         _task = task;
     }
 
-    public override void Activate() 
+    public virtual void Activate() 
     {
         PrepareTriggerVolume();
     }
@@ -67,7 +58,7 @@ public class Encounter : BaseEncounter, IInteractable
         _player = null;
     }
 
-    public override void Deactivate()
+    public virtual void Deactivate()
     {
         ClearTriggerVolume();
 

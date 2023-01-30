@@ -7,7 +7,7 @@ public class MoveToDogTask : BaseQuestTask
     [Header("Encounter names")]
     [SerializeField] protected string _distanationVolumeName = string.Empty;
 
-    private IEncounter _distanationVolumeEncounter = null;
+    private ITaskEncounter _distanationVolumeEncounter = null;
 
     public override void Prepare()
     {

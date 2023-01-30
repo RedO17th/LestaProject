@@ -7,13 +7,13 @@ public class TalkWithDogTask : BaseQuestTask
     [Header("Encounter names")]
     [SerializeField] protected string _dogEncounterName = string.Empty;
 
-    private IEncounter _dogEncounter = null;
+    private IDialogableEncounter _dogEncounter = null;
 
     public override void Prepare()
     {
-        _dogEncounter = _quest.GetEncounterByName(_dogEncounterName);
+        _dogEncounter = _quest.GetEncounterByName(_dogEncounterName) as IDialogableEncounter;
         _dogEncounter.SetTask(this);
-        //_dogEncounter.InitializeDialog();
+        _dogEncounter.InitializeDialog();
 
         base.Prepare();
     }
