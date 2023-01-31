@@ -15,18 +15,20 @@ public class Dog : BasePlayerAssistant
     //Test
     protected BaseInteractionController _interactionHandler = null;
 
+    private BaseDialogController _dialogController = null;
     private DialogSubSystem _dialogSubSystem = null;
 
     protected override void Awake()
     {
         _interactionHandler = new BaseInteractionController(this);
 
-        _dialogController = GetComponent<BaseDialogController>();
-
         _dialogSubSystem = ProjectSystem.Instance.GetSubSystemByType(typeof(DialogSubSystem)) as DialogSubSystem;
+        _dialogController = GetComponent<BaseDialogController>();
 
         InitializeDialogable(_dialogSubSystem);
     }
+
+    public void InitializeDialogable(DialogSubSystem system) => _dialogController.Initialize(system);
 
     private void OnEnable()
     {
@@ -57,11 +59,6 @@ public class Dog : BasePlayerAssistant
         //if (_dialog != string.Empty)
         //    StartCoroutine(DialogTimer());
 
-        Talk();
-    }
-
-    public void Talk()
-    {
         _dialogController.ActivateDialog();
     }
 
@@ -86,9 +83,4 @@ public class Dog : BasePlayerAssistant
     }
 }
 
-//[ForMe]
-//Общий контейнер в котором лежит тип DialogByQuestTask (DialogByTask) - 
-//в нем указывается сам файл диалога и его idname, 
-//по команде InitializeDialog из IDialogable сущность ищет файл диалога
-//и инициализируется им...
 

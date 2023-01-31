@@ -223,11 +223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e006e1ca61bec7044821ca63e6cc6ee5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dialogContainers:
-  - _quest: {fileID: 11400000, guid: 4056320cd9d04ed4ea127fa496da3be7, type: 2}
-    _dialogEncounter:
-    - _encounter: {fileID: 0}
-      _dialog: {fileID: 0}
+  _dialogueController: {fileID: 0}
 --- !u!1 &4927095735731968069
 GameObject:
   m_ObjectHideFlags: 0
@@ -272,6 +268,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7ce6ba566521d8458a2dd2a29699e4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _subtractKoef: 10
+  _divideKoef: 2
+  _baseSkillBonus: 2
+  _skillBonusStep: 4
+  _difficult: 10
+  _checkMode: -1
+  _characterisicType: -1
+  _skillType: -1
 --- !u!1 &5823730383227973767
 GameObject:
   m_ObjectHideFlags: 0
@@ -363,6 +367,8 @@ MonoBehaviour:
   _dataContainers:
   - {fileID: 11400000, guid: 953cb7d50b62ec941a82a32c4f5981b5, type: 2}
   - {fileID: 11400000, guid: 8f008dcb58531444eaedccfa9d5abeca, type: 2}
+  - {fileID: 11400000, guid: 59e8a675730692142931428337ed72c4, type: 2}
+  - {fileID: 11400000, guid: b4c0b4d472151a443ad9b5f19f2b800e, type: 2}
 --- !u!1 &6294595696765306745
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArsenEncounter : Encounter, ITalkable
+public class ArsenEncounter : Encounter//, ITalkable
 {
     //ƒанный контроллер может быть разным, под каждый отдельный диалог -
     // - свой собственный
