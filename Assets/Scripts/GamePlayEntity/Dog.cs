@@ -19,9 +19,15 @@ public class Dog : Encounter, ITalkable
     // - свой собственный
     private BaseDialogController _dialogController = null;
 
+    private DialogSubSystem _dialogSubSystem = null;
+
     protected override void Awake()
     {
         _dialogController = GetComponent<BaseDialogController>();
+
+        _dialogSubSystem = ProjectSystem.Instance.GetSubSystemByType(typeof(DialogSubSystem)) as DialogSubSystem;
+
+        InitializeDialogable(_dialogSubSystem);
     }
 
     public void InitializeDialogable(DialogSubSystem system)
@@ -53,8 +59,6 @@ public class Dog : Encounter, ITalkable
     public void Talk()
     {
         _dialogController.ActivateDialog();
-
-
     }
 
     public override void Deactivate()

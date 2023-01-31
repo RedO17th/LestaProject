@@ -4,21 +4,15 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Skills", menuName = "ScriptableObjects/Container/Skills", order = 3)]
 public class SkillsContainer : BaseDataContainer
 {
-    [SerializeField] private BaseSkill[] _skills;
+    [SerializeField] private List<BaseSkill> _skills;
 
-    public BaseSkill GetSkillByType(SkillType skillType)
+    public BaseSkill GetSkillByType(SkillType type)
     {
-        BaseSkill skill = null;
+        return _skills.Find(x => x.Type.Equals(type));
+    }
 
-        foreach(var skillItem in _skills)
-        {
-            if (skillItem.Type == skillType)
-            {
-                skill = skillItem;
-                break;
-            }
-        }
-
-        return skill;
+    public SkillType GetSkillTypeByName(string name)
+    {
+        return _skills.Find(x => x.Type.ToString().ToLower().Equals(name.ToLower())).Type;
     }
 }

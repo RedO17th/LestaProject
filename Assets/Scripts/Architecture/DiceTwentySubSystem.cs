@@ -42,9 +42,14 @@ public class DiceTwentySubSystem : BaseSubSystem
     }
 
     #region Characteristics part
-    public bool CheckByCharacterisicType(CharacterisicType characterisic, int difficult)
+    public bool CheckByCharacteristicType(CharacterisicType characterisic, int difficult)
     {
         return (Dice.D20(1) + GetCharacteristicModificator(characterisic)) >= difficult;
+    }
+    public bool CheckByCharacteristicName(string characteristicName, int difficult)
+    {
+        CharacterisicType type = _characteristics.GetCharacterisicTypeByName(characteristicName);
+        return CheckByCharacteristicType(type, difficult);
     }
 
     private int GetCharacteristicModificator(CharacterisicType type)
@@ -68,6 +73,11 @@ public class DiceTwentySubSystem : BaseSubSystem
     public bool CheckBySkillType(SkillType skill, int difficult)
     {
         return (Dice.D20(1) + GetSkillModificator(skill)) >= difficult;
+    }
+    public bool CheckBySkillName(string skillName, int difficult)
+    {
+        SkillType type = _skills.GetSkillTypeByName(skillName);
+        return CheckBySkillType(type, difficult);
     }
 
     private int GetSkillModificator(SkillType type)
@@ -106,7 +116,7 @@ public class DiceTwentySubSystem : BaseSubSystem
             }
             else
             {
-                bool result = CheckByCharacterisicType(_characterisicType, _difficult);
+                bool result = CheckByCharacteristicType(_characterisicType, _difficult);
                 Debug.Log(result ? "Success" : "Failure");
             }
         }

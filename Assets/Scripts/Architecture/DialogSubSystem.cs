@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 //[Note] ≈сли вынести инициализацию "диалоговых энкаунтеров" в данную подсистему,
@@ -10,88 +9,137 @@ using UnityEngine;
 
 public class DialogSubSystem : BaseSubSystem
 {
-    [SerializeField] private List<DialogContainer> _dialogContainers;
+    [SerializeField] private DialogueController _dialogueController;
+
+    //[SerializeField] private List<DialogContainer> _dialogContainers;
 
     private QuestSubSystem _questSubSystem = null;
+    private DiceTwentySubSystem _diceTwentySubSystem = null;
+
+    private CharactersContainer _characters = null;
 
     public override void Initialize(ProjectSystem system)
     {
         base.Initialize(system);
     }
+
     public override void Prepare()
     {
-        _questSubSystem = _projectSystem.GetSubSystemByType(typeof(QuestSubSystem)) as QuestSubSystem;
-        _questSubSystem.OnQuestWillActivated += InitializeDialogEncountersByQuestType;
+        //_questSubSystem = _projectSystem.GetSubSystemByType(typeof(QuestSubSystem)) as QuestSubSystem;
+        //_questSubSystem.OnQuestWillActivated += InitializeDialogEncountersByQuestType;
+
+        _diceTwentySubSystem = _projectSystem.GetSubSystemByType(typeof(DiceTwentySubSystem)) as DiceTwentySubSystem;
+
+        var settingsSystem = _projectSystem.GetSubSystemByType(typeof(SettingsSubSystem)) as SettingsSubSystem;
+        _characters = settingsSystem?.GetDataContainerByType(typeof(CharactersContainer)) as CharactersContainer;
+
+        _dialogueController.Initialize(this);
     }
 
-    private void InitializeDialogEncountersByQuestType(Type questType)
-    {
-        var currentDialogContainer = GetDialogContainerByQuestType(questType);
+    //private void InitializeDialogEncountersByQuestType(Type questType)
+    //{
+    //    var currentDialogContainer = GetDialogContainerByQuestType(questType);
 
-        InitializeDialogEncounters(currentDialogContainer);
+    //    InitializeDialogEncounters(currentDialogContainer);
+    //}
+
+    //private DialogContainer GetDialogContainerByQuestType(Type questType)
+    //{
+    //    DialogContainer currentDialogContainer = null;
+
+    //    foreach (var container in _dialogContainers)
+    //    {
+    //        if (container.IsEqual(questType))
+    //        {
+    //            currentDialogContainer = container;
+    //            break;
+    //        }
+    //    }
+
+    //    return currentDialogContainer;
+    //}
+
+    //private void InitializeDialogEncounters(DialogContainer dialogContainer)
+    //{
+    //    var dialogEncounterPair = dialogContainer.GetDialogEncounters();
+
+    //    foreach (var pair in dialogEncounterPair)
+    //    {
+    //        var encounter = pair.Encounter;
+    //        var dialog = pair.Dialog;
+
+    //        if (encounter is IDialogable dEncounter)
+    //        {
+    //            dEncounter.InitializeDialogable(this);
+    //            dEncounter.SetDialog(dialog);
+    //        }
+    //    }
+    //}
+
+    public void StartNewDialog(TextAsset newStory)
+    {
+        _dialogueController.StartStory(newStory);
     }
 
-    private DialogContainer GetDialogContainerByQuestType(Type questType)
+    public CharacterDialogueInfo GetCharacterInfo(string tag)
     {
-        DialogContainer currentDialogContainer = null;
+        return _characters.GetCharacterByTag(tag);
+    }
 
-        foreach (var container in _dialogContainers)
+    public bool Check(string tag)
+    {
+        var parts = tag.Split(".");
+
+        if (parts.Length > 0)
         {
-            if (container.IsEqual(questType))
+            if (parts[0].ToLower().Equals("checkcharacteristic"))
             {
-                currentDialogContainer = container;
-                break;
+                if (int.TryParse(parts[2], out int difficult) == false)
+                    return false;
+
+                return _diceTwentySubSystem.CheckByCharacteristicName(parts[1], difficult);
+            }
+
+            if (parts[0].ToLower().Equals("checkskill"))
+            {
+                if (int.TryParse(parts[2], out int difficult) == false)
+                    return false;
+
+                return _diceTwentySubSystem.CheckBySkillName(parts[1], difficult);
             }
         }
 
-        return currentDialogContainer;
-    }
-
-    private void InitializeDialogEncounters(DialogContainer dialogContainer)
-    {
-        var dialogEncounterPair = dialogContainer.GetDialogEncounters();
-
-        foreach (var pair in dialogEncounterPair)
-        {
-            var encounter = pair.Encounter;
-            var dialog = pair.Dialog;
-
-            if (encounter is IDialogable dEncounter)
-            {
-                dEncounter.InitializeDialogable(this);
-                dEncounter.SetDialog(dialog);
-            }
-        }
+        return false;
     }
 
     public override void StartSystem() { }
 
     public override void Clear()
     {
-        _questSubSystem.OnQuestWillActivated -= InitializeDialogEncountersByQuestType;
+        //_questSubSystem.OnQuestWillActivated -= InitializeDialogEncountersByQuestType;
         _questSubSystem = null;
     }
 }
 
-[System.Serializable]
-public class DialogContainer
-{
-    [SerializeField] private BaseQuest _quest = null;
-    [SerializeField] private List<DialogEncounter> _dialogEncounter;
+//[System.Serializable]
+//public class DialogContainer
+//{
+//    [SerializeField] private BaseQuest _quest = null;
+//    [SerializeField] private List<DialogEncounter> _dialogEncounter;
 
-    public bool IsEqual(Type questType) => _quest.Type == questType;
+//    public bool IsEqual(Type questType) => _quest.Type == questType;
 
-    public List<DialogEncounter> GetDialogEncounters()
-    {
-        List<DialogEncounter> list = new List<DialogEncounter>();
+//    public List<DialogEncounter> GetDialogEncounters()
+//    {
+//        List<DialogEncounter> list = new List<DialogEncounter>();
 
-        foreach (var encounter in _dialogEncounter)
-            list.Add(encounter);
+//        foreach (var encounter in _dialogEncounter)
+//            list.Add(encounter);
 
-        return list;
-    }
+//        return list;
+//    }
 
-}
+//}
 
 [System.Serializable]
 public class DialogEncounter

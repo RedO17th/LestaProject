@@ -36,6 +36,7 @@ public class Encounter : BaseEncounter, IInvokable
 
     protected virtual void Awake() { }
 
+    [ContextMenu("Activate")]
     public override void Activate() 
     {
         PrepareTriggerVolume();
