@@ -6,10 +6,8 @@ public class EncounterWithDialog : SimpleEncounter, IDialogableEncounter
 
     protected IQuestTask _task = null;
 
-    protected string _dialog = null;
-
     public virtual void SetTask(IQuestTask task) { _task = task; }
-    public virtual void InitializeDialog() { }
+    public virtual void InitializeDialog(string dialogName) { }
     public virtual void Hint() { _pointer.Enable(); }
 
     public virtual void Activate()

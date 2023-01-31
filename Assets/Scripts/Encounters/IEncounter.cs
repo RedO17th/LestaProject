@@ -37,7 +37,7 @@ public interface IHintableEncounter : ITaskEncounter
 }
 public interface IDialogableEncounter : IHintableEncounter
 {
-    void InitializeDialog();
+    void InitializeDialog(string dialogName);
 }
 
 public class Encounter : SimpleEncounter, ITaskEncounter

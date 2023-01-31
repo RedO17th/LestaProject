@@ -15,10 +15,13 @@ public class DialogSubSystem : BaseSubSystem
     private DiceTwentySubSystem _diceTwentySubSystem = null;
 
     private CharactersContainer _characters = null;
+    private DialogueDataContainer _dialogueDataContainer = null;
 
-    public override void Initialize(ProjectSystem system)
+    public override void Initialize(ProjectSystem system) => base.Initialize(system);
+
+    public TextAsset GetDialogueByName(string name)
     {
-        base.Initialize(system);
+        return _dialogueDataContainer.GetDialogueByName(name);
     }
 
     public override void Prepare()
@@ -26,7 +29,10 @@ public class DialogSubSystem : BaseSubSystem
         _diceTwentySubSystem = _projectSystem.GetSubSystemByType(typeof(DiceTwentySubSystem)) as DiceTwentySubSystem;
 
         var settingsSystem = _projectSystem.GetSubSystemByType(typeof(SettingsSubSystem)) as SettingsSubSystem;
+        
         _characters = settingsSystem?.GetDataContainerByType(typeof(CharactersContainer)) as CharactersContainer;
+        _dialogueDataContainer = settingsSystem?.GetDataContainerByType(typeof(DialogueDataContainer)) as DialogueDataContainer;
+
 
         _dialogueController.Initialize(this);
     }

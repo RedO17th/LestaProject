@@ -49,3 +49,4 @@ MonoBehaviour:
   _name: TalkWithDogName
   _description: TalkWithDogDescription
   _dogEncounterName: Dog
+  _dogEncounterDialogName: TestDialogue

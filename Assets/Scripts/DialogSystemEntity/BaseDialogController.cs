@@ -11,7 +11,7 @@ public abstract class BaseDialogController : MonoBehaviour
         _dialogSubSystem = system;
     }
 
-    public virtual void SetDialog(BaseDialog dialog) { }
+    public virtual void SetDialog(TextAsset dialog) { }
 
     public virtual void ActivateDialog() { }
 

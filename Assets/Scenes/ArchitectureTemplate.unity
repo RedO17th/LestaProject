@@ -2383,37 +2383,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1302741373}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1312361909
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1312361910}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1312361910
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1312361909}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 11
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1323715317
 GameObject:
   m_ObjectHideFlags: 0
@@ -4306,6 +4275,10 @@ PrefabInstance:
       propertyPath: _dialogContainers.Array.data[0]._settingsForDialog.Array.data[0]._encounter
       value: 
       objectReference: {fileID: 1671161892}
+    - target: {fileID: 6294595696671136710, guid: 8364672ad827ed64586a666157504801, type: 3}
+      propertyPath: _dataContainers.Array.data[5]
+      value: 
+      objectReference: {fileID: 11400000, guid: 1a7940b9adad9c141bcddf23a3892a71, type: 2}
     - target: {fileID: 6294595696765306745, guid: 8364672ad827ed64586a666157504801, type: 3}
       propertyPath: m_Name
       value: ProjectSystem
@@ -4369,7 +4342,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6749992285000558340, guid: 5f7831d4e1fb24040bea95519fa27528, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -2.9
       objectReference: {fileID: 0}
     - target: {fileID: 6749992285000558340, guid: 5f7831d4e1fb24040bea95519fa27528, type: 3}
       propertyPath: m_LocalPosition.y

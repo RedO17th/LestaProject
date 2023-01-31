@@ -23,10 +23,10 @@ public class ArsenEncounter : Encounter//, ITalkable
     {
         _dialogController.Initialize(system);
     }
-    public void SetDialog(BaseDialog dialog)
-    {
-        _dialogController.SetDialog(dialog);
-    }
+    //public void SetDialog(BaseDialog dialog)
+    //{
+    //    _dialogController.SetDialog(dialog);
+    //}
 
 
     public override void Activate()

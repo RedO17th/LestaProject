@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.VirtualTexturing;
 
 //[ForMe] Может быть сделать еще промежуточную абстракцию между
 //EncounterWithDialog и Dog в виде какого_нибудь "помощника"...
@@ -23,12 +24,10 @@ public class Dog : BasePlayerAssistant
         _interactionHandler = new BaseInteractionController(this);
 
         _dialogSubSystem = ProjectSystem.Instance.GetSubSystemByType(typeof(DialogSubSystem)) as DialogSubSystem;
+        
         _dialogController = GetComponent<BaseDialogController>();
-
-        InitializeDialogable(_dialogSubSystem);
+        _dialogController.Initialize(_dialogSubSystem);
     }
-
-    public void InitializeDialogable(DialogSubSystem system) => _dialogController.Initialize(system);
 
     private void OnEnable()
     {
@@ -39,11 +38,12 @@ public class Dog : BasePlayerAssistant
         ClearTriggerVolume();
     }
 
-    public override void InitializeDialog()
+    public override void InitializeDialog(string dialogName)
     {
-        _dialog = "Some dialog";
+        var dialog = _dialogSubSystem.GetDialogueByName(dialogName);
+        _dialogController.SetDialog(dialog);
 
-        Debug.Log($"Dog.InitializeDialog: { _dialog } ");
+        Debug.Log($"Dog.InitializeDialog");
     }
 
     public override void Hint() => base.Hint();
@@ -56,8 +56,6 @@ public class Dog : BasePlayerAssistant
         _pointer.Disable();
 
         //_interactionHandler.Interact();
-        //if (_dialog != string.Empty)
-        //    StartCoroutine(DialogTimer());
 
         _dialogController.ActivateDialog();
     }
@@ -68,19 +66,19 @@ public class Dog : BasePlayerAssistant
     }
 
     //[Test]
-    private IEnumerator DialogTimer()
-    {
-        yield return new WaitForSeconds(3f);
+    //private IEnumerator DialogTimer()
+    //{
+    //    yield return new WaitForSeconds(3f);
 
-        if (_task != null)
-        {
-            var context = new TaskContext();
-                context.SetCommand(TaskCommand.Complete);
-                context.SetID(_task.IDName);
+    //    if (_task != null)
+    //    {
+    //        var context = new TaskContext();
+    //            context.SetCommand(TaskCommand.Complete);
+    //            context.SetID(_task.IDName);
 
-            ProjectBus.Instance.SendSignalByContext(context);
-        }
-    }
+    //        ProjectBus.Instance.SendSignalByContext(context);
+    //    }
+    //}
 }
 
 

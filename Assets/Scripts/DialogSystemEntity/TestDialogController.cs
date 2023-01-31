@@ -4,23 +4,21 @@ using UnityEngine;
 
 public class TestDialogController : BaseDialogController
 {
-    [SerializeField] TextAsset _story = null;
-
-    private BaseDialog _dialog = null;
+    private TextAsset _dialog = null;
 
     public override void Initialize(DialogSubSystem system)
     {
         base.Initialize(system);
     }
 
-    public override void SetDialog(BaseDialog dialog)
+    public override void SetDialog(TextAsset dialog)
     {
         _dialog = dialog;
     }
 
     public override void ActivateDialog()
     {
-        _dialogSubSystem.StartNewDialog(_story);
+        _dialogSubSystem.StartNewDialog(_dialog);
     }
 
     public override void Clear()

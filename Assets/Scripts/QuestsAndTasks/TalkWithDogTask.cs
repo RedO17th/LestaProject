@@ -6,6 +6,7 @@ public class TalkWithDogTask : BaseQuestTask
 {
     [Header("Encounter names")]
     [SerializeField] protected string _dogEncounterName = string.Empty;
+    [SerializeField] protected string _dogEncounterDialogName = string.Empty;
 
     //[ForMe] Для расширения функционала сделать тип = Dog, или добавить абстракцию "Помощника"? 
     private BasePlayerAssistant _dog = null;
@@ -14,7 +15,7 @@ public class TalkWithDogTask : BaseQuestTask
     {
         _dog = _quest.GetEncounterByName(_dogEncounterName) as BasePlayerAssistant;
         _dog.SetTask(this);
-        _dog.InitializeDialog();
+        _dog.InitializeDialog(_dogEncounterDialogName);
 
         base.Prepare();
     }
