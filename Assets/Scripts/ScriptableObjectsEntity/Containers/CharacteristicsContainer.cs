@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,17 +8,11 @@ public class CharacteristicsContainer : BaseDataContainer
 
     public BaseCharacteristic GetCharacteristicByType(CharacterisicType type)
     {
-        BaseCharacteristic characteristic = null;
+        return _characteristics.Find(x => x.Type.Equals(type));
+    }
 
-        foreach (var ch in _characteristics)
-        {
-            if (ch.Type == type)
-            {
-                characteristic = ch;
-                break;
-            }
-        }
-
-        return characteristic;
+    public CharacterisicType GetCharacterisicTypeByName(string name)
+    {
+        return _characteristics.Find(x => x.Type.ToString().ToLower().Equals(name.ToLower())).Type;
     }
 }

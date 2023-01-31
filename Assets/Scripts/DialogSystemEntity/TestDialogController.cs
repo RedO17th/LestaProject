@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TestDialogController : BaseDialogController
 {
+    [SerializeField] TextAsset _story = null;
+
     private BaseDialog _dialog = null;
 
     public override void Initialize(DialogSubSystem system)
@@ -18,7 +20,7 @@ public class TestDialogController : BaseDialogController
 
     public override void ActivateDialog()
     {
-        _dialog.Start();
+        _dialogSubSystem.StartNewDialog(_story);
     }
 
     public override void Clear()

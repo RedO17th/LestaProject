@@ -15,9 +15,17 @@ public class Dog : BasePlayerAssistant
     //Test
     protected BaseInteractionController _interactionHandler = null;
 
+    private DialogSubSystem _dialogSubSystem = null;
+
     protected override void Awake()
     {
         _interactionHandler = new BaseInteractionController(this);
+
+        _dialogController = GetComponent<BaseDialogController>();
+
+        _dialogSubSystem = ProjectSystem.Instance.GetSubSystemByType(typeof(DialogSubSystem)) as DialogSubSystem;
+
+        InitializeDialogable(_dialogSubSystem);
     }
 
     private void OnEnable()
@@ -46,8 +54,15 @@ public class Dog : BasePlayerAssistant
         _pointer.Disable();
 
         //_interactionHandler.Interact();
-        if (_dialog != string.Empty)
-            StartCoroutine(DialogTimer());
+        //if (_dialog != string.Empty)
+        //    StartCoroutine(DialogTimer());
+
+        Talk();
+    }
+
+    public void Talk()
+    {
+        _dialogController.ActivateDialog();
     }
 
     public override void Deactivate()
