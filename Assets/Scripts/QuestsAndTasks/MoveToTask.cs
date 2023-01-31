@@ -7,19 +7,19 @@ public class MoveToTask : BaseQuestTask
     [Header("Encounter names")]
     [SerializeField] protected string _distanationVolumeName = string.Empty;
 
-    private ITaskEncounter _distanationVolumeEncounter = null;
+    private ITaskEncounter _distanationVolume = null;
 
     public override void Prepare()
     {
-        _distanationVolumeEncounter = _quest.GetEncounterByName(_distanationVolumeName);
-        _distanationVolumeEncounter.SetTask(this);
+        _distanationVolume = _quest.GetEncounterByName(_distanationVolumeName);
+        _distanationVolume.SetTask(this);
     
         base.Prepare();
     }
 
     public override void Activate()
     {
-        _distanationVolumeEncounter.Activate();
+        _distanationVolume.Activate();
 
         Debug.Log($"MoveToTask.Activate: {_name}");
 
@@ -39,13 +39,13 @@ public class MoveToTask : BaseQuestTask
 
         base.Dectivate();
 
-        _distanationVolumeEncounter.Deactivate();
+        _distanationVolume.Deactivate();
 
         Clear();
     }
 
     protected override void Clear()
     {
-        _distanationVolumeEncounter = null;
+        _distanationVolume = null;
     }
 }

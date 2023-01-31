@@ -95,6 +95,7 @@ public class QuestSubSystem : BaseSubSystem
     }
 }
 
+//TODO: Transfer to...
 [System.Serializable]
 public class QuestAndEncounters
 {

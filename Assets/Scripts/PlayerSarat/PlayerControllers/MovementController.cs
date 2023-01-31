@@ -76,9 +76,6 @@ public class MovementController : BasePlayerContoller
 
         foreach (var mech in _movementMechanics)
         {
-            //if (mech.IsInput)
-            //    return mech;
-
             if (mech.IsInput)
                 mechanic = mech;
         }

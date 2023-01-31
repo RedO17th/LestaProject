@@ -36,7 +36,7 @@ public class SimpleEncounter : BaseEncounter, IInteractable
     {
         _pointer.Disable();
 
-        _player.RemoveEncounter();
+        _player.RemoveInteractable();
         _player = null;
     }
 

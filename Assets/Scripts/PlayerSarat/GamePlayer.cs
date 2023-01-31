@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -85,13 +86,16 @@ public class GamePlayer : BasePlayer
     #endregion
 
     //Interact part (test)
+    //[ForMe] А вообще есть смысл передавать encounter'a... Подумать... Мб Event?
 
     private IInteractable _interactable = null;
-
-    //А вообще есть смысл передавать encounter'a...
     public void SetInteractable(IInteractable encounter)
     {
         _interactable = encounter;
+    }
+    public void RemoveInteractable()
+    {
+        _interactable = null;
     }
 
     private void Update()
@@ -100,10 +104,5 @@ public class GamePlayer : BasePlayer
         {
             _interactable.Interact();
         }
-    }
-
-    public void RemoveEncounter()
-    {
-        _interactable = null;
     }
 }

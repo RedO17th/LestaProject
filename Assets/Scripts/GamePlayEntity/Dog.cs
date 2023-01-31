@@ -5,7 +5,13 @@ using UnityEngine;
 
 public class Dog : EncounterWithDialog
 {
-    protected override void Awake() { }
+    //Test
+    protected BaseInteractionController _interactionHandler = null;
+
+    protected override void Awake()
+    {
+        _interactionHandler = new BaseInteractionController(this);
+    }
 
     private void OnEnable()
     {
@@ -32,7 +38,9 @@ public class Dog : EncounterWithDialog
 
         _pointer.Disable();
 
-        StartCoroutine(DialogTimer());
+        //_interactionHandler.Interact();
+        if (_dialog != string.Empty)
+            StartCoroutine(DialogTimer());
     }
 
     public override void Deactivate()
