@@ -7,13 +7,14 @@ public class TalkWithDogTask : BaseQuestTask
     [Header("Encounter names")]
     [SerializeField] protected string _dogEncounterName = string.Empty;
 
-    private IDialogableEncounter _dogEncounter = null;
+    //[ForMe] Для расширения функционала сделать тип = Dog, или добавить абстракцию "Помощника"? 
+    private BasePlayerAssistant _dog = null;
 
     public override void Prepare()
     {
-        _dogEncounter = _quest.GetEncounterByName(_dogEncounterName) as IDialogableEncounter;
-        _dogEncounter.SetTask(this);
-        _dogEncounter.InitializeDialog();
+        _dog = _quest.GetEncounterByName(_dogEncounterName) as BasePlayerAssistant;
+        _dog.SetTask(this);
+        _dog.InitializeDialog();
 
         base.Prepare();
     }
@@ -43,6 +44,6 @@ public class TalkWithDogTask : BaseQuestTask
 
     protected override void Clear()
     {
-        _dogEncounter = null;
+        _dog = null;
     }
 }

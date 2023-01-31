@@ -3,7 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Dog : EncounterWithDialog
+//[ForMe] Может быть сделать еще промежуточную абстракцию между
+//EncounterWithDialog и Dog в виде какого_нибудь "помощника"...
+
+//Перевести ли данную сущность в интерфейс?
+
+public class BasePlayerAssistant : EncounterWithDialog { }
+
+public class Dog : BasePlayerAssistant
 {
     //Test
     protected BaseInteractionController _interactionHandler = null;
