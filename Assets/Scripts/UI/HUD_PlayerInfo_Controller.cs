@@ -1,13 +1,19 @@
 using UnityEngine;
+using TMPro;
 
 public class HUD_PlayerInfo_Controller : BaseUIController
 {
 
     [SerializeField] private BaseBar _healthBar = null;
     [SerializeField] private BaseBar _energyBar = null;
+    [SerializeField] private BaseBar _experienceBar = null;
+
+    [SerializeField] private TextMeshProUGUI _levelText;
 
     private HealthSign _playerHealthSystem = null;
     private EnergySign _playerEnergySystem = null;
+
+    private TestPlayer _testPlayer;
 
     public override void Initialize(BaseWindow window)
     {
@@ -16,6 +22,24 @@ public class HUD_PlayerInfo_Controller : BaseUIController
         var playerSubSystem = ProjectSystem.Instance.GetSubSystemByType(typeof(PlayerSubSystem)) as PlayerSubSystem;
         _playerHealthSystem = playerSubSystem.Player.Health;
         _playerEnergySystem = playerSubSystem.Player.Energy;
+        //Подписывается на ивенты плеера и изменяет показатели по вызову ивентов
+    }
+    private void Start()
+    {
+        TestInit();
+    }
+
+    public void TestInit()
+    {
+        _testPlayer = TestPlayer.Instance;
+        _testPlayer.OnHealthChanged += HandleOnHealthChanged;
+        _testPlayer.OnEnergyChanged += HandleOnEnergyChanged;
+        _testPlayer.OnExpChanged += HandleOnExperienceChanged;
+        _testPlayer.OnLevelChanged += HandleOnLevelChanged;
+
+        _healthBar.SetMaxValue(_testPlayer.MaxHealth);
+        _energyBar.SetMaxValue(_testPlayer.MaxEnergy);
+        _experienceBar.SetMaxValue(_testPlayer.MaxExperience);
     }
 
     public void OnEnable()
@@ -24,21 +48,30 @@ public class HUD_PlayerInfo_Controller : BaseUIController
         _playerEnergySystem.OnValueChanged += HandleOnEnergyChanged;
     }
 
-    private float NormalizeChanging(int changing, int maxValue)
+    private void HandleOnHealthChanged(int value)
     {
-        return (float)changing / maxValue;
+        _healthBar?.SetValue(value);
     }
 
-    private void HandleOnHealthChanged(int changing)
+    private void HandleOnEnergyChanged(int value) 
     {
-        float normalChanging = NormalizeChanging(changing, _playerHealthSystem.MaxValue);
-        _healthBar?.ChangeValue(normalChanging);
+        _energyBar?.SetValue(value);
     }
 
-    private void HandleOnEnergyChanged(int changing) 
+    private void HandleOnExperienceChanged(int value)
     {
-        float normalChanging = NormalizeChanging(changing, _playerEnergySystem.MaxValue);
-        _energyBar?.ChangeValue(normalChanging);
+        _experienceBar.SetValue(value);
+    }
+
+    private void HandleOnLevelChanged(int value)
+    {
+        _levelText.text = value.ToString();
+    }
+
+
+    public void OnPortraitClick()
+    {
+        Debug.Log("Кликнули на портрет");
     }
 
     public void OnDisable()

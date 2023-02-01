@@ -1,5 +1,4 @@
 using System;
-using static HUD_Button;
 
 public class HUD_Button : BaseButton
 {
