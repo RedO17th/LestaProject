@@ -24,6 +24,8 @@ public class BaseQuest : MonoBehaviour
     protected List<BaseQuestTask> _tasks = null;
     protected List<ITaskEncounter> _encounters = null;
 
+    protected BaseQuestTask _currentTask = null;
+
     public bool StateIs(QuestState checkableState)
     {
         return _state == checkableState;
@@ -90,16 +92,16 @@ public class BaseQuest : MonoBehaviour
 
     protected virtual void StartTaskExecution()
     {
-        var task = GetUnactivatedTask();
+        _currentTask = GetUnactivatedTask();
 
-        if (task)
+        if (_currentTask)
         {
             _state = QuestState.Activated;
 
-            task.OnCompleted += ProcessTaskCompletion;
+            _currentTask.OnCompleted += ProcessTaskCompletion;
 
-            task.Prepare();
-            task.Activate();
+            _currentTask.Prepare();
+            _currentTask.Activate();
         }
     }
 
@@ -119,17 +121,19 @@ public class BaseQuest : MonoBehaviour
         return result;
     }
 
-    protected virtual void ProcessTaskCompletion(BaseQuestTask task)
+    protected virtual void ProcessTaskCompletion()
     {
-        task.OnCompleted -= ProcessTaskCompletion;
-        task.Dectivate();
-        //[ForMe] Удалять задачу...
+        _currentTask.OnCompleted -= ProcessTaskCompletion;
+        _currentTask.Dectivate();
+        
+        var taskState = _currentTask.State;
+        //[ForMe] Удалять ли задачу...
 
-        if (task.State == TaskState.Completed)
+        if (taskState == TaskState.Completed)
         {
             ProcessCorrectCompletion();
         }
-        else if (task.State == TaskState.Failed)
+        else if (taskState == TaskState.Failed)
         {
             //ProcessFailedCompletion();
         }

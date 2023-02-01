@@ -24,7 +24,6 @@ public abstract class BaseEncounter : MonoBehaviour, IEncounter
 public interface ITaskEncounter : IEncounter
 {
     string Name { get; }
-
     void SetTask(IQuestTask task);
 
     void Activate();
@@ -59,4 +58,6 @@ public class Encounter : SimpleEncounter, ITaskEncounter
 
         _pointer.Disable();
     }
+
+
 }

@@ -6,8 +6,21 @@ public class EncounterWithDialog : SimpleEncounter, IDialogableEncounter
 
     protected IQuestTask _task = null;
 
-    public virtual void SetTask(IQuestTask task) { _task = task; }
+    public virtual void SetTask(IQuestTask task) 
+    {
+        _task = task;
+        _task.OnCompleted += ProcessTaskComplition;
+    }
+
+    //[Think] У задачи могут быть разные состояния при завершении, обдумать этот момент
+    public virtual void ProcessTaskComplition() 
+    {
+        _task.OnCompleted -= ProcessTaskComplition;
+        _task = null;
+    }
+
     public virtual void InitializeDialog(string dialogName) { }
+
     public virtual void Hint() { _pointer.Enable(); }
 
     public virtual void Activate()

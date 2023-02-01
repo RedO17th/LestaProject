@@ -1,60 +1,74 @@
-﻿
-using System.Collections.Generic;
-
-public enum InteractionMode { None = -1, Dialog, Info, Some }
+﻿using System.Collections.Generic;
 
 public interface IInteractable
 {
     void Interact();
 }
 
-public class BaseInteractionController : IInteractable
+public class BaseInteractionsController : IInteractable
 {
-    protected InteractionMode _mode = InteractionMode.None;
-
     protected IEncounter _encounter = null;
 
-    protected List<BaseInteractionHandler> _handlers;
+    protected List<BaseInteractionMode> _interactions = null;
 
-    public BaseInteractionController(IEncounter encounter)
+    public BaseInteractionsController(IEncounter encounter)
     {
         _encounter = encounter;
-
-        _handlers = new List<BaseInteractionHandler>();
+        _interactions = new List<BaseInteractionMode>();
     }
 
-    public virtual void InitializeInteractionHandlers()
-    { 
-        if(_encounter is IDialogableEncounter encounter)
-            _handlers.Add(new DialogInteractionHandler(encounter));
-
-        //and others type...
-    }
+    public virtual void InitializeInteractionModes() { }
 
     public virtual void Interact() 
     {
-        CheckInteractonMode();
+        var mode = GetInteractionMode();
+            mode.Execute();
     }
 
-    //Проверяется режим взаимодействия
-    protected virtual void CheckInteractonMode() { }
+    protected virtual BaseInteractionMode GetInteractionMode()
+    {
+        BaseInteractionMode mode = null;
 
-    //И выполняются соответствующие инструкции
-    protected virtual void PerformInteraction() { }
-    protected virtual void PerformStandardInteraction() { }
+        foreach (var interaction in _interactions)
+        {
+            if (interaction.CheckConditionForExecution())
+            {
+                mode = interaction;
+            }
+        }
+
+        return mode;
+    }
 }
 
-public class BaseInteractionHandler
+public abstract class BaseInteractionMode
 {
     protected IEncounter _encounter = null;
-    public BaseInteractionHandler(IEncounter encounter)
-    {
-        _encounter = encounter;
-    }
+
+    public BaseInteractionMode(IEncounter encounter) { _encounter = encounter; }
+
+    public virtual bool CheckConditionForExecution() => false;
+    public abstract void Execute();
 }
 
-public class DialogInteractionHandler : BaseInteractionHandler
+public abstract class BaseSimpleInteractionMode : BaseInteractionMode
 {
-    public DialogInteractionHandler(IEncounter encounter) : base(encounter) { }
+    public BaseSimpleInteractionMode(IEncounter encounter) : base(encounter) { }
+
+    public override bool CheckConditionForExecution()
+    {
+        return base.CheckConditionForExecution();
+    }
+    public override void Execute() { }
+}
+
+public abstract class BaseTaskInteractionMode : BaseInteractionMode
+{
+    public BaseTaskInteractionMode(IEncounter encounter) : base(encounter) { }
+    public override bool CheckConditionForExecution()
+    {
+        return base.CheckConditionForExecution();
+    }
+    public override void Execute() { }
 }
 

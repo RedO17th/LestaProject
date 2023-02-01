@@ -4,29 +4,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.VirtualTexturing;
 
-//[ForMe] Может быть сделать еще промежуточную абстракцию между
-//EncounterWithDialog и Dog в виде какого_нибудь "помощника"...
-
 //Перевести ли данную сущность в интерфейс?
 
-public class BasePlayerAssistant : EncounterWithDialog { }
+public class BasePlayerAssistant : EncounterWithDialog
+{
+    public bool TaskIsExist => _task != null;
+
+    public BaseDialogController DialogController => _dialogController;
+
+    protected BaseInteractionsController _interactionHandler = null;
+
+    protected DialogSubSystem _dialogSubSystem = null;
+    protected BaseDialogController _dialogController = null;
+}
 
 public class Dog : BasePlayerAssistant
 {
-    //Test
-    protected BaseInteractionController _interactionHandler = null;
-
-    private BaseDialogController _dialogController = null;
-    private DialogSubSystem _dialogSubSystem = null;
-
     protected override void Awake()
     {
-        _interactionHandler = new BaseInteractionController(this);
-
         _dialogSubSystem = ProjectSystem.Instance.GetSubSystemByType(typeof(DialogSubSystem)) as DialogSubSystem;
         
         _dialogController = GetComponent<BaseDialogController>();
         _dialogController.Initialize(_dialogSubSystem);
+
+        _interactionHandler = new PlayerAssistantInteractionsController(this);
+        _interactionHandler.InitializeInteractionModes();
     }
 
     private void OnEnable()
@@ -41,9 +43,8 @@ public class Dog : BasePlayerAssistant
     public override void InitializeDialog(string dialogName)
     {
         var dialog = _dialogSubSystem.GetDialogueByName(dialogName);
+        
         _dialogController.SetDialog(dialog);
-
-        Debug.Log($"Dog.InitializeDialog");
     }
 
     public override void Hint() => base.Hint();
@@ -55,30 +56,13 @@ public class Dog : BasePlayerAssistant
 
         _pointer.Disable();
 
-        //_interactionHandler.Interact();
-
-        _dialogController.ActivateDialog();
+        _interactionHandler.Interact();
     }
 
     public override void Deactivate()
     {
         base.Deactivate();
     }
-
-    //[Test]
-    //private IEnumerator DialogTimer()
-    //{
-    //    yield return new WaitForSeconds(3f);
-
-    //    if (_task != null)
-    //    {
-    //        var context = new TaskContext();
-    //            context.SetCommand(TaskCommand.Complete);
-    //            context.SetID(_task.IDName);
-
-    //        ProjectBus.Instance.SendSignalByContext(context);
-    //    }
-    //}
 }
 
 

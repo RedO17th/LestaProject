@@ -4,7 +4,7 @@ using System;
 using Ink.Runtime;
 
 // This is a super bare bones example of how to play and display a ink story in Unity.
-public class DialogueController : MonoBehaviour
+public class DialogueSceneController : MonoBehaviour
 {
     [SerializeField] private GameObject _dialogueScreen = null;
 
@@ -27,6 +27,7 @@ public class DialogueController : MonoBehaviour
 
     private DialogSubSystem _dialogSubSystem;
 
+    private BaseDialogue _currentDialogue = null;
     private Story _story;
 
     public void Initialize(DialogSubSystem dialogSubSystem)
@@ -41,9 +42,12 @@ public class DialogueController : MonoBehaviour
     }
 
     // Creates a new Story object with the compiled story which we can then play!
-    public void StartStory(TextAsset newStory)
+    public void StartStory(BaseDialogue dialogue)
     {
-        _story = new Story(newStory.text);
+        _currentDialogue = dialogue;
+
+        _story = new Story(_currentDialogue.File.text);
+
         if (OnCreateStory != null) OnCreateStory(_story);
 
         foreach (var button in _choiceButtons)
@@ -81,7 +85,15 @@ public class DialogueController : MonoBehaviour
             ConfigureChoices();
         }
         else
+        { 
             _dialogueScreen.SetActive(false);
+
+            _currentDialogue.End();
+            _currentDialogue = null;
+
+            //[?] Нужно ли ее обнулять...
+            //_story = null;
+        }
 
         // If we've read all the content and there's no choices, the story is finished!
         //else {

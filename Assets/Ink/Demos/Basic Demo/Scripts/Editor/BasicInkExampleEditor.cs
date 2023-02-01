@@ -5,7 +5,7 @@ using UnityEditor;
 using Ink.UnityIntegration;
 using Ink.Runtime;
 
-[CustomEditor(typeof(DialogueController))]
+[CustomEditor(typeof(DialogueSceneController))]
 [InitializeOnLoad]
 public class BasicInkExampleEditor : Editor {
 
@@ -21,7 +21,7 @@ public class BasicInkExampleEditor : Editor {
 	public override void OnInspectorGUI () {
 		Repaint();
 		base.OnInspectorGUI ();
-		var realTarget = target as DialogueController;
+		var realTarget = target as DialogueSceneController;
 		//var story = realTarget.story;
 		//InkPlayerWindow.DrawStoryPropertyField(story, new GUIContent("Story"));
 	}

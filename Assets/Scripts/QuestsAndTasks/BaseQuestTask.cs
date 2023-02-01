@@ -6,10 +6,10 @@ public enum TaskState { None = -1, UnActivated, Activated, Completed, Failed }
 
 public interface IQuestTask
 {
+    event Action OnCompleted;
+
     public TaskState State { get; }
     public string IDName { get; }
-
-    //[TODO] Добавить Name, если понадобиться 
 }
 
 public class BaseQuestTask : MonoBehaviour, IQuestTask
@@ -20,7 +20,7 @@ public class BaseQuestTask : MonoBehaviour, IQuestTask
     [SerializeField] protected string _name;
     [SerializeField] protected string _description = string.Empty;
 
-    public event Action<BaseQuestTask> OnCompleted;
+    public event Action OnCompleted;
 
     public TaskState State => _state;
     public string IDName => _idName;
@@ -76,7 +76,7 @@ public class BaseQuestTask : MonoBehaviour, IQuestTask
     {
         _state = TaskState.Completed;
 
-        OnCompleted?.Invoke(this);
+        OnCompleted?.Invoke();
     }
 
     protected virtual void ProcessFailedCompletion()
@@ -89,7 +89,7 @@ public class BaseQuestTask : MonoBehaviour, IQuestTask
     {
         _state = TaskState.Failed;
 
-        OnCompleted?.Invoke(this);
+        OnCompleted?.Invoke();
     }
 
     public virtual void Dectivate() 

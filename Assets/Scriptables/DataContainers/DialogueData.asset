@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: DialogueData
   m_EditorClassIdentifier: 
   _dialogues:
-  - {fileID: 4900000, guid: 425bee9ed53ee2044baee632fc360d57, type: 3}
+  - _dialogueFile: {fileID: 4900000, guid: 425bee9ed53ee2044baee632fc360d57, type: 3}

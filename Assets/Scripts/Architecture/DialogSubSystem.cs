@@ -9,42 +9,40 @@ using UnityEngine;
 
 public class DialogSubSystem : BaseSubSystem
 {
-    [SerializeField] private DialogueController _dialogueController;
+    [SerializeField] private DialogueSceneController _dialogueController;
 
-    private QuestSubSystem _questSubSystem = null;
     private DiceTwentySubSystem _diceTwentySubSystem = null;
 
-    private CharactersContainer _characters = null;
-    private DialogueDataContainer _dialogueDataContainer = null;
+    private CharactersContainer _charactersData = null;
+    private DialogueDataContainer _dialogueData = null;
 
     public override void Initialize(ProjectSystem system) => base.Initialize(system);
 
-    public TextAsset GetDialogueByName(string name)
+    public BaseDialogue GetDialogueByName(string name)
     {
-        return _dialogueDataContainer.GetDialogueByName(name);
+        return _dialogueData.GetDialogueByName(name);
     }
 
     public override void Prepare()
     {
+        _dialogueController.Initialize(this);
+
         _diceTwentySubSystem = _projectSystem.GetSubSystemByType(typeof(DiceTwentySubSystem)) as DiceTwentySubSystem;
 
         var settingsSystem = _projectSystem.GetSubSystemByType(typeof(SettingsSubSystem)) as SettingsSubSystem;
         
-        _characters = settingsSystem?.GetDataContainerByType(typeof(CharactersContainer)) as CharactersContainer;
-        _dialogueDataContainer = settingsSystem?.GetDataContainerByType(typeof(DialogueDataContainer)) as DialogueDataContainer;
-
-
-        _dialogueController.Initialize(this);
+        _charactersData = settingsSystem?.GetDataContainerByType(typeof(CharactersContainer)) as CharactersContainer;
+        _dialogueData = settingsSystem?.GetDataContainerByType(typeof(DialogueDataContainer)) as DialogueDataContainer;
     }
 
-    public void StartNewDialog(TextAsset newStory)
+    public void StartNewDialog(BaseDialogue newStory)
     {
         _dialogueController.StartStory(newStory);
     }
 
     public CharacterDialogueInfo GetCharacterInfo(string tag)
     {
-        return _characters.GetCharacterByTag(tag);
+        return _charactersData.GetCharacterByTag(tag);
     }
 
     public bool Check(string tag)
@@ -75,8 +73,5 @@ public class DialogSubSystem : BaseSubSystem
 
     public override void StartSystem() { }
 
-    public override void Clear()
-    {
-        _questSubSystem = null;
-    }
+    public override void Clear() { }
 }

@@ -5,14 +5,14 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "DialogueData", menuName = "ScriptableObjects/Container/DialogueData")]
 public class DialogueDataContainer : BaseDataContainer
 {
-    [SerializeField] private TextAsset[] _dialogues;
+    [SerializeField] private BaseDialogue[] _dialogues;
 
-    public TextAsset GetDialogueByName(string name)
+    public BaseDialogue GetDialogueByName(string name)
     {
-        TextAsset result = null;
+        BaseDialogue result = null;
         foreach (var dialogue in _dialogues)
         {
-            if(dialogue.name.Equals(name))
+            if(dialogue.Name.Equals(name))
             {
                 result = dialogue;
                 break;
