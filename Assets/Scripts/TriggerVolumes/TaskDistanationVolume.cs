@@ -8,6 +8,7 @@ public class TaskDistanationVolume : BaseEncounter, ITaskEncounter
     [SerializeField] protected TriggerVolumeByPlayer _triggerVolume;
 
     public string Name => _encounterName;
+    public IQuestTask Task => _questTask;
 
     protected IQuestTask _questTask = null;
 
@@ -26,7 +27,7 @@ public class TaskDistanationVolume : BaseEncounter, ITaskEncounter
     {
         var context = new TaskContext();
             context.SetCommand(TaskCommand.Complete);
-            context.SetID(_questTask.IDName);
+            context.SetID(Task.IDName);
 
         ProjectBus.Instance.SendSignalByContext(context);
     }

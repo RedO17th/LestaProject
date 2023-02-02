@@ -88,6 +88,7 @@ public class DialogueSceneController : MonoBehaviour
         { 
             _dialogueScreen.SetActive(false);
 
+            _currentDialogue.InvokeResult();
             _currentDialogue.End();
             _currentDialogue = null;
 
@@ -123,6 +124,10 @@ public class DialogueSceneController : MonoBehaviour
             {
                 Checking(tag);
             }
+            //else if (tag.StartsWith("Quest"))
+            //{
+            //    Debug.Log($"SetReplica: ololo");
+            //}
         }
     }
 

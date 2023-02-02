@@ -43,7 +43,8 @@ public class Dog : BasePlayerAssistant
     public override void InitializeDialog(string dialogName)
     {
         var dialog = _dialogSubSystem.GetDialogueByName(dialogName);
-        
+            dialog.Initialize(this);
+
         _dialogController.SetDialog(dialog);
     }
 
