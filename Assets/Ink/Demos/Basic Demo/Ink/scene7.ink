@@ -49,27 +49,27 @@ VAR CheckResultStr = ""
 
 == scene_7_block_3 ==
 Внезапно из-за гаражных построек ты слышишь пронзительный крик, вслед за которым все близлежащие дома озаряет яркая пульсирующая вспышка, которая растет все сильнее и сильнее… #Speaker.Storyteller
-    * [<Упасть ничком на землю.>] #Speaker.Tisha #CheckCharacteristic.Sleight
+    * [<Упасть ничком на землю.>] #Speaker.Tisha #CheckCharacteristic.Sleight.10
         {   CheckResult:
                 -> scene_7_block_3_1
             -else:
                 -> scene_7_block_3_1_else
         }
 	
-    * [<Окружить себя пси-полем.>]#Speaker.Tisha #CheckCharacteristic.Wisdom
+    * [<Окружить себя пси-полем.>] #Speaker.Tisha #CheckCharacteristic.Wisdom.10
         {   CheckResult:
                 -> scene_7_block_3_2
             -else:
                 -> scene_7_block_3_2_else
         }
 
-    * [<Отпрыгнуть в сторону.>]#Speaker.Tisha #CheckCharacteristic.Wisdom
+    * [<Отпрыгнуть в сторону.>] #Speaker.Tisha #CheckCharacteristic.Wisdom.10
         {   CheckResult:
                 -> scene_7_block_3_3
             -else:
                 -> scene_7_block_3_3_else
         }
-    * [<Замереть на месте.>]#Speaker.Tisha 
+    * [<Замереть на месте.>] #Speaker.Tisha 
         -> scene_7_block_4 
 
 
@@ -94,7 +94,7 @@ VAR CheckResultStr = ""
 == scene_7_block_3_2_else == 
 {CheckResultStr} Что, научился пистолетом обращаться и все, прощай родные пси-способности? Своими действиями ты усилил энергию взрывной волны: та оглушает тебя, будто обухом по голове, и ты лишь осоловело поворачиваешь  голову в разные стороны, пытаясь понять, что вообще происходит. Кажется, взрыв откинул тебя в на решетку забора, и лишь кибермилицейская броня спасает тебя от гибели, приняв весь удар на себя: микросхемы вышли из строя и воняют паленым. #Speaker.Storyteller
     +[>>]
--Ты слышишь движение сбоку и, повернув голову, видишь, что твой противник лежит и стонет, прикованный решеткой к забору с другой стороны. Кажется, у тебя появился шанс спастись.#Speaker.Storyteller #Debuff.Tisha.Stun #Debuff.Tisha.LowHP #Debuff.Tisha.BrokenEquip 
+-Ты слышишь движение сбоку и, повернув голову, видишь, что твой противник лежит и стонет, прикованный решеткой к забору с другой стороны. Кажется, у тебя появился шанс спастись. #Speaker.Storyteller #Debuff.Tisha.Stun #Debuff.Tisha.LowHP #Debuff.Tisha.BrokenEquip 
     +[>>]
         -> END 
 
