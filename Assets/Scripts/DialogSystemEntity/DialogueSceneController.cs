@@ -6,6 +6,7 @@ using Ink.Runtime;
 // This is a super bare bones example of how to play and display a ink story in Unity.
 public class DialogueSceneController : MonoBehaviour
 {
+    #region UIComponents
     [SerializeField] private GameObject _dialogueScreen = null;
 
     [Header("Speaker")]
@@ -22,13 +23,14 @@ public class DialogueSceneController : MonoBehaviour
     [Header("Buttons")]
     [SerializeField] private ChoiceButton[] _choiceButtons = null;
     [SerializeField] private ChoiceButton _nextButton = null;
+    #endregion
 
     public static event Action<Story> OnCreateStory;
 
-    private DialogSubSystem _dialogSubSystem;
+    private DialogSubSystem _dialogSubSystem = null;
 
     private BaseDialogue _currentDialogue = null;
-    private Story _story;
+    private Story _story = null;
 
     public void Initialize(DialogSubSystem dialogSubSystem)
     {
@@ -48,7 +50,7 @@ public class DialogueSceneController : MonoBehaviour
 
         _story = new Story(_currentDialogue.File.text);
 
-        if (OnCreateStory != null) OnCreateStory(_story);
+        OnCreateStory?.Invoke(_story);
 
         foreach (var button in _choiceButtons)
         {
@@ -131,33 +133,13 @@ public class DialogueSceneController : MonoBehaviour
         }
     }
 
-    private void ConfigureChoices()
+    // Creates a textbox showing the the line of text
+    void CreateContentView(string text)
     {
-        _nextButton.Interactable = (_story.currentChoices.Count == 1);
-
-        if (_story.currentChoices.Count == 1)
-        {
-            _nextButton.SetNewChoice(_story.currentChoices[0]);
-
-            for (int i = 0; i < _choiceButtons.Length; i++)
-            {
-                _choiceButtons[i].gameObject.SetActive(false);
-            }
-        }
-        else
-        {
-            for (int i = 0; i < _choiceButtons.Length; i++)
-            {
-                if (i >= _story.currentChoices.Count)
-                {
-                    _choiceButtons[i].gameObject.SetActive(false);
-                    continue;
-                }
-
-                _choiceButtons[i].gameObject.SetActive(true);
-                _choiceButtons[i].SetNewChoice(_story.currentChoices[i]);
-            }
-        }
+        //Text storyText = Instantiate(textPrefab) as Text;
+        //storyText.text = text;
+        //storyText.transform.SetParent(canvas.transform, false);
+        _replica.text = text;
     }
 
     private void ConfigurateSpeaker(string tag)
@@ -191,12 +173,32 @@ public class DialogueSceneController : MonoBehaviour
         _story.variablesState.SetGlobal("CheckResultStr", Value.Create(resultStr));
     }
 
-    // Creates a textbox showing the the line of text
-    void CreateContentView(string text)
+    private void ConfigureChoices()
     {
-        //Text storyText = Instantiate(textPrefab) as Text;
-        //storyText.text = text;
-        //storyText.transform.SetParent(canvas.transform, false);
-        _replica.text = text;
+        _nextButton.Interactable = (_story.currentChoices.Count == 1);
+
+        if (_story.currentChoices.Count == 1)
+        {
+            _nextButton.SetNewChoice(_story.currentChoices[0]);
+
+            for (int i = 0; i < _choiceButtons.Length; i++)
+            {
+                _choiceButtons[i].gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            for (int i = 0; i < _choiceButtons.Length; i++)
+            {
+                if (i >= _story.currentChoices.Count)
+                {
+                    _choiceButtons[i].gameObject.SetActive(false);
+                    continue;
+                }
+
+                _choiceButtons[i].gameObject.SetActive(true);
+                _choiceButtons[i].SetNewChoice(_story.currentChoices[i]);
+            }
+        }
     }
 }
