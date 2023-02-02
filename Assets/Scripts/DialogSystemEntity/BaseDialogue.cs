@@ -1,8 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-[System.Serializable]
-public class BaseDialogue
+public class BaseDialogue : MonoBehaviour
 {
     [SerializeField] protected TextAsset _dialogueFile = null;
     [SerializeField] protected BaseDialogueResult _dialogueResult = null; 
@@ -21,6 +20,8 @@ public class BaseDialogue
 
         _dialogueResult.Initialize(this, _encounter);
     }
+
+    public virtual void ProcessCommandViaTag(string tag) { }
 
     public virtual void InvokeResult()
     {

@@ -11,11 +11,13 @@ public class BaseDialogueResult : MonoBehaviour
     {
         _dialogue = dialogue;
         _encounter = encounter;
+
+        _isInvoked = false;
     }
 
     public virtual void Invoke()
     {
-        if (_isInvoked == false) 
+        if (_isInvoked == false)
         {
             _isInvoked = true;
 
@@ -25,7 +27,7 @@ public class BaseDialogueResult : MonoBehaviour
 
     protected virtual void ProcessInvoke() { }
 
-    public virtual void Cancel() 
+    public virtual void Cancel()
     {
         _encounter = null;
         _dialogue = null;

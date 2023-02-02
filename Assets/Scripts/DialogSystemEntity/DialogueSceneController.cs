@@ -37,9 +37,8 @@ public class DialogueSceneController : MonoBehaviour
         _dialogSubSystem = dialogSubSystem;
 
         foreach (var button in _choiceButtons)
-        {
             button.OnClickEvent += RefreshView;
-        }
+
         _nextButton.OnClickEvent += RefreshView;
     }
 
@@ -53,9 +52,8 @@ public class DialogueSceneController : MonoBehaviour
         OnCreateStory?.Invoke(_story);
 
         foreach (var button in _choiceButtons)
-        {
             button.SetStory(_story);
-        }
+
         _nextButton.SetStory(_story);
 
         _dialogueScreen.SetActive(true);
@@ -63,19 +61,8 @@ public class DialogueSceneController : MonoBehaviour
         RefreshView();
     }
 
-    [ContextMenu("Switch")]
-    private void SwitchCheckResult()
-    {
-        _story.variablesState.SetGlobal("CheckResult", Value.Create(true));
-        _story.variablesState.SetGlobal("CheckResultStr", Value.Create(true));
-    }
-
-    // This is the main function called every time the story changes. It does a few things:
-    // Destroys all the old content and choices.
-    // Continues over all the lines of text, then displays all the choices. If there are no choices, the story is finished!
     void RefreshView()
     {
-        // Read all the content until we can't continue any more
         while (_story.canContinue)
         {
             SetReplica();
@@ -97,14 +84,6 @@ public class DialogueSceneController : MonoBehaviour
             //[?] Нужно ли ее обнулять...
             //_story = null;
         }
-
-        // If we've read all the content and there's no choices, the story is finished!
-        //else {
-        //	Button choice = CreateChoiceView("End of story.\nRestart?");
-        //	choice.onClick.AddListener(delegate{
-        //		StartStory();
-        //	});
-        //}
     }
 
     private void SetReplica()
@@ -130,22 +109,18 @@ public class DialogueSceneController : MonoBehaviour
             //{
             //    Debug.Log($"SetReplica: ololo");
             //}
+
+            _currentDialogue.ProcessCommandViaTag(tag);
         }
     }
 
-    // Creates a textbox showing the the line of text
     void CreateContentView(string text)
     {
-        //Text storyText = Instantiate(textPrefab) as Text;
-        //storyText.text = text;
-        //storyText.transform.SetParent(canvas.transform, false);
         _replica.text = text;
     }
 
     private void ConfigurateSpeaker(string tag)
     {
-        //string name = tag["Speaker.".Length..];
-
         var character = _dialogSubSystem.GetCharacterInfo(tag);
 
         _speaker.text = character.Name;
