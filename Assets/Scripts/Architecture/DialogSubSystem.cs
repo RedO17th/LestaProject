@@ -49,12 +49,12 @@ public class DialogSubSystem : BaseSubSystem
     {
         var parts = tag.Split(".");
 
-        if (parts.Length > 0)
+        if (parts.Length > 2)
         {
             if (parts[0].ToLower().Equals("checkcharacteristic"))
             {
                 if (int.TryParse(parts[2], out int difficult) == false)
-                    return false;
+                    throw new Exception("Wrong format of checking difficult");
 
                 return _diceTwentySubSystem.CheckByCharacteristicName(parts[1], difficult);
             }
@@ -62,16 +62,72 @@ public class DialogSubSystem : BaseSubSystem
             if (parts[0].ToLower().Equals("checkskill"))
             {
                 if (int.TryParse(parts[2], out int difficult) == false)
-                    return false;
+                    throw new Exception("Wrong format of checking difficult");
 
                 return _diceTwentySubSystem.CheckBySkillName(parts[1], difficult);
             }
         }
 
-        return false;
+        throw new Exception("Wrong format of checking tag");
+    }
+
+    public void AddObjectToInventory(string tag)
+    {
+        var nameObject = tag["NewObject.".Length..];
+
+        if (string.IsNullOrWhiteSpace(nameObject) == false)
+        {
+            //TODO: real adding object to inventory
+            Debug.Log($"Добавлен предмет: {nameObject}");
+        }
+        else
+            throw new Exception("Empty name of adding object to inventory");
+    }
+
+    public void ActivateQuest(string tag)
+    {
+        var nameQuest = tag["Quest.".Length..];
+
+        if (string.IsNullOrWhiteSpace(nameQuest) == false)
+        {
+            //TODO: real activating quest
+            Debug.Log($"Активирован квест: {nameQuest}");
+        }
+        else
+            throw new Exception("Empty name of activated quest");
+    }
+
+    public void AddNoteToJournal(string tag)
+    {
+        var nameNote = tag["Note.".Length..];
+
+        if (string.IsNullOrWhiteSpace(nameNote) == false)
+        {
+            //TODO: real add note to journal
+            Debug.Log($"Добавлена запись: {nameNote}");
+        }
+        else
+            throw new Exception("Empty name of note");
+    }
+
+    public void AddDebuf(string tag)
+    {
+        var parts = tag.Split(".");
+
+        if (parts.Length > 2)
+        {
+            //TODO: real debuffes
+            Debug.Log($"Наложен дебаф {parts[2]} на персонажа {parts[1]}");
+        }
+        else
+            throw new Exception("Wrong format of debuf tag");
     }
 
     public override void StartSystem() { }
 
-    public override void Clear() { }
+    public override void Clear()
+    {
+        //_questSubSystem.OnQuestWillActivated -= InitializeDialogEncountersByQuestType;
+        _questSubSystem = null;
+    }
 }

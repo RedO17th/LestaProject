@@ -88,29 +88,37 @@ public class DialogueSceneController : MonoBehaviour
 
     private void SetReplica()
     {
-        // Continue gets the next line of the story
         string text = _story.Continue();
-        // This removes any white space from the text.
-        text = text.Trim();
-        // Display the text on screen!
-        CreateContentView(text);
+        _replica.text = text.Trim();
 
         foreach (var tag in _story.currentTags)
         {
             if (tag.StartsWith("Speaker."))
             {
-                ConfigurateSpeaker(tag["Speaker.".Length..]);
+                ConfigurateSpeaker(tag);
             }
             else if (tag.StartsWith("Check"))
             {
                 Checking(tag);
             }
-            //else if (tag.StartsWith("Quest"))
-            //{
-            //    Debug.Log($"SetReplica: ololo");
-            //}
+            else if(tag.StartsWith("NewObject"))
+            {
+                AddObjectToInventory(tag);
+            }
+            else if(tag.StartsWith("Quest"))
+            {
+                ActivateQuest(tag);
+            }
+            else if(tag.StartsWith("Note"))
+            {
+                AddNoteToJournal(tag);
+            }
+            else if(tag.StartsWith("Debuff"))
+            {
+                AddDebuf(tag);
+            }
 
-            _currentDialogue.ProcessCommandViaTag(tag);
+            //_currentDialogue.ProcessCommandViaTag(tag);
         }
     }
 
@@ -148,11 +156,12 @@ public class DialogueSceneController : MonoBehaviour
         _story.variablesState.SetGlobal("CheckResultStr", Value.Create(resultStr));
     }
 
+
     private void ConfigureChoices()
     {
         _nextButton.Interactable = (_story.currentChoices.Count == 1);
 
-        if (_story.currentChoices.Count == 1)
+        if (_story.currentChoices.Count == 1 && _story.currentChoices[0].text==">>")
         {
             _nextButton.SetNewChoice(_story.currentChoices[0]);
 
@@ -175,5 +184,56 @@ public class DialogueSceneController : MonoBehaviour
                 _choiceButtons[i].SetNewChoice(_story.currentChoices[i]);
             }
         }
+    }
+	
+    private void ConfigurateSpeaker(string tag)
+    {
+        string name = tag["Speaker.".Length..];
+
+        var character = _dialogSubSystem.GetCharacterInfo(name);
+
+        _speaker.text = character.Name;
+
+        if (name.Equals("Tisha"))
+        {
+            _tishaShadow.enabled = false;
+            _portraitShadow.enabled = true;
+        }
+        else
+        {
+            _tishaShadow.enabled = true;
+            _portraitShadow.enabled = false;
+
+            _portrait.sprite = character.Portreit;
+        }
+    }
+
+    private void Checking(string tag)
+    {
+        bool result = _dialogSubSystem.Check(tag);
+        _story.variablesState.SetGlobal("CheckResult", Value.Create(result));
+
+        string resultStr = result ? "[УСПЕХ]" : "[ПРОВАЛ]";
+        _story.variablesState.SetGlobal("CheckResultStr", Value.Create(resultStr));
+    }
+
+    private void AddObjectToInventory(string tag)
+    {
+        _dialogSubSystem.AddObjectToInventory(tag);
+    }
+
+    private void ActivateQuest(string tag)
+    {
+        _dialogSubSystem.ActivateQuest(tag);
+    }
+
+    private void AddNoteToJournal(string tag)
+    {
+        _dialogSubSystem.AddNoteToJournal(tag);
+    }
+   
+    private void AddDebuf(string tag)
+    {
+        _dialogSubSystem.AddDebuf(tag);
     }
 }

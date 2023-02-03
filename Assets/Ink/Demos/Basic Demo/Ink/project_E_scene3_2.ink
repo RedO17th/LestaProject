@@ -8,7 +8,7 @@ VAR CheckResultStr = ""
     ->scene_3_2_block_1
 *[Ага. Ребенок. Понятно] #Speaker.Tisha
     ->scene_3_2_block_2
-*[Мне необходимо изучить капсулу.] #Speaker.Tisha #CheckSkill.Alertness
+*[Мне необходимо изучить капсулу.] #Speaker.Tisha #CheckSkill.Alertness.1
     ->scene_3_2_block_3
 
 == scene_3_2_block_1 ==
