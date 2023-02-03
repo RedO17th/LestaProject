@@ -18,7 +18,7 @@ public class BaseDialogue : MonoBehaviour
     {
         _encounter = encounter;
 
-        _dialogueResult.Initialize(this, _encounter);
+        _dialogueResult?.Initialize(this, _encounter);
     }
 
     public virtual void ProcessCommandViaTag(string tag) { }
@@ -36,7 +36,7 @@ public class BaseDialogue : MonoBehaviour
 
     public virtual void End()
     {
-        _dialogueResult.Cancel();
+        _dialogueResult?.Cancel();
 
         _encounter = null;
 

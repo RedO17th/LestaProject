@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5841993172956168597}
   - component: {fileID: 5841993172956168602}
   m_Layer: 0
-  m_Name: TaskTalkWithDog
+  m_Name: JohnnyTheyreInTheTreesTask_1_TalkWithAssistant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5841993172956168596}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.5115311, y: -1.6459389, z: 13.675558}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -49,4 +49,4 @@ MonoBehaviour:
   _name: TalkWithDogName
   _description: TalkWithDogDescription
   _dogEncounterName: Dog
-  _dogEncounterDialogName: TestDialogue
+  _dogEncounterDialogName: project E scene1

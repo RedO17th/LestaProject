@@ -576,3 +576,6 @@ MonoBehaviour:
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
+  - _questPrefab: {fileID: 6528779191282509331, guid: d4f15429aa321584a9b25170d6e54ede, type: 3}
+    _encounters:
+    - {fileID: 0}

@@ -11,8 +11,9 @@ public class BaseQuest : MonoBehaviour
     [SerializeField] protected QuestState _state = QuestState.Closed;
 
     [SerializeField] protected string _idName = string.Empty;
-
     [SerializeField] protected string _name = string.Empty;
+
+    [TextArea]
     [SerializeField] protected string _description = string.Empty;
 
     [SerializeField] protected List<BaseQuestTask> _taskPrefabs;
@@ -125,9 +126,10 @@ public class BaseQuest : MonoBehaviour
     {
         _currentTask.OnCompleted -= ProcessTaskCompletion;
         _currentTask.Dectivate();
-        
+
         var taskState = _currentTask.State;
-        //[ForMe] Удалять ли задачу...
+
+        _currentTask = null;
 
         if (taskState == TaskState.Completed)
         {

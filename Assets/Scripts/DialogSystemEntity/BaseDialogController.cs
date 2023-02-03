@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class BaseDialogController : MonoBehaviour
+public class BaseDialogController : MonoBehaviour
 {
     public event Action OnDialogueEnded;
 
@@ -21,9 +21,19 @@ public abstract class BaseDialogController : MonoBehaviour
         _dialog = dialog; 
     }
 
-    public virtual void ActivateDialog() { }
+    public virtual void ActivateDialog()
+    {
+        _dialog.OnEnded += ProcessTheEndOfTheDialog;
 
-    protected virtual void ProcessTheEndOfTheDialog() { }
+        _dialogSubSystem.StartNewDialog(_dialog);
+    }
+
+    protected virtual void ProcessTheEndOfTheDialog()
+    {
+        _dialog.OnEnded -= ProcessTheEndOfTheDialog;
+        _dialog = null;
+    }
+
     protected virtual void DeactivateDialog() { }
 
     public virtual void Clear()

@@ -1,11 +1,8 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering.VirtualTexturing;
 
-//[TODO] Перевести общие поля с NPCEncounterWithDialog в EncounterWithDialog
-public class BasePlayerAssistant : EncounterWithDialog
+public class NPCEncounterWithDialog : EncounterWithDialog
 {
     public bool TaskIsExist => _task != null;
 
@@ -17,23 +14,14 @@ public class BasePlayerAssistant : EncounterWithDialog
     protected BaseDialogController _dialogController = null;
 }
 
-public class Dog : BasePlayerAssistant
+public class Uncle : NPCEncounterWithDialog
 {
     protected override void Awake()
     {
         _dialogController = GetComponent<BaseDialogController>();
 
-        _interactionHandler = new PlayerAssistantInteractionsController(this);
-        _interactionHandler.InitializeInteractionModes();
-    }
-
-    private void OnEnable()
-    {
-        PrepareTriggerVolume();
-    }
-    private void OnDisable()
-    {
-        ClearTriggerVolume();
+        //_interactionHandler = new PlayerAssistantInteractionsController(this);
+        //_interactionHandler.InitializeInteractionModes();
     }
 
     protected override void Start()
@@ -56,11 +44,10 @@ public class Dog : BasePlayerAssistant
 
     public override void Interact()
     {
-        Debug.Log($"Dog.Interact");
-
         _pointer.Disable();
 
-        _interactionHandler.Interact();
+        //_interactionHandler.Interact();
+        _dialogController.ActivateDialog();
     }
 
     public override void Deactivate()
@@ -68,5 +55,3 @@ public class Dog : BasePlayerAssistant
         base.Deactivate();
     }
 }
-
-

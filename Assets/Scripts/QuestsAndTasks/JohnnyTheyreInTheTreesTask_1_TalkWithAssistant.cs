@@ -2,13 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TalkWithDogTask : BaseQuestTask
+public class JohnnyTheyreInTheTreesTask_1_TalkWithAssistant : BaseQuestTask
 {
     [Header("Encounter names")]
     [SerializeField] protected string _dogEncounterName = string.Empty;
     [SerializeField] protected string _dogEncounterDialogName = string.Empty;
 
-    //[ForMe] Для расширения функционала сделать тип = Dog, или добавить абстракцию "Помощника"? 
     private BasePlayerAssistant _dog = null;
 
     public override void Prepare()
@@ -16,28 +15,22 @@ public class TalkWithDogTask : BaseQuestTask
         _dog = _quest.GetEncounterByName(_dogEncounterName) as BasePlayerAssistant;
         _dog.SetTask(this);
         _dog.InitializeDialog(_dogEncounterDialogName);
+        _dog.Hint();
 
         base.Prepare();
     }
 
-    public override void Activate()
-    {
-        Debug.Log($"TalkWithDogTask.Activate: {_name}");
-
-        base.Activate();
-    }
+    public override void Activate() => base.Activate();
 
     protected override void Complete()
     {
-        Debug.Log($"TalkWithDogTask.Complete: {_name}");
-
+        Debug.Log($"JohnnyTheyreInTheTreesTask_1_TalkWithAssistant.Complete: {_name}");
+    
         base.Complete();
     }
 
     public override void Dectivate()
     {
-        Debug.Log($"TalkWithDogTask.Dectivate: {_name}");
-
         base.Dectivate();
 
         Clear();

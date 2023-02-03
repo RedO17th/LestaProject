@@ -10,6 +10,7 @@ public class SimpleEncounter : BaseEncounter, IInteractable
     protected GamePlayer _player = null;
 
     protected virtual void Awake() { }
+    protected virtual void Start() { }
 
     protected virtual void PrepareTriggerVolume()
     {
@@ -28,14 +29,10 @@ public class SimpleEncounter : BaseEncounter, IInteractable
     public virtual void Interact()
     {
         Debug.Log($"SimpleEncounter.Interact");
-
-        _pointer.Disable();
     }
 
     protected virtual void CancelInteraction(GamePlayer player)
     {
-        _pointer.Disable();
-
         _player.RemoveInteractable();
         _player = null;
     }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4166578237772585919}
   - component: {fileID: 7027258275075833154}
   m_Layer: 0
-  m_Name: TestDialogue
+  m_Name: Scene1_Dialogue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,5 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8b4c6a0d8d6bab40a152c9a19f041d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dialogueFile: {fileID: 4900000, guid: 425bee9ed53ee2044baee632fc360d57, type: 3}
+  _dialogueFile: {fileID: 4900000, guid: 26dee79d9a8f0c44ab38a11111469523, type: 3}
   _dialogueResult: {fileID: 8522763574803428273, guid: d1f2874f18245c8489f80d53ce0b3c4a, type: 3}
