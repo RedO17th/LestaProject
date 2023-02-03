@@ -127,26 +127,6 @@ public class DialogueSceneController : MonoBehaviour
         _replica.text = text;
     }
 
-    private void ConfigurateSpeaker(string tag)
-    {
-        var character = _dialogSubSystem.GetCharacterInfo(tag);
-
-        _speaker.text = character.Name;
-
-        if (tag.Equals("Tisha"))
-        {
-            _tishaShadow.enabled = false;
-            _portraitShadow.enabled = true;
-        }
-        else
-        {
-            _tishaShadow.enabled = true;
-            _portraitShadow.enabled = false;
-
-            _portrait.sprite = character.Portreit;
-        }
-    }
-
     private void Checking(string tag)
     {
         bool result = _dialogSubSystem.Check(tag);
@@ -206,15 +186,6 @@ public class DialogueSceneController : MonoBehaviour
 
             _portrait.sprite = character.Portreit;
         }
-    }
-
-    private void Checking(string tag)
-    {
-        bool result = _dialogSubSystem.Check(tag);
-        _story.variablesState.SetGlobal("CheckResult", Value.Create(result));
-
-        string resultStr = result ? "[УСПЕХ]" : "[ПРОВАЛ]";
-        _story.variablesState.SetGlobal("CheckResultStr", Value.Create(resultStr));
     }
 
     private void AddObjectToInventory(string tag)
