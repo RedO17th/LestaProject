@@ -15,12 +15,16 @@ public class TestPlayer : MonoBehaviour
 
     [SerializeField] private int _level;
 
+    [SerializeField] private int _skillPoints;
+
     public static TestPlayer Instance;
 
     public event Action<int> OnHealthChanged;
     public event Action<int> OnEnergyChanged;
     public event Action<int> OnExpChanged;
     public event Action<int> OnLevelChanged;
+
+    public SkillPoints SkillPoints = new SkillPoints();
 
     public int MaxHealth => _maxHealth;
     public int MaxEnergy => _maxEnergy;
@@ -29,6 +33,11 @@ public class TestPlayer : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+    }
+
+    private void Start()
+    {
+        SkillPoints.AddSkillPoint(_skillPoints);
     }
 
     private TestPlayer()

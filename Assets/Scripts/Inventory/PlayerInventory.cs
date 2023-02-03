@@ -64,7 +64,7 @@ public class PlayerInventory : MonoBehaviour
     {
         PlayerInventoryData playerInventoryData = new PlayerInventoryData(Inventory.Capacity, Equipment.Capacity, QuickAccessMenuSlots.Length);
 
-        _gameData = new GameData(playerInventoryData);
+        _gameData = GameData.Instance;
 
         SaveInventory(_gameData);
         SaveEquipment(_gameData);
@@ -80,7 +80,7 @@ public class PlayerInventory : MonoBehaviour
 
         PlayerInventoryData playerInventoryData = new PlayerInventoryData(Inventory.Capacity, Equipment.Capacity, QuickAccessMenuSlots.Length);
 
-        _gameData = (GameData)storage.Load(new GameData(playerInventoryData));
+        _gameData = (GameData)storage.Load(GameData.Instance);
 
         InventoryItemInfo[] infoObjects = Resources.LoadAll<InventoryItemInfo>("Info");
 
