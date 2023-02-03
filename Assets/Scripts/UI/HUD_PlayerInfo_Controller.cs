@@ -12,8 +12,7 @@ public class HUD_PlayerInfo_Controller : BaseUIController
 
     private HealthSign _playerHealthSystem = null;
     private EnergySign _playerEnergySystem = null;
-
-    private TestPlayer _testPlayer;
+    private Level _playerLevelSystem = null;
 
     public override void Initialize(BaseWindow window)
     {
@@ -22,45 +21,54 @@ public class HUD_PlayerInfo_Controller : BaseUIController
         var playerSubSystem = ProjectSystem.Instance.GetSubSystemByType(typeof(PlayerSubSystem)) as PlayerSubSystem;
         _playerHealthSystem = playerSubSystem.Player.Health;
         _playerEnergySystem = playerSubSystem.Player.Energy;
+        _playerLevelSystem = playerSubSystem.Player.Level;
         //Подписывается на ивенты плеера и изменяет показатели по вызову ивентов
-    }
-    private void Start()
-    {
-        TestInit();
-    }
-
-    public void TestInit()
-    {
-        _testPlayer = TestPlayer.Instance;
-        _testPlayer.OnHealthChanged += HandleOnHealthChanged;
-        _testPlayer.OnEnergyChanged += HandleOnEnergyChanged;
-        _testPlayer.OnExpChanged += HandleOnExperienceChanged;
-        _testPlayer.OnLevelChanged += HandleOnLevelChanged;
-
-        _healthBar.SetMaxValue(_testPlayer.MaxHealth);
-        _energyBar.SetMaxValue(_testPlayer.MaxEnergy);
-        _experienceBar.SetMaxValue(_testPlayer.MaxExperience);
     }
 
     public void OnEnable()
     {
+        SubscribeToEvents();
+        PrepareBars();
+    }
+
+
+    private void SubscribeToEvents()
+    {
         _playerHealthSystem.OnValueChanged += HandleOnHealthChanged;
         _playerEnergySystem.OnValueChanged += HandleOnEnergyChanged;
+        _playerLevelSystem.OnPointsChanged += HandleOnExperienceChanged;
+        _playerLevelSystem.OnLevelChanged += HandleOnLevelChanged;
+    }
+
+    private void UnsubscribeFromEvents()
+    {
+        _playerHealthSystem.OnValueChanged -= HandleOnHealthChanged;
+        _playerEnergySystem.OnValueChanged -= HandleOnEnergyChanged;
+        _playerLevelSystem.OnPointsChanged -= HandleOnExperienceChanged;
+        _playerLevelSystem.OnLevelChanged -= HandleOnLevelChanged;
+    }
+
+    
+    private void PrepareBars()
+    {
+        _healthBar.SetValue(_playerHealthSystem.NormalizedValue);
+        _energyBar.SetValue(_playerEnergySystem.NormalizedValue);
+        _experienceBar.SetValue(_playerLevelSystem.NormalizedPoints);
     }
 
     private void HandleOnHealthChanged(int value)
     {
-        _healthBar?.SetValue(value);
+        _healthBar?.SetValue(_playerHealthSystem.NormalizedValue);
     }
 
     private void HandleOnEnergyChanged(int value) 
     {
-        _energyBar?.SetValue(value);
+        _energyBar?.SetValue(_playerEnergySystem.NormalizedValue);
     }
 
     private void HandleOnExperienceChanged(int value)
     {
-        _experienceBar.SetValue(value);
+        _experienceBar.SetValue(_playerLevelSystem.NormalizedPoints);
     }
 
     private void HandleOnLevelChanged(int value)
@@ -76,7 +84,6 @@ public class HUD_PlayerInfo_Controller : BaseUIController
 
     public void OnDisable()
     {
-        _playerHealthSystem.OnValueChanged -= HandleOnHealthChanged;
-        _playerEnergySystem.OnValueChanged -= HandleOnEnergyChanged;
+        UnsubscribeFromEvents();
     }
 }

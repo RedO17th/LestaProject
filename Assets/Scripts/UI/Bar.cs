@@ -4,14 +4,15 @@ using UnityEngine.UI;
 public class Bar : BaseBar
 {
     [SerializeField] private Slider _slider;
+    [SerializeField] private float _fillerOffset = 0.0f;
 
-    public override void SetMaxValue(int value)
+    public override void Initialize()
     {
-        _slider.maxValue = value;
-        _slider.value = value;
+        _slider.maxValue += _fillerOffset;
     }
-    public override void SetValue(int value)
+
+    public override void SetValue(float value)
     {
-        _slider.value = value;
+        _slider.value = value + _fillerOffset;
     }
 }
