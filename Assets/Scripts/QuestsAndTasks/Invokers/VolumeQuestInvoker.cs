@@ -8,7 +8,7 @@ public class VolumeQuestInvoker : QuestInvoker
     [SerializeField] protected bool _isEnabled = false;
     [SerializeField] protected TriggerVolumeByPlayer _triggerVolume = null;
 
-    protected virtual void Awake()
+    protected virtual void Start()
     {
         ProcessEnable();
     }

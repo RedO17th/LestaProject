@@ -570,11 +570,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _questContainer:
-  - _questPrefab: {fileID: 7902951450737505079, guid: ab0ab56053b2ac940ada0ddb4f3c8913, type: 3}
-    _encounters:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
   - _questPrefab: {fileID: 6528779191282509331, guid: d4f15429aa321584a9b25170d6e54ede, type: 3}
     _encounters:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
     - {fileID: 0}

@@ -27,17 +27,10 @@ public class Dog : BasePlayerAssistant
         _interactionHandler.InitializeInteractionModes();
     }
 
-    private void OnEnable()
-    {
-        PrepareTriggerVolume();
-    }
-    private void OnDisable()
-    {
-        ClearTriggerVolume();
-    }
-
     protected override void Start()
     {
+        PrepareTriggerVolume();
+
         _dialogSubSystem = ProjectSystem.Instance.GetSubSystemByType(typeof(DialogSubSystem)) as DialogSubSystem;
 
         _dialogController.Initialize(_dialogSubSystem);
@@ -66,6 +59,11 @@ public class Dog : BasePlayerAssistant
     public override void Deactivate()
     {
         base.Deactivate();
+    }
+
+    private void OnDisable()
+    {
+        ClearTriggerVolume();
     }
 }
 
