@@ -49,5 +49,6 @@ public class JohnnyTheyreInTheTreesTask_2_MoveToUncle : BaseQuestTask
     protected override void Clear()
     {
         _distanationVolume = null;
+        _uncle = null;
     }
 }

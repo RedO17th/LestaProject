@@ -15,7 +15,6 @@ public class JohnnyTheyreInTheTreesTask_3_TalkWithUncleTask : BaseQuestTask
         _uncle = _quest.GetEncounterByName(_uncleEncounterName) as IDialogableEncounter;
         _uncle.SetTask(this);
         _uncle.InitializeDialog(_uncleEncounterDialogName);
-        _uncle.Hint();
 
         base.Prepare();
     }

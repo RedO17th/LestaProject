@@ -20,8 +20,8 @@ public class Uncle : NPCEncounterWithDialog
     {
         _dialogController = GetComponent<BaseDialogController>();
 
-        //_interactionHandler = new PlayerAssistantInteractionsController(this);
-        //_interactionHandler.InitializeInteractionModes();
+        _interactionHandler = new NPCEncounterInteractionsController(this);
+        _interactionHandler.InitializeInteractionModes();
     }
 
     protected override void Start()
@@ -46,8 +46,7 @@ public class Uncle : NPCEncounterWithDialog
     {
         _pointer.Disable();
 
-        //_interactionHandler.Interact();
-        _dialogController.ActivateDialog();
+        _interactionHandler.Interact();
     }
 
     public override void Deactivate()
