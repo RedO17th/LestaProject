@@ -48,4 +48,4 @@ MonoBehaviour:
   _idName: JohnnyTheyreInTheTreesTask_4_MoveToGarageCooperative
   _name: JohnnyTheyreInTheTreesTask_4_MoveToGarageCooperativeName
   _description: JohnnyTheyreInTheTreesTask_4_MoveToGarageCooperativeDesc
-  _distanationVolumeName: MoveToGarageCooperative
+  _distanationVolumeName: Volume_JohnnyTheyreInTheTreesTask_4_MoveToGarageCooperative

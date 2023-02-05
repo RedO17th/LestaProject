@@ -4,14 +4,12 @@ using UnityEngine;
 
 public class VolumeQuestInvoker : QuestInvoker
 {
-    //Флаг должен кто-то включать!!!
+    //[TODO] Transfer to BaseContextInvoker
     [SerializeField] protected bool _isEnabled = false;
     [SerializeField] protected TriggerVolumeByPlayer _triggerVolume = null;
 
-    protected virtual void Start()
-    {
-        ProcessEnable();
-    }
+    protected virtual void Start() => Activate();
+    public override void Activate() => ProcessEnable();
 
     protected virtual void ProcessEnable()
     {
@@ -24,10 +22,8 @@ public class VolumeQuestInvoker : QuestInvoker
 
     protected virtual void ProcessEnterInVolume(GamePlayer obj)
     {
-        _triggerVolume.OnEnter -= ProcessEnterInVolume;
-        _triggerVolume.Disable();
-
         Invoke();
+        Deactivate();
     }
 
     protected override void ProcessInvoke() 
@@ -37,5 +33,12 @@ public class VolumeQuestInvoker : QuestInvoker
             context.SetID(_questID);
 
         ProjectBus.Instance.SendSignalByContext(context);
+    }
+
+    protected override void Deactivate()
+    {
+        _triggerVolume.OnEnter -= ProcessEnterInVolume;
+        _triggerVolume.Disable();
+
     }
 }

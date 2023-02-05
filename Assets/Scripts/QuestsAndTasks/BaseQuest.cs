@@ -23,7 +23,7 @@ public class BaseQuest : MonoBehaviour
     protected QuestSubSystem _questSubSystem = null;
 
     protected List<BaseQuestTask> _tasks = null;
-    protected List<ITaskEncounter> _encounters = null;
+    protected List<IEncounter> _encounters = null;
 
     protected BaseQuestTask _currentTask = null;
 
@@ -32,13 +32,14 @@ public class BaseQuest : MonoBehaviour
         return _state == checkableState;
     }
 
-    public virtual void AddEncounters(List<ITaskEncounter> encounters)
+    public virtual void AddEncounters(List<IEncounter> encounters)
     {
         _encounters = encounters;
     }
-    public virtual ITaskEncounter GetEncounterByName(string name)
+
+    public virtual IEncounter GetEncounterByName(string name)
     {
-        ITaskEncounter result = null;
+        IEncounter result = null;
 
         foreach (var encounter in _encounters)
         {

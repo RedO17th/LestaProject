@@ -2,8 +2,6 @@
 
 public class SimpleEncounter : BaseEncounter, IInteractable
 {
-    [SerializeField] protected string _name = string.Empty;
-
     [SerializeField] protected BasePointer _pointer = null;
     [SerializeField] protected TriggerVolumeByPlayer _triggerVolume;
 

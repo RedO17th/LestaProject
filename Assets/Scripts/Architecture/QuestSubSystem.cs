@@ -56,7 +56,7 @@ public class QuestSubSystem : BaseSubSystem
         {
             var quest = CreateQuest(container);
 
-                quest.AddEncounters(container.GetEncouners());
+                quest.AddEncounters(container.GetEncounters());
 
                 quest.Initialize(this);
                 quest.Prepare();
@@ -105,14 +105,14 @@ public class QuestAndEncounters
     public string QuestID => _questPrefab.IDName;
     public BaseQuest QuestPrefab => _questPrefab;
 
-    public List<ITaskEncounter> GetEncouners()
+    public List<IEncounter> GetEncounters()
     {
-        List<ITaskEncounter> result = new List<ITaskEncounter>();
+        List<IEncounter> result = new List<IEncounter>();
 
         foreach (var encounter in _encounters)
         {
             if (encounter is IEncounter e)
-                result.Add((ITaskEncounter)e);
+                result.Add(e);
         }
 
         return result;

@@ -13,7 +13,7 @@ public class JohnnyTheyreInTheTreesTask_2_MoveToUncle : BaseQuestTask
 
     public override void Prepare()
     {
-        _distanationVolume = _quest.GetEncounterByName(_distanationVolumeName);
+        _distanationVolume = _quest.GetEncounterByName(_distanationVolumeName) as ITaskEncounter;
         _distanationVolume.SetTask(this);
 
         _uncle = _quest.GetEncounterByName(_uncleEncounterName) as IHintableEncounter;
@@ -32,7 +32,7 @@ public class JohnnyTheyreInTheTreesTask_2_MoveToUncle : BaseQuestTask
 
     protected override void Complete()
     {
-        Debug.Log($"JohnnyTheyreInTheTreesTask_2_MoveToUncle.Complete: { _name }");
+        Debug.Log($"JohnnyTheyreInTheTreesTask_2_MoveToUncle.Complete");
 
         base.Complete();
     }

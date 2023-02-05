@@ -2,7 +2,6 @@
 
 public class EncounterWithDialog : SimpleEncounter, IDialogableEncounter
 {
-    public string Name => _name;
     public IQuestTask Task => _task;
 
     protected IQuestTask _task = null;

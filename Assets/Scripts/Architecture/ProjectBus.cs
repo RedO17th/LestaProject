@@ -27,8 +27,6 @@ public class ProjectBus
 
     public event Action<DialogContext> OnDialogContextSignal;
 
-    public event Action<SomeContext> OnSomeContextSignal;
-
     public void SendSignalByContext(QuestContext context)
     {
         OnQuestContextSignal?.Invoke(context);
@@ -37,20 +35,30 @@ public class ProjectBus
     {
         OnTaskContextSignal?.Invoke(context);
     }
-
     public void SendSignalByContext(DialogContext context)
     {
         OnDialogContextSignal?.Invoke(context);
     }
-    public void SendSignalByContext(SomeContext context)
-    {
-        OnSomeContextSignal?.Invoke(context);
-    }
 }
 
 public abstract class SignalContext { }
-public class SomeContext : SignalContext { }
-public class DialogContext : SignalContext { }
+
+public class DialogContext : SignalContext 
+{
+    public DialogueCommand Command { get; private set; }
+    public string IDName { get; private set; }
+
+    public DialogContext() { }
+
+    public void SetCommand(DialogueCommand command)
+    {
+        Command = command;
+    }
+    public void SetID(string name)
+    {
+        IDName = name;
+    }
+}
 
 public class QuestContext : SignalContext 
 {

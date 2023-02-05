@@ -53,6 +53,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4171116248933726933, guid: 57da0b72aa7b1b34197951251c13bafc, type: 3}
       propertyPath: m_Name
+      value: Volume_JohnnyTheyreInTheTreesTask_4_MoveToGarageCooperative Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 4171116248933726939, guid: 57da0b72aa7b1b34197951251c13bafc, type: 3}
+      propertyPath: _name
       value: Volume_JohnnyTheyreInTheTreesTask_4_MoveToGarageCooperative
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -3,11 +3,8 @@ using UnityEngine;
 
 public class TaskDistanationVolume : BaseEncounter, ITaskEncounter
 {
-    [SerializeField] protected string _encounterName = string.Empty;
-
     [SerializeField] protected TriggerVolumeByPlayer _triggerVolume;
 
-    public string Name => _encounterName;
     public IQuestTask Task => _questTask;
 
     protected IQuestTask _questTask = null;

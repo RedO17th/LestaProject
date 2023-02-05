@@ -2,28 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IEncounter
+public interface IEncounter 
 {
-    //string Name { get; }
-
-    //void SetTask(IQuestTask task);
-    //void Activate();
-    //void Deactivate();
+    string Name { get; }
 }
+
 public abstract class BaseEncounter : MonoBehaviour, IEncounter
 {
-    //[SerializeField] protected string _encounterName = string.Empty;
+    [SerializeField] protected string _name = string.Empty;
 
-    //public string Name => _encounterName;
-
-    //public abstract void SetTask(IQuestTask task);
-    //public abstract void Activate();
-    //public abstract void Deactivate();
+    public string Name => _name;
 }
 
 public interface ITaskEncounter : IEncounter
 {
-    string Name { get; }
     IQuestTask Task { get; }
 
     void SetTask(IQuestTask task);
@@ -43,7 +35,6 @@ public interface IDialogableEncounter : IHintableEncounter
 
 public class Encounter : SimpleEncounter, ITaskEncounter
 {
-    public string Name => _name;
     public IQuestTask Task => _task;
 
     protected IQuestTask _task = null;

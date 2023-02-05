@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _state: 0
-  _idName: TalkwithUncleTaskID
-  _name: TalkwithUncleTaskName
-  _description: TalkwithUncleTaskDescription
+  _idName: JohnnyTheyreInTheTreesTask_3_TalkWithUncle
+  _name: JohnnyTheyreInTheTreesTask_3_TalkWithUncleName
+  _description: JohnnyTheyreInTheTreesTask_3_TalkWithUncleDescription
   _uncleEncounterName: Uncle
   _uncleEncounterDialogName: project_E_scene2

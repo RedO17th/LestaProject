@@ -16,6 +16,8 @@ public class DialogSubSystem : BaseSubSystem
     private CharactersContainer _charactersData = null;
     private DialogueDataContainer _dialogueData = null;
 
+    private DialogContext _currentContext = null;
+
     public override void Initialize(ProjectSystem system) => base.Initialize(system);
 
     public BaseDialogue GetDialogueByName(string name)
@@ -33,6 +35,37 @@ public class DialogSubSystem : BaseSubSystem
         
         _charactersData = settingsSystem?.GetDataContainerByType(typeof(CharactersContainer)) as CharactersContainer;
         _dialogueData = settingsSystem?.GetDataContainerByType(typeof(DialogueDataContainer)) as DialogueDataContainer;
+
+        ProjectBus.Instance.OnDialogContextSignal += ProcessSignal;
+    }
+
+    public override void StartSystem() { }
+
+    private void ProcessSignal(DialogContext context)
+    {
+        _currentContext = context;
+
+        ProcessContext();
+    }
+    private void ProcessContext()
+    {
+        switch (_currentContext.Command)
+        {
+            case DialogueCommand.None:
+                break;
+            case DialogueCommand.Activate:
+                {
+                    ActivateDialogue();
+                    break;
+                }
+        }
+    }
+
+    private void ActivateDialogue()
+    {
+        var dialogue = GetDialogueByName(_currentContext.IDName);
+
+        StartNewDialog(dialogue);
     }
 
     public void StartNewDialog(BaseDialogue newStory)
@@ -117,9 +150,8 @@ public class DialogSubSystem : BaseSubSystem
         }
     }
 
-    public override void StartSystem() { }
-
     public override void Clear()
     {
+        ProjectBus.Instance.OnDialogContextSignal -= ProcessSignal;
     }
 }
