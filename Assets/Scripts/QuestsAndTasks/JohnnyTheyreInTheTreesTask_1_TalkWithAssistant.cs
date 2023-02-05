@@ -41,3 +41,4 @@ public class JohnnyTheyreInTheTreesTask_1_TalkWithAssistant : BaseQuestTask
         _dog = null;
     }
 }
+ 

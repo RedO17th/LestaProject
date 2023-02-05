@@ -74,6 +74,8 @@ public class BaseQuestTask : MonoBehaviour, IQuestTask
     }
     protected virtual void Complete()
     {
+        _context = null;
+
         _state = TaskState.Completed;
 
         OnCompleted?.Invoke();

@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _state: 0
-  _idName: MoveTo
-  _name: MoveToEncounterName
-  _description: MoveToEncounterDescription
+  _idName: JohnnyTheyreInTheTreesTask_2_MoveToUncle
+  _name: JohnnyTheyreInTheTreesTask_2_MoveToUncleName
+  _description: JohnnyTheyreInTheTreesTask_2_MoveToUncleDescription
   _uncleEncounterName: Uncle
   _distanationVolumeName: Volume_JohnnyTheyreInTheTreesTask_2_MoveToUncle

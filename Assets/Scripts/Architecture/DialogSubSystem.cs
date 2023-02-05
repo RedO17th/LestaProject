@@ -119,9 +119,17 @@ public class DialogSubSystem : BaseSubSystem
 
         if (string.IsNullOrWhiteSpace(nameQuest) == false)
         {
-            //TODO: real activating quest
-            Debug.Log($"Активирован квест: {nameQuest}");
+            CreateAndSendQuestContext(nameQuest);
         }
+    }
+
+    private void CreateAndSendQuestContext(string nameQuest)
+    {
+        var context = new QuestContext();
+            context.SetCommand(QuestCommand.Activate);
+            context.SetID(nameQuest);
+
+        ProjectBus.Instance.SendSignalByContext(context);
     }
 
     public void AddNoteToJournal(string tag)

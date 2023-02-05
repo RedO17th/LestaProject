@@ -12,8 +12,6 @@ public class JohnnyTheyreInTheTreesTask_5_TalkWithAssistant : BaseQuestTask
     public override void Prepare()
     {
         _dialogueInvokerVolume = _quest.GetInvokerEncounterByName(_dialogueInvokerVolumeName) as IContextInvoker;
-
-        base.Prepare();
     }
 
     public override void Activate()
@@ -21,6 +19,17 @@ public class JohnnyTheyreInTheTreesTask_5_TalkWithAssistant : BaseQuestTask
         _dialogueInvokerVolume.Activate();
 
         base.Activate();
+
+        PerformForcedTermination();
+    }
+
+    private void PerformForcedTermination()
+    {
+        _context = new TaskContext();
+        _context.SetCommand(TaskCommand.Complete);
+        _context.SetID(_idName);
+
+        ProcessCommandFromSignal();
     }
 
     protected override void Complete()
@@ -32,8 +41,6 @@ public class JohnnyTheyreInTheTreesTask_5_TalkWithAssistant : BaseQuestTask
 
     public override void Dectivate()
     {
-        base.Dectivate();
-
         Clear();
     }
 

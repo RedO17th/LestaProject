@@ -111,8 +111,6 @@ public class BaseQuest : MonoBehaviour
 
     public virtual void Prepare()
     {
-        Debug.Log($"BaseQuest.Prepare");
-
         CreateTasks();
         InitializeTasks();
     }
@@ -139,7 +137,7 @@ public class BaseQuest : MonoBehaviour
 
     public virtual void Activate()
     {
-        Debug.Log($"BaseQuest.Activate");
+        Debug.Log($"BaseQuest.Activate: Quest name is { _idName } ");
         StartTaskExecution();
     }
 

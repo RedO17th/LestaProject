@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _state: 0
-  _idName: TalkWithDog
-  _name: TalkWithDogName
-  _description: TalkWithDogDescription
+  _idName: JohnnyTheyreInTheTreesTask_1_TalkWithAssistant
+  _name: JohnnyTheyreInTheTreesTask_1_TalkWithAssistantName
+  _description: JohnnyTheyreInTheTreesTask_1_TalkWithAssistantDescription
   _dogEncounterName: Dog
   _dogEncounterDialogName: project E scene1

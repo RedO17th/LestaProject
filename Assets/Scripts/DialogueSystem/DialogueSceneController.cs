@@ -117,8 +117,6 @@ public class DialogueSceneController : MonoBehaviour
             {
                 AddDebuf(tag);
             }
-
-            //_currentDialogue.ProcessCommandViaTag(tag);
         }
     }
 

@@ -4,7 +4,7 @@ VAR CheckResultStr = ""
 -> scene_3
 
 == scene_3 ==
-*[Нужно вызвать подмогу!]#Speaker.Tisha
+*[Нужно вызвать подмогу!]#Speaker.Tisha 
     -> scene_3_block_1
 *[Мухтар, доложи обстановку!] #Speaker.Tisha #CheckSkill.Alertness.10
     -> scene_3_block_2
