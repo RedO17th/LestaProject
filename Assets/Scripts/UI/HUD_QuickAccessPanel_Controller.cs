@@ -19,16 +19,14 @@ public enum QuickAccessButtonID
 
 public class HUD_QuickAccessPanel_Controller : BaseUIController
 {
-    private HUD_QuickAccess_Button[] _consumablesButtons = null;
-    private HUD_QuickAccess_Button[] _skillsButtons = null;
+    private BaseButton[] _consumablesButtons = null;
+    private BaseButton[] _skillsButtons = null;
 
     public event Action<QuickAccessButtonID> OnConsumableCalled = null;
     public event Action<QuickAccessButtonID> OnSkillCalled = null;
-
-    public override void Initialize(BaseWindow window)
+    
+    public void Awake()
     {
-        base.Initialize(window);
-
         InitializeConsumablesButtons();
 
         InitializeSkillsButtons();
@@ -44,7 +42,7 @@ public class HUD_QuickAccessPanel_Controller : BaseUIController
     {
         for (int i = 0; i < _consumablesButtons.Length; i++)
         {
-            _consumablesButtons[i].Initialize(QAConsumableClickListener, (QuickAccessButtonID)i);
+            //_consumablesButtons[i].Initialize(QAConsumableClickListener, (QuickAccessButtonID)i);
         }
     }
 
@@ -53,7 +51,7 @@ public class HUD_QuickAccessPanel_Controller : BaseUIController
     {
         for (int i = 0; i < _skillsButtons.Length; i++)
         {
-            _skillsButtons[i].Initialize(QASkillClickListener, (QuickAccessButtonID)i);
+            //_skillsButtons[i].Initialize(QASkillClickListener, (QuickAccessButtonID)i);
         }
     }
 

@@ -51,8 +51,8 @@ public class Tooltip : MonoBehaviour
 
     public void Locate(Vector2 position)
     {
-        float pivotX = position.x / Screen.width;
-        float pivotY = position.y / Screen.height;
+        float pivotX = position.x / UnityEngine.Screen.width;
+        float pivotY = position.y / UnityEngine.Screen.height;
 
         _rectTransform.pivot = new Vector2(pivotX, pivotY);
         transform.position = position;
