@@ -23,7 +23,10 @@ public class BaseQuest : MonoBehaviour
     protected QuestSubSystem _questSubSystem = null;
 
     protected List<BaseQuestTask> _tasks = null;
-    protected List<IEncounter> _encounters = null;
+
+    protected List<IEncounter> _npcEncounters = null;
+    protected List<IEncounter> _volumesEncounters = null;
+    protected List<IEncounter> _invokerEncounter = null;
 
     protected BaseQuestTask _currentTask = null;
 
@@ -32,16 +35,30 @@ public class BaseQuest : MonoBehaviour
         return _state == checkableState;
     }
 
-    public virtual void AddEncounters(List<IEncounter> encounters)
+    #region Add encounters
+
+    public virtual void AddNpcEncounters(List<IEncounter> encounters)
     {
-        _encounters = encounters;
+        _npcEncounters = encounters;
+    }
+    public virtual void AddVolumeEncounters(List<IEncounter> encounters)
+    {
+        _volumesEncounters = encounters;
+    }
+    public virtual void AddInvokerEncounters(List<IEncounter> encounters)
+    {
+        _invokerEncounter = encounters;
     }
 
-    public virtual IEncounter GetEncounterByName(string name)
+    #endregion
+
+    #region Get encounters
+
+    public virtual IEncounter GetNpcEncounterByName(string name)
     {
         IEncounter result = null;
 
-        foreach (var encounter in _encounters)
+        foreach (var encounter in _npcEncounters)
         {
             if (encounter.Name == name)
             {
@@ -52,6 +69,40 @@ public class BaseQuest : MonoBehaviour
 
         return result;
     }
+
+    public virtual IEncounter GetVolumeEncounterByName(string name)
+    {
+        IEncounter result = null;
+
+        foreach (var encounter in _volumesEncounters)
+        {
+            if (encounter.Name == name)
+            {
+                result = encounter;
+                break;
+            }
+        }
+
+        return result;
+    }
+
+    public virtual IEncounter GetInvokerEncounterByName(string name)
+    {
+        IEncounter result = null;
+
+        foreach (var encounter in _invokerEncounter)
+        {
+            if (encounter.Name == name)
+            {
+                result = encounter;
+                break;
+            }
+        }
+
+        return result;
+    }
+
+    #endregion
 
     public virtual void Initialize(QuestSubSystem system)
     {

@@ -12,7 +12,7 @@ public class JohnnyTheyreInTheTreesTask_3_TalkWithUncleTask : BaseQuestTask
 
     public override void Prepare()
     {
-        _uncle = _quest.GetEncounterByName(_uncleEncounterName) as IDialogableEncounter;
+        _uncle = _quest.GetNpcEncounterByName(_uncleEncounterName) as IDialogableEncounter;
         _uncle.SetTask(this);
         _uncle.InitializeDialog(_uncleEncounterDialogName);
 
@@ -23,7 +23,7 @@ public class JohnnyTheyreInTheTreesTask_3_TalkWithUncleTask : BaseQuestTask
 
     protected override void Complete()
     {
-        Debug.Log($"JohnnyTheyreInTheTreesTask_3_TalkWithUncleTask.Complete: {_name}");
+        Debug.Log($"JohnnyTheyreInTheTreesTask_3_TalkWithUncleTask.Complete");
 
         base.Complete();
     }

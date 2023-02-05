@@ -56,7 +56,9 @@ public class QuestSubSystem : BaseSubSystem
         {
             var quest = CreateQuest(container);
 
-                quest.AddEncounters(container.GetEncounters());
+                quest.AddNpcEncounters(container.GetEncounters());
+                quest.AddVolumeEncounters(container.GetVolumeEncounters());
+                quest.AddInvokerEncounters(container.GetInvokerEncounters());
 
                 quest.Initialize(this);
                 quest.Prepare();
@@ -100,7 +102,9 @@ public class QuestSubSystem : BaseSubSystem
 public class QuestAndEncounters
 {
     [SerializeField] private BaseQuest _questPrefab;
-    [SerializeField] private List<BaseEncounter> _encounters;
+    [SerializeField] private List<BaseEncounter> _npcEncounters;
+    [SerializeField] private List<BaseVolumeEncounter> _volumeEncounters;
+    [SerializeField] private List<BaseContextInvoker> _invokerEncounters;
 
     public string QuestID => _questPrefab.IDName;
     public BaseQuest QuestPrefab => _questPrefab;
@@ -109,11 +113,28 @@ public class QuestAndEncounters
     {
         List<IEncounter> result = new List<IEncounter>();
 
-        foreach (var encounter in _encounters)
-        {
-            if (encounter is IEncounter e)
-                result.Add(e);
-        }
+        foreach (var encounter in _npcEncounters)
+            result.Add(encounter);
+
+        return result;
+    }
+
+    public List<IEncounter> GetVolumeEncounters()
+    {
+        List<IEncounter> result = new List<IEncounter>();
+
+        foreach (var encounter in _volumeEncounters)
+            result.Add(encounter);
+
+        return result;
+    }
+
+    public List<IEncounter> GetInvokerEncounters()
+    {
+        List<IEncounter> result = new List<IEncounter>();
+
+        foreach (var encounter in _invokerEncounters)
+            result.Add(encounter);
 
         return result;
     }

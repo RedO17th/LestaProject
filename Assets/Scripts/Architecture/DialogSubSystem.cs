@@ -3,10 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//[Note] ≈сли вынести инициализацию "диалоговых энкаунтеров" в данную подсистему,
-//как функционал, то уже она будет решать, есть ли эти самые
-//сущности внутри определенного quest'a и выполн€ть определенную логику
-
 public class DialogSubSystem : BaseSubSystem
 {
     [SerializeField] private DialogueSceneController _dialogueController;

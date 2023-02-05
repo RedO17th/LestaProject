@@ -571,8 +571,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _questContainer:
   - _questPrefab: {fileID: 6528779191282509331, guid: d4f15429aa321584a9b25170d6e54ede, type: 3}
-    _encounters:
+    _npcEncounters:
     - {fileID: 0}
     - {fileID: 0}
+    _volumeEncounters:
     - {fileID: 0}
+    - {fileID: 0}
+    _invokerEncounters:
     - {fileID: 0}

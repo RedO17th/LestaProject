@@ -12,7 +12,7 @@ public class JohnnyTheyreInTheTreesTask_1_TalkWithAssistant : BaseQuestTask
 
     public override void Prepare()
     {
-        _dog = _quest.GetEncounterByName(_dogEncounterName) as BasePlayerAssistant;
+        _dog = _quest.GetNpcEncounterByName(_dogEncounterName) as BasePlayerAssistant;
         _dog.SetTask(this);
         _dog.InitializeDialog(_dogEncounterDialogName);
         _dog.Hint();
@@ -24,7 +24,7 @@ public class JohnnyTheyreInTheTreesTask_1_TalkWithAssistant : BaseQuestTask
 
     protected override void Complete()
     {
-        Debug.Log($"JohnnyTheyreInTheTreesTask_1_TalkWithAssistant.Complete: {_name}");
+        Debug.Log($"JohnnyTheyreInTheTreesTask_1_TalkWithAssistant.Complete");
     
         base.Complete();
     }

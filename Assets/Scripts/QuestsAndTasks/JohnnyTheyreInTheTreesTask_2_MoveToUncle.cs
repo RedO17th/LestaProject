@@ -9,14 +9,14 @@ public class JohnnyTheyreInTheTreesTask_2_MoveToUncle : BaseQuestTask
     [SerializeField] protected string _distanationVolumeName = string.Empty;
 
     private IHintableEncounter _uncle = null;
-    private ITaskEncounter _distanationVolume = null;
+    private IVolumeEncounter _distanationVolume = null;
 
     public override void Prepare()
     {
-        _distanationVolume = _quest.GetEncounterByName(_distanationVolumeName) as ITaskEncounter;
+        _distanationVolume = _quest.GetVolumeEncounterByName(_distanationVolumeName) as IVolumeEncounter;
         _distanationVolume.SetTask(this);
 
-        _uncle = _quest.GetEncounterByName(_uncleEncounterName) as IHintableEncounter;
+        _uncle = _quest.GetNpcEncounterByName(_uncleEncounterName) as IHintableEncounter;
         _uncle.Hint();
 
         base.Prepare();

@@ -2,8 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class BaseContextInvoker : BaseEncounter
+public interface IContextInvoker : IEncounter
 {
+    void Activate();
+}
+
+public abstract class BaseContextInvoker : MonoBehaviour, IContextInvoker
+{
+    [SerializeField] protected string _name = string.Empty;
+
+    public string Name => _name;
+
     public virtual void Activate() { }
 
     protected virtual void Invoke() => ProcessInvoke();

@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IEncounter 
+public interface INamable
 {
     string Name { get; }
 }
+
+public interface IEncounter : INamable { }
 
 public abstract class BaseEncounter : MonoBehaviour, IEncounter
 {
@@ -14,11 +16,14 @@ public abstract class BaseEncounter : MonoBehaviour, IEncounter
     public string Name => _name;
 }
 
-public interface ITaskEncounter : IEncounter
+public interface ITaskable
+{
+    void SetTask(IQuestTask task);
+}
+
+public interface ITaskEncounter : IEncounter, ITaskable
 {
     IQuestTask Task { get; }
-
-    void SetTask(IQuestTask task);
 
     void Activate();
     void Deactivate();

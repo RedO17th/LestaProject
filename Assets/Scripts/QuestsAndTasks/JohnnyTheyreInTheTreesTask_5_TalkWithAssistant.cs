@@ -7,11 +7,11 @@ public class JohnnyTheyreInTheTreesTask_5_TalkWithAssistant : BaseQuestTask
     [Header("Encounter names")]
     [SerializeField] protected string _dialogueInvokerVolumeName = string.Empty;
 
-    private BaseContextInvoker _dialogueInvokerVolume = null;
+    private IContextInvoker _dialogueInvokerVolume = null;
 
     public override void Prepare()
     {
-        _dialogueInvokerVolume = _quest.GetEncounterByName(_dialogueInvokerVolumeName) as BaseContextInvoker;
+        _dialogueInvokerVolume = _quest.GetInvokerEncounterByName(_dialogueInvokerVolumeName) as IContextInvoker;
 
         base.Prepare();
     }

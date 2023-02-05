@@ -7,11 +7,11 @@ public class JohnnyTheyreInTheTreesTask_4_MoveToGarageCooperative : BaseQuestTas
     [Header("Encounter names")]
     [SerializeField] protected string _distanationVolumeName = string.Empty;
 
-    private ITaskEncounter _distanationVolume = null;
+    private IVolumeEncounter _distanationVolume = null;
 
     public override void Prepare()
     {
-        _distanationVolume = _quest.GetEncounterByName(_distanationVolumeName) as ITaskEncounter;
+        _distanationVolume = _quest.GetVolumeEncounterByName(_distanationVolumeName) as IVolumeEncounter;
         _distanationVolume.SetTask(this);
 
         base.Prepare();
@@ -26,7 +26,7 @@ public class JohnnyTheyreInTheTreesTask_4_MoveToGarageCooperative : BaseQuestTas
 
     protected override void Complete()
     {
-        Debug.Log($"JohnnyTheyreInTheTreesTask_3_TalkWithUncleTask.Complete: {_name}");
+        Debug.Log($"JohnnyTheyreInTheTreesTask_4_MoveToGarageCooperative.Complete");
 
         base.Complete();
     }
