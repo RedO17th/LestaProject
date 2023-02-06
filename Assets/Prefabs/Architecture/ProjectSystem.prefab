@@ -580,6 +580,12 @@ MonoBehaviour:
     _invokerEncounters:
     - {fileID: 0}
   - _questPrefab: {fileID: 4963157389322867785, guid: 053b04300fbc0d548895701a04ba0c0e, type: 3}
-    _npcEncounters: []
+    _npcEncounters:
+    - {fileID: 0}
     _volumeEncounters: []
     _invokerEncounters: []
+  - _questPrefab: {fileID: 8876499499370373682, guid: 97591ab76424a5d45ad3e88038181ad4, type: 3}
+    _npcEncounters: []
+    _volumeEncounters: []
+    _invokerEncounters:
+    - {fileID: 0}
