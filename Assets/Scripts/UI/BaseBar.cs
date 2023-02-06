@@ -1,8 +1,12 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class BaseBar : MonoBehaviour
 {
-    public abstract void SetMaxValue(int value);
-    public abstract void SetValue(int value);
+    [SerializeField] protected Slider _slider;
+
+    public abstract void SetValue(float value);
+
+    public abstract void Initialize();
 }
 

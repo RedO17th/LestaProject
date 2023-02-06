@@ -6,6 +6,7 @@ public abstract class BaseVitalSign
     public event Action<int> OnValueChanged;
     public int MinValue => _minValue;
     public int MaxValue => _maxValue;
+    public float NormalizedValue => (float)_currentValue / _maxValue;
 
     private const int _minValue = 0;
     private int _maxValue = 0;
@@ -35,4 +36,7 @@ public abstract class BaseVitalSign
         _maxValue = maxValue;
         _currentValue = maxValue;
     }
+
+    
+ 
 }

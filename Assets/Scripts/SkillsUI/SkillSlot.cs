@@ -84,8 +84,8 @@ public class SkillSlot : MonoBehaviour
 
     public void ActivateSkill()
     {
-        if (!TestPlayer.Instance.SkillPoints.TryToRemoveSkillPoint())
-            return;
+        //if (!TestPlayer.Instance.SkillPoints.TryToRemoveSkillPoint())
+            //return;
 
         _skill.Activate();
 
