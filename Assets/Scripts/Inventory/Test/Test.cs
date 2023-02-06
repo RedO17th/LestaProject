@@ -59,45 +59,46 @@ public class Test : MonoBehaviour
 
     public void SelectItem(int value)
     {
+        ItemsFactory factory = new ItemsFactory();
         if (value == 0)
         {
-            _selectedItem = new UsableItem(_appleInfo);
+            _selectedItem = factory.SpawnItem(_appleInfo);
         }
         if (value == 1)
         {
-            _selectedItem = new UsableItem(_breadInfo);
+            _selectedItem = factory.SpawnItem(_breadInfo);
         }
         if(value == 2)
         {
-            _selectedItem = new Equipment(_glovesInfo);
+            _selectedItem = factory.SpawnItem(_glovesInfo);
         }
         if(value == 3)
         {
-            _selectedItem = new Equipment(_helmetInfo);
+            _selectedItem = factory.SpawnItem(_helmetInfo);
         }
         if (value == 4)
         {
-            _selectedItem = new QuestItem(_doorkeyInfo);
+            _selectedItem = factory.SpawnItem(_doorkeyInfo);
         }
         if (value == 5)
         {
-            _selectedItem = new QuestItem(_goldenKeyInfo);
+            _selectedItem = factory.SpawnItem(_goldenKeyInfo);
         }
         if (value == 6)
         {
-            _selectedItem = new Equipment(_glovesInfo2);
+            _selectedItem = factory.SpawnItem(_glovesInfo2);
         }
         if (value == 7)
         {
-            _selectedItem = new Equipment(_helmetInfo2);
+            _selectedItem = factory.SpawnItem(_helmetInfo2);
         }
         if (value == 8)
         {
-            _selectedItem = new Weapon(_makaroffInfo);
+            _selectedItem = factory.SpawnItem(_makaroffInfo);
         }
         if(value == 9)
         {
-            _selectedItem = new Ammo(_bullets);
+            _selectedItem = factory.SpawnItem(_bullets);
         }
     }
 

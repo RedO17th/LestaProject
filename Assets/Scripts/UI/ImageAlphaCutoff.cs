@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ButtonClickMask : MonoBehaviour
+public class ImageAlphaCutoff : MonoBehaviour
 {
     [Range(0f, 1f)]
     [SerializeField] public float AlphaLevel = 1f;

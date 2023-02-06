@@ -4,15 +4,14 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class MovementController : BasePlayerContoller
 {
     [SerializeField] private BaseMovementMechanic[] _movementMechanics = null;
     [SerializeField] private NavMeshAgent _navMeshAgent = null;
 
-    [Range(5f, 50f)]
-    [SerializeField] private float _speedRotation = 5f;
+    //[Range(5f, 50f)]
+    //[SerializeField] private float _speedRotation = 5f;
 
     public NavMeshAgent NavMeshAgent => _navMeshAgent;
     public PlayerDataContainer PlayerData => _playerData;

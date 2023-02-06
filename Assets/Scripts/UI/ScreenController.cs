@@ -14,10 +14,4 @@ public class ScreenController : MonoBehaviour
                 screen.SetActive(false);
         }
     }
-
-
-
-
-
-
 }
