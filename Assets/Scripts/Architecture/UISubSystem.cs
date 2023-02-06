@@ -20,32 +20,24 @@ public class UISubSystem : BaseSubSystem
     [SerializeField] private Screen _tooltipScreen = null;
 
     private List<Screen> _modalScreens = null;
-
-    private List<Screen> _PlayerMenuScreensOrder = null;
     
     public override void Initialize(ProjectSystem system)
     {
         base.Initialize(system);
 
         InitializeModalScreens();
-
-        InitializePlayerMenuScreensOrder();
     }
 
     public void Awake()
     {
-        EventSystem.OnClipboardScreenCalled += HandleOnClipboardScreenCalled;
-        EventSystem.OnInventoryScreenCalled += HandleOnInventoryScreenCalled;
-        EventSystem.OnAbilitiesScreenCalled += HandleOnAbilitiesScreenCalled;
+        EventSystem.OnScreenCalled += HandleOnScreenCalled;
         
-        EventSystem.OnPlayerMenuExit += HandleOnPlayerMenuExit;
-
-        
+        EventSystem.OnPlayerMenuExit += HandleOnPlayerMenuExit;  
     }
 
     public void Start()
     {
-        ShowScreen(_HUDScreen);
+        ShowScreen(_HUDScreen.ScreenID);
     }
 
     private void InitializeModalScreens()
@@ -58,55 +50,30 @@ public class UISubSystem : BaseSubSystem
         if (_dialogScreen != null) _modalScreens.Add(_dialogScreen);
     }
 
-    private void InitializePlayerMenuScreensOrder()
-    {
-        _PlayerMenuScreensOrder = new List<Screen>();
-        if (_clipboardScreen != null) _PlayerMenuScreensOrder.Add(_clipboardScreen);
-        if (_inventoryScreen != null) _PlayerMenuScreensOrder.Add(_inventoryScreen);
-        if (_abilitiesScreen != null) _PlayerMenuScreensOrder.Add(_abilitiesScreen);
-    }
-
-    private void ShowScreen(Screen screen)
+    private void ShowScreen(string screenID)
     {
         foreach (Screen s in _modalScreens)
         {
-            if (s == screen)
+            if (s.ScreenID == screenID)
                 s.ShowScreen();
             else
                 s.HideScreen();
         }
     }
 
-    public void HandleOnClipboardScreenCalled()
+    public void HandleOnScreenCalled(string screenID)
     {
-        ShowScreen(_clipboardScreen);
-    }
-
-    public void HandleOnInventoryScreenCalled()
-    {
-        ShowScreen(_inventoryScreen);
-    }
-
-    public void HandleOnAbilitiesScreenCalled()
-    {
-        ShowScreen(_abilitiesScreen);
-    }
-
-    public void HandleOnPauseMenuScreenCalled()
-    {
-        ShowScreen(_pauseMenuScreen);
+        ShowScreen(screenID);
     }
 
     public void HandleOnPlayerMenuExit()
     {
-        ShowScreen(_HUDScreen);
+        ShowScreen(_HUDScreen.ScreenID);
     }
 
     public void Destroy()
     {
-        EventSystem.OnClipboardScreenCalled -= HandleOnClipboardScreenCalled;
-        EventSystem.OnInventoryScreenCalled -= HandleOnInventoryScreenCalled;
-        EventSystem.OnAbilitiesScreenCalled -= HandleOnAbilitiesScreenCalled;
+        EventSystem.OnScreenCalled -= HandleOnScreenCalled;
 
         EventSystem.OnPlayerMenuExit -= HandleOnPlayerMenuExit;
     }

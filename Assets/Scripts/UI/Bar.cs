@@ -3,7 +3,6 @@ using UnityEngine.UI;
 
 public class Bar : BaseBar
 {
-    [SerializeField] private Slider _slider;
     [SerializeField] private float _fillerOffset = 0.0f;
 
     public override void Initialize()

@@ -24,13 +24,13 @@ public class HUDARButtonUIController : BaseUIController
 
     private void InitializeButton()
     {
-        _ARButton?.Initialize(OnARButtonClicked);
+        _ARButton?.Subscribe(OnARButtonClicked);
         _DisabledImage.gameObject.SetActive(true);
         _EnabledImage.gameObject.SetActive(false);
     }
 
 
-    private void OnARButtonClicked()
+    private void OnARButtonClicked(BaseButton sender)
     {
         if (isARButtonActive)
         {
