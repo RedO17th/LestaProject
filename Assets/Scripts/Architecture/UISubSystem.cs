@@ -1,10 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
-
-/*
- * По сути, всё, что делает подсистема - может выполнять некий UIManager
- * Понятия не имею за что эти системы должны быть ответственны в принципе.
- */
+using System;
 
 public class UISubSystem : BaseSubSystem
 {
@@ -12,69 +8,108 @@ public class UISubSystem : BaseSubSystem
     [SerializeField] private Screen _HUDScreen = null;
     [SerializeField] private Screen _inventoryScreen = null;
     [SerializeField] private Screen _clipboardScreen = null;
-    [SerializeField] private Screen _abilitiesScreen = null;
+    [SerializeField] private Screen _skillsScreen = null;
     [SerializeField] private Screen _pauseMenuScreen = null;
-    
     [SerializeField] private Screen _dialogScreen = null;
-    
-    [SerializeField] private Screen _tooltipScreen = null;
+    [SerializeField] private Screen _settingsScreen = null;
+    private List<Screen> _screens = null;
 
-    private List<Screen> _modalScreens = null;
-    
+    private bool _isInMenu = false;
+    public bool IsInMenu => _isInMenu;
+
     public override void Initialize(ProjectSystem system)
     {
         base.Initialize(system);
 
-        InitializeModalScreens();
+        InitializeScreens(); 
     }
 
-    public void Awake()
+    public void OnEnable()
     {
-        EventSystem.OnScreenCalled += HandleOnScreenCalled;
-        
-        EventSystem.OnPlayerMenuExit += HandleOnPlayerMenuExit;  
+        EventSystem.UIEvents.OnScreenCalled += ShowScreen;
+
+        EventSystem.UIEvents.OnPauseMenuCalled += HandleOnPauseMenuCalled;
+
+        EventSystem.UIEvents.OnPlayerMenuExit += HandleOnPlayerMenuExit;
     }
 
     public void Start()
     {
-        ShowScreen(_HUDScreen.ScreenID);
+        _isInMenu = false;
+        ShowScreen(_HUDScreen.ID);
     }
 
-    private void InitializeModalScreens()
+    void Update()
     {
-        _modalScreens = new List<Screen>();
-        if (_HUDScreen != null) _modalScreens.Add(_HUDScreen);
-        if (_inventoryScreen != null) _modalScreens.Add(_inventoryScreen);
-        if (_clipboardScreen != null) _modalScreens.Add(_clipboardScreen);
-        if (_abilitiesScreen != null) _modalScreens.Add(_abilitiesScreen);
-        if (_dialogScreen != null) _modalScreens.Add(_dialogScreen);
-    }
-
-    private void ShowScreen(string screenID)
-    {
-        foreach (Screen s in _modalScreens)
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (s.ScreenID == screenID)
+            if (_isInMenu)
+            {
+                Debug.Log("InvokeOnPlayerMenuExit");
+                EventSystem.UIEvents.InvokeOnPlayerMenuExit();
+            }
+            else
+            {
+                Debug.Log("InvokeOnPauseMenuCalled");
+                EventSystem.UIEvents.InvokeOnPauseMenuCalled();
+            }
+        }
+    }
+
+    private void InitializeScreens()
+    {
+        _screens = new List<Screen>();
+        if (_HUDScreen != null) _screens.Add(_HUDScreen);
+        if (_inventoryScreen != null) _screens.Add(_inventoryScreen);
+        if (_clipboardScreen != null) _screens.Add(_clipboardScreen);
+        if (_skillsScreen != null) _screens.Add(_skillsScreen);
+        if (_dialogScreen != null) _screens.Add(_dialogScreen);
+        if (_pauseMenuScreen != null) _screens.Add(_pauseMenuScreen);
+        if (_settingsScreen != null) _screens.Add(_settingsScreen);
+    }
+
+    public void ShowScreen(ScreenID screenID)
+    {
+        if (screenID == _HUDScreen.ID && _isInMenu)
+        {
+            EventSystem.InvokeOnResumeCalled();
+            _isInMenu = false;
+        }
+        else if (screenID != _HUDScreen.ID && !_isInMenu)
+        {
+            EventSystem.InvokeOnPauseCalled();
+            _isInMenu = true;
+        }
+        
+        foreach (Screen s in _screens)
+        {
+            if (s.ID == screenID)
+            {
                 s.ShowScreen();
+            }
             else
                 s.HideScreen();
         }
     }
 
-    public void HandleOnScreenCalled(string screenID)
+    public void HandleOnPauseMenuCalled()
     {
-        ShowScreen(screenID);
+        ShowScreen(_pauseMenuScreen.ID);
+        EventSystem.InvokeOnPauseCalled();
     }
 
     public void HandleOnPlayerMenuExit()
     {
-        ShowScreen(_HUDScreen.ScreenID);
+        ShowScreen(_HUDScreen.ID);
+        EventSystem.InvokeOnResumeCalled();
     }
 
-    public void Destroy()
+    public void OnDisable()
     {
-        EventSystem.OnScreenCalled -= HandleOnScreenCalled;
+        EventSystem.UIEvents.OnScreenCalled -= ShowScreen;
 
-        EventSystem.OnPlayerMenuExit -= HandleOnPlayerMenuExit;
+        EventSystem.UIEvents.OnPauseMenuCalled -= HandleOnPauseMenuCalled;
+
+        EventSystem.UIEvents.OnPlayerMenuExit -= HandleOnPlayerMenuExit;
     }
 }

@@ -88,6 +88,22 @@ public class ProjectSystem : MonoBehaviour
         return result;
     }
 
+    public T GetSubSystem<T>() where T : BaseSubSystem
+    {
+        T system = null;
+
+        foreach (var s in _subSystems)
+        {
+            if (s is T)
+            {
+                system = s as T;
+                break;
+            }
+        }
+
+        return system;
+    }
+
     public BaseSubSystem GetSubSystemByType(Type systemType)
     {
         BaseSubSystem system = null;
