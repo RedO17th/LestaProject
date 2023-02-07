@@ -8,20 +8,24 @@ public class JournalManager : MonoBehaviour
     [SerializeField] private JournalUI _completeQuestsJournal;
     [SerializeField] private JournalUI _diaryJournal;
 
-    [SerializeField] private JournalTest JournalTest;
+    private QuestSubSystem _questSubSystem;
+    //[SerializeField] private JournalTest JournalTest;
 
     private void OnEnable()
     {
-        JournalTest.OnQuestActivate += QuestActivated;
-        JournalTest.OnQuestComplete += QuestCompleted;
-        JournalTest.OnAddNoteToDiary += AddNoteToDiary;
-        JournalTest.OnSaveJournal += SaveJournalsToGameData;
-        JournalTest.OnLoadJournals += LoadJournalsFromGameData;
+        //JournalTest.OnQuestActivate += QuestActivated;
+        //JournalTest.OnQuestComplete += QuestCompleted;
+        //JournalTest.OnAddNoteToDiary += AddNoteToDiary;
 
-        //quests.OnQuestActivate.AddListener(QuestActivated);
-        //quests.OnQuestComplete.AddListener(QuestCompleted);
+        //JournalTest.OnSaveJournal += SaveJournalsToGameData;
+        //JournalTest.OnLoadJournals += LoadJournalsFromGameData;
+    }
 
-        //OnAddNoteToDiary(AddNoteToDiary)
+    private void Start()
+    {
+        _questSubSystem = ProjectSystem.Instance.GetSubSystemByType(typeof(QuestSubSystem)) as QuestSubSystem;
+        _questSubSystem.OnQuestActivated += QuestActivated;
+        _questSubSystem.OnQuestCompleted += QuestCompleted;
     }
 
     public void QuestActivated(object sender, INote quest)

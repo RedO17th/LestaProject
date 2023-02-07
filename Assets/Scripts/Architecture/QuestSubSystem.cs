@@ -8,6 +8,9 @@ public class QuestSubSystem : BaseSubSystem
 {
     [SerializeField] private List<QuestAndEncounters> _questContainer;
 
+    public event Action<object, IQuestNote> OnQuestActivated;
+    public event Action<object, IQuestNote> OnQuestCompleted;
+
     private QuestContext _questContext = null;
 
     public override void Initialize(ProjectSystem system)
@@ -60,10 +63,18 @@ public class QuestSubSystem : BaseSubSystem
                 quest.AddVolumeEncounters(container.GetVolumeEncounters());
                 quest.AddInvokerEncounters(container.GetInvokerEncounters());
 
+                quest.OnQuestComplete += ProcessQuestComplete;
                 quest.Initialize(this);
                 quest.Prepare();
                 quest.Activate();
+            OnQuestActivated?.Invoke(this, quest);
         }
+    }
+
+    private void ProcessQuestComplete(BaseQuest baseQuest)
+    {
+        baseQuest.OnQuestComplete -= ProcessQuestComplete;
+        OnQuestCompleted?.Invoke(this, baseQuest);
     }
 
     private QuestAndEncounters GetContainerByQuestID(string name)
@@ -138,4 +149,5 @@ public class QuestAndEncounters
 
         return result;
     }
+
 }

@@ -14,6 +14,11 @@ public class PlayerInfoPanelUIController : BaseUIController
 
     public void OnEnable()
     {
+      
+    }
+
+    private void Start()
+    {
         var playerSubSystem = ProjectSystem.Instance.GetSubSystemByType(typeof(PlayerSubSystem)) as PlayerSubSystem;
         _playerHealthSystem = playerSubSystem.Player.Health;
         _playerEnergySystem = playerSubSystem.Player.Energy;

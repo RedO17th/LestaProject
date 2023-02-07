@@ -18,13 +18,13 @@ public class PauseManager : MonoBehaviour
     {
         Debug.Log("PauseManager : pause");
         _isPaused = true;
-        Time.timeScale = 0;
+        //Time.timeScale = 0;
     }
 
     private void Resume()
     {
         Debug.Log("PauseManager : resume");
         _isPaused = false;
-        Time.timeScale = 1;
+        //Time.timeScale = 1;
     }
 }

@@ -6,7 +6,7 @@ using UnityEngine;
 public enum QuestCommand { None = -1, Open, Close, Activate, Deactivate, Complete, Fail }
 public enum QuestState { None = -1, Opened, Closed, Activated, Completed, Failed }
 
-public class BaseQuest : MonoBehaviour
+public class BaseQuest : MonoBehaviour, IQuestNote
 {
     [SerializeField] protected QuestState _state = QuestState.Closed;
 
@@ -15,10 +15,21 @@ public class BaseQuest : MonoBehaviour
 
     [TextArea]
     [SerializeField] protected string _description = string.Empty;
+    [SerializeField] private Reward _reward;
 
     [SerializeField] protected List<BaseQuestTask> _taskPrefabs;
 
+    public event Action<BaseQuest> OnQuestComplete;
+
     public string IDName => _idName;
+
+    public string Id => _idName;
+
+    public string Header => _name;
+
+    public string Content => _description;
+
+    public Reward Reward => _reward;
 
     protected QuestSubSystem _questSubSystem = null;
 
@@ -215,6 +226,8 @@ public class BaseQuest : MonoBehaviour
         Debug.Log($"BaseQuest.Complete");
 
         _state = QuestState.Completed;
+
+        OnQuestComplete?.Invoke(this);
     }
 
     protected virtual void ContinueCompletingTasks() => StartTaskExecution();
