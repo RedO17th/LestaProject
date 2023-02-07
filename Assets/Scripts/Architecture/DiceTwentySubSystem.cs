@@ -44,7 +44,7 @@ public class DiceTwentySubSystem : BaseSubSystem
     #region Characteristics part
     public bool CheckByCharacteristicType(CharacterisicType characterisic, int difficult)
     {
-        return (Dice.D20(1) + GetCharacteristicModificator(characterisic)) >= difficult;
+        return (DiceRoller.D20() + GetCharacteristicModificator(characterisic)) >= difficult;
     }
     public bool CheckByCharacteristicName(string characteristicName, int difficult)
     {
@@ -72,7 +72,7 @@ public class DiceTwentySubSystem : BaseSubSystem
     #region Skills part
     public bool CheckBySkillType(SkillType skill, int difficult)
     {
-        return (Dice.D20(1) + GetSkillModificator(skill)) >= difficult;
+        return (DiceRoller.D20() + GetSkillModificator(skill)) >= difficult;
     }
     public bool CheckBySkillName(string skillName, int difficult)
     {
