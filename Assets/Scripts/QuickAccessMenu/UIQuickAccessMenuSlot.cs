@@ -28,7 +28,7 @@ public class UIQuickAccessMenuSlot : MonoBehaviour, IDropHandler, IBindableSlot
             if (_quickAccessMenuItem.Amount == 0 || _quickAccessMenuItem.Item == null)
                 return;
 
-            IUsableItem item = (IUsableItem) PlayerInventory.Instance.Inventory.GetItemByTypeID(_quickAccessMenuItem.Item.TypeID);
+            IUsableItem item = (IUsableItem) InventoryController.Instance.Inventory.GetItemByTypeID(_quickAccessMenuItem.Item.TypeID);
 
             item.Use();
         }

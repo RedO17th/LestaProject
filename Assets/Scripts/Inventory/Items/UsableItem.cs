@@ -42,6 +42,6 @@ public class UsableItem : InventoryItem, IUsableItem
             info += $"Здоровья восстановлено: {heal} ({healEffect.DisesAmount}{healEffect.Dice}+{healEffect.Bonus}).\n";
         }
         Debug.Log(info);
-        PlayerInventory.Instance.Inventory.RemoveByTypeID(this, ItemInfo.TypeId);
+        InventoryController.Instance.Inventory.RemoveByTypeID(this, ItemInfo.TypeId);
     }
 }

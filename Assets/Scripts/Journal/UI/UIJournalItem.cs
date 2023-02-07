@@ -64,7 +64,7 @@ public class UIJournalItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     private IEnumerator ShowTooltipWithDelayRoutine(string content, string header)
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSecondsRealtime(0.5f);
         //Vector2 position = Camera.current.WorldToScreenPoint(_rectTransform.position);
         Vector2 position = _rectTransform.position;
         TooltipSystem.Show(position, content, header);

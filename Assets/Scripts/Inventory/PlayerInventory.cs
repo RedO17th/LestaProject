@@ -1,4 +1,3 @@
-
 using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
@@ -16,13 +15,53 @@ public class PlayerInventory : MonoBehaviour
     public UIQuickAccessMenuSlot[] QuickAccessMenuSlots => _quickAccessMenuSlots;
 
     private static PlayerInventory _instance;
+    private int _money;
     private GameData _gameData;
+    private QuestSubSystem _questSubSystem = null;
 
     private void Awake()
     {
         _instance = this;
     }
 
+    private void Start()
+    {
+        _questSubSystem = ProjectSystem.Instance.GetSubSystemByType(typeof(QuestSubSystem)) as QuestSubSystem;
+        _questSubSystem.OnQuestCompleted += ReceiveQuestReward;
+    }
+    private void OnDisable()
+    {
+        _questSubSystem.OnQuestCompleted -= ReceiveQuestReward;
+    }
+
+    private void ReceiveQuestReward(object sender, IQuestNote quest)
+    {
+        TryChangeMoney(quest.Reward.Money);
+
+        AddItemsFromReward(quest);
+    }
+
+    private void AddItemsFromReward(IQuestNote quest)
+    {
+        ItemsFactory factory = new ItemsFactory();
+
+        foreach (var itemData in quest.Reward.Items)
+        {
+            IInventoryItem item = factory.SpawnItem(itemData.Info);
+            item.State.amount = itemData.Amount;
+
+            _inventoryUI.Inventory.TryToAdd(this, item);
+        }
+    }
+
+    public bool TryChangeMoney(int value)
+    {
+        if (_money + value < 0)
+            return false;
+
+        _money += value;
+        return true;
+    }
 
     public void SaveInventory(GameData gameData)
     {

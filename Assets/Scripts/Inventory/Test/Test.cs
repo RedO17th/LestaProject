@@ -33,7 +33,7 @@ public class Test : MonoBehaviour
         if (_selectedItem == null || _selectedAmount < 1)
             return;
 
-        PlayerInventory.Instance.Inventory.TryToAdd(this, _selectedItem);
+        InventoryController.Instance.Inventory.TryToAdd(this, _selectedItem);
     }
 
     public void RemoveItemButton()
@@ -44,7 +44,7 @@ public class Test : MonoBehaviour
             return;
 
         //PlayerInventory.Instance.inventory.Remove(this, _selectedItem.Type, _selectedAmount);
-        PlayerInventory.Instance.Inventory.RemoveByTypeID(this, _selectedItem.ItemInfo.TypeId, _selectedAmount);
+        InventoryController.Instance.Inventory.RemoveByTypeID(this, _selectedItem.ItemInfo.TypeId, _selectedAmount);
     }
 
     private void GetValuesFromUI()
@@ -107,7 +107,7 @@ public class Test : MonoBehaviour
         if (!context.started)
             return;
 
-        PlayerInventory.Instance.Save();
+        InventoryController.Instance.Save();
     }
 
     public void LoadInventory(InputAction.CallbackContext context)
@@ -115,7 +115,7 @@ public class Test : MonoBehaviour
         if (!context.started)
             return;
 
-        PlayerInventory.Instance.Load();
+        InventoryController.Instance.Load();
     }
 
     public void UseGun(InputAction.CallbackContext context)
@@ -123,7 +123,7 @@ public class Test : MonoBehaviour
         if (!context.started)
             return;
 
-        IInventoryItem[] equipment = PlayerInventory.Instance.Equipment.GetEquippedItems();
+        IInventoryItem[] equipment = InventoryController.Instance.Equipment.GetEquippedItems();
 
         foreach (var item in equipment)
         {
@@ -167,12 +167,12 @@ public class Test : MonoBehaviour
     }
     private bool UseBullet(string BulletsTypeID)
     {
-        int bulletAmountInInventory = PlayerInventory.Instance.Inventory.GetItemAmountByTypeID(BulletsTypeID);
+        int bulletAmountInInventory = InventoryController.Instance.Inventory.GetItemAmountByTypeID(BulletsTypeID);
 
         if(bulletAmountInInventory == 0)
             return false;
 
-        PlayerInventory.Instance.Inventory.RemoveByTypeID(this, BulletsTypeID);
+        InventoryController.Instance.Inventory.RemoveByTypeID(this, BulletsTypeID);
 
         return true;
     }

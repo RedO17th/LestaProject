@@ -69,7 +69,9 @@ MonoBehaviour:
     _money: 99
     _items:
     - _info: {fileID: 11400000, guid: b529486643d4b0b46b0b02a03f1043be, type: 2}
-      _amount: 3
+      _amount: 20
+    - _info: {fileID: 11400000, guid: 5ec50bf4ac40e914598ee7d659cc659d, type: 2}
+      _amount: 2
   _taskPrefabs:
   - {fileID: 5841993172956168602, guid: 9eca9f9eb5f91c6428e68fcf31bda56c, type: 3}
   - {fileID: 1428222560064803186, guid: cb7585e81e1f4b840a7b2ecea224d3d2, type: 3}

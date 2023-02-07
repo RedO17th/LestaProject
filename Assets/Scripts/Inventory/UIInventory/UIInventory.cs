@@ -5,7 +5,17 @@ public class UIInventory : MonoBehaviour
     [SerializeField] private int _inventoryCapacity = 25;
     [SerializeField] private UISlot[] _uiSlots;
 
-    public InventoryWithSlots Inventory { get; private set; }
+    private InventoryWithSlots _inventory = null; 
+
+    public InventoryWithSlots Inventory 
+    { 
+        get 
+        { 
+            if (_inventory == null) 
+                _inventory = new InventoryWithSlots(_inventoryCapacity);
+            return _inventory;
+        }
+    }
 
     private void Awake()
     {
@@ -14,12 +24,8 @@ public class UIInventory : MonoBehaviour
 
     protected virtual void Initialize()
     {
-        Inventory = new InventoryWithSlots(_inventoryCapacity);
-
         Inventory.OnInventoryStateChangedEvent += OnInventoryStateChanged;
     }
-    
-
     private void Start()
     {
         SetupInventoryUI(Inventory);

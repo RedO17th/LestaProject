@@ -24,7 +24,7 @@ public class UIQuickAccessMenuItem : MonoBehaviour, IPointerEnterHandler, IPoint
     }
     private void Start()
     {
-        PlayerInventory.Instance.Inventory.OnInventoryStateChangedEvent += OnInventoryStateChanged;
+        InventoryController.Instance.Inventory.OnInventoryStateChangedEvent += OnInventoryStateChanged;
         Refresh(); ;
     }
 
@@ -81,7 +81,7 @@ public class UIQuickAccessMenuItem : MonoBehaviour, IPointerEnterHandler, IPoint
 
     public int UpdateAmount()
     {
-        return PlayerInventory.Instance.Inventory.GetItemAmountByTypeID(Item.TypeID);
+        return InventoryController.Instance.Inventory.GetItemAmountByTypeID(Item.TypeID);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -110,7 +110,7 @@ public class UIQuickAccessMenuItem : MonoBehaviour, IPointerEnterHandler, IPoint
 
     private IEnumerator ShowTooltipWithDelayRoutine(string content, string header)
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSecondsRealtime(0.5f);
         //Vector2 position = Camera.current.WorldToScreenPoint(_rectTransform.position);
         Vector2 position = _rectTransform.position;
         TooltipSystem.Show(position, content, header);
