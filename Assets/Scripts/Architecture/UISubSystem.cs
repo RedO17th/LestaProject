@@ -24,6 +24,14 @@ public class UISubSystem : BaseSubSystem
         InitializeScreens(); 
     }
 
+    public override void StartSystem()
+    {
+        base.StartSystem();
+
+        _isInMenu = false;
+        ShowScreen(_HUDScreen.ID);
+    }
+
     public void OnEnable()
     {
         EventSystem.UIEvents.OnScreenCalled += ShowScreen;
@@ -31,12 +39,6 @@ public class UISubSystem : BaseSubSystem
         EventSystem.UIEvents.OnPauseMenuCalled += HandleOnPauseMenuCalled;
 
         EventSystem.UIEvents.OnPlayerMenuExit += HandleOnPlayerMenuExit;
-    }
-
-    public void Start()
-    {
-        _isInMenu = false;
-        ShowScreen(_HUDScreen.ID);
     }
 
     void Update()

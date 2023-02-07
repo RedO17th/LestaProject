@@ -173,7 +173,7 @@ MonoBehaviour:
   _toggle: {fileID: 6369991091509316610}
   _button: {fileID: 6702813300898318829}
   IsNew: 1
-  IsSelected: 1
+  IsSelected: 0
   IsSelectable: 1
 --- !u!1 &5231206398433276165
 GameObject:
@@ -612,8 +612,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Quest name
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 6f92890898a3c0a41aba6c70b95b871d, type: 2}
+  m_sharedMaterial: {fileID: -3934585879959017618, guid: 6f92890898a3c0a41aba6c70b95b871d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
