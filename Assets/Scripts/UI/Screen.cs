@@ -4,8 +4,6 @@ using static UISubSystem;
 
 public class Screen : MonoBehaviour
 {
-    [SerializeField] private BaseUIController[] _controllers = null;
-
     [SerializeField] private ScreenID _id = ScreenID.Default;
 
     public ScreenID ID => _id;
