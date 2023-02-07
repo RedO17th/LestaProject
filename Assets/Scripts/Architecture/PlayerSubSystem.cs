@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class PlayerSubSystem : BaseSubSystem
 {
-    [SerializeField] private BasePlayer[] _players = null;
+    [SerializeField] private BasePlayer _player = null;
+
+    public BasePlayer Player => _player;
 
     private WalletOfPoints _walletOfPoints = null;
     private CharacteristicsContainer _characteristics = null;
@@ -21,8 +23,7 @@ public class PlayerSubSystem : BaseSubSystem
 
     private void InitializePlayers()
     {
-        foreach (var player in _players)
-            player.Initialize(this);
+        _player.Initialize(this);
     }
 
     public override void Prepare()
@@ -38,6 +39,7 @@ public class PlayerSubSystem : BaseSubSystem
         return _characteristics.GetCharacteristicByType(type);
     }
     #endregion
+
 
     #region Wallet part
     [ContextMenu("TestAddPoints")]

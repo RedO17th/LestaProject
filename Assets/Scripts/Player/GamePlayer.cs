@@ -104,5 +104,7 @@ public class GamePlayer : BasePlayer
         {
             _interactable.Interact();
         }
+		
+		if (Input.GetKeyDown(KeyCode.Space)) Health.CurrentValue -= 10;
     }
 }

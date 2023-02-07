@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: d352c32df6df381488b3849f06a36fc7
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Rimma_sans
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 770745e52919017429f5b5639e09e7d6, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

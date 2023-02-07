@@ -1,10 +1,17 @@
-﻿using UnityEngine;
+﻿using System.Diagnostics.Contracts;
+using UnityEngine;
+
 
 public class BasePlayer : MonoBehaviour
 {
     protected PlayerSubSystem _playerSystem = null;
 
-    //TODO: Создать сущность Health
+    public HealthSign Health { get; } = new HealthSign(100);
+
+    public EnergySign Energy { get; } = new EnergySign(150);
+    
+    //Level - заглушка для теста
+    public Level Level { get; } = new Level();
 
     public virtual void Initialize(PlayerSubSystem system)
     {

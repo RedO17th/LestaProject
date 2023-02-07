@@ -73,6 +73,22 @@ public class ProjectSystem : MonoBehaviour
         return result;
     }
 
+    public T GetSubSystem<T>() where T : BaseSubSystem
+    {
+        T system = null;
+
+        foreach (var s in _subSystems)
+        {
+            if (s is T)
+            {
+                system = s as T;
+                break;
+            }
+        }
+
+        return system;
+    }
+
     public BaseSubSystem GetSubSystemByType(Type systemType)
     {
         BaseSubSystem system = null;
@@ -170,7 +186,7 @@ public class MenuGameState : BaseGameState
 
     public override GameStateType Tick()
     {
-        Debug.Log($"MenuGameState.Tick");
+        //Debug.Log($"MenuGameState.Tick");
 
         //Заглушка
         return GameStateType.Menu;
