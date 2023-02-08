@@ -17,7 +17,7 @@ public class DialogSubSystem : BaseSubSystem
     public static event Action OnDialogScreenCalled;
     public static event Action OnExitFromDialogScreenCalled;
 
-    public override void Initialize(ProjectSystem system) => base.Initialize(system);
+    public void Initialize(ProjectSystem system) => base.Initialize();
 
     public BaseDialogue GetDialogueByName(string name)
     {
@@ -28,9 +28,9 @@ public class DialogSubSystem : BaseSubSystem
     {
         _dialogueController.Initialize(this);
 
-        _diceTwentySubSystem = _projectSystem.GetSubSystemByType(typeof(DiceTwentySubSystem)) as DiceTwentySubSystem;
+        _diceTwentySubSystem = ProjectSystem.GetSubSystem<DiceTwentySubSystem>();
 
-        var settingsSystem = _projectSystem.GetSubSystemByType(typeof(SettingsSubSystem)) as SettingsSubSystem;
+        var settingsSystem = ProjectSystem.GetSubSystem<SettingsSubSystem>();
         
         _charactersData = settingsSystem?.GetDataContainerByType(typeof(CharactersContainer)) as CharactersContainer;
         _dialogueData = settingsSystem?.GetDataContainerByType(typeof(DialogueDataContainer)) as DialogueDataContainer;
