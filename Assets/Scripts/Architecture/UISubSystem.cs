@@ -37,6 +37,10 @@ public class UISubSystem : BaseSubSystem
         EventSystem.UIEvents.OnPauseMenuCalled += HandleOnPauseMenuCalled;
 
         EventSystem.UIEvents.OnPlayerMenuExit += HandleOnPlayerMenuExit;
+
+        EventSystem.UIEvents.OnDialogueMenuCalled += HandleOnDialogueMenuCalled;
+
+        EventSystem.UIEvents.OnExitFromDialogueMenuCalled += HandleOnExitFromDialogueMenuCalled;
     }
 
     void Update()
@@ -95,13 +99,23 @@ public class UISubSystem : BaseSubSystem
     public void HandleOnPauseMenuCalled()
     {
         ShowScreen(_pauseMenuScreen.ID);
-        EventSystem.InvokeOnPauseCalled();
+        //EventSystem.InvokeOnPauseCalled();
     }
 
     public void HandleOnPlayerMenuExit()
     {
         ShowScreen(_HUDScreen.ID);
-        EventSystem.InvokeOnResumeCalled();
+        //EventSystem.InvokeOnResumeCalled();
+    }
+
+    public void HandleOnDialogueMenuCalled()
+    {
+        ShowScreen(_dialogScreen.ID);
+    }
+
+    public void HandleOnExitFromDialogueMenuCalled()
+    {
+        ShowScreen(_HUDScreen.ID);
     }
 
     public void OnDisable()
@@ -111,5 +125,7 @@ public class UISubSystem : BaseSubSystem
         EventSystem.UIEvents.OnPauseMenuCalled -= HandleOnPauseMenuCalled;
 
         EventSystem.UIEvents.OnPlayerMenuExit -= HandleOnPlayerMenuExit;
+
+        EventSystem.UIEvents.OnDialogueMenuCalled -= HandleOnDialogueMenuCalled;
     }
 }

@@ -10,9 +10,9 @@ public class DialogueSceneController : MonoBehaviour
     [SerializeField] private GameObject _dialogueScreen = null;
 
     [Header("Speaker")]
-    [SerializeField] private Text _speaker = null;
-    [SerializeField] private Image _portrait = null;
-    [SerializeField] private Image _portraitShadow = null;
+    [SerializeField] private Text _speakerName = null;
+    [SerializeField] private Image _speakerPortrait = null;
+    [SerializeField] private Image _speakerShadow = null;
 
     [Header("Replica")]
     [SerializeField] private Text _replica = null;
@@ -25,7 +25,12 @@ public class DialogueSceneController : MonoBehaviour
     [SerializeField] private ChoiceButton _nextButton = null;
     #endregion
 
+    //Мазанов А. - Для чего нужен этот ивент?
     public static event Action<Story> OnCreateStory;
+
+    //Мазанов А.
+    public static event Action OnDialogueStart;
+    public static event Action OnDialogueEnd;
 
     private DialogSubSystem _dialogSubSystem = null;
 
@@ -45,6 +50,9 @@ public class DialogueSceneController : MonoBehaviour
     // Creates a new Story object with the compiled story which we can then play!
     public void StartStory(BaseDialogue dialogue)
     {
+        //Мазанов А.
+        OnDialogueStart?.Invoke();
+
         _currentDialogue = dialogue;
 
         _story = new Story(_currentDialogue.File.text);
@@ -56,7 +64,7 @@ public class DialogueSceneController : MonoBehaviour
 
         _nextButton.SetStory(_story);
 
-        _dialogueScreen.SetActive(true);
+        //_dialogueScreen.SetActive(true);
 
         RefreshView();
     }
@@ -74,8 +82,9 @@ public class DialogueSceneController : MonoBehaviour
             ConfigureChoices();
         }
         else
-        { 
-            _dialogueScreen.SetActive(false);
+        {
+            OnDialogueEnd.Invoke();
+            //_dialogueScreen.SetActive(false);
 
             _currentDialogue.InvokeResult();
             _currentDialogue.End();
@@ -170,19 +179,19 @@ public class DialogueSceneController : MonoBehaviour
 
         var character = _dialogSubSystem.GetCharacterInfo(name);
 
-        _speaker.text = character.Name;
+        _speakerName.text = character.Name;
 
         if (name.Equals("Tisha"))
         {
             _tishaShadow.enabled = false;
-            _portraitShadow.enabled = true;
+            _speakerShadow.enabled = true;
         }
         else
         {
             _tishaShadow.enabled = true;
-            _portraitShadow.enabled = false;
+            _speakerShadow.enabled = false;
 
-            _portrait.sprite = character.Portreit;
+            _speakerPortrait.sprite = character.Portreit;
         }
     }
 

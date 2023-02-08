@@ -14,6 +14,11 @@ public class DialogSubSystem : BaseSubSystem
 
     private DialogContext _currentContext = null;
 
+    public static event Action OnDialogScreenCalled;
+    public static event Action OnExitFromDialogScreenCalled;
+
+    public override void Initialize(ProjectSystem system) => base.Initialize(system);
+
     public BaseDialogue GetDialogueByName(string name)
     {
         return _dialogueData.GetDialogueByName(name);
@@ -23,9 +28,9 @@ public class DialogSubSystem : BaseSubSystem
     {
         _dialogueController.Initialize(this);
 
-        _diceTwentySubSystem = ProjectSystem.GetSubSystem<DiceTwentySubSystem>();
+        _diceTwentySubSystem = _projectSystem.GetSubSystemByType(typeof(DiceTwentySubSystem)) as DiceTwentySubSystem;
 
-        var settingsSystem = ProjectSystem.GetSubSystem<SettingsSubSystem>();
+        var settingsSystem = _projectSystem.GetSubSystemByType(typeof(SettingsSubSystem)) as SettingsSubSystem;
         
         _charactersData = settingsSystem?.GetDataContainerByType(typeof(CharactersContainer)) as CharactersContainer;
         _dialogueData = settingsSystem?.GetDataContainerByType(typeof(DialogueDataContainer)) as DialogueDataContainer;
@@ -34,6 +39,24 @@ public class DialogSubSystem : BaseSubSystem
     }
 
     public override void StartSystem() { }
+
+    public void Start()
+    {
+        DialogueSceneController.OnDialogueEnd += HandleOnDialogueEnd;
+        DialogueSceneController.OnDialogueStart += HandleOnDialogueStart;
+    }
+
+    public void HandleOnDialogueStart()
+    {
+        EventSystem.UIEvents.InvokeOnDialogueMenuCalled();
+    }
+
+    public void HandleOnDialogueEnd()
+    {
+
+        EventSystem.UIEvents.InvokeOnExitFromDialogueMenuCalled();
+    }
+
 
     private void ProcessSignal(DialogContext context)
     {
