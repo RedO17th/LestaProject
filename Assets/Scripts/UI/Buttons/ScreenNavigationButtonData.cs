@@ -2,6 +2,6 @@
 
 public class ScreenNavigationButtonData : MonoBehaviour, IButtonData
 {
-    [SerializeField] private ScreenID _id = ScreenID.Default;
-    public ScreenID ID => _id; 
+    [SerializeField] private IngameScreenID _id = IngameScreenID.Default;
+    public IngameScreenID ID => _id; 
 }
