@@ -6,8 +6,6 @@ using UnityEngine;
 
 public class GamePlayer : BasePlayer
 {
-    [SerializeField] private List<BasePlayerContoller> _controllers;
-
     #region Public Properties
     public Quaternion Rotation => transform.rotation;
     #endregion
@@ -43,22 +41,6 @@ public class GamePlayer : BasePlayer
     {
         foreach (var controller in _controllers)
             controller.Disable();
-    }
-
-    public BasePlayerContoller GetControllerBy(PlayerControllerType type)
-    {
-        BasePlayerContoller pController = null;
-
-        foreach (var controller in _controllers)
-        {
-            if (controller.Type == type)
-            {
-                pController = controller;
-                break;
-            }
-        }
-
-        return pController;
     }
     #endregion
 

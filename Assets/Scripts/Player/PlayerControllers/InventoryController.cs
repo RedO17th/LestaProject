@@ -32,9 +32,12 @@ public class InventoryController : BasePlayerContoller
 
     private void Start()
     {
-        _questSubSystem = ProjectSystem.Instance.GetSubSystemByType(typeof(QuestSubSystem)) as QuestSubSystem;
+        _questSubSystem = ProjectSystem.GetSubSystem<QuestSubSystem>();
+
         _questSubSystem.OnQuestCompleted += ReceiveQuestReward;
+
         _money = 0;
+        
         OnMoneyChanged?.Invoke(_money);
     }
     private void OnDisable()

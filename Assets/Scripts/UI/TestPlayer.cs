@@ -9,7 +9,8 @@ public class TestPlayer : MonoBehaviour
 
     private void Start()
     {
-        var playerSubSystem = ProjectSystem.Instance.GetSubSystemByType(typeof(PlayerSubSystem)) as PlayerSubSystem;
+        var playerSubSystem = ProjectSystem.GetSubSystem<PlayerSubSystem>();
+
         _player = playerSubSystem.Player;
     }
 

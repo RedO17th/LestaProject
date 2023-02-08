@@ -14,8 +14,6 @@ public class DialogSubSystem : BaseSubSystem
 
     private DialogContext _currentContext = null;
 
-    public override void Initialize(ProjectSystem system) => base.Initialize(system);
-
     public BaseDialogue GetDialogueByName(string name)
     {
         return _dialogueData.GetDialogueByName(name);
@@ -25,9 +23,9 @@ public class DialogSubSystem : BaseSubSystem
     {
         _dialogueController.Initialize(this);
 
-        _diceTwentySubSystem = _projectSystem.GetSubSystemByType(typeof(DiceTwentySubSystem)) as DiceTwentySubSystem;
+        _diceTwentySubSystem = ProjectSystem.GetSubSystem<DiceTwentySubSystem>();
 
-        var settingsSystem = _projectSystem.GetSubSystemByType(typeof(SettingsSubSystem)) as SettingsSubSystem;
+        var settingsSystem = ProjectSystem.GetSubSystem<SettingsSubSystem>();
         
         _charactersData = settingsSystem?.GetDataContainerByType(typeof(CharactersContainer)) as CharactersContainer;
         _dialogueData = settingsSystem?.GetDataContainerByType(typeof(DialogueDataContainer)) as DialogueDataContainer;

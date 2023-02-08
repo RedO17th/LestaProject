@@ -73,31 +73,15 @@ public class ProjectSystem : MonoBehaviour
         return result;
     }
 
-    public T GetSubSystem<T>() where T : BaseSubSystem
+    public static T GetSubSystem<T>() where T : BaseSubSystem
     {
         T system = null;
 
-        foreach (var s in _subSystems)
+        foreach (var s in _instance._subSystems)
         {
             if (s is T)
             {
                 system = s as T;
-                break;
-            }
-        }
-
-        return system;
-    }
-
-    public BaseSubSystem GetSubSystemByType(Type systemType)
-    {
-        BaseSubSystem system = null;
-
-        foreach (var s in _subSystems)
-        {
-            if (s.GetType() == systemType)
-            {
-                system = s;
                 break;
             }
         }
@@ -117,7 +101,7 @@ public class ProjectSystem : MonoBehaviour
     private void InitializeSubSystems()
     {
         foreach (var s in _subSystems)
-            s.Initialize(this);
+            s.Initialize();
     }
     private void PrepareSubSystems()
     {

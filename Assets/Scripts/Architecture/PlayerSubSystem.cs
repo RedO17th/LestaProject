@@ -11,10 +11,8 @@ public class PlayerSubSystem : BaseSubSystem
     private WalletOfPoints _walletOfPoints = null;
     private CharacteristicsContainer _characteristics = null;
 
-    public override void Initialize(ProjectSystem system)
+    public override void Initialize()
     {
-        base.Initialize(system);
-
         InitializePlayers();
 
         //Test: При этом данное значение необходимо откуда либо брать...
@@ -28,9 +26,14 @@ public class PlayerSubSystem : BaseSubSystem
 
     public override void Prepare()
     {
-        var settingsSystem = _projectSystem.GetSubSystemByType(typeof(SettingsSubSystem)) as SettingsSubSystem;
+        var settingsSystem = ProjectSystem.GetSubSystem<SettingsSubSystem>();
 
         _characteristics = settingsSystem?.GetDataContainerByType(typeof(CharacteristicsContainer)) as CharacteristicsContainer;
+    }
+
+    public BasePlayerContoller GetPlayerControllerBy(PlayerControllerType type)
+    {
+        return _player.GetControllerBy(type);
     }
 
     #region Characteristics part

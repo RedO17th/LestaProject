@@ -27,14 +27,9 @@ public class DiceTwentySubSystem : BaseSubSystem
     private SkillsContainer _skills = null;
     private PlayerDataContainer _playerData = null;
 
-    public override void Initialize(ProjectSystem system)
-    {
-        base.Initialize(system);
-    }
-
     public override void Prepare()
     {
-        var settingsSystem = _projectSystem.GetSubSystemByType(typeof(SettingsSubSystem)) as SettingsSubSystem;
+        var settingsSystem = ProjectSystem.GetSubSystem<SettingsSubSystem>();
 
         _characteristics = settingsSystem?.GetDataContainerByType(typeof(CharacteristicsContainer)) as CharacteristicsContainer;
         _skills = settingsSystem?.GetDataContainerByType(typeof(SkillsContainer)) as SkillsContainer;

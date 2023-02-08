@@ -43,7 +43,7 @@ public class MovementController : BasePlayerContoller
 
     private void InitializeData()
     {
-        var settingsSystem = ProjectSystem.Instance.GetSubSystemByType(typeof(SettingsSubSystem)) as SettingsSubSystem;
+        var settingsSystem = ProjectSystem.GetSubSystem<SettingsSubSystem>();
 
         _playerData = settingsSystem.GetDataContainerByType(typeof(PlayerDataContainer)) as PlayerDataContainer;
     }

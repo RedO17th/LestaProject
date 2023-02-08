@@ -17,10 +17,8 @@ public class UISubSystem : BaseSubSystem
     private bool _isInMenu = false;
     public bool IsInMenu => _isInMenu;
 
-    public override void Initialize(ProjectSystem system)
+    public override void Initialize()
     {
-        base.Initialize(system);
-
         InitializeScreens(); 
     }
 

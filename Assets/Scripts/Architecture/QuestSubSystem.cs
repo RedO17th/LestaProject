@@ -11,11 +11,6 @@ public class QuestSubSystem : BaseSubSystem
 
     private QuestContext _questContext = null;
 
-    public override void Initialize(ProjectSystem system)
-    {
-        base.Initialize(system);
-    }
-
     public override void Prepare()
     {
         ProjectBus.Instance.OnQuestContextSignal += ProcessSignal;

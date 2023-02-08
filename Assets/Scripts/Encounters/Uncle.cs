@@ -14,7 +14,7 @@ public class Uncle : NPCEncounterWithDialog
 
     protected override void Start()
     {
-        _dialogSubSystem = ProjectSystem.Instance.GetSubSystemByType(typeof(DialogSubSystem)) as DialogSubSystem;
+        _dialogSubSystem = ProjectSystem.GetSubSystem<DialogSubSystem>();
 
         _dialogController.Initialize(_dialogSubSystem);
     }

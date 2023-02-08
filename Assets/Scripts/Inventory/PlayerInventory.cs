@@ -26,7 +26,7 @@ public class PlayerInventory : MonoBehaviour
 
     private void Start()
     {
-        _questSubSystem = ProjectSystem.Instance.GetSubSystemByType(typeof(QuestSubSystem)) as QuestSubSystem;
+        _questSubSystem = ProjectSystem.GetSubSystem<QuestSubSystem>();
         _questSubSystem.OnQuestCompleted += ReceiveQuestReward;
     }
     private void OnDisable()

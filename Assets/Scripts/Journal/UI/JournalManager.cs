@@ -23,7 +23,8 @@ public class JournalManager : MonoBehaviour
 
     private void Start()
     {
-        _questSubSystem = ProjectSystem.Instance.GetSubSystemByType(typeof(QuestSubSystem)) as QuestSubSystem;
+        _questSubSystem = ProjectSystem.GetSubSystem<QuestSubSystem>();
+
         _questSubSystem.OnQuestActivated += QuestActivated;
         _questSubSystem.OnQuestCompleted += QuestCompleted;
     }

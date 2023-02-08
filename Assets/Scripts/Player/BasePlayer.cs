@@ -1,9 +1,12 @@
-﻿using System.Diagnostics.Contracts;
+﻿using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using UnityEngine;
 
 
 public class BasePlayer : MonoBehaviour
 {
+    [SerializeField] protected List<BasePlayerContoller> _controllers;
+
     protected PlayerSubSystem _playerSystem = null;
 
     public HealthSign Health { get; } = new HealthSign(100);
@@ -16,6 +19,22 @@ public class BasePlayer : MonoBehaviour
     public virtual void Initialize(PlayerSubSystem system)
     {
         _playerSystem = system;
+    }
+
+    public BasePlayerContoller GetControllerBy(PlayerControllerType type)
+    {
+        BasePlayerContoller pController = null;
+
+        foreach (var controller in _controllers)
+        {
+            if (controller.Type == type)
+            {
+                pController = controller;
+                break;
+            }
+        }
+
+        return pController;
     }
 
     #region Health part
