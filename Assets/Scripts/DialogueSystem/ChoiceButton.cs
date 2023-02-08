@@ -25,9 +25,8 @@ public class ChoiceButton : MonoBehaviour
         }
     }
 
-    private void OnEnable()
+    private void Awake()
     {
-        this._button = null;
         _button = GetComponent<Button>();
         _buttonCaption = _button.GetComponentInChildren<Text>();
     }
