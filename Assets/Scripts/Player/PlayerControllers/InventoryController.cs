@@ -8,7 +8,9 @@ public class InventoryController : BasePlayerContoller
 
     [SerializeField] private UIInventory _inventoryUI;
 
-    [SerializeField] private UIQuickAccessMenuSlot[] _quickAccessMenuSlots;
+    [SerializeField] private UIQuickAccessMenu _quickAccessMenu;
+
+    [SerializeField] private UIQuickAccessMenu _quickAccessMenuhud;
 
     public static InventoryController Instance => _instance;
 
@@ -16,9 +18,9 @@ public class InventoryController : BasePlayerContoller
 
     public InventoryWithSlots Inventory => _inventoryUI.Inventory;
     public InventoryWithSlots Equipment => _equipmentUI.Inventory;
-    public UIQuickAccessMenuSlot[] QuickAccessMenuSlots => _quickAccessMenuSlots;
+    public UIQuickAccessMenu QuickAccessMenu => _quickAccessMenu;
 
-    //public int Money => _money;
+    public int Money => _money;
 
     private static InventoryController _instance;
     private int _money;
@@ -28,8 +30,18 @@ public class InventoryController : BasePlayerContoller
     private void Awake()
     {
         _instance = this;
+        Initialize();
     }
 
+    public void Initialize()
+    {
+        _equipmentUI.Initialize();
+        _inventoryUI.Initialize();
+        _quickAccessMenu.Initialize(this);
+        _quickAccessMenuhud.Initialize(this);
+
+
+    }
     private void Start()
     {
         _questSubSystem = ProjectSystem.GetSubSystem<QuestSubSystem>();
@@ -42,7 +54,7 @@ public class InventoryController : BasePlayerContoller
     }
     private void OnDisable()
     {
-        _questSubSystem.OnQuestCompleted -= ReceiveQuestReward;
+        //_questSubSystem.OnQuestCompleted -= ReceiveQuestReward;
     }
 
     private void ReceiveQuestReward(object sender, IQuestNote quest)
@@ -97,23 +109,23 @@ public class InventoryController : BasePlayerContoller
 
     public void SaveQAM(GameData gameData)
     {
-        for (int i = 0; i < QuickAccessMenuSlots.Length; i++)
+        for (int i = 0; i < _quickAccessMenu.Slots.Length; i++)
         {
-            gameData.PlayerInventoryData.QuickAccessMenuItems.Items[i] = QuickAccessMenuSlots[i].QuickAccessMenuItem.Item;
+            gameData.PlayerInventoryData.QuickAccessMenuItems.Items[i] = _quickAccessMenu.Slots[i].QuickAccessMenuItem.Item;
         }
     }
 
     public void LoadQAM(GameData gameData)
     {
-        for (int i = 0; i < QuickAccessMenuSlots.Length; i++)
+        for (int i = 0; i < _quickAccessMenu.Slots.Length; i++)
         {
-            QuickAccessMenuSlots[i].QuickAccessMenuItem.SetNewItem(gameData.PlayerInventoryData.QuickAccessMenuItems.Items[i]);
+            _quickAccessMenu.Slots[i].QuickAccessMenuItem.SetNewItem(gameData.PlayerInventoryData.QuickAccessMenuItems.Items[i]);
         }
     }
 
     public void Save()
     {
-        PlayerInventoryData playerInventoryData = new PlayerInventoryData(Inventory.Capacity, Equipment.Capacity, QuickAccessMenuSlots.Length);
+        PlayerInventoryData playerInventoryData = new PlayerInventoryData(Inventory.Capacity, Equipment.Capacity, _quickAccessMenu.Slots.Length);
 
         _gameData = GameData.Instance;
 
@@ -129,7 +141,7 @@ public class InventoryController : BasePlayerContoller
     {
         Storage storage = new Storage();
 
-        PlayerInventoryData playerInventoryData = new PlayerInventoryData(Inventory.Capacity, Equipment.Capacity, QuickAccessMenuSlots.Length);
+        PlayerInventoryData playerInventoryData = new PlayerInventoryData(Inventory.Capacity, Equipment.Capacity, _quickAccessMenu.Slots.Length);
 
         _gameData = (GameData)storage.Load(GameData.Instance);
 

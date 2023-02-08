@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f96b3826b675a6c4982f93ea76d50799, type: 3}
+  m_Name: DiaryNoteDB
+  m_EditorClassIdentifier: 
+  DiaryNotes:
+  - {fileID: 11400000, guid: 9e2b88a30502c58469ea054bcdb5b0ff, type: 2}
+  - {fileID: 11400000, guid: 5d298d5f8399a3347a0ced917f47b917, type: 2}
+  - {fileID: 11400000, guid: 1e9ee5fcd12f87348a0a028a749517b6, type: 2}
+  - {fileID: 11400000, guid: a4e6d0a9a3d2fa8478d5c3e435fefff3, type: 2}
+  - {fileID: 11400000, guid: 49393893cd9a15743bdf9ee81cb5dc05, type: 2}
+  - {fileID: 11400000, guid: d6e5c54e82f9d9e46a5525a53096b1c2, type: 2}
+  - {fileID: 11400000, guid: 13b5e94992536f643bf86ffc49f56eba, type: 2}
+  - {fileID: 11400000, guid: f797ea5d4ee775e4abf570d7022bfd97, type: 2}
+  - {fileID: 11400000, guid: 73fe71ec50965294ebe51960b8794fe6, type: 2}
+  - {fileID: 11400000, guid: 300f9c367ad4cb043a2c3f89e4124bbd, type: 2}
+  - {fileID: 11400000, guid: 7b7ccbcc7b94a4f4782ab3837dd640d5, type: 2}
+  - {fileID: 11400000, guid: c0bf9019980664b40afe98df815ce5b8, type: 2}
+  - {fileID: 11400000, guid: 9d161b85d3eee4e4e96b00eb13b9079d, type: 2}

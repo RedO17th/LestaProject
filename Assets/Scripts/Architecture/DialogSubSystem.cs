@@ -17,7 +17,9 @@ public class DialogSubSystem : BaseSubSystem
     public static event Action OnDialogScreenCalled;
     public static event Action OnExitFromDialogScreenCalled;
 
-    public override void Initialize(ProjectSystem system) => base.Initialize(system);
+    public event Action<object, INote> OnAddNote;
+
+    public void Initialize(ProjectSystem system) => base.Initialize();
 
     public BaseDialogue GetDialogueByName(string name)
     {
@@ -28,9 +30,9 @@ public class DialogSubSystem : BaseSubSystem
     {
         _dialogueController.Initialize(this);
 
-        _diceTwentySubSystem = _projectSystem.GetSubSystemByType(typeof(DiceTwentySubSystem)) as DiceTwentySubSystem;
+        _diceTwentySubSystem = ProjectSystem.GetSubSystem<DiceTwentySubSystem>();
 
-        var settingsSystem = _projectSystem.GetSubSystemByType(typeof(SettingsSubSystem)) as SettingsSubSystem;
+        var settingsSystem = ProjectSystem.GetSubSystem<SettingsSubSystem>();
         
         _charactersData = settingsSystem?.GetDataContainerByType(typeof(CharactersContainer)) as CharactersContainer;
         _dialogueData = settingsSystem?.GetDataContainerByType(typeof(DialogueDataContainer)) as DialogueDataContainer;
@@ -155,12 +157,17 @@ public class DialogSubSystem : BaseSubSystem
 
     public void AddNoteToJournal(string tag)
     {
-        var nameNote = tag["Note.".Length..];
+        var noteID = tag["Note.".Length..];
 
-        if (string.IsNullOrWhiteSpace(nameNote) == false)
+        if (string.IsNullOrWhiteSpace(noteID) == false)
         {
             //TODO: real add note to journal
-            Debug.Log($"Добавлена запись: {nameNote}");
+            SettingsSubSystem settingsSubSystem = ProjectSystem.GetSubSystem<SettingsSubSystem>();
+            var noteDB = settingsSubSystem.GetDataContainerByType(typeof(DiaryNoteDB)) as DiaryNoteDB;
+            INote note = noteDB.GetNote(noteID);
+            OnAddNote?.Invoke(this, note);
+
+            Debug.Log($"Добавлена запись: {noteID}");
         }
     }
 

@@ -27,9 +27,9 @@ public class QuickAccessPanelUIController : BaseUIController
     
     public void Awake()
     {
-        InitializeConsumablesButtons();
+        //InitializeConsumablesButtons();
 
-        InitializeSkillsButtons();
+        //InitializeSkillsButtons();
     }
 
     public void OnEnable()

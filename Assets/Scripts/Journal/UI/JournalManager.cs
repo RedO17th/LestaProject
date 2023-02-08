@@ -27,6 +27,10 @@ public class JournalManager : MonoBehaviour
 
         _questSubSystem.OnQuestActivated += QuestActivated;
         _questSubSystem.OnQuestCompleted += QuestCompleted;
+
+        DialogSubSystem dialogSubSystem = ProjectSystem.GetSubSystem<DialogSubSystem>();
+
+        dialogSubSystem.OnAddNote += AddNoteToDiary;
     }
 
     public void QuestActivated(object sender, INote quest)
