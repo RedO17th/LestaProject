@@ -14,6 +14,9 @@ public class DialogSubSystem : BaseSubSystem
 
     private DialogContext _currentContext = null;
 
+    public static event Action OnDialogScreenCalled;
+    public static event Action OnExitFromDialogScreenCalled;
+
     public override void Initialize(ProjectSystem system) => base.Initialize(system);
 
     public BaseDialogue GetDialogueByName(string name)
@@ -36,6 +39,24 @@ public class DialogSubSystem : BaseSubSystem
     }
 
     public override void StartSystem() { }
+
+    public void Start()
+    {
+        DialogueSceneController.OnDialogueEnd += HandleOnDialogueEnd;
+        DialogueSceneController.OnDialogueStart += HandleOnDialogueStart;
+    }
+
+    public void HandleOnDialogueStart()
+    {
+        EventSystem.UIEvents.InvokeOnDialogueMenuCalled();
+    }
+
+    public void HandleOnDialogueEnd()
+    {
+
+        EventSystem.UIEvents.InvokeOnExitFromDialogueMenuCalled();
+    }
+
 
     private void ProcessSignal(DialogContext context)
     {

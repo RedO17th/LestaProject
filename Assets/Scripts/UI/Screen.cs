@@ -19,9 +19,9 @@ public enum ScreenID
     Default = -1,
     HUD = 0,
     Inventory = 1,
-    Clipboard = 2,
+    Journal = 2,
     Skills = 3,
     PauseMenu = 4,
-    Dialog = 5,
+    Dialogue = 5,
     Settings = 6
 }
