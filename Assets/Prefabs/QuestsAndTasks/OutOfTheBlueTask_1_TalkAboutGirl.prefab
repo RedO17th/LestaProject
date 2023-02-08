@@ -50,4 +50,4 @@ MonoBehaviour:
   _description: OutOfTheBlueTask_1_TalkAboutGirlDescription
   _girlName: Girl
   _dialogueName: project_E_scene3_2
-  _dialogueInvokerVolumeName: 
+  _freeDialogueName: VolumeInvoker_Dialogue_Scene3_3

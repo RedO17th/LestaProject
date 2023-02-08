@@ -50,3 +50,5 @@ MonoBehaviour:
   _description: JohnnyTheyreInTheTreesTask_2_MoveToUncleDescription
   _uncleEncounterName: Uncle
   _distanationVolumeName: Volume_JohnnyTheyreInTheTreesTask_2_MoveToUncle
+  _dogEncounterName: Dog
+  _dogPosition: {x: 118, y: 2.44, z: -30}

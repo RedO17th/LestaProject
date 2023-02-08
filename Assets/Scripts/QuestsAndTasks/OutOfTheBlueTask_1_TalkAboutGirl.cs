@@ -8,7 +8,10 @@ public class OutOfTheBlueTask_1_TalkAboutGirl : BaseQuestTask
     [SerializeField] protected string _girlName = string.Empty;
     [SerializeField] protected string _dialogueName = string.Empty;
 
+    [SerializeField] protected string _freeDialogueName = string.Empty;
+
     private IDialogableEncounter _girl = null;
+    private IContextInvoker _dialogueVolume = null;
 
     public override void Prepare()
     {
@@ -16,26 +19,18 @@ public class OutOfTheBlueTask_1_TalkAboutGirl : BaseQuestTask
         _girl.SetTask(this);
         _girl.InitializeDialog(_dialogueName);
 
+        _dialogueVolume = _quest.GetInvokerEncounterByName(_freeDialogueName) as IContextInvoker;
+
         base.Prepare();
     }
 
     public override void Activate()
     {
         _girl.Activate();
+        _girl.Hint();
 
         base.Activate();
-
-        //PerformForcedTermination();
     }
-
-    //private void PerformForcedTermination()
-    //{
-    //    _context = new TaskContext();
-    //    _context.SetCommand(TaskCommand.Complete);
-    //    _context.SetID(_idName);
-
-    //    ProcessCommandFromSignal();
-    //}
 
     protected override void Complete()
     {
@@ -46,6 +41,8 @@ public class OutOfTheBlueTask_1_TalkAboutGirl : BaseQuestTask
 
     public override void Dectivate()
     {
+        _dialogueVolume.Activate();
+
         base.Dectivate();
 
         Clear();
