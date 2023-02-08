@@ -13,7 +13,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6792460990661249428, guid: f20773bae8e5c0f4aa5c8eaaba85ed17, type: 3}
       propertyPath: _isEnabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6792460990661249428, guid: f20773bae8e5c0f4aa5c8eaaba85ed17, type: 3}
       propertyPath: _dialogueName

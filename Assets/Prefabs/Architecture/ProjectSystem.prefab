@@ -88,8 +88,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b4e642e5057c2c47a663a0447aa2e7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _players:
-  - {fileID: 0}
+  _player: {fileID: 0}
 --- !u!1 &1012111113
 GameObject:
   m_ObjectHideFlags: 0
@@ -134,6 +133,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29ed9af017916774fa93c1f8e9ea6300, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _HUDScreen: {fileID: 0}
+  _inventoryScreen: {fileID: 0}
+  _clipboardScreen: {fileID: 0}
+  _skillsScreen: {fileID: 0}
+  _pauseMenuScreen: {fileID: 0}
+  _dialogScreen: {fileID: 0}
+  _settingsScreen: {fileID: 0}
 --- !u!1 &1729848808
 GameObject:
   m_ObjectHideFlags: 0
@@ -583,7 +589,8 @@ MonoBehaviour:
     _npcEncounters:
     - {fileID: 0}
     _volumeEncounters: []
-    _invokerEncounters: []
+    _invokerEncounters:
+    - {fileID: 0}
   - _questPrefab: {fileID: 8876499499370373682, guid: 97591ab76424a5d45ad3e88038181ad4, type: 3}
     _npcEncounters: []
     _volumeEncounters: []

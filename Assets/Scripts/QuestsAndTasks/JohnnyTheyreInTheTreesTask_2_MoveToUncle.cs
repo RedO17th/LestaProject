@@ -8,8 +8,16 @@ public class JohnnyTheyreInTheTreesTask_2_MoveToUncle : BaseQuestTask
     [SerializeField] protected string _uncleEncounterName = string.Empty;
     [SerializeField] protected string _distanationVolumeName = string.Empty;
 
+    //[Remove]
+    [Space]
+    [SerializeField] protected string _dogEncounterName = string.Empty;
+    [SerializeField] protected Vector3 _dogPosition = Vector3.zero;
+
     private IHintableEncounter _uncle = null;
     private IVolumeEncounter _distanationVolume = null;
+
+    //[Remove]
+    private Dog _dog = null;
 
     public override void Prepare()
     {
@@ -19,6 +27,9 @@ public class JohnnyTheyreInTheTreesTask_2_MoveToUncle : BaseQuestTask
         _uncle = _quest.GetNpcEncounterByName(_uncleEncounterName) as IHintableEncounter;
         _uncle.Hint();
 
+        //Remove
+        _dog = _quest.GetNpcEncounterByName(_dogEncounterName) as Dog;
+
         base.Prepare();
     }
 
@@ -26,6 +37,9 @@ public class JohnnyTheyreInTheTreesTask_2_MoveToUncle : BaseQuestTask
     {
         _distanationVolume.Activate();
         _uncle.Activate();
+
+        //Remove
+        _dog.transform.position = _dogPosition;
 
         base.Activate();
     }
