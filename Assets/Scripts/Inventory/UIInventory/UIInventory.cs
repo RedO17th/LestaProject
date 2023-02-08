@@ -19,15 +19,17 @@ public class UIInventory : MonoBehaviour
 
     private void Awake()
     {
-        Initialize();
+        //Initialize();
     }
 
-    protected virtual void Initialize()
+    public void Initialize()
     {
         Inventory.OnInventoryStateChangedEvent += OnInventoryStateChanged;
-    }
-    private void Start()
-    {
+        foreach(var slot in _uiSlots)
+        {
+            slot.Initialize();
+        }
+
         SetupInventoryUI(Inventory);
     }
 

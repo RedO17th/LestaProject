@@ -12,6 +12,11 @@ public class UISlot : MonoBehaviour, IDropHandler
 
     private void Awake()
     {
+        //Initialize()
+    }
+
+    public void Initialize()
+    {
         _uiInventory = GetComponentInParent<UIInventory>();
     }
 

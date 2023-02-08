@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -5,6 +6,8 @@ using UnityEngine.InputSystem;
 public class UIQuickAccessMenuSlot : MonoBehaviour, IDropHandler, IBindableSlot
 {
     [SerializeField] private UIQuickAccessMenuItem _quickAccessMenuItem;
+    
+    public event Action OnSetNewItem;
 
     public UIQuickAccessMenuItem QuickAccessMenuItem => _quickAccessMenuItem;
 
@@ -13,12 +16,20 @@ public class UIQuickAccessMenuSlot : MonoBehaviour, IDropHandler, IBindableSlot
         var otherItemUI = eventData.pointerDrag.GetComponent<UIInventoryItem>();
 
         if (otherItemUI.Item is IUsableItem item)
+        {
             _quickAccessMenuItem.SetNewItem(item);
+            OnSetNewItem?.Invoke();
+        }
         else
         {
             Debug.Log("Неверный тип предмета");
             return;
         }    
+    }
+
+    public void SetItem(IInventoryItem item)
+    {
+        _quickAccessMenuItem.SetNewItem(item);
     }
 
     public void OnBindingUse(InputAction.CallbackContext context)

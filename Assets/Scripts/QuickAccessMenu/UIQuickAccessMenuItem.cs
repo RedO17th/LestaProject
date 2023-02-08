@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,10 +21,12 @@ public class UIQuickAccessMenuItem : MonoBehaviour, IPointerEnterHandler, IPoint
     {
         _rectTransform = GetComponent<RectTransform>();
     }
-    private void Start()
+
+    public void Initialize(InventoryController inventoryController)
     {
-        InventoryController.Instance.Inventory.OnInventoryStateChangedEvent += OnInventoryStateChanged;
-        Refresh(); ;
+        //InventoryController inventoryController = ProjectSystem.GetSubSystem<PlayerSubSystem>().GetPlayerControllerBy(PlayerControllerType.Inventory) as InventoryController;
+        inventoryController.Inventory.OnInventoryStateChangedEvent += OnInventoryStateChanged;
+        Refresh();
     }
 
     private void OnInventoryStateChanged(object sender)
@@ -73,6 +74,7 @@ public class UIQuickAccessMenuItem : MonoBehaviour, IPointerEnterHandler, IPoint
     {
         if (item == null)
             return;
+
 
         Item = item.Clone();
         _imageIcon.sprite = Item.ItemInfo.SpriteIcon;

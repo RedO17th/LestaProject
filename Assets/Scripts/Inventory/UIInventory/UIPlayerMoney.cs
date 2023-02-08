@@ -6,15 +6,20 @@ using TMPro;
 public class UIPlayerMoney : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _moneyText;
+    private InventoryController _inventoryController = null;
 
     private void Start()
     {
-        //PlayerSubSystem playerSubSystem = ProjectSystem.Instance.GetSubSystemByType(typeof(PlayerSubSystem)) as PlayerSubSystem;
-        //InventoryController inventoryController = ((GamePlayer)playerSubSystem.Player).GetControllerBy(PlayerControllerType.Inventory) as InventoryController;
-        //inventoryController.OnMoneyChanged += Refresh;
-        InventoryController.Instance.OnMoneyChanged += Refresh;
-        //OnMoneyChanged += Refresh();    
+        Initialize();
     }
+
+    public void Initialize()
+    {
+        _inventoryController = ProjectSystem.GetSubSystem<PlayerSubSystem>().GetPlayerControllerBy(PlayerControllerType.Inventory) as InventoryController;
+        _inventoryController.OnMoneyChanged += Refresh;
+        Refresh(_inventoryController.Money);
+    }
+
     private void OnDisable()
     {
         //InventoryController.Instance.OnMoneyChanged -= Refresh;
