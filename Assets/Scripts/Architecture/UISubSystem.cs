@@ -5,14 +5,14 @@ using System;
 public class UISubSystem : BaseSubSystem
 {
     [Header("Screens")]
-    [SerializeField] private Screen _HUDScreen = null;
-    [SerializeField] private Screen _inventoryScreen = null;
-    [SerializeField] private Screen _clipboardScreen = null;
-    [SerializeField] private Screen _skillsScreen = null;
-    [SerializeField] private Screen _pauseMenuScreen = null;
-    [SerializeField] private Screen _dialogScreen = null;
-    [SerializeField] private Screen _settingsScreen = null;
-    private List<Screen> _screens = null;
+    [SerializeField] private IngameScreen _HUDScreen = null;
+    [SerializeField] private IngameScreen _inventoryScreen = null;
+    [SerializeField] private IngameScreen _clipboardScreen = null;
+    [SerializeField] private IngameScreen _skillsScreen = null;
+    [SerializeField] private IngameScreen _pauseMenuScreen = null;
+    [SerializeField] private IngameScreen _dialogScreen = null;
+    [SerializeField] private IngameScreen _settingsScreen = null;
+    private List<IngameScreen> _screens = null;
 
     private bool _isInMenu = false;
     public bool IsInMenu => _isInMenu;
@@ -64,7 +64,7 @@ public class UISubSystem : BaseSubSystem
 
     private void InitializeScreens()
     {
-        _screens = new List<Screen>();
+        _screens = new List<IngameScreen>();
         if (_HUDScreen != null) _screens.Add(_HUDScreen);
         if (_inventoryScreen != null) _screens.Add(_inventoryScreen);
         if (_clipboardScreen != null) _screens.Add(_clipboardScreen);
@@ -74,7 +74,7 @@ public class UISubSystem : BaseSubSystem
         if (_settingsScreen != null) _screens.Add(_settingsScreen);
     }
 
-    public void ShowScreen(ScreenID screenID)
+    public void ShowScreen(IngameScreenID screenID)
     {
         if (screenID == _HUDScreen.ID && _isInMenu)
         {
@@ -87,7 +87,7 @@ public class UISubSystem : BaseSubSystem
             _isInMenu = true;
         }
         
-        foreach (Screen s in _screens)
+        foreach (IngameScreen s in _screens)
         {
             if (s.ID == screenID)
             {

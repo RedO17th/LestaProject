@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseMenuUIController : BaseUIController
 {
@@ -36,11 +37,12 @@ public class PauseMenuUIController : BaseUIController
                 break;
                 
             case PauseMenuButtonsEnum.Settings:
-                EventSystem.UIEvents.InvokeOnScreenCalled(ScreenID.Settings);
+                EventSystem.UIEvents.InvokeOnScreenCalled(IngameScreenID.Settings);
                 break;
                 
             case PauseMenuButtonsEnum.Exit:
-                Debug.Log("Exit called");
+                //Да да, дедушке нужно вынести это в контроллер, но пусть пока так
+                SceneManager.LoadScene(0);
                 break;
                 
             default:
