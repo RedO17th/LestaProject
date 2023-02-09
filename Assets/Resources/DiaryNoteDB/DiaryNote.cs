@@ -4,7 +4,9 @@ using UnityEngine;
 public class DiaryNote : ScriptableObject, INote
 {
     [SerializeField] private string _id;
+    [TextArea]
     [SerializeField] private string _header;
+    [TextArea]
     [SerializeField] private string _content;
     public string Id => _id;
 

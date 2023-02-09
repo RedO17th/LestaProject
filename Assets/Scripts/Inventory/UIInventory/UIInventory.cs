@@ -27,7 +27,7 @@ public class UIInventory : MonoBehaviour
         Inventory.OnInventoryStateChangedEvent += OnInventoryStateChanged;
         foreach(var slot in _uiSlots)
         {
-            slot.Initialize();
+            slot.Initialize(this);
         }
 
         SetupInventoryUI(Inventory);

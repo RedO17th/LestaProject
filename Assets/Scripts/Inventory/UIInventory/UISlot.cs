@@ -15,9 +15,9 @@ public class UISlot : MonoBehaviour, IDropHandler
         //Initialize()
     }
 
-    public void Initialize()
+    public void Initialize(UIInventory uIInventory)
     {
-        _uiInventory = GetComponentInParent<UIInventory>();
+        _uiInventory = uIInventory;
     }
 
     public void SetSlot(IInventorySlot newSlot)

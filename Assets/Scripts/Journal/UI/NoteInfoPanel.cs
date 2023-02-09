@@ -12,6 +12,16 @@ public class NoteInfoPanel : MonoBehaviour
     public virtual void SetNoteInfo(INote note)
     {
         _header.text = note.Header;
-        _content.text = note.Content;
+
+        string[] content = note.Content.Split(new string[] { "\\n" }, System.StringSplitOptions.None);
+
+        string contentWithN = "";
+        foreach (string line in content)
+        {
+            contentWithN += line + "\n";
+        }
+
+        _content.text = contentWithN;
+    
     }
 }

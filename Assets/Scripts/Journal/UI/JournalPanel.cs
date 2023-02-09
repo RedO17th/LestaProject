@@ -12,7 +12,7 @@ public class JournalPanel : MonoBehaviour
     {
         _listPanel.SetActive(false);
         _infoPanel.gameObject.SetActive(true);
-
+       
         _infoPanel.SetNoteInfo(note);
     }
 
