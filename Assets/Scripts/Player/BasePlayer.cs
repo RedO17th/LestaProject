@@ -73,20 +73,20 @@ public class BasePlayer : MonoBehaviour
     }
     #endregion
 
-    public BasePlayerContoller GetControllerBy(PlayerControllerType type)
+    public T GetControllerBy<T>() where T : BasePlayerContoller
     {
-        BasePlayerContoller pController = null;
+        T controller = null;
 
-        foreach (var controller in _controllers)
+        foreach (var c in _controllers)
         {
-            if (controller.Type == type)
+            if (c is T)
             {
-                pController = controller;
+                controller = c as T; 
                 break;
             }
         }
 
-        return pController;
+        return controller;
     }
 
     #region Health part

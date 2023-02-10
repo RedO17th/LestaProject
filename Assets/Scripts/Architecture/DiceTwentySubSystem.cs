@@ -31,9 +31,9 @@ public class DiceTwentySubSystem : BaseSubSystem
     {
         var settingsSystem = ProjectSystem.GetSubSystem<SettingsSubSystem>();
 
-        _characteristics = settingsSystem?.GetDataContainerByType(typeof(CharacteristicsContainer)) as CharacteristicsContainer;
-        _skills = settingsSystem?.GetDataContainerByType(typeof(SkillsContainer)) as SkillsContainer;
-        _playerData = settingsSystem?.GetDataContainerByType(typeof(PlayerDataContainer)) as PlayerDataContainer;
+        _characteristics = settingsSystem?.GetDataContainer<CharacteristicsContainer>();
+        _skills = settingsSystem?.GetDataContainer<SkillsContainer>(); 
+        _playerData = settingsSystem?.GetDataContainer<PlayerDataContainer>();
     }
 
     #region Characteristics part

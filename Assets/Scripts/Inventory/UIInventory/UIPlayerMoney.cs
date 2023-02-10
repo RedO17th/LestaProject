@@ -15,8 +15,12 @@ public class UIPlayerMoney : MonoBehaviour
 
     public void Initialize()
     {
-        _inventoryController = ProjectSystem.GetSubSystem<PlayerSubSystem>().GetPlayerControllerBy(PlayerControllerType.Inventory) as InventoryController;
+        var playerSubSystem = ProjectSystem.GetSubSystem<PlayerSubSystem>();
+
+        _inventoryController = playerSubSystem.GetPlayerController<InventoryController>();
+
         _inventoryController.OnMoneyChanged += Refresh;
+
         Refresh(_inventoryController.Money);
     }
 

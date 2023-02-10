@@ -45,7 +45,7 @@ public class MovementController : BasePlayerContoller
     {
         var settingsSystem = ProjectSystem.GetSubSystem<SettingsSubSystem>();
 
-        _playerData = settingsSystem.GetDataContainerByType(typeof(PlayerDataContainer)) as PlayerDataContainer;
+        _playerData = settingsSystem.GetDataContainer<PlayerDataContainer>();
     }
 
     private void InitializeMovementMechanics()

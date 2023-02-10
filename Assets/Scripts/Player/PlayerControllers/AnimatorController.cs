@@ -18,7 +18,7 @@ public class AnimatorController : BasePlayerContoller
 
     public override void Prepare()
     {
-        _movementController = _player.GetControllerBy(PlayerControllerType.Movement) as MovementController;
+        _movementController = _player.GetControllerBy<MovementController>();
     }
 
     private void Update()

@@ -28,12 +28,12 @@ public class PlayerSubSystem : BaseSubSystem
     {
         var settingsSystem = ProjectSystem.GetSubSystem<SettingsSubSystem>();
 
-        _characteristics = settingsSystem?.GetDataContainerByType(typeof(CharacteristicsContainer)) as CharacteristicsContainer;
+        _characteristics = settingsSystem?.GetDataContainer<CharacteristicsContainer>();
     }
 
-    public BasePlayerContoller GetPlayerControllerBy(PlayerControllerType type)
+    public T GetPlayerController<T>() where T : BasePlayerContoller
     {
-        return _player.GetControllerBy(type);
+        return _player.GetControllerBy<T>();
     }
 
     #region Characteristics part
