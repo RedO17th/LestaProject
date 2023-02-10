@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Girl : NPCEncounterWithDialog
+public class Girl : DialogueEncounter
 {
     protected override void Awake()
     {
@@ -14,13 +14,14 @@ public class Girl : NPCEncounterWithDialog
 
     protected override void Start()
     {
-        _dialogSubSystem = ProjectSystem.GetSubSystem<DialogSubSystem>();
-
-        _dialogController.Initialize(_dialogSubSystem);
+        _dialogController.Initialize();
     }
 
     public override void InitializeDialog(string dialogName)
     {
+        if(_dialogSubSystem == null)
+            _dialogSubSystem = ProjectSystem.GetSubSystem<DialogSubSystem>();
+
         var dialog = _dialogSubSystem.GetDialogueByName(dialogName);
             dialog.Initialize(this);
 

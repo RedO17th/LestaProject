@@ -23,12 +23,12 @@ public class NPCEncounterSimpleInteractionMode : BaseSimpleInteractionMode
 
 public class NPCEncounterDialogueInteractionMode : BaseTaskInteractionMode
 {
-    private NPCEncounterWithDialog _npcEncounter = null;
+    private DialogueEncounter _npcEncounter = null;
     private BaseDialogController _dialogController = null;
 
     public NPCEncounterDialogueInteractionMode(IEncounter encounter) : base(encounter)
     {
-        _npcEncounter = _encounter as NPCEncounterWithDialog;
+        _npcEncounter = _encounter as DialogueEncounter;
 
         _dialogController = _npcEncounter.DialogController;
     }

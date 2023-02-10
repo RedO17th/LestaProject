@@ -2,13 +2,14 @@
 using System.Diagnostics.Contracts;
 using UnityEngine;
 
+//Возможно создать интерфейс IPlayer и объеденить его с IInteractor
 public interface IInteractor
 {
     void SetInteractable(IInteractable encounter);
     void RemoveInteractable(IInteractable encounter);
 }
 
-public class BasePlayer : MonoBehaviour
+public class BasePlayer : MonoBehaviour, IInteractor
 {
     [SerializeField] protected List<BasePlayerContoller> _controllers;
 
@@ -21,6 +22,7 @@ public class BasePlayer : MonoBehaviour
     #endregion
 
     protected PlayerSubSystem _playerSystem = null;
+    protected IInteractable _interactable = null;
 
     public virtual void Initialize(PlayerSubSystem system)
     {
@@ -104,18 +106,17 @@ public class BasePlayer : MonoBehaviour
 
     #endregion
 
-    //Interact part (test)
-    //[ForMe] А вообще есть смысл передавать encounter'a... Подумать... Мб Event?
-
-    private IInteractable _interactable = null;
+    #region Interaction part
     public void SetInteractable(IInteractable encounter)
     {
         _interactable = encounter;
     }
     public void RemoveInteractable(IInteractable encounter)
     {
-        _interactable = null;
+        if(_interactable == encounter)
+            _interactable = null;
     }
+    #endregion
 
     private void Update()
     {

@@ -5,17 +5,7 @@ using UnityEngine;
 using UnityEngine.Rendering.VirtualTexturing;
 
 //[TODO] Перевести общие поля с NPCEncounterWithDialog в EncounterWithDialog
-public class BasePlayerAssistant : EncounterWithDialog
-{
-    public bool TaskIsExist => _task != null;
-
-    public BaseDialogController DialogController => _dialogController;
-
-    protected BaseInteractionsController _interactionHandler = null;
-
-    protected DialogSubSystem _dialogSubSystem = null;
-    protected BaseDialogController _dialogController = null;
-}
+public class BasePlayerAssistant : DialogueEncounter { }
 
 public class Dog : BasePlayerAssistant
 {
@@ -31,13 +21,14 @@ public class Dog : BasePlayerAssistant
     {
         PrepareTriggerVolume();
 
-        _dialogSubSystem = ProjectSystem.GetSubSystem<DialogSubSystem>();
-
-        _dialogController.Initialize(_dialogSubSystem);
+        _dialogController.Initialize();
     }
 
     public override void InitializeDialog(string dialogName)
     {
+        if (_dialogSubSystem == null)
+            _dialogSubSystem = ProjectSystem.GetSubSystem<DialogSubSystem>();
+
         var dialog = _dialogSubSystem.GetDialogueByName(dialogName);
             dialog.Initialize(this);
 

@@ -575,6 +575,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51fe7ff7e33be7a4ebed7c1111244f7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _firstQuestName: JohnnyTheyreInTheTrees
   _questContainer:
   - _questPrefab: {fileID: 6528779191282509331, guid: d4f15429aa321584a9b25170d6e54ede, type: 3}
     _npcEncounters:

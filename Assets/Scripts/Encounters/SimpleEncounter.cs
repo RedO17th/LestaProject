@@ -43,3 +43,4 @@ public class SimpleEncounter : BaseEncounter, IInteractable
         _triggerVolume.Disable();
     }
 }
+

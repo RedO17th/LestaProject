@@ -9,9 +9,9 @@ public class BaseDialogController : MonoBehaviour
     protected DialogSubSystem _dialogSubSystem = null;
     protected BaseDialogue _dialog = null;
 
-    public virtual void Initialize(DialogSubSystem system)
+    public virtual void Initialize()
     {
-        _dialogSubSystem = system;
+        _dialogSubSystem = ProjectSystem.GetSubSystem<DialogSubSystem>();
     }
 
     public virtual void SetDialog(BaseDialogue dialog) 

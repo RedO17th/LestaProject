@@ -8,18 +8,19 @@ public class PlayerSubSystem : BaseSubSystem
 
     public BasePlayer Player => _player;
 
+    //[TODO] Remove
     private WalletOfPoints _walletOfPoints = null;
     private CharacteristicsContainer _characteristics = null;
 
     public override void Initialize()
     {
-        InitializePlayers();
+        InitializePlayer();
 
         //Test: При этом данное значение необходимо откуда либо брать...
-        _walletOfPoints = new WalletOfPoints(100);
+        //_walletOfPoints = new WalletOfPoints(100);
     }
 
-    private void InitializePlayers()
+    private void InitializePlayer()
     {
         _player.Initialize(this);
     }

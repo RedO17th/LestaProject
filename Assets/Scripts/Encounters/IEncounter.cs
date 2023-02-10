@@ -37,24 +37,3 @@ public interface IDialogableEncounter : IHintableEncounter
 {
     void InitializeDialog(string dialogName);
 }
-
-public class Encounter : SimpleEncounter, ITaskEncounter
-{
-    public IQuestTask Task => _task;
-
-    protected IQuestTask _task = null;
-
-    public virtual void SetTask(IQuestTask task) { _task = task; }
-
-    public virtual void Activate()
-    {
-        PrepareTriggerVolume();
-    }
-
-    public virtual void Deactivate()
-    {
-        ClearTriggerVolume();
-
-        _pointer.Disable();
-    }
-}
