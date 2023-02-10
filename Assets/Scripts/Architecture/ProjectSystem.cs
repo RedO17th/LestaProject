@@ -36,8 +36,6 @@ public class ProjectSystem : MonoBehaviour
     {
         if (_instance == null) _instance = this;
         else Destroy(gameObject);
-
-        DontDestroyOnLoad(gameObject);
     }
     private void InitializeGameStates()
     {

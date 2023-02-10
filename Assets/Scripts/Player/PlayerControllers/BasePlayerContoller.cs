@@ -9,13 +9,13 @@ public abstract class BasePlayerContoller : MonoBehaviour
 
     public bool IsEnabled { get; protected set; } = true;
     public PlayerControllerType Type => _type;
-    public GamePlayer Player => _player;
+    public BasePlayer Player => _player;
 
-    protected GamePlayer _player = null;
+    protected BasePlayer _player = null;
 
     public virtual void Initialize(BasePlayer player)
     {
-        _player = player as GamePlayer;
+        _player = player;
     }
 
     public virtual void Prepare() {}

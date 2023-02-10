@@ -27,7 +27,7 @@ public class VolumeDialogueInvoker : DialogueInvoker
         }
     }
 
-    protected virtual void ProcessEnterInVolume(GamePlayer obj)
+    protected virtual void ProcessEnterInVolume(BasePlayer obj)
     {
         Invoke();
         Deactivate();

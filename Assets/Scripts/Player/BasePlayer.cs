@@ -2,24 +2,76 @@
 using System.Diagnostics.Contracts;
 using UnityEngine;
 
+public interface IInteractor
+{
+    void SetInteractable(IInteractable encounter);
+    void RemoveInteractable(IInteractable encounter);
+}
 
 public class BasePlayer : MonoBehaviour
 {
     [SerializeField] protected List<BasePlayerContoller> _controllers;
 
-    protected PlayerSubSystem _playerSystem = null;
-
+    #region Public Properties
     public HealthSign Health { get; } = new HealthSign(100);
-
     public EnergySign Energy { get; } = new EnergySign(150);
-    
-    //Level - заглушка для теста
+    //[Test]
     public Level Level { get; } = new Level();
+    public Quaternion Rotation => transform.rotation;
+    #endregion
+
+    protected PlayerSubSystem _playerSystem = null;
 
     public virtual void Initialize(PlayerSubSystem system)
     {
         _playerSystem = system;
+
+        InitializeControllers();
+        PreparingControllers();
     }
+
+    #region Systems part
+    //Возможно все это дело необходимо вынести в PlayerSubSystem... А здесь только делегирование
+    private void InitializeControllers()
+    {
+        foreach (var controller in _controllers)
+            controller.Initialize(this);
+    }
+
+    private void PreparingControllers()
+    {
+        foreach (var controller in _controllers)
+            controller.Prepare();
+    }
+
+    private void EnableControllers()
+    {
+        foreach (var controller in _controllers)
+            controller.Enable();
+    }
+    private void DisableControllers()
+    {
+        foreach (var controller in _controllers)
+            controller.Disable();
+    }
+    #endregion
+
+    public void Activate()
+    {
+        EnableControllers();
+    }
+
+    public void Deactivate()
+    {
+        DisableControllers();
+    }
+
+    #region MovementPart
+    public void Rotate(Quaternion rotation)
+    {
+        transform.rotation = rotation;
+    }
+    #endregion
 
     public BasePlayerContoller GetControllerBy(PlayerControllerType type)
     {
@@ -45,11 +97,33 @@ public class BasePlayer : MonoBehaviour
 
     #region Wallet part
     //TODO: Если не пригодится, то убрать...
-
     public virtual void AddPoints(int points)
     {
         _playerSystem.AddPoints(points);
     }
 
     #endregion
+
+    //Interact part (test)
+    //[ForMe] А вообще есть смысл передавать encounter'a... Подумать... Мб Event?
+
+    private IInteractable _interactable = null;
+    public void SetInteractable(IInteractable encounter)
+    {
+        _interactable = encounter;
+    }
+    public void RemoveInteractable(IInteractable encounter)
+    {
+        _interactable = null;
+    }
+
+    private void Update()
+    {
+        if (_interactable != null && Input.GetKeyDown(KeyCode.E))
+        {
+            _interactable.Interact();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space)) Health.CurrentValue -= 10;
+    }
 }

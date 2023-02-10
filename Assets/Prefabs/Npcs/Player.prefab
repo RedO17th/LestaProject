@@ -186,7 +186,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5193322390670805941}
   - component: {fileID: 5943265004900845409}
-  - component: {fileID: 4079703571850851283}
   m_Layer: 0
   m_Name: Inventory
   m_TagString: Untagged
@@ -222,28 +221,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 2
---- !u!114 &4079703571850851283
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1006122217695933044}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c1d2af8788995d43abe35159eec2b5d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   _equipmentUI: {fileID: 0}
   _inventoryUI: {fileID: 0}
-  _quickAccessMenuSlots:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  _quickAccessMenu: {fileID: 0}
+  _quickAccessMenuhud: {fileID: 0}
 --- !u!1 &1437986108548605368
 GameObject:
   m_ObjectHideFlags: 0
@@ -288,7 +269,7 @@ GameObject:
   - component: {fileID: 5418957975065274440}
   - component: {fileID: 7586685861484454896}
   - component: {fileID: 9210229231687253681}
-  - component: {fileID: 1437986109242297407}
+  - component: {fileID: 3710950650348947550}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -365,7 +346,7 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &1437986109242297407
+--- !u!114 &3710950650348947550
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -374,7 +355,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1437986109242297405}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8c960d02b009c3498f009a1844ba69c, type: 3}
+  m_Script: {fileID: 11500000, guid: bb09ab745561628419b524b93863be0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _controllers:
@@ -512,7 +493,6 @@ MonoBehaviour:
   _activeQuestsJournal: {fileID: 0}
   _completeQuestsJournal: {fileID: 0}
   _diaryJournal: {fileID: 0}
-  JournalTest: {fileID: 0}
 --- !u!1 &6917586893841443942
 GameObject:
   m_ObjectHideFlags: 0
