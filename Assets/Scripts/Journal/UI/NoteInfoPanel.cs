@@ -21,7 +21,6 @@ public class NoteInfoPanel : MonoBehaviour
             contentWithN += line + "\n";
         }
 
-        _content.text = contentWithN;
-    
+        _content.text = contentWithN;   
     }
 }

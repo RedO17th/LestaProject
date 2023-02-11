@@ -20,6 +20,7 @@ public class UIInventory : MonoBehaviour
     private void Awake()
     {
         //Initialize();
+        //Debug.Log(this.gameObject.name);
     }
 
     public void Initialize()
