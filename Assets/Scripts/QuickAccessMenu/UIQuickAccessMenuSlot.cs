@@ -11,6 +11,12 @@ public class UIQuickAccessMenuSlot : MonoBehaviour, IDropHandler, IBindableSlot
 
     public UIQuickAccessMenuItem QuickAccessMenuItem => _quickAccessMenuItem;
 
+    private QAM _qam;
+
+    public void Initialize(QAM qam)
+    {
+        _qam = qam;
+    }
     public void OnDrop(PointerEventData eventData)
     {
         var otherItemUI = eventData.pointerDrag.GetComponent<UIInventoryItem>();

@@ -5,7 +5,7 @@ using UnityEngine;
 public class InventoryWithSlots : IInventory
 {
 
-    public event Action<object, IInventoryItem, int> OnInventoryItemAddedEvent; //кто добавил предмет в инвентарь, какой предмет и в каком количестве 
+    public event Action<object, IInventoryItem, int> OnInventoryItemAddedEvent;
     public event Action<object, Type, int> OnInventoryItemRemovedEvent;
     public event Action<object> OnInventoryStateChangedEvent;
 

@@ -4,28 +4,54 @@ using UnityEngine;
 
 public class InventoryController : BasePlayerContoller
 {
-    [SerializeField] private UIInventory _equipmentUI;
-
-    [SerializeField] private UIInventory _inventoryUI;
-
     [SerializeField] private UIQuickAccessMenu _quickAccessMenu;
 
     [SerializeField] private UIQuickAccessMenu _quickAccessMenuhud;
+
+    [SerializeField] private UIInventoryController _uiInventoryController;
+
+    [Space]
+    [SerializeField] private int _inventoryCapacity = 42;
+    [SerializeField] private int _equipmentCapacity = 12;
+
 
     public static InventoryController Instance => _instance;
 
     public event Action<int> OnMoneyChanged;
 
-    public InventoryWithSlots Inventory => _inventoryUI.Inventory;
-    public InventoryWithSlots Equipment => _equipmentUI.Inventory;
+    public InventoryWithSlots Inventory
+    {
+        get
+        {
+            if (_inventory == null)
+                _inventory = new InventoryWithSlots(_inventoryCapacity);
+            return _inventory;
+        }
+    }
+    public InventoryWithSlots Equipment
+    {
+        get
+        {
+            if (_equipment == null)
+                _equipment = new InventoryWithSlots(_equipmentCapacity);
+            return _equipment;
+        }
+    }
+
     public UIQuickAccessMenu QuickAccessMenu => _quickAccessMenu;
 
     public int Money => _money;
 
     private static InventoryController _instance;
+
     private int _money;
+
     private GameData _gameData;
+
     private QuestSubSystem _questSubSystem = null;
+
+    private InventoryWithSlots _equipment;
+    private InventoryWithSlots _inventory;
 
     private void Awake()
     {
@@ -35,8 +61,12 @@ public class InventoryController : BasePlayerContoller
 
     public void Initialize()
     {
-        _equipmentUI.Initialize();
-        _inventoryUI.Initialize();
+        //_equipment.Initialize();
+        //_inventory.Initialize();
+        _uiInventoryController.UIInventory.Initialize(Inventory);
+        _uiInventoryController.UIEquipment.Initialize(Equipment);
+
+
         _quickAccessMenu.Initialize(this);
         _quickAccessMenuhud.Initialize(this);
 
@@ -73,7 +103,7 @@ public class InventoryController : BasePlayerContoller
             IInventoryItem item = factory.SpawnItem(itemData.Info);
             item.State.amount = itemData.Amount;
 
-            _inventoryUI.Inventory.TryToAdd(this, item);
+            //_inventory.Inventory.TryToAdd(this, item);
         }
     }
 

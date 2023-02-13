@@ -2,39 +2,25 @@ using UnityEngine;
 
 public class UIInventory : MonoBehaviour
 {
-    [SerializeField] private int _inventoryCapacity = 25;
     [SerializeField] private UISlot[] _uiSlots;
 
-    private InventoryWithSlots _inventory = null; 
+    private InventoryWithSlots _inventory;
 
-    public InventoryWithSlots Inventory 
-    { 
-        get 
-        { 
-            if (_inventory == null) 
-                _inventory = new InventoryWithSlots(_inventoryCapacity);
-            return _inventory;
-        }
-    }
+    public InventoryWithSlots Inventory => _inventory;
 
-    private void Awake()
+    public void Initialize(InventoryWithSlots inventory)
     {
-        //Initialize();
-        //Debug.Log(this.gameObject.name);
-    }
-
-    public void Initialize()
-    {
-        Inventory.OnInventoryStateChangedEvent += OnInventoryStateChanged;
+        _inventory = inventory;
+        inventory.OnInventoryStateChangedEvent += OnInventoryStateChanged;
         foreach(var slot in _uiSlots)
         {
             slot.Initialize(this);
         }
 
-        SetupInventoryUI(Inventory);
+        SetupInventoryUI(inventory);
     }
 
-    private void SetupInventoryUI(InventoryWithSlots inventory)
+    public void SetupInventoryUI(InventoryWithSlots inventory)
     {
         var allSlots = inventory.GetAllSlots();
         var allSlotsCount = allSlots.Length;
@@ -52,11 +38,5 @@ public class UIInventory : MonoBehaviour
     {
         foreach (var slot in _uiSlots)
             slot.Refresh();
-    }
-
-    public void OnOpenOrClose()
-    {
-        gameObject.SetActive(!gameObject.activeSelf);
-        //Кинуть ивент, что инвентарь закрылся или открылся 
     }
 }
