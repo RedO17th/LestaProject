@@ -25,30 +25,28 @@ public class TaskEncounter : SimpleEncounter, ITaskEncounter
 //Encounter with task and Dialogue
 public class DialogueEncounter : SimpleEncounter, IDialogableEncounter
 {
-    public bool TaskIsExist => _task != null;
-    public IQuestTask Task => _task;
+    public bool TaskIsExist => Task != null;
+    public IQuestTask Task { get; protected set; }
 
-    protected IQuestTask _task = null;
+    //public BaseDialogController DialogController => _dialogController;
 
-    public BaseDialogController DialogController => _dialogController;
+    //protected BaseDialogController _dialogController = null;
 
-    protected BaseDialogController _dialogController = null;
-    protected DialogSubSystem _dialogSubSystem = null;
+    //protected DialogSubSystem _dialogSubSystem = null;
 
-    protected BaseInteractionsController _interactionHandler = null;
+    //protected BaseInteractionsController _interactionHandler = null;
 
 
     public virtual void SetTask(IQuestTask task) 
     {
-        _task = task;
-        _task.OnCompleted += ProcessTaskComplition;
+        Task = task;
+        Task.OnCompleted += ProcessTaskComplition;
     }
 
-    //[Think] У задачи могут быть разные состояния при завершении, обдумать этот момент
     public virtual void ProcessTaskComplition() 
     {
-        _task.OnCompleted -= ProcessTaskComplition;
-        _task = null;
+        Task.OnCompleted -= ProcessTaskComplition;
+        Task = null;
     }
 
     public virtual void InitializeDialog(string dialogName) { }

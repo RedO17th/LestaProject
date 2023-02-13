@@ -30,7 +30,7 @@ public class NPCEncounterDialogueInteractionMode : BaseTaskInteractionMode
     {
         _npcEncounter = _encounter as DialogueEncounter;
 
-        _dialogController = _npcEncounter.DialogController;
+        //_dialogController = _npcEncounter.DialogController;
     }
 
     public override bool CheckConditionForExecution()

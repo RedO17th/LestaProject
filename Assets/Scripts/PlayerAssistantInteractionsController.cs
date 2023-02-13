@@ -29,7 +29,7 @@ public class PlayerAssistantDialogueInteractionMode : BaseTaskInteractionMode
     {
         _playerAssistant = _encounter as BasePlayerAssistant;
 
-        _dialogController = _playerAssistant.DialogController;
+        //_dialogController = _playerAssistant.DialogController;
     }
 
     public override bool CheckConditionForExecution()

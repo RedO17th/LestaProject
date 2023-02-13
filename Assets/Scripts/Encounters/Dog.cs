@@ -9,30 +9,43 @@ public class BasePlayerAssistant : DialogueEncounter { }
 
 public class Dog : BasePlayerAssistant
 {
+    private IStateMachine _stateMachine = null;
+
     protected override void Awake()
     {
-        _dialogController = GetComponent<BaseDialogController>();
+        //_dialogController = GetComponent<BaseDialogController>();
 
-        _interactionHandler = new PlayerAssistantInteractionsController(this);
-        _interactionHandler.InitializeInteractionModes();
+        _stateMachine = GetComponent<AssistantStateMachine>();
+        _stateMachine.Initialize(this);
+
+        //_interactionHandler = new PlayerAssistantInteractionsController(this);
+        //_interactionHandler.InitializeInteractionModes();
     }
 
     protected override void Start()
     {
         PrepareTriggerVolume();
 
-        _dialogController.Initialize();
+        //_dialogController.Initialize();
+
+        List<IState> states = new List<IState>()
+        {
+            new DefaultAssistantState(_stateMachine),
+            new DialogueAssistantState(_stateMachine)
+        };
+
+        _stateMachine.SetStates(states);
     }
 
     public override void InitializeDialog(string dialogName)
     {
-        if (_dialogSubSystem == null)
-            _dialogSubSystem = ProjectSystem.GetSubSystem<DialogSubSystem>();
+        //if (_dialogSubSystem == null)
+        //    _dialogSubSystem = ProjectSystem.GetSubSystem<DialogSubSystem>();
 
-        var dialog = _dialogSubSystem.GetDialogueByName(dialogName);
-            dialog.Initialize(this);
+        //var dialog = _dialogSubSystem.GetDialogueByName(dialogName);
+        //    dialog.Initialize(this);
 
-        _dialogController.SetDialog(dialog);
+        //_dialogController.SetDialog(dialog);
     }
 
     public override void Hint() => base.Hint();
@@ -44,7 +57,12 @@ public class Dog : BasePlayerAssistant
 
         _pointer.Disable();
 
-        _interactionHandler.Interact();
+        //_interactionHandler.Interact();
+    }
+
+    private void Update()
+    {
+        _stateMachine.Tick();
     }
 
     public override void Deactivate()
