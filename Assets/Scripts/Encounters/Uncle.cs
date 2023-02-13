@@ -6,7 +6,7 @@ public class Uncle : DialogueEncounter
 {
     protected override void Awake()
     {
-        _dialogController = GetComponent<BaseDialogController>();
+        //_dialogController = GetComponent<BaseDialogController>();
 
         //_interactionHandler = new NPCEncounterInteractionsController(this);
         //_interactionHandler.InitializeInteractionModes();
@@ -14,7 +14,7 @@ public class Uncle : DialogueEncounter
 
     protected override void Start()
     {
-        _dialogController.Initialize();
+        //_dialogController.Initialize();
     }
 
     public override void InitializeDialog(string dialogName)

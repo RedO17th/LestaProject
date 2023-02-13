@@ -29,48 +29,47 @@ public class DefaultAssistantState : BaseState
         _assistantStateMachine = stateMachine as AssistantStateMachine;
     }
 
-    public override bool CanPerform() => true;
+    public override bool CanPerformAndNotActivated() => true;
 
-    public override Type Tick()
+    public override void Tick()
     {
         Debug.Log($"StandartAssistantState.Tick");
-
-        return base.Tick();
     }
 }
 
-public class DialogueAssistantState : BaseState
+public class DialogueAssistantState : DialogueState
 {
     private AssistantStateMachine _assistantStateMachine = null;
 
     private bool _isStarted = false;
-    private string _dialogName = string.Empty;
 
     public DialogueAssistantState(IStateMachine stateMachine) : base(stateMachine)
     {
         _assistantStateMachine = stateMachine as AssistantStateMachine;
     }
 
-    public void SetDialogueName(string dialogName) => _dialogName = dialogName;
+    public override bool CanPerformAndNotActivated()
+    { 
+        return _dialogueName != string.Empty && Activated == false;
+    }
 
-    public override Type Tick()
+    public override void Tick()
     {
         Debug.Log($"TalkAssistantState.Tick");
 
         ProcessTalk();
-
-        return base.Tick();
     }
 
     private void ProcessTalk()
     {
         if (_isStarted == false)
         {
+            Activated = true;
             _isStarted = true;
 
             var context = new DialogContext();
                 context.SetCommand(DialogueCommand.Activate);
-                context.SetID(_dialogName);
+                context.SetID(_dialogueName);
 
             ProjectBus.Instance.SendSignalByContext(context);
         }

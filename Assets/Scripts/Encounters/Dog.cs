@@ -13,22 +13,10 @@ public class Dog : BasePlayerAssistant
 
     protected override void Awake()
     {
-        //_dialogController = GetComponent<BaseDialogController>();
-
         _stateMachine = GetComponent<AssistantStateMachine>();
         _stateMachine.Initialize(this);
 
-        //_interactionHandler = new PlayerAssistantInteractionsController(this);
-        //_interactionHandler.InitializeInteractionModes();
-    }
-
-    protected override void Start()
-    {
-        PrepareTriggerVolume();
-
-        //_dialogController.Initialize();
-
-        List<IState> states = new List<IState>()
+        var states = new List<IState>()
         {
             new DefaultAssistantState(_stateMachine),
             new DialogueAssistantState(_stateMachine)
@@ -37,15 +25,17 @@ public class Dog : BasePlayerAssistant
         _stateMachine.SetStates(states);
     }
 
+    protected override void Start()
+    {
+        PrepareTriggerVolume();
+
+        _stateMachine.ActivateDefaultBehaviour();
+    }
+
     public override void InitializeDialog(string dialogName)
     {
-        //if (_dialogSubSystem == null)
-        //    _dialogSubSystem = ProjectSystem.GetSubSystem<DialogSubSystem>();
-
-        //var dialog = _dialogSubSystem.GetDialogueByName(dialogName);
-        //    dialog.Initialize(this);
-
-        //_dialogController.SetDialog(dialog);
+        var s = _stateMachine.GetState<DialogueAssistantState>();
+            s.SetDialogueName(dialogName);    
     }
 
     public override void Hint() => base.Hint();
@@ -53,11 +43,9 @@ public class Dog : BasePlayerAssistant
 
     public override void Interact()
     {
-        Debug.Log($"Dog.Interact");
-
         _pointer.Disable();
 
-        //_interactionHandler.Interact();
+        _stateMachine.ActivateQuestBehaviour();
     }
 
     private void Update()
