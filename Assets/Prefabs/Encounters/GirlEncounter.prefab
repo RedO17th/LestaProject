@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7294222371576667}
   - component: {fileID: 7294222371576642}
-  - component: {fileID: 7294222371576669}
+  - component: {fileID: 8067620054576226530}
   m_Layer: 0
   m_Name: GirlEncounter
   m_TagString: Untagged
@@ -51,7 +51,7 @@ MonoBehaviour:
   _name: Girl
   _pointer: {fileID: 7294221718210319}
   _triggerVolume: {fileID: 1734404434391004282}
---- !u!114 &7294222371576669
+--- !u!114 &8067620054576226530
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -60,7 +60,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7294222371576665}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 839849c0dbe489045bbfbc85ca6d9cc1, type: 3}
+  m_Script: {fileID: 11500000, guid: 13e4f7f1155f6d84d9990778930553d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2075770488522522116

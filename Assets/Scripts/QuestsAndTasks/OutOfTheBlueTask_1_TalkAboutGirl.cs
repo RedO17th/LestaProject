@@ -21,6 +21,8 @@ public class OutOfTheBlueTask_1_TalkAboutGirl : BaseQuestTask
 
         _dialogueVolume = _quest.GetInvokerEncounterByName(_freeDialogueName) as IContextInvoker;
 
+        DialogueSceneController.OnDialogueEnd += ProcessEndOfDialogue;
+
         base.Prepare();
     }
 
@@ -30,6 +32,25 @@ public class OutOfTheBlueTask_1_TalkAboutGirl : BaseQuestTask
         _girl.Hint();
 
         base.Activate();
+    }
+
+    private void ProcessEndOfDialogue(BaseDialogue dialogue)
+    {
+        if (dialogue.Name == _dialogueName)
+        {
+            DialogueSceneController.OnDialogueEnd -= ProcessEndOfDialogue;
+
+            FinishTheCurrentTask();
+        }
+    }
+
+    private void FinishTheCurrentTask()
+    {
+        var context = new TaskContext();
+            context.SetCommand(TaskCommand.Complete);
+            context.SetID(_idName);
+
+        ProjectBus.Instance.SendSignalByContext(context);
     }
 
     protected override void Complete()
@@ -50,6 +71,7 @@ public class OutOfTheBlueTask_1_TalkAboutGirl : BaseQuestTask
 
     protected override void Clear()
     {
+        _dialogueVolume = null;
         _girl = null;
     }
 }
