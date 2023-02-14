@@ -16,10 +16,31 @@ public class JohnnyTheyreInTheTreesTask_3_TalkWithUncleTask : BaseQuestTask
         _uncle.SetTask(this);
         _uncle.InitializeDialog(_uncleEncounterDialogName);
 
+        DialogueSceneController.OnDialogueEnd += ProcessEndOfDialogue;
+
         base.Prepare();
     }
 
     public override void Activate() => base.Activate();
+
+    private void ProcessEndOfDialogue(BaseDialogue dialogue)
+    {
+        if (dialogue.Name == _uncleEncounterDialogName)
+        {
+            DialogueSceneController.OnDialogueEnd -= ProcessEndOfDialogue;
+
+            FinishTheCurrentTask();
+        }
+    }
+
+    private void FinishTheCurrentTask()
+    {
+        var context = new TaskContext();
+            context.SetCommand(TaskCommand.Complete);
+            context.SetID(_idName);
+
+        ProjectBus.Instance.SendSignalByContext(context);
+    }
 
     protected override void Complete()
     {

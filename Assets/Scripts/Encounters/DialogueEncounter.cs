@@ -28,15 +28,6 @@ public class DialogueEncounter : SimpleEncounter, IDialogableEncounter
     public bool TaskIsExist => Task != null;
     public IQuestTask Task { get; protected set; }
 
-    //public BaseDialogController DialogController => _dialogController;
-
-    //protected BaseDialogController _dialogController = null;
-
-    //protected DialogSubSystem _dialogSubSystem = null;
-
-    //protected BaseInteractionsController _interactionHandler = null;
-
-
     public virtual void SetTask(IQuestTask task) 
     {
         Task = task;

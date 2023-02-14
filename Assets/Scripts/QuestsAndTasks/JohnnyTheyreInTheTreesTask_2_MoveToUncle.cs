@@ -25,7 +25,6 @@ public class JohnnyTheyreInTheTreesTask_2_MoveToUncle : BaseQuestTask
         _distanationVolume.SetTask(this);
 
         _uncle = _quest.GetNpcEncounterByName(_uncleEncounterName) as IHintableEncounter;
-        _uncle.Hint();
 
         //Remove
         _dog = _quest.GetNpcEncounterByName(_dogEncounterName) as Dog;
@@ -36,7 +35,9 @@ public class JohnnyTheyreInTheTreesTask_2_MoveToUncle : BaseQuestTask
     public override void Activate()
     {
         _distanationVolume.Activate();
+
         _uncle.Activate();
+        _uncle.Hint();
 
         //Remove
         _dog.transform.position = _dogPosition;

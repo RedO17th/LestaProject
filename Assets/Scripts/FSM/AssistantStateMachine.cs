@@ -34,7 +34,7 @@ public class DefaultAssistantState : BaseState, IDefaultState
     public override void Tick() { }
 }
 
-public class DialogueAssistantState : DefaultDialogueState, IQuestState
+public class DialogueAssistantState : DialogueState, IQuestState
 {
     private AssistantStateMachine _assistantStateMachine = null;
 

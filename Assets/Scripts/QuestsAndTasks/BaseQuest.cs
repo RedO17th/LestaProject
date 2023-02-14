@@ -22,13 +22,9 @@ public class BaseQuest : MonoBehaviour, IQuestNote
     public event Action<BaseQuest> OnQuestComplete;
 
     public string IDName => _idName;
-
     public string Id => _idName;
-
     public string Header => _name;
-
     public string Content => _description;
-
     public Reward Reward => _reward;
 
     protected QuestSubSystem _questSubSystem = null;

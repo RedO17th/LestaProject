@@ -82,11 +82,6 @@ public class QuestSubSystem : BaseSubSystem
         }
     }
 
-    private void ProcessQuestComplete(BaseQuest baseQuest)
-    {
-        baseQuest.OnQuestComplete -= ProcessQuestComplete;
-        OnQuestCompleted?.Invoke(this, baseQuest);
-    }
 
     private QuestAndEncounters GetContainerByQuestID(string name)
     {
@@ -108,6 +103,14 @@ public class QuestSubSystem : BaseSubSystem
     {
         return Instantiate(container.QuestPrefab, transform);
     }
+
+    private void ProcessQuestComplete(BaseQuest baseQuest)
+    {
+        baseQuest.OnQuestComplete -= ProcessQuestComplete;
+
+        OnQuestCompleted?.Invoke(this, baseQuest);
+    }
+
 
     #endregion
 

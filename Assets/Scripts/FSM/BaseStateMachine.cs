@@ -163,11 +163,11 @@ public interface IDialogueState
     void SetDialogueName(string dialogName);
 }
 
-public abstract class DefaultDialogueState : BaseState, IDialogueState
+public abstract class DialogueState : BaseState, IDialogueState
 {
     protected string _dialogueName = string.Empty;
 
-    public DefaultDialogueState(IStateMachine stateMachine) : base(stateMachine) { }
+    public DialogueState(IStateMachine stateMachine) : base(stateMachine) { }
     public virtual void SetDialogueName(string dialogueName)
     {
         _dialogueName = dialogueName;
