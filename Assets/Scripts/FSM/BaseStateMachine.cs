@@ -50,7 +50,9 @@ public class BaseStateMachine : MonoBehaviour, IStateMachine
 
     public virtual void ActivateDefaultBehaviour()
     {
-        _currentState = FindState();
+        _currentState?.Deactivate();
+
+        _currentState = FindStateByMark<IDefaultState>();
 
         if (_currentState != null)
         {
@@ -60,11 +62,11 @@ public class BaseStateMachine : MonoBehaviour, IStateMachine
         }
     }
 
-    protected virtual IState FindState()
+    protected virtual IState FindStateByMark<T>() where T : class
     {
         IState result = null;
 
-        foreach (var state in _states)
+        foreach (var state in _states.Where(s => s is T))
         {
             if (state.CanPerformAndNotActivated())
             {
@@ -78,7 +80,7 @@ public class BaseStateMachine : MonoBehaviour, IStateMachine
 
     public virtual void ActivateQuestBehaviour()
     {
-        var questState = FindState();
+        var questState = FindStateByMark<IQuestState>();
 
         if (questState != null)
         {
@@ -107,6 +109,9 @@ public interface IState
     void Deactivate();
 }
 
+public interface IDefaultState { }
+public interface IQuestState { }
+
 public abstract class BaseState : IState
 {
     public bool Activated { get; protected set; } = false;
@@ -123,11 +128,11 @@ public interface IDialogueState
     void SetDialogueName(string dialogName);
 }
 
-public abstract class DialogueState : BaseState, IDialogueState
+public abstract class DefaultDialogueState : BaseState, IDialogueState
 {
     protected string _dialogueName = string.Empty;
 
-    public DialogueState(IStateMachine stateMachine) : base(stateMachine) { }
+    public DefaultDialogueState(IStateMachine stateMachine) : base(stateMachine) { }
     public virtual void SetDialogueName(string dialogueName)
     {
         _dialogueName = dialogueName;

@@ -20,7 +20,7 @@ public class AssistantStateMachine : BaseStateMachine
     }
 }
 
-public class DefaultAssistantState : BaseState
+public class DefaultAssistantState : BaseState, IDefaultState
 {
     private AssistantStateMachine _assistantStateMachine = null;
 
@@ -37,7 +37,7 @@ public class DefaultAssistantState : BaseState
     }
 }
 
-public class DialogueAssistantState : DialogueState
+public class DialogueAssistantState : DefaultDialogueState, IQuestState
 {
     private AssistantStateMachine _assistantStateMachine = null;
 
