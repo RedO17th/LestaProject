@@ -50,16 +50,31 @@ public class BaseStateMachine : MonoBehaviour, IStateMachine
 
     public virtual void ActivateDefaultBehaviour()
     {
-        _currentState?.Deactivate();
+        ActivateSomeDefaultState();
+    }
 
-        _currentState = FindStateByMark<IDefaultState>();
+    protected virtual void ActivateSomeDefaultState()
+    {
+        var someDefaultState = FindStateByMark<IDefaultState>();
 
-        if (_currentState != null)
+        if (someDefaultState != null)
         {
+            _currentState?.Deactivate();
+
+            _currentState = someDefaultState;
+
+            _currentState.OnCompleted += ProcessDefaultStateCompleting;
             _currentState.Activate();
 
             OnStateChanged?.Invoke(_currentState);
         }
+    }
+
+    protected virtual void ProcessDefaultStateCompleting(IState currentState)
+    {
+        currentState.OnCompleted -= ProcessDefaultStateCompleting;
+
+        ActivateSomeDefaultState();
     }
 
     protected virtual IState FindStateByMark<T>() where T : class
@@ -84,14 +99,22 @@ public class BaseStateMachine : MonoBehaviour, IStateMachine
 
         if (questState != null)
         {
-            _currentState.Deactivate();
+            _currentState?.Deactivate();
 
             _currentState = questState;
 
+            _currentState.OnCompleted += ProcessQuestStateCompleting;
             _currentState.Activate();
         
             OnStateChanged?.Invoke(_currentState);
         }
+    }
+
+    protected virtual void ProcessQuestStateCompleting(IState currentState)
+    {
+        currentState.OnCompleted -= ProcessQuestStateCompleting;
+
+        ActivateSomeDefaultState();
     }
 
     public virtual void Tick() => _currentState?.Tick();
@@ -101,6 +124,8 @@ public class BaseStateMachine : MonoBehaviour, IStateMachine
 
 public interface IState
 {
+    event Action<IState> OnCompleted;
+
     bool Activated { get; }
     bool CanPerformAndNotActivated();
 
@@ -114,12 +139,22 @@ public interface IQuestState { }
 
 public abstract class BaseState : IState
 {
+    public event Action<IState> OnCompleted;
+
     public bool Activated { get; protected set; } = false;
 
     public BaseState(IStateMachine stateMachine) { }
+
     public virtual bool CanPerformAndNotActivated() { return false; }
     public virtual void Activate() { Activated = true; }
-    public virtual void Tick() { }
+    public virtual void Tick() 
+    {
+        if (Activated == false)
+            return;
+    }
+
+    protected virtual void OnStateCompleted(IState state) { OnCompleted?.Invoke(state); }
+
     public virtual void Deactivate() { Activated = false; }
 }
 

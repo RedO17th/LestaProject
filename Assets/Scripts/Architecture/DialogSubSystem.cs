@@ -19,8 +19,6 @@ public class DialogSubSystem : BaseSubSystem
 
     public event Action<object, INote> OnAddNote;
 
-    public void Initialize(ProjectSystem system) => base.Initialize();
-
     public BaseDialogue GetDialogueByName(string name)
     {
         return _dialogueData.GetDialogueByName(name);
@@ -48,12 +46,12 @@ public class DialogSubSystem : BaseSubSystem
         DialogueSceneController.OnDialogueStart += HandleOnDialogueStart;
     }
 
-    public void HandleOnDialogueStart()
+    public void HandleOnDialogueStart(BaseDialogue dialogue)
     {
         EventSystem.UIEvents.InvokeOnDialogueMenuCalled();
     }
 
-    public void HandleOnDialogueEnd()
+    public void HandleOnDialogueEnd(BaseDialogue dialogue)
     {
 
         EventSystem.UIEvents.InvokeOnExitFromDialogueMenuCalled();

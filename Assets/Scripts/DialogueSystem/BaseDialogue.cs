@@ -27,13 +27,13 @@ public class BaseDialogue : MonoBehaviour
 
     public virtual void InvokeResult()
     {
-        if (_dialogueResult == null)
-        {
-            Debug.Log($"BaseDialogue.InvokeResult: result is absent");
-            return;
-        }
+        //if (_dialogueResult == null)
+        //{
+        //    Debug.Log($"BaseDialogue.InvokeResult: result is absent");
+        //    return;
+        //}
 
-        _dialogueResult.Invoke();
+        //_dialogueResult.Invoke();
     }
 
     public virtual void End()

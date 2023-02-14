@@ -8,19 +8,41 @@ public class JohnnyTheyreInTheTreesTask_1_TalkWithAssistant : BaseQuestTask
     [SerializeField] protected string _dogEncounterName = string.Empty;
     [SerializeField] protected string _dogEncounterDialogName = string.Empty;
 
-    private BasePlayerAssistant _dog = null;
+    private BasePlayerAssistant _assistant = null;
 
     public override void Prepare()
     {
-        _dog = _quest.GetNpcEncounterByName(_dogEncounterName) as BasePlayerAssistant;
-        _dog.SetTask(this);
-        _dog.InitializeDialog(_dogEncounterDialogName);
-        _dog.Hint();
+        _assistant = _quest.GetNpcEncounterByName(_dogEncounterName) as BasePlayerAssistant;
+
+        _assistant.SetTask(this);
+        _assistant.InitializeDialog(_dogEncounterDialogName);
+        _assistant.Hint();
+
+        DialogueSceneController.OnDialogueEnd += ProcessEndOfDialogue;
 
         base.Prepare();
     }
 
     public override void Activate() => base.Activate();
+
+    private void ProcessEndOfDialogue(BaseDialogue dialogue)
+    {
+        if (dialogue.Name == _dogEncounterDialogName)
+        {
+            DialogueSceneController.OnDialogueEnd -= ProcessEndOfDialogue;
+
+            FinishTheCurrentTask();
+        }
+    }
+
+    private void FinishTheCurrentTask()
+    {
+        var context = new TaskContext();
+            context.SetCommand(TaskCommand.Complete);
+            context.SetID(_idName);
+
+        ProjectBus.Instance.SendSignalByContext(context);
+    }
 
     protected override void Complete()
     {
@@ -38,7 +60,7 @@ public class JohnnyTheyreInTheTreesTask_1_TalkWithAssistant : BaseQuestTask
 
     protected override void Clear()
     {
-        _dog = null;
+        _assistant = null;
     }
 }
  

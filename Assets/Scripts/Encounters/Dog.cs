@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.VirtualTexturing;
 
-//[TODO] Перевести общие поля с NPCEncounterWithDialog в EncounterWithDialog
 public class BasePlayerAssistant : DialogueEncounter { }
 
 public class Dog : BasePlayerAssistant

@@ -29,8 +29,8 @@ public class DialogueSceneController : MonoBehaviour
     public static event Action<Story> OnCreateStory;
 
     //Мазанов А.
-    public static event Action OnDialogueStart;
-    public static event Action OnDialogueEnd;
+    public static event Action<BaseDialogue> OnDialogueStart;
+    public static event Action<BaseDialogue> OnDialogueEnd;
 
     private DialogSubSystem _dialogSubSystem = null;
 
@@ -51,7 +51,7 @@ public class DialogueSceneController : MonoBehaviour
     public void StartStory(BaseDialogue dialogue)
     {
         //Мазанов А.
-        OnDialogueStart?.Invoke();
+        OnDialogueStart?.Invoke(dialogue);
 
         _currentDialogue = dialogue;
 
@@ -63,8 +63,6 @@ public class DialogueSceneController : MonoBehaviour
             button.SetStory(_story);
 
         _nextButton.SetStory(_story);
-
-        //_dialogueScreen.SetActive(true);
 
         RefreshView();
     }
@@ -83,15 +81,15 @@ public class DialogueSceneController : MonoBehaviour
         }
         else
         {
-            OnDialogueEnd.Invoke();
-            //_dialogueScreen.SetActive(false);
-
-            _currentDialogue.InvokeResult();
+            //_currentDialogue.InvokeResult();
             _currentDialogue.End();
-            _currentDialogue = null;
 
             //[?] Нужно ли ее обнулять...
             //_story = null;
+
+            OnDialogueEnd.Invoke(_currentDialogue);
+
+            _currentDialogue = null;
         }
     }
 

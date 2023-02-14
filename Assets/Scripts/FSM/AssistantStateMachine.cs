@@ -31,10 +31,7 @@ public class DefaultAssistantState : BaseState, IDefaultState
 
     public override bool CanPerformAndNotActivated() => true;
 
-    public override void Tick()
-    {
-        Debug.Log($"StandartAssistantState.Tick");
-    }
+    public override void Tick() { }
 }
 
 public class DialogueAssistantState : DefaultDialogueState, IQuestState
@@ -55,7 +52,7 @@ public class DialogueAssistantState : DefaultDialogueState, IQuestState
 
     public override void Tick()
     {
-        Debug.Log($"TalkAssistantState.Tick");
+        base.Tick();
 
         ProcessTalk();
     }
@@ -67,11 +64,36 @@ public class DialogueAssistantState : DefaultDialogueState, IQuestState
             Activated = true;
             _isStarted = true;
 
-            var context = new DialogContext();
-                context.SetCommand(DialogueCommand.Activate);
-                context.SetID(_dialogueName);
+            SendSignalByDialogueContext();
 
-            ProjectBus.Instance.SendSignalByContext(context);
+            DialogueSceneController.OnDialogueEnd += ProcessEndOfDialogue;
         }
+    }
+
+    private void SendSignalByDialogueContext()
+    {
+        var context = new DialogContext();
+            context.SetCommand(DialogueCommand.Activate);
+            context.SetID(_dialogueName);
+
+        ProjectBus.Instance.SendSignalByContext(context);
+    }
+
+    private void ProcessEndOfDialogue(BaseDialogue dialogue)
+    {
+        if (dialogue.Name == _dialogueName)
+        {
+            DialogueSceneController.OnDialogueEnd -= ProcessEndOfDialogue;
+
+            OnStateCompleted(this);
+        }
+    }
+
+    public override void Deactivate()
+    {
+        base.Deactivate();
+
+        _isStarted = false;
+        _dialogueName = string.Empty;
     }
 }
