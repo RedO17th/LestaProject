@@ -10,7 +10,7 @@ public class UISubSystem : BaseSubSystem
     [SerializeField] private IngameScreen _clipboardScreen = null;
     [SerializeField] private IngameScreen _skillsScreen = null;
     [SerializeField] private IngameScreen _pauseMenuScreen = null;
-    [SerializeField] private IngameScreen _dialogScreen = null;
+    [SerializeField] private IngameScreen _dialogueScreen = null;
     [SerializeField] private IngameScreen _settingsScreen = null;
     private List<IngameScreen> _screens = null;
 
@@ -67,7 +67,7 @@ public class UISubSystem : BaseSubSystem
         if (_inventoryScreen != null) _screens.Add(_inventoryScreen);
         if (_clipboardScreen != null) _screens.Add(_clipboardScreen);
         if (_skillsScreen != null) _screens.Add(_skillsScreen);
-        if (_dialogScreen != null) _screens.Add(_dialogScreen);
+        if (_dialogueScreen != null) _screens.Add(_dialogueScreen);
         if (_pauseMenuScreen != null) _screens.Add(_pauseMenuScreen);
         if (_settingsScreen != null) _screens.Add(_settingsScreen);
     }
@@ -79,7 +79,7 @@ public class UISubSystem : BaseSubSystem
             EventSystem.InvokeOnResumeCalled();
             _isInMenu = false;
         }
-        else if ((screenID == _HUDScreen.ID) && !_isInMenu)
+        else if ((screenID != _HUDScreen.ID && screenID != _dialogueScreen.ID) && !_isInMenu)
         {
             EventSystem.InvokeOnPauseCalled();
             _isInMenu = true;
@@ -108,7 +108,7 @@ public class UISubSystem : BaseSubSystem
 
     public void HandleOnDialogueMenuCalled()
     {
-        ShowScreen(_dialogScreen.ID);
+        ShowScreen(_dialogueScreen.ID);
     }
 
     public void HandleOnExitFromDialogueMenuCalled()
