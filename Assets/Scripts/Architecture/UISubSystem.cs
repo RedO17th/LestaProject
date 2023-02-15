@@ -74,12 +74,12 @@ public class UISubSystem : BaseSubSystem
 
     public void ShowScreen(IngameScreenID screenID)
     {
-        if (screenID == _HUDScreen.ID && _isInMenu)
+        if ((screenID == _HUDScreen.ID) && _isInMenu)
         {
             EventSystem.InvokeOnResumeCalled();
             _isInMenu = false;
         }
-        else if (screenID != _HUDScreen.ID && !_isInMenu)
+        else if ((screenID == _HUDScreen.ID) && !_isInMenu)
         {
             EventSystem.InvokeOnPauseCalled();
             _isInMenu = true;
@@ -99,13 +99,11 @@ public class UISubSystem : BaseSubSystem
     public void HandleOnPauseMenuCalled()
     {
         ShowScreen(_pauseMenuScreen.ID);
-        //EventSystem.InvokeOnPauseCalled();
     }
 
     public void HandleOnPlayerMenuExit()
     {
         ShowScreen(_HUDScreen.ID);
-        //EventSystem.InvokeOnResumeCalled();
     }
 
     public void HandleOnDialogueMenuCalled()

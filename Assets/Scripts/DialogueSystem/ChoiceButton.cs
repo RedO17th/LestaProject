@@ -1,5 +1,6 @@
 using Ink.Runtime;
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,7 +10,7 @@ public class ChoiceButton : MonoBehaviour
     private Story _story = null;
 
     private Button _button = null;
-    private Text _buttonCaption = null;
+    private TextMeshProUGUI _buttonCaption = null;
 
     public event Action OnClickEvent;
 
@@ -28,7 +29,13 @@ public class ChoiceButton : MonoBehaviour
     private void Awake()
     {
         _button = GetComponent<Button>();
-        _buttonCaption = _button.GetComponentInChildren<Text>();
+        _buttonCaption = _button.GetComponent<TextMeshProUGUI>();
+        //Debug.Log(_buttonCaption.text);
+    }
+
+    private void Start()
+    {
+        
     }
 
     public void SetStory(Story story)
@@ -45,6 +52,10 @@ public class ChoiceButton : MonoBehaviour
     public void SetNewChoice(Choice choice)
     {
         _choice = choice;
-        _buttonCaption.text = choice.text.Trim();
+        if (_buttonCaption != null)
+        {
+            _buttonCaption.text = "- " + choice.text.Trim();   
+        }
+
     }
 }

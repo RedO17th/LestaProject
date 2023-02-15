@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using System;
 using Ink.Runtime;
+using TMPro;
 
 // This is a super bare bones example of how to play and display a ink story in Unity.
 public class DialogueSceneController : MonoBehaviour
@@ -10,12 +11,12 @@ public class DialogueSceneController : MonoBehaviour
     [SerializeField] private GameObject _dialogueScreen = null;
 
     [Header("Speaker")]
-    [SerializeField] private Text _speakerName = null;
+    [SerializeField] private TextMeshProUGUI _speakerName = null;
     [SerializeField] private Image _speakerPortrait = null;
     [SerializeField] private Image _speakerShadow = null;
 
     [Header("Replica")]
-    [SerializeField] private Text _replica = null;
+    [SerializeField] private TextMeshProUGUI _replica = null;
 
     [Header("Tisha")]
     [SerializeField] private Image _tishaShadow = null;
