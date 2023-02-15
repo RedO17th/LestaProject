@@ -14,7 +14,7 @@ public class BaseDialogue : MonoBehaviour
     public string Name => _dialogueFile.name;
     public TextAsset File => _dialogueFile;
 
-    public bool CorrectComplition{ get; protected set; } = false;
+    public bool CorrectCompletion{ get; protected set; } = false;
 
-    public void SetComplitionState(bool state = true) => CorrectComplition = state;
+    public void SetComplitionState(bool state = true) => CorrectCompletion = state;
 }

@@ -90,6 +90,7 @@ public class DialogueSceneController : MonoBehaviour
         string text = _story.Continue();
         _replica.text = text.Trim();
 
+        //[TODO] Refactoing.
         foreach (var tag in _story.currentTags)
         {
             if (tag.StartsWith("Speaker."))
@@ -124,7 +125,6 @@ public class DialogueSceneController : MonoBehaviour
             {
                 _currentDialogue.SetComplitionState(false);
             }
-
         }
     }
 

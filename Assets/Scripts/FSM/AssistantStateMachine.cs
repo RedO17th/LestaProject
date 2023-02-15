@@ -85,7 +85,7 @@ public class DialogueAssistantState : DialogueState, IQuestState
         {
             DialogueSceneController.OnDialogueEnd -= ProcessEndOfDialogue;
 
-            if (dialogue.CorrectComplition)
+            if (dialogue.CorrectCompletion)
             {
                 _dialogueName = string.Empty;
             }

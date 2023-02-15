@@ -8,7 +8,7 @@
         *[Какие новости?] # Speaker.Tisha 
             -> scene_1_block_2
         *[Ладно, отставить.] # Speaker.Tisha 
-            ->END
+            ->IncorrectCompletion
 
 ==joke==
 Если бы у пса была такая техническая возможность, то он бы сейчас тяжело вздохнул. Но, вместо этого, он просто смотрит на тебя, не мигая, галогенными фарами вместо глаз. # Speaker.Storyteller
@@ -17,7 +17,7 @@
     +[>>]
 -Ладно, я тебя понял. К дядь Арсену – так к дядь Арсену. #Speaker.Tisha
     +[>>]
-        ->DONE
+        ->CorrectCompletion
 
 == scene_1_block_1 ==
 Гражданин А.Г.Урамалян заявил о нарушениях общественного порядка возле его магазина. Участковый Дашков отказывается выезжать туда снова, говорит, что это шестой вызов за последние два дня. Приоритет низкий. # Speaker.Mukhtar
@@ -31,9 +31,9 @@
                 ->joke
         --Ладно, я тебя понял. К дядь Арсену – так к дядь Арсену. # Speaker.Tisha
             +++[>>]
-                ->DONE
+                ->CorrectCompletion
     +[Ладно, отставить.] # Speaker.Tisha
-->END
+        ->IncorrectCompletion
 
 == scene_1_block_2 ==
 { shuffle:
@@ -46,4 +46,12 @@
     +[>>]
 -Ладно, отставить. # Speaker.Tisha
     +[>>]
+        ->IncorrectCompletion
+        
+== CorrectCompletion ==
+    + #CorrectCompletion
         ->DONE
+  
+ == IncorrectCompletion ==
+    + #IncorrectCompletion
+        ->END  

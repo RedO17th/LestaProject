@@ -27,11 +27,18 @@ public class JohnnyTheyreInTheTreesTask_1_TalkWithAssistant : BaseQuestTask
 
     private void ProcessEndOfDialogue(BaseDialogue dialogue)
     {
-        if (dialogue.Name == _dogEncounterDialogName && dialogue.CorrectComplition)
+        //[TODO] Refactoing. If dialogue correct completion
+        if (dialogue.Name == _dogEncounterDialogName && dialogue.CorrectCompletion)
         {
             DialogueSceneController.OnDialogueEnd -= ProcessEndOfDialogue;
 
             FinishTheCurrentTask();
+        }
+
+        //[TODO] Refactoing. If dialogue incorrect completion
+        if (dialogue.CorrectCompletion == false)
+        {
+            _assistant.OnPlayerMovedAway += PlayerMovedAway;
         }
     }
 
@@ -42,6 +49,14 @@ public class JohnnyTheyreInTheTreesTask_1_TalkWithAssistant : BaseQuestTask
             context.SetID(_idName);
 
         ProjectBus.Instance.SendSignalByContext(context);
+
+        //Можно использовать метод ProcessSignal() из BaseQuestTask
+    }
+
+    private void PlayerMovedAway()
+    {
+        _assistant.OnPlayerMovedAway -= PlayerMovedAway;
+        _assistant.Hint();
     }
 
     protected override void Complete()
