@@ -81,15 +81,7 @@ public class DialogueSceneController : MonoBehaviour
         }
         else
         {
-            //_currentDialogue.InvokeResult();
-            _currentDialogue.End();
-
-            //[?] Нужно ли ее обнулять...
-            //_story = null;
-
-            OnDialogueEnd.Invoke(_currentDialogue);
-
-            _currentDialogue = null;
+            ProcessDialogueComplition();
         }
     }
 
@@ -108,23 +100,40 @@ public class DialogueSceneController : MonoBehaviour
             {
                 Checking(tag);
             }
-            else if(tag.StartsWith("NewObject"))
+            else if (tag.StartsWith("NewObject"))
             {
                 AddObjectToInventory(tag);
             }
-            else if(tag.StartsWith("Quest"))
+            else if (tag.StartsWith("Quest"))
             {
                 ActivateQuest(tag);
             }
-            else if(tag.StartsWith("Note"))
+            else if (tag.StartsWith("Note"))
             {
                 AddNoteToJournal(tag);
             }
-            else if(tag.StartsWith("Debuff"))
+            else if (tag.StartsWith("Debuff"))
             {
                 AddDebuf(tag);
             }
+            else if (tag.StartsWith("CorrectCompletion"))
+            {
+                _currentDialogue.SetComplitionState();
+            }
+            else if (tag.StartsWith("IncorrectCompletion"))
+            {
+                _currentDialogue.SetComplitionState(false);
+            }
+
         }
+    }
+
+    private void ProcessDialogueComplition()
+    {
+        OnDialogueEnd.Invoke(_currentDialogue);
+
+        _currentDialogue = null;
+        _story = null;
     }
 
     void CreateContentView(string text)

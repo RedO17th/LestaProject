@@ -85,6 +85,11 @@ public class DialogueAssistantState : DialogueState, IQuestState
         {
             DialogueSceneController.OnDialogueEnd -= ProcessEndOfDialogue;
 
+            if (dialogue.CorrectComplition)
+            {
+                _dialogueName = string.Empty;
+            }
+
             OnStateCompleted(this);
         }
     }
@@ -94,6 +99,5 @@ public class DialogueAssistantState : DialogueState, IQuestState
         base.Deactivate();
 
         _isStarted = false;
-        _dialogueName = string.Empty;
     }
 }

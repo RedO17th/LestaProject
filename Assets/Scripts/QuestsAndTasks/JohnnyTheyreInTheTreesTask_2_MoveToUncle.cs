@@ -40,7 +40,7 @@ public class JohnnyTheyreInTheTreesTask_2_MoveToUncle : BaseQuestTask
         _uncle.Hint();
 
         //Remove
-        _dog.transform.position = _dogPosition;
+        //_dog.transform.position = _dogPosition;
 
         base.Activate();
     }

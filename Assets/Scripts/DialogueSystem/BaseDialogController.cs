@@ -21,14 +21,14 @@ public class BaseDialogController : MonoBehaviour
 
     public virtual void ActivateDialog()
     {
-        _dialog.OnEnded += ProcessTheEndOfTheDialog;
+        //_dialog.OnEnded += ProcessTheEndOfTheDialog;
 
         _dialogSubSystem.StartNewDialog(_dialog);
     }
 
     protected virtual void ProcessTheEndOfTheDialog()
     {
-        _dialog.OnEnded -= ProcessTheEndOfTheDialog;
+        //_dialog.OnEnded -= ProcessTheEndOfTheDialog;
         _dialog = null;
     }
 

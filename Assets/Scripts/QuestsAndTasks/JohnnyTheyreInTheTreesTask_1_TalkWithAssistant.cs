@@ -27,7 +27,7 @@ public class JohnnyTheyreInTheTreesTask_1_TalkWithAssistant : BaseQuestTask
 
     private void ProcessEndOfDialogue(BaseDialogue dialogue)
     {
-        if (dialogue.Name == _dogEncounterDialogName)
+        if (dialogue.Name == _dogEncounterDialogName && dialogue.CorrectComplition)
         {
             DialogueSceneController.OnDialogueEnd -= ProcessEndOfDialogue;
 
