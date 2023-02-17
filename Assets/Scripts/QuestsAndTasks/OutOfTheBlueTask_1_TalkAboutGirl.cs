@@ -10,12 +10,12 @@ public class OutOfTheBlueTask_1_TalkAboutGirl : BaseQuestTask
 
     [SerializeField] protected string _freeDialogueName = string.Empty;
 
-    private IDialogableEncounter _girl = null;
+    private DialogueEncounter _girl = null;
     private IContextInvoker _dialogueVolume = null;
 
     public override void Prepare()
     {
-        _girl = _quest.GetNpcEncounterByName(_girlName) as IDialogableEncounter;
+        _girl = _quest.GetNpcEncounterByName(_girlName) as DialogueEncounter;
         _girl.SetTask(this);
         _girl.InitializeDialog(_dialogueName);
 
@@ -38,9 +38,16 @@ public class OutOfTheBlueTask_1_TalkAboutGirl : BaseQuestTask
     {
         if (dialogue.Name == _dialogueName)
         {
-            DialogueSceneController.OnDialogueEnd -= ProcessEndOfDialogue;
+            if (dialogue.CorrectCompletion)
+            {
+                DialogueSceneController.OnDialogueEnd -= ProcessEndOfDialogue;
 
-            FinishTheCurrentTask();
+                FinishTheCurrentTask();
+            }
+            else
+            {
+                _girl.OnPlayerMovedAway += PlayerMovedAway;
+            }
         }
     }
 
@@ -51,6 +58,12 @@ public class OutOfTheBlueTask_1_TalkAboutGirl : BaseQuestTask
             context.SetID(_idName);
 
         ProjectBus.Instance.SendSignalByContext(context);
+    }
+
+    private void PlayerMovedAway()
+    {
+        _girl.OnPlayerMovedAway -= PlayerMovedAway;
+        _girl.Hint();
     }
 
     protected override void Complete()

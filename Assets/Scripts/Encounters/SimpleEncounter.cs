@@ -6,6 +6,9 @@ public class SimpleEncounter : BaseEncounter, IInteractable
     [SerializeField] protected BasePointer _pointer = null;
     [SerializeField] protected TriggerVolumeByPlayer _triggerVolume;
 
+    public event Action OnPlayerCameUp;
+    public event Action OnPlayerMovedAway;
+
     protected BasePlayer _player = null;
 
     protected virtual void Awake() { }
@@ -23,6 +26,8 @@ public class SimpleEncounter : BaseEncounter, IInteractable
     {
         _player = player;
         _player.SetInteractable(this);
+
+        OnPlayerCameUp?.Invoke();
     }
 
     public virtual void Interact()
@@ -34,6 +39,8 @@ public class SimpleEncounter : BaseEncounter, IInteractable
     {
         _player.RemoveInteractable(this);
         _player = null;
+
+        OnPlayerMovedAway?.Invoke();
     }
 
     protected virtual void ClearTriggerVolume()
@@ -44,4 +51,3 @@ public class SimpleEncounter : BaseEncounter, IInteractable
         _triggerVolume.Disable();
     }
 }
-

@@ -4,25 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.VirtualTexturing;
 
-public class BasePlayerAssistant : DialogueEncounter 
-{
-    public event Action OnPlayerCameUp;
-    public event Action OnPlayerMovedAway;
-
-    protected override void PrepareToInteraction(BasePlayer player)
-    {
-        base.PrepareToInteraction(player);
-
-        OnPlayerCameUp?.Invoke();
-    }
-
-    protected override void CancelInteraction(BasePlayer player)
-    {
-        base.CancelInteraction(player);
-
-        OnPlayerMovedAway?.Invoke();
-    }
-}
+public class BasePlayerAssistant : DialogueEncounter { }
 
 public class Dog : BasePlayerAssistant
 {

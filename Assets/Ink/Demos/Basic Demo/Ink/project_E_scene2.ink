@@ -16,7 +16,7 @@ VAR CheckResultStr = ""
     *[Давайте поговорим о деле.]  #Speaker.Tisha 
         ->scene2_block_2
     *[Простите, я вернусь чуть позже.] #Speaker.Tisha 
-        ->END
+        ->IncorrectCompletion
 
 ==scene2_block_1== 
 Ой-ой! Какой ты взрослый стал! Покажи жетон-то свой, дай, полюбуюсь! #Speaker.Arsen
@@ -41,7 +41,7 @@ VAR CheckResultStr = ""
         -else:
             -> scene2_block_2_else
     }
-    ->DONE
+    ->CorrectCompletion
 
 == scene2_block_2_else ==
 {CheckResultStr} Дядя Арсен со злобой смотрит на Мухтара, пока тот сканирует его объективами. Сплюнув на снег, дядя Арсен пинает Мухтара, и тот с механическим треском падает на спину, а затем с трудом поднимается и включает сирену. #Speaker.Storyteller
@@ -65,7 +65,7 @@ VAR CheckResultStr = ""
         То-то же! Вай какой ты грозный! Держи еще мандаринку! #Speaker.Arsen #NewObject.Tangerine
         ++ [>>] 
             ->scene2_block_2
-->DONE 
+->CorrectCompletion 
 
 
 ==scene2_block_2== 
@@ -134,4 +134,12 @@ VAR CheckResultStr = ""
     + [>>]
 -Ты лишь киваешь дяде Арсену. Вопрос, конечно, чем конкретно простреливать колени, если тебя вооружили лишь электрошокером, но зачем огорчать милого дядюшку, у которого всегда самые вкусные мандарины? #Speaker.Storyteller 
     + [>>]
-->DONE 
+->CorrectCompletion
+
+== CorrectCompletion ==
+    + #CorrectCompletion
+        ->DONE
+  
+ == IncorrectCompletion ==
+    + #IncorrectCompletion
+        ->END  

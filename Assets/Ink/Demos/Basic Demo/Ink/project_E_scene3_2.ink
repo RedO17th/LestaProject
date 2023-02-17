@@ -35,7 +35,7 @@ VAR CheckResultStr = ""
     * [Изучить капсулу бы...] #Speaker.Tisha
         -> scene_3_2_block_3_1
     * [Отличное первое дежурство. Просто, мать его, отличное.] #Speaker.Tisha
-        ->DONE
+        ->CorrectCompletion
 
 == scene_3_2_block_3 ==
 	{ CheckResult:
@@ -62,3 +62,11 @@ VAR CheckResultStr = ""
 -Единственное, что ты понимаешь: ребенку требуется медицинская помощь. И единственный человек, который может ее тебе оказать - твой старый знакомый… #Speaker.Storyteller #Note.Padlytch  #Quest.SaveAndPreserve
     +[>>]
 ->DONE
+
+== CorrectCompletion ==
+    + #CorrectCompletion
+        ->DONE
+  
+ == IncorrectCompletion ==
+    + #IncorrectCompletion
+        ->END  

@@ -8,13 +8,15 @@ public class JohnnyTheyreInTheTreesTask_3_TalkWithUncleTask : BaseQuestTask
     [SerializeField] protected string _uncleEncounterName = string.Empty;
     [SerializeField] protected string _uncleEncounterDialogName = string.Empty;
 
-    private IDialogableEncounter _uncle = null;
+    private DialogueEncounter _uncle = null;
 
     public override void Prepare()
     {
-        _uncle = _quest.GetNpcEncounterByName(_uncleEncounterName) as IDialogableEncounter;
+        _uncle = _quest.GetNpcEncounterByName(_uncleEncounterName) as DialogueEncounter;
+
         _uncle.SetTask(this);
         _uncle.InitializeDialog(_uncleEncounterDialogName);
+        _uncle.Hint();
 
         DialogueSceneController.OnDialogueEnd += ProcessEndOfDialogue;
 
@@ -27,9 +29,16 @@ public class JohnnyTheyreInTheTreesTask_3_TalkWithUncleTask : BaseQuestTask
     {
         if (dialogue.Name == _uncleEncounterDialogName)
         {
-            DialogueSceneController.OnDialogueEnd -= ProcessEndOfDialogue;
+            if (dialogue.CorrectCompletion)
+            {
+                DialogueSceneController.OnDialogueEnd -= ProcessEndOfDialogue;
 
-            FinishTheCurrentTask();
+                FinishTheCurrentTask();
+            }
+            else
+            {
+                _uncle.OnPlayerMovedAway += PlayerMovedAway;
+            }
         }
     }
 
@@ -40,6 +49,14 @@ public class JohnnyTheyreInTheTreesTask_3_TalkWithUncleTask : BaseQuestTask
             context.SetID(_idName);
 
         ProjectBus.Instance.SendSignalByContext(context);
+
+        //Можно использовать метод ProcessSignal() из BaseQuestTask
+    }
+
+    private void PlayerMovedAway()
+    {
+        _uncle.OnPlayerMovedAway -= PlayerMovedAway;
+        _uncle.Hint();
     }
 
     protected override void Complete()

@@ -69,6 +69,11 @@ public class DialogueUncleState : DialogueState, IQuestState
         {
             DialogueSceneController.OnDialogueEnd -= ProcessEndOfDialogue;
 
+            if (dialogue.CorrectCompletion)
+            {
+                _dialogueName = string.Empty;
+            }
+
             OnStateCompleted(this);
         }
     }
@@ -78,6 +83,5 @@ public class DialogueUncleState : DialogueState, IQuestState
         base.Deactivate();
 
         _isStarted = false;
-        _dialogueName = string.Empty;
     }
 }

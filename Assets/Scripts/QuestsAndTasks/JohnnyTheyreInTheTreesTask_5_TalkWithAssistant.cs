@@ -10,8 +10,6 @@ public class JohnnyTheyreInTheTreesTask_5_TalkWithAssistant : BaseQuestTask
 
     private BasePlayerAssistant _assistant = null;
 
-    [SerializeField] protected string _dialogueInvokerVolumeName = string.Empty;
-
     public override void Prepare()
     {
         _assistant = _quest.GetNpcEncounterByName(_dogEncounterName) as BasePlayerAssistant;
@@ -31,9 +29,16 @@ public class JohnnyTheyreInTheTreesTask_5_TalkWithAssistant : BaseQuestTask
     {
         if (dialogue.Name == _dogEncounterDialogName)
         {
-            DialogueSceneController.OnDialogueEnd -= ProcessEndOfDialogue;
+            if (dialogue.CorrectCompletion)
+            {
+                DialogueSceneController.OnDialogueEnd -= ProcessEndOfDialogue;
 
-            FinishTheCurrentTask();
+                FinishTheCurrentTask();
+            }
+            else
+            {
+                _assistant.OnPlayerMovedAway += PlayerMovedAway;
+            }
         }
     }
 
@@ -44,6 +49,12 @@ public class JohnnyTheyreInTheTreesTask_5_TalkWithAssistant : BaseQuestTask
             context.SetID(_idName);
 
         ProjectBus.Instance.SendSignalByContext(context);
+    }
+
+    private void PlayerMovedAway()
+    {
+        _assistant.OnPlayerMovedAway -= PlayerMovedAway;
+        _assistant.Hint();
     }
 
     protected override void Complete()

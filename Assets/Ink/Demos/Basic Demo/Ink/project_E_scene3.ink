@@ -25,14 +25,14 @@ VAR CheckResultStr = ""
         -> scene_3_block_1_2
     *[Запусти осмотр капсулы, Мухтар. И вызови наряд.] #Speaker.Tisha
         -> scene_3_block_1_3
-->DONE
+->CorrectCompletion
 
 == scene_3_block_1_1 ==
 Никак нет, рядовой. Но вот дым от капсулы вполне может ей навредить. #Speaker.Mukhtar
     + [>>]
 -Ладно. Помоги мне. #Speaker.Tisha #Quest.OutOfTheBlue
     + [>>]
-    ->DONE
+    ->CorrectCompletion
 
 == scene_3_block_1_2 ==
 Никак нет, рядовой. Я называю гуманоидами лишь гуманоидов. #Speaker.Mukhtar
@@ -52,11 +52,14 @@ VAR CheckResultStr = ""
     + [>>]
 -Мне занести в рапорт кражу? #Speaker.Mukhtar
     *[Сами разберемся. Зайдем на днях, поговорим.] #Speaker.Tisha #Quest.MyGrannysTangerines
-        -> DONE
+        МУХТАР_1
+        ТИШКА_1
+        МУХТАР_1
+        -> CorrectCompletion
     *[Сейчас явно не до этого. Помоги мне!] #Speaker.Tisha #Quest.OutOfTheBlue
-        -> DONE
+        -> CorrectCompletion
     *[Лучше помоги этого пилота вытащить.] #Speaker.Tisha #Quest.OutOfTheBlue
-        ->DONE
+        ->CorrectCompletion
 
 == scene_3_block_2 ==
 	{ CheckResult:
@@ -64,7 +67,7 @@ VAR CheckResultStr = ""
     -else:
         -> scene_3_block_2_2
     }
-->DONE
+->CorrectCompletion
 
 == scene_3_block_2_1 ==
 {CheckResultStr} Эвакуационная капсула серии №376810, используется для обязательной установки на воздушные станции. На обшивке логотип, но его невозможно разглядеть. Регистрирую критические повреждения капсулы. Предположение: управление велось необученным пилотом. Регистрирую гуманоидную форму жизни в капсуле. В стабильном, но тяжелом состоянии. Рекомендуется извлечь предполагаемого пилота для установления деталей и оказания первой помощи. #Speaker.Mukhtar
@@ -75,7 +78,7 @@ VAR CheckResultStr = ""
     + [>>]
 -Так… Ладно. Помоги мне. #Speaker.Tisha #Quest.OutOfTheBlue
     + [>>]
-        ->DONE
+        ->CorrectCompletion
 
 == scene_3_block_2_2 ==
 {CheckResultStr} Регистрирую поврежденный летательный аппарат. Внутри летательного аппарата обнаружена гуманоидная форма жизни. Предположение: это пилот данного летательного аппарата. Необходима первая помощь. #Speaker.Mukhtar
@@ -86,7 +89,7 @@ VAR CheckResultStr = ""
     + [>>]
 -Так… Ладно. Помоги мне. #Speaker.Tisha #Quest.OutOfTheBlue
     + [>>]
-->DONE
+->CorrectCompletion
 
 == scene_3_block_3 ==
 Из капсулы не слышно ни вздоха. Ты подходишь ближе - в лицо ударяет горячий пар. Кажется, эта капсула недолго будет просто чадить дым. Ты делаешь несколько шагов назад и прикрываешь лицо рукой. #Speaker.Storyteller
@@ -96,7 +99,7 @@ VAR CheckResultStr = ""
         -> scene_3_block_3_2
     *[Надо вызвать скорую и наряд!] #Speaker.Tisha
         -> scene_3_block_3_3
-->DONE
+->CorrectCompletion
 
 == scene_3_block_3_1 ==
 Мухтар подходит к капсуле ближе, проводит по ней сканерами, а после поворачивается к тебе. #Speaker.Storyteller
@@ -109,7 +112,7 @@ VAR CheckResultStr = ""
     + [>>]
 -Ладно. Сначала вытащим, а потом будем разбираться. #Speaker.Tisha #Quest.OutOfTheBlue
     + [>>]
-->DONE
+->CorrectCompletion
 
 == scene_3_block_3_2 ==
 Пока ты стоишь и не можешь придумать ничего важного и полезного, все за тебя решил сделать твой робопес. Ну и кто из вас полезный? #Speaker.Storyteller
@@ -122,13 +125,21 @@ VAR CheckResultStr = ""
     + [>>]
 -Ладно. Сначала вытащим, а потом будем разбираться. #Speaker.Tisha #Quest.OutOfTheBlue
     + [>>]
-->DONE
+->CorrectCompletion
 
 == scene_3_block_3_3 ==
 Ты шаришь по карманам, но не находишь свой коммуникатор. В голове встает воспоминание, как дядя Арсен тебя крепко обнимал несколько минут назад. Его недовольство работой кибермилиции, похоже, достигло своего апогея. #Speaker.Storyteller
     + [>>]
 -Мне занести в рапорт кражу? #Speaker.Mukhtar
     + [>>]
--Нет, сами разберемся. #Speaker.Tisha #Quest.MyGrannysTangerines
+-Нет, сами разберемся. #Speaker.Tisha #Quest.MyGrannysTangerines #Quest.OutOfTheBlue //Добавил вклюение квеста OutOfTheBlue
     + [>>]
-->DONE
+->CorrectCompletion
+
+== CorrectCompletion ==
+    + #CorrectCompletion
+        ->DONE
+  
+ == IncorrectCompletion ==
+    + #IncorrectCompletion
+        ->END  
