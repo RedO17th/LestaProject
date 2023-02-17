@@ -37,7 +37,7 @@ public class PlayerSubSystem : BaseSubSystem
     }
 
     #region Characteristics part
-    public BaseCharacteristic GetCharacteristicByType(CharacterisicType type)
+    public BaseCharacteristic GetCharacteristicByType(CharacteristicType type)
     {
         return _characteristics.GetCharacteristicByType(type);
     }

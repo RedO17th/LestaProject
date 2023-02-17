@@ -25,4 +25,3 @@ public class TabButton : BaseButton, IButtonWithData, IToggledButton
         this.gameObject.GetComponent<Image>().sprite = _data.InactiveSprite;
     }
 }
-

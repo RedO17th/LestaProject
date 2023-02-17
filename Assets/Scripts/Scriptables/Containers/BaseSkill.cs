@@ -22,11 +22,11 @@ public class BaseSkill
 {
     [SerializeField] private SkillType _type = SkillType.None;
     [SerializeField] private string _name = string.Empty;
-    [SerializeField] private CharacterisicType _characterisicType = CharacterisicType.None;
+    [SerializeField] private CharacteristicType _characterisicType = CharacteristicType.None;
     [SerializeField] private bool _isLearn = false;
 
     public SkillType Type => _type;
     public string Name => _name;
-    public CharacterisicType CharacterisicType => _characterisicType;
+    public CharacteristicType CharacterisicType => _characterisicType;
     public bool IsLearn => _isLearn;
 }
