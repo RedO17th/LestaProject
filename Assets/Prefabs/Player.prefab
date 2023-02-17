@@ -186,7 +186,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5193322390670805941}
   - component: {fileID: 5943265004900845409}
-  - component: {fileID: 4079703571850851283}
   m_Layer: 0
   m_Name: Inventory
   m_TagString: Untagged
@@ -222,28 +221,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 2
---- !u!114 &4079703571850851283
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1006122217695933044}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c1d2af8788995d43abe35159eec2b5d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _equipmentUI: {fileID: 0}
-  _inventoryUI: {fileID: 0}
-  _quickAccessMenuSlots:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  _quickAccessMenu: {fileID: 0}
+  _quickAccessMenuhud: {fileID: 0}
+  _uiInventoryController: {fileID: 0}
+  _inventoryCapacity: 42
+  _equipmentCapacity: 12
 --- !u!1 &1437986108548605368
 GameObject:
   m_ObjectHideFlags: 0
@@ -474,7 +456,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1931900938351439998}
-  - component: {fileID: 5660008855993548834}
   m_Layer: 0
   m_Name: Journal
   m_TagString: Untagged
@@ -497,22 +478,6 @@ Transform:
   m_Father: {fileID: 5862163671078957526}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5660008855993548834
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3434646728156481608}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bcde20dcb007014aa4710777cac0eab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _activeQuestsJournal: {fileID: 0}
-  _completeQuestsJournal: {fileID: 0}
-  _diaryJournal: {fileID: 0}
-  JournalTest: {fileID: 0}
 --- !u!1 &6917586893841443942
 GameObject:
   m_ObjectHideFlags: 0

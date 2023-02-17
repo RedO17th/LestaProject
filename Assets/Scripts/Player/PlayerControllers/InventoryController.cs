@@ -171,7 +171,7 @@ public class InventoryController : BasePlayerContoller
     {
         Storage storage = new Storage();
 
-        PlayerInventoryData playerInventoryData = new PlayerInventoryData(Inventory.Capacity, Equipment.Capacity, _quickAccessMenu.Slots.Length);
+        //PlayerInventoryData playerInventoryData = new PlayerInventoryData(Inventory.Capacity, Equipment.Capacity, _quickAccessMenu.Slots.Length);
 
         _gameData = (GameData)storage.Load(GameData.Instance);
 
