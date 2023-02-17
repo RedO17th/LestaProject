@@ -99,6 +99,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1012111114}
   - component: {fileID: 1012111115}
+  - component: {fileID: 4191074930287209820}
   m_Layer: 0
   m_Name: UISubSystem
   m_TagString: Untagged
@@ -138,8 +139,23 @@ MonoBehaviour:
   _clipboardScreen: {fileID: 0}
   _skillsScreen: {fileID: 0}
   _pauseMenuScreen: {fileID: 0}
-  _dialogScreen: {fileID: 0}
+  _dialogueScreen: {fileID: 0}
   _settingsScreen: {fileID: 0}
+--- !u!114 &4191074930287209820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1012111113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bcde20dcb007014aa4710777cac0eab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _activeQuestsJournal: {fileID: 0}
+  _completeQuestsJournal: {fileID: 0}
+  _diaryJournal: {fileID: 0}
 --- !u!1 &1729848808
 GameObject:
   m_ObjectHideFlags: 0

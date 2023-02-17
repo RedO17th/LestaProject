@@ -10,6 +10,7 @@ public class AmmoSlot : MonoBehaviour
     void Start()
     {
         Ammo ammo = new Ammo(_ammoInfo);
+        _item.Initialize(InventoryController.Instance);
         _item.SetNewItem(ammo);
     }
 }

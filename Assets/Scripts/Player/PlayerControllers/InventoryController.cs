@@ -103,7 +103,7 @@ public class InventoryController : BasePlayerContoller
             IInventoryItem item = factory.SpawnItem(itemData.Info);
             item.State.amount = itemData.Amount;
 
-            //_inventory.Inventory.TryToAdd(this, item);
+            Inventory.TryToAdd(this, item);
         }
     }
 

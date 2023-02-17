@@ -9,22 +9,24 @@ public class UIJournalsController : MonoBehaviour
     [SerializeField] private JournalUI _diaryJournal;
 
     private QuestSubSystem _questSubSystem;
-
-    private void OnEnable()
-    {
-
-    }
+    private DialogSubSystem _dialogSubSystem;
 
     private void Start()
     {
-        _questSubSystem = ProjectSystem.GetSubSystem<QuestSubSystem>();
+        Initialize(ProjectSystem.GetSubSystem<QuestSubSystem>(), ProjectSystem.GetSubSystem<DialogSubSystem>());
+    }
+
+    public void Initialize(QuestSubSystem questSubSystem, DialogSubSystem dialogSubSystem)
+    {
+        _questSubSystem = questSubSystem;
 
         _questSubSystem.OnQuestActivated += QuestActivated;
         _questSubSystem.OnQuestCompleted += QuestCompleted;
 
-        DialogSubSystem dialogSubSystem = ProjectSystem.GetSubSystem<DialogSubSystem>();
 
-        dialogSubSystem.OnAddNote += AddNoteToDiary;
+        _dialogSubSystem = dialogSubSystem;
+
+        _dialogSubSystem.OnAddNote += AddNoteToDiary;
     }
 
     public void QuestActivated(object sender, INote quest)
