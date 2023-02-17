@@ -15,6 +15,8 @@ public interface IInventory
     int GetItemAmountByType(Type itemType);
     int GetItemAmountByTypeID(string itemTypeID);
 
+    IInventorySlot FindEmptySlot();
+
     bool TryToAdd(object sender, IInventoryItem item);
 
     void RemoveByType(object sender, Type itemType, int amount = 1);
