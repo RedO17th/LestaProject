@@ -3,77 +3,7 @@ guid: 53235edd1edc31347b9dac1b29482368
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Asphalt
-    second: {fileID: 2100000, guid: 470b0e003365e104798250346957528c, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: BlackMetal
-    second: {fileID: 2100000, guid: 64fcd2004c10a2b449c9c3fd056b8801, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Cable
-    second: {fileID: 2100000, guid: 8da07636b524faa4a815ba338342745f, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Emis
-    second: {fileID: 2100000, guid: 64bc8e91305d0f041b5a90fe8ffc272a, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Metal
-    second: {fileID: 2100000, guid: 0aea96c51a9dae449a56055a41e113a6, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: MetalPaintGreen
-    second: {fileID: 2100000, guid: a233abd15af374642bb5db4e2418f081, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: MetalRed
-    second: {fileID: 2100000, guid: 6cad366fb839c6d46940232eae8b2207, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: MetalRust
-    second: {fileID: 2100000, guid: 0d9286c11675f2742ba03104f82dccc0, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: MetalStairs
-    second: {fileID: 2100000, guid: 0aea96c51a9dae449a56055a41e113a6, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Sign
-    second: {fileID: 2100000, guid: ce0b673ca28d0b541aa6ac1f43f263b9, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: TramwayRoad
-    second: {fileID: 2100000, guid: ff2d602c74958c9428892210b0feb290, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: WhiteMetal
-    second: {fileID: 2100000, guid: 90a865a6590cf4940a916955973dcc7d, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Yellow
-    second: {fileID: 2100000, guid: 5c8cf63820c62ee41b5c0cd24580c96b, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: trotuar
-    second: {fileID: 2100000, guid: efca76dc0d8bc0f48b48c147908670bb, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
