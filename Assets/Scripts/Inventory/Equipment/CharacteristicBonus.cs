@@ -1,14 +1,17 @@
 [System.Serializable]
 public class CharacteristicBonus
 {
-    public Characteristic Characteristic;
+    public CharacteristicName Characteristic;
     public int Value;
 }
 
 [System.Serializable]
-public enum Characteristic
+public enum CharacteristicName
 {
-    Strength,
-    Agility,
-    Wisdom
+    STRENGTH,
+    DEXTERITY,
+    CONSTITUTION,
+    INTELLIGENCE,
+    WISDOM,
+    CHARISMA
 }
