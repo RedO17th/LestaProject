@@ -4,14 +4,12 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.InputSystem;
 
 public class MovementController : BasePlayerContoller
 {
     [SerializeField] private BaseMovementMechanic[] _movementMechanics = null;
     [SerializeField] private NavMeshAgent _navMeshAgent = null;
-
-    //[Range(5f, 50f)]
-    //[SerializeField] private float _speedRotation = 5f;
 
     public NavMeshAgent NavMeshAgent => _navMeshAgent;
     public PlayerDataContainer PlayerData => _playerData;
@@ -28,7 +26,8 @@ public class MovementController : BasePlayerContoller
         }
     }
 
-    public PlayerDataContainer _playerData = null;
+    private PlayerDataContainer _playerData = null;
+
     private BaseMovementMechanic _currentMovementMechanic = null;
 
     public override void Initialize(BasePlayer player)
