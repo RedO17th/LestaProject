@@ -2,29 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Uncle : NPCEncounterWithDialog
+public class Uncle : DialogueEncounter
 {
+    private IStateMachine _stateMachine = null;
+
     protected override void Awake()
     {
-        _dialogController = GetComponent<BaseDialogController>();
+        _stateMachine = GetComponent<UncleStateMachine>();
+        _stateMachine.Initialize(this);
 
-        _interactionHandler = new NPCEncounterInteractionsController(this);
-        _interactionHandler.InitializeInteractionModes();
+        var states = new List<IState>()
+        {
+            new DefaultUncleState(_stateMachine),
+            new DialogueUncleState(_stateMachine)
+        };
+
+        _stateMachine.SetStates(states);
     }
 
     protected override void Start()
     {
-        _dialogSubSystem = ProjectSystem.GetSubSystem<DialogSubSystem>();
-
-        _dialogController.Initialize(_dialogSubSystem);
+        _stateMachine.ActivateDefaultBehaviour();
     }
 
     public override void InitializeDialog(string dialogName)
     {
-        var dialog = _dialogSubSystem.GetDialogueByName(dialogName);
-            dialog.Initialize(this);
-
-        _dialogController.SetDialog(dialog);
+        var s = _stateMachine.GetState<DialogueUncleState>();
+            s.SetDialogueName(dialogName);
     }
 
     public override void Hint() => base.Hint();
@@ -34,7 +38,12 @@ public class Uncle : NPCEncounterWithDialog
     {
         _pointer.Disable();
 
-        _interactionHandler.Interact();
+        _stateMachine.ActivateQuestBehaviour();
+    }
+
+    private void Update()
+    {
+        _stateMachine.Tick();
     }
 
     public override void Deactivate()

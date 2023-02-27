@@ -31,7 +31,7 @@ public class DistanationVolume : BaseVolumeEncounter
         _triggerVolume.OnEnter += PlayerCameUp;
     }
 
-    private void PlayerCameUp(GamePlayer player) => SendSignalByContext();
+    private void PlayerCameUp(BasePlayer player) => SendSignalByContext();
 
     private void SendSignalByContext()
     {

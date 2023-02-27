@@ -19,8 +19,6 @@ public class DialogSubSystem : BaseSubSystem
 
     public event Action<object, INote> OnAddNote;
 
-    public void Initialize(ProjectSystem system) => base.Initialize();
-
     public BaseDialogue GetDialogueByName(string name)
     {
         return _dialogueData.GetDialogueByName(name);
@@ -34,8 +32,8 @@ public class DialogSubSystem : BaseSubSystem
 
         var settingsSystem = ProjectSystem.GetSubSystem<SettingsSubSystem>();
         
-        _charactersData = settingsSystem?.GetDataContainerByType(typeof(CharactersContainer)) as CharactersContainer;
-        _dialogueData = settingsSystem?.GetDataContainerByType(typeof(DialogueDataContainer)) as DialogueDataContainer;
+        _charactersData = settingsSystem?.GetDataContainer<CharactersContainer>();
+        _dialogueData = settingsSystem?.GetDataContainer<DialogueDataContainer>();
 
         ProjectBus.Instance.OnDialogContextSignal += ProcessSignal;
     }
@@ -48,12 +46,12 @@ public class DialogSubSystem : BaseSubSystem
         DialogueSceneController.OnDialogueStart += HandleOnDialogueStart;
     }
 
-    public void HandleOnDialogueStart()
+    public void HandleOnDialogueStart(BaseDialogue dialogue)
     {
         EventSystem.UIEvents.InvokeOnDialogueMenuCalled();
     }
 
-    public void HandleOnDialogueEnd()
+    public void HandleOnDialogueEnd(BaseDialogue dialogue)
     {
 
         EventSystem.UIEvents.InvokeOnExitFromDialogueMenuCalled();
@@ -162,9 +160,11 @@ public class DialogSubSystem : BaseSubSystem
         if (string.IsNullOrWhiteSpace(noteID) == false)
         {
             //TODO: real add note to journal
-            SettingsSubSystem settingsSubSystem = ProjectSystem.GetSubSystem<SettingsSubSystem>();
-            var noteDB = settingsSubSystem.GetDataContainerByType(typeof(DiaryNoteDB)) as DiaryNoteDB;
-            INote note = noteDB.GetNote(noteID);
+            var settingsSubSystem = ProjectSystem.GetSubSystem<SettingsSubSystem>();
+
+            var noteDB = settingsSubSystem.GetDataContainer<DiaryNoteDB>();
+            var note = noteDB.GetNote(noteID);
+
             OnAddNote?.Invoke(this, note);
 
             Debug.Log($"Добавлена запись: {noteID}");

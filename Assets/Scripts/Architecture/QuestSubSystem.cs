@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class QuestSubSystem : BaseSubSystem
 {
+    [Header("Starting quest")]
+    [SerializeField] private string _firstQuestName;
+
+    [Space]
     [SerializeField] private List<QuestAndEncounters> _questContainer;
 
     public event Action<object, IQuestNote> OnQuestActivated;
@@ -17,7 +21,19 @@ public class QuestSubSystem : BaseSubSystem
     }
 
     #region Cycle of switching quests
-    public override void StartSystem() { }
+    public override void StartSystem() 
+    {
+        StartQuest();
+    }
+
+    private void StartQuest()
+    {
+        _questContext = new QuestContext();
+        _questContext.SetCommand(QuestCommand.Activate);
+        _questContext.SetID(_firstQuestName);
+
+        ProcessSignal(_questContext);
+    }
 
     private void ProcessSignal(QuestContext context)
     {
@@ -57,18 +73,15 @@ public class QuestSubSystem : BaseSubSystem
                 quest.AddInvokerEncounters(container.GetInvokerEncounters());
 
                 quest.OnQuestComplete += ProcessQuestComplete;
+
                 quest.Initialize(this);
                 quest.Prepare();
                 quest.Activate();
+
             OnQuestActivated?.Invoke(this, quest);
         }
     }
 
-    private void ProcessQuestComplete(BaseQuest baseQuest)
-    {
-        baseQuest.OnQuestComplete -= ProcessQuestComplete;
-        OnQuestCompleted?.Invoke(this, baseQuest);
-    }
 
     private QuestAndEncounters GetContainerByQuestID(string name)
     {
@@ -91,6 +104,12 @@ public class QuestSubSystem : BaseSubSystem
         return Instantiate(container.QuestPrefab, transform);
     }
 
+    private void ProcessQuestComplete(BaseQuest baseQuest)
+    {
+        baseQuest.OnQuestComplete -= ProcessQuestComplete;
+
+        OnQuestCompleted?.Invoke(this, baseQuest);
+    }
 
 
     #endregion

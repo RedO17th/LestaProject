@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class TriggerVolumeByPlayer : BaseTriggerVolume
 {
-    public event Action<GamePlayer> OnEnter;
-    public event Action<GamePlayer> OnExit;
+    public event Action<BasePlayer> OnEnter;
+    public event Action<BasePlayer> OnExit;
 
     protected override void ProcessingEnter(Collider other)
     {
-        var player = other.attachedRigidbody.GetComponent<GamePlayer>();
+        var player = other.attachedRigidbody.GetComponent<BasePlayer>();
 
         if (player)
         {
@@ -20,7 +20,7 @@ public class TriggerVolumeByPlayer : BaseTriggerVolume
 
     protected override void ProcessingExit(Collider other)
     {
-        var player = other.attachedRigidbody.GetComponent<GamePlayer>();
+        var player = other.attachedRigidbody.GetComponent<BasePlayer>();
 
         if (player)
         {

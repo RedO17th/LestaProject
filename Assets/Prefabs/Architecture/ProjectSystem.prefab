@@ -591,6 +591,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51fe7ff7e33be7a4ebed7c1111244f7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _firstQuestName: JohnnyTheyreInTheTrees
   _questContainer:
   - _questPrefab: {fileID: 6528779191282509331, guid: d4f15429aa321584a9b25170d6e54ede, type: 3}
     _npcEncounters:
@@ -599,8 +600,7 @@ MonoBehaviour:
     _volumeEncounters:
     - {fileID: 0}
     - {fileID: 0}
-    _invokerEncounters:
-    - {fileID: 0}
+    _invokerEncounters: []
   - _questPrefab: {fileID: 4963157389322867785, guid: 053b04300fbc0d548895701a04ba0c0e, type: 3}
     _npcEncounters:
     - {fileID: 0}

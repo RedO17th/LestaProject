@@ -48,4 +48,6 @@ MonoBehaviour:
   _idName: JohnnyTheyreInTheTreesTask_5_TalkWithAssistant
   _name: JohnnyTheyreInTheTreesTask_5_TalkWithAssistantName
   _description: JohnnyTheyreInTheTreesTask_5_TalkWithAssistantDescription
+  _dogEncounterName: Dog
+  _dogEncounterDialogName: project_E_scene3
   _dialogueInvokerVolumeName: VolumeInvoker_Scene3_Dialogue

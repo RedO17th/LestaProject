@@ -2,7 +2,7 @@
 
 public class AxisWalkMovement : BaseMovementMechanic
 {
-    private GamePlayer _player = null;
+    private BasePlayer _player = null;
     
     private float _walkSpeed = 0f;
     private float _speedRotation = 0f;

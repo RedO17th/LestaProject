@@ -10,16 +10,18 @@ public class OutOfTheBlueTask_1_TalkAboutGirl : BaseQuestTask
 
     [SerializeField] protected string _freeDialogueName = string.Empty;
 
-    private IDialogableEncounter _girl = null;
+    private DialogueEncounter _girl = null;
     private IContextInvoker _dialogueVolume = null;
 
     public override void Prepare()
     {
-        _girl = _quest.GetNpcEncounterByName(_girlName) as IDialogableEncounter;
+        _girl = _quest.GetNpcEncounterByName(_girlName) as DialogueEncounter;
         _girl.SetTask(this);
         _girl.InitializeDialog(_dialogueName);
 
         _dialogueVolume = _quest.GetInvokerEncounterByName(_freeDialogueName) as IContextInvoker;
+
+        DialogueSceneController.OnDialogueEnd += ProcessEndOfDialogue;
 
         base.Prepare();
     }
@@ -30,6 +32,38 @@ public class OutOfTheBlueTask_1_TalkAboutGirl : BaseQuestTask
         _girl.Hint();
 
         base.Activate();
+    }
+
+    private void ProcessEndOfDialogue(BaseDialogue dialogue)
+    {
+        if (dialogue.Name == _dialogueName)
+        {
+            if (dialogue.CorrectCompletion)
+            {
+                DialogueSceneController.OnDialogueEnd -= ProcessEndOfDialogue;
+
+                FinishTheCurrentTask();
+            }
+            else
+            {
+                _girl.OnPlayerMovedAway += PlayerMovedAway;
+            }
+        }
+    }
+
+    private void FinishTheCurrentTask()
+    {
+        var context = new TaskContext();
+            context.SetCommand(TaskCommand.Complete);
+            context.SetID(_idName);
+
+        ProjectBus.Instance.SendSignalByContext(context);
+    }
+
+    private void PlayerMovedAway()
+    {
+        _girl.OnPlayerMovedAway -= PlayerMovedAway;
+        _girl.Hint();
     }
 
     protected override void Complete()
@@ -50,6 +84,7 @@ public class OutOfTheBlueTask_1_TalkAboutGirl : BaseQuestTask
 
     protected override void Clear()
     {
+        _dialogueVolume = null;
         _girl = null;
     }
 }

@@ -4,44 +4,37 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.VirtualTexturing;
 
-//[TODO] Перевести общие поля с NPCEncounterWithDialog в EncounterWithDialog
-public class BasePlayerAssistant : EncounterWithDialog
-{
-    public bool TaskIsExist => _task != null;
-
-    public BaseDialogController DialogController => _dialogController;
-
-    protected BaseInteractionsController _interactionHandler = null;
-
-    protected DialogSubSystem _dialogSubSystem = null;
-    protected BaseDialogController _dialogController = null;
-}
+public class BasePlayerAssistant : DialogueEncounter { }
 
 public class Dog : BasePlayerAssistant
 {
+    private IStateMachine _stateMachine = null;
+
     protected override void Awake()
     {
-        _dialogController = GetComponent<BaseDialogController>();
+        _stateMachine = GetComponent<AssistantStateMachine>();
+        _stateMachine.Initialize(this);
 
-        _interactionHandler = new PlayerAssistantInteractionsController(this);
-        _interactionHandler.InitializeInteractionModes();
+        var states = new List<IState>()
+        {
+            new DefaultAssistantState(_stateMachine),
+            new DialogueAssistantState(_stateMachine)
+        };
+
+        _stateMachine.SetStates(states);
     }
 
     protected override void Start()
     {
         PrepareTriggerVolume();
 
-        _dialogSubSystem = ProjectSystem.GetSubSystem<DialogSubSystem>();
-
-        _dialogController.Initialize(_dialogSubSystem);
+        _stateMachine.ActivateDefaultBehaviour();
     }
 
     public override void InitializeDialog(string dialogName)
     {
-        var dialog = _dialogSubSystem.GetDialogueByName(dialogName);
-            dialog.Initialize(this);
-
-        _dialogController.SetDialog(dialog);
+        var s = _stateMachine.GetState<DialogueAssistantState>();
+            s.SetDialogueName(dialogName);    
     }
 
     public override void Hint() => base.Hint();
@@ -49,11 +42,14 @@ public class Dog : BasePlayerAssistant
 
     public override void Interact()
     {
-        Debug.Log($"Dog.Interact");
-
         _pointer.Disable();
 
-        _interactionHandler.Interact();
+        _stateMachine.ActivateQuestBehaviour();
+    }
+
+    private void Update()
+    {
+        _stateMachine.Tick();
     }
 
     public override void Deactivate()

@@ -7,19 +7,19 @@ public class SettingsSubSystem : BaseSubSystem
 {
     [SerializeField] private List<BaseDataContainer> _dataContainers;
 
-    public BaseDataContainer GetDataContainerByType(Type type)
+    public T GetDataContainer<T>() where T : BaseDataContainer
     {
-        BaseDataContainer dataContainer = null;
+        T container = null;
 
-        foreach (var data in _dataContainers)
+        foreach (var c in _dataContainers)
         {
-            if (data.GetType() == type)
+            if (c is T)
             {
-                dataContainer = data;
+                container = c as T;
                 break;
             }
         }
 
-        return dataContainer;
+        return container;
     }
 }

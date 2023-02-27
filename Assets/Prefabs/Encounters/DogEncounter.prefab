@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3260176780747691026}
   - component: {fileID: 3260176780747691029}
-  - component: {fileID: 4908469410225073190}
+  - component: {fileID: 7078213890706796404}
   m_Layer: 0
   m_Name: DogEncounter
   m_TagString: Untagged
@@ -51,7 +51,7 @@ MonoBehaviour:
   _name: Dog
   _pointer: {fileID: 3260176781164070982}
   _triggerVolume: {fileID: 3834327075176807219}
---- !u!114 &4908469410225073190
+--- !u!114 &7078213890706796404
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -60,7 +60,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3260176780747691024}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34fb2ab0f0d74fa49a0e7eb7dc2dbdfb, type: 3}
+  m_Script: {fileID: 11500000, guid: 3dda52f5d17963a4f910184ef1fb1c07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &3596420959599341901

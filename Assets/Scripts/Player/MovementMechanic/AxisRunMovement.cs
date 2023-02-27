@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class AxisRunMovement : BaseMovementMechanic
 {
-    private GamePlayer _player = null;
+    private BasePlayer _player = null;
 
     private float _runSpeed = 0f;
     private float _speedRotation = 0f;
