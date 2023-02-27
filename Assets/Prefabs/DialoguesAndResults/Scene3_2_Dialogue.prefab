@@ -45,4 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dialogueFile: {fileID: 4900000, guid: fd9c7d889c4920a49a9a163138489305, type: 3}
-  _dialogueResult: {fileID: 5369808017868326633, guid: 1b48dc3982b2d244ab710a09bfed6d9e, type: 3}
+  _dialogueResult: {fileID: 0}

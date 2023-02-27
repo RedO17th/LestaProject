@@ -4,6 +4,7 @@ VAR CheckResultStr = ""
 -> scene_3
 
 == scene_3 ==
+Перед твоими глазами раскрывается картина, которая бросает тебя в ужас: полуразрушенная капсула, из которой валит дым. Ты заглядываешь в разбитое окно...  #Speaker.Storyteller
 *[Нужно вызвать подмогу!]#Speaker.Tisha 
     -> scene_3_block_1
 *[Мухтар, доложи обстановку!] #Speaker.Tisha #CheckSkill.Alertness.10
@@ -52,9 +53,9 @@ VAR CheckResultStr = ""
     + [>>]
 -Мне занести в рапорт кражу? #Speaker.Mukhtar
     *[Сами разберемся. Зайдем на днях, поговорим.] #Speaker.Tisha #Quest.MyGrannysTangerines
-        МУХТАР_1
-        ТИШКА_1
-        МУХТАР_1
+       Вы уверены? Гража имущества рядового кибермилиции - преступление, которое серьезно наказывается. #Speaker.Mukhtar
+        Мухтар! Лучше помоги мне разобраться с вот этим! С дядей Арсеном я уж сам как-нибудь решу вопрос! #Speaker.Tisha
+        Если вы считаете это правильным, рядовой. #Speaker.Mukhtar #Quest.OutOfTheBlue
         -> CorrectCompletion
     *[Сейчас явно не до этого. Помоги мне!] #Speaker.Tisha #Quest.OutOfTheBlue
         -> CorrectCompletion

@@ -37,11 +37,6 @@ public class BaseQuest : MonoBehaviour, IQuestNote
 
     protected BaseQuestTask _currentTask = null;
 
-    public bool StateIs(QuestState checkableState)
-    {
-        return _state == checkableState;
-    }
-
     #region Add encounters
 
     public virtual void AddNpcEncounters(List<IEncounter> encounters)
