@@ -19,7 +19,7 @@ public class QAM : MonoBehaviour
     {
         //_items = new IInventoryItem[_capacity];
         _slots = new QAMSlot[_capacity];
-        Inventory = (ProjectSystem.GetSubSystem<PlayerSubSystem>().GetPlayerControllerBy(PlayerControllerType.Inventory) as InventoryController).Inventory;
+        //Inventory = (ProjectSystem.GetSubSystem<PlayerSubSystem>().GetPlayerControllerBy(PlayerControllerType.Inventory) as InventoryController).Inventory;
         //_qamUIController.Initialize()
     }
 
