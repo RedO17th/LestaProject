@@ -46,7 +46,7 @@ public class InventoryController : BasePlayerContoller
 
     private int _money;
 
-    private GameData _gameData;
+    private GameDataContainer _gameData;
 
     private QuestSubSystem _questSubSystem = null;
 
@@ -117,27 +117,27 @@ public class InventoryController : BasePlayerContoller
         return true;
     }
 
-    public void SaveInventory(GameData gameData)
+    public void SaveInventory(GameDataContainer gameData)
     {
         Inventory.SaveData(gameData.PlayerInventoryData.PlayerInventory);
     }
 
-    public void LoadInventory(GameData gameData)
+    public void LoadInventory(GameDataContainer gameData)
     {
         Inventory.LoadData(gameData.PlayerInventoryData.PlayerInventory);
     }
 
-    public void SaveEquipment(GameData gameData)
+    public void SaveEquipment(GameDataContainer gameData)
     {
         Inventory.SaveData(gameData.PlayerInventoryData.PlayerEquipment);
     }
 
-    public void LoadEquipment(GameData gameData)
+    public void LoadEquipment(GameDataContainer gameData)
     {
         Inventory.LoadData(gameData.PlayerInventoryData.PlayerEquipment);
     }
 
-    public void SaveQAM(GameData gameData)
+    public void SaveQAM(GameDataContainer gameData)
     {
         for (int i = 0; i < _quickAccessMenu.Slots.Length; i++)
         {
@@ -145,7 +145,7 @@ public class InventoryController : BasePlayerContoller
         }
     }
 
-    public void LoadQAM(GameData gameData)
+    public void LoadQAM(GameDataContainer gameData)
     {
         for (int i = 0; i < _quickAccessMenu.Slots.Length; i++)
         {
@@ -157,7 +157,7 @@ public class InventoryController : BasePlayerContoller
     {
         PlayerInventoryData playerInventoryData = new PlayerInventoryData(Inventory.Capacity, Equipment.Capacity, _quickAccessMenu.Slots.Length);
 
-        _gameData = GameData.Instance;
+        _gameData = GameDataContainer.Instance;
 
         SaveInventory(_gameData);
         SaveEquipment(_gameData);
@@ -173,7 +173,7 @@ public class InventoryController : BasePlayerContoller
 
         //PlayerInventoryData playerInventoryData = new PlayerInventoryData(Inventory.Capacity, Equipment.Capacity, _quickAccessMenu.Slots.Length);
 
-        _gameData = (GameData)storage.Load(GameData.Instance);
+        _gameData = (GameDataContainer)storage.Load(GameDataContainer.Instance);
 
         InventoryItemInfo[] infoObjects = Resources.LoadAll<InventoryItemInfo>("Info");
 

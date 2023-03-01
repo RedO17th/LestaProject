@@ -1,49 +1,64 @@
 using System.IO;
+using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
+using UnityEngine.Windows;
+using Directory = System.IO.Directory;
+using File = System.IO.File;
 
 public class Storage
 {
-    private string _filePath;
-    private BinaryFormatter _formatter;
+    private string _filePath = string.Empty;
+    private string _fileName = string.Empty;
+    private BinaryFormatter _formatter = null;
 
-    public Storage()
+    public Storage() { }
+
+    public Storage(string path, string file)
     {
-        var directory = Application.persistentDataPath + "/saves";
-        if (!Directory.Exists(directory))
-        {
-            Directory.CreateDirectory(directory);
-        }
+        _filePath = path;
+        _fileName = file;
 
-        _filePath = directory + "/Save.save";
+        var directory = Path.Combine(Application.persistentDataPath, _filePath);
 
-        InitBinaryFormatter();
+        CheckDirectoryAtExisting(directory);
+
+        _filePath = Path.Combine(directory, _fileName);
+
+        _formatter = new BinaryFormatter();
     }
 
-    private void InitBinaryFormatter()
+    private void CheckDirectoryAtExisting(string directory)
     {
-        _formatter = new BinaryFormatter();
+        if (Directory.Exists(directory) == false)
+            Directory.CreateDirectory(directory);
     }
 
     public object Load(object saveDataByDefault)
     {
-        if (!File.Exists(_filePath))
+        if (File.Exists(_filePath) == false)
         {
             if (saveDataByDefault != null)
                 Save(saveDataByDefault);
+
             return saveDataByDefault;
         }
 
-        var file = File.Open(_filePath, FileMode.Open);
-        var savedData = _formatter.Deserialize(file);
-        file.Close();
-        return savedData;
+        object loaded = null;
+
+        using (FileStream fs = new FileStream(_filePath, FileMode.Open))
+        {
+            loaded = _formatter.Deserialize(fs);
+        }
+
+        return loaded;
     }
 
     public void Save(object saveData)
     {
-        var file = File.Create(_filePath);
-        _formatter.Serialize(file, saveData);
-        file.Close();
+        using (FileStream fs = new FileStream(_filePath, FileMode.OpenOrCreate))
+        {
+            _formatter.Serialize(fs, saveData);
+        }
     }
 }

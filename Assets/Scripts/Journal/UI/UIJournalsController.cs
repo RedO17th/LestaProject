@@ -64,14 +64,14 @@ public class UIJournalsController : MonoBehaviour
 
         PlayerJournalData playerJournalData = new PlayerJournalData(activeQuestsJournalData, completeQuestsJournalData, diaryJournalData);
 
-        GameData.Instance.AddPlayerJournalData(playerJournalData);
+        GameDataContainer.Instance.AddPlayerJournalData(playerJournalData);
     }
 
     public void LoadJournalsFromGameData()
     {
-        _activeQuestsJournal.LoadJournalUIFromData(this, GameData.Instance.PlayerJournalData.ActiveJournal);
-        _completeQuestsJournal.LoadJournalUIFromData(this, GameData.Instance.PlayerJournalData.CompleteJournal);
-        _diaryJournal.LoadJournalUIFromData(this, GameData.Instance.PlayerJournalData.DiaryJournal);
+        _activeQuestsJournal.LoadJournalUIFromData(this, GameDataContainer.Instance.PlayerJournalData.ActiveJournal);
+        _completeQuestsJournal.LoadJournalUIFromData(this, GameDataContainer.Instance.PlayerJournalData.CompleteJournal);
+        _diaryJournal.LoadJournalUIFromData(this, GameDataContainer.Instance.PlayerJournalData.DiaryJournal);
     }
 
 }

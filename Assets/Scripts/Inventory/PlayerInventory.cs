@@ -16,7 +16,7 @@ public class PlayerInventory : MonoBehaviour
 
     private static PlayerInventory _instance;
     private int _money;
-    private GameData _gameData;
+    private GameDataContainer _gameData;
     private QuestSubSystem _questSubSystem = null;
 
     private void Awake()
@@ -63,27 +63,27 @@ public class PlayerInventory : MonoBehaviour
         return true;
     }
 
-    public void SaveInventory(GameData gameData)
+    public void SaveInventory(GameDataContainer gameData)
     {
         Inventory.SaveData(gameData.PlayerInventoryData.PlayerInventory);
     }
 
-    public void LoadInventory(GameData gameData)
+    public void LoadInventory(GameDataContainer gameData)
     {
         Inventory.LoadData(gameData.PlayerInventoryData.PlayerInventory);
     }
 
-    public void SaveEquipment(GameData gameData)
+    public void SaveEquipment(GameDataContainer gameData)
     {
         Inventory.SaveData(gameData.PlayerInventoryData.PlayerEquipment);
     }
 
-    public void LoadEquipment(GameData gameData)
+    public void LoadEquipment(GameDataContainer gameData)
     {
         Inventory.LoadData(gameData.PlayerInventoryData.PlayerEquipment);
     }
 
-    public void SaveQAM(GameData gameData)
+    public void SaveQAM(GameDataContainer gameData)
     {
         for (int i = 0; i < QuickAccessMenuSlots.Length; i++)
         {
@@ -91,7 +91,7 @@ public class PlayerInventory : MonoBehaviour
         }
     }
 
-    public void LoadQAM(GameData gameData)
+    public void LoadQAM(GameDataContainer gameData)
     {
         for (int i = 0; i < QuickAccessMenuSlots.Length; i++)
         {
@@ -103,7 +103,7 @@ public class PlayerInventory : MonoBehaviour
     {
         PlayerInventoryData playerInventoryData = new PlayerInventoryData(Inventory.Capacity, Equipment.Capacity, QuickAccessMenuSlots.Length);
 
-        _gameData = GameData.Instance;
+        _gameData = GameDataContainer.Instance;
 
         SaveInventory(_gameData);
         SaveEquipment(_gameData);
@@ -119,7 +119,7 @@ public class PlayerInventory : MonoBehaviour
 
         PlayerInventoryData playerInventoryData = new PlayerInventoryData(Inventory.Capacity, Equipment.Capacity, QuickAccessMenuSlots.Length);
 
-        _gameData = (GameData)storage.Load(GameData.Instance);
+        _gameData = storage.Load(GameDataContainer.Instance) as GameDataContainer;
 
         InventoryItemInfo[] infoObjects = Resources.LoadAll<InventoryItemInfo>("Info");
 
