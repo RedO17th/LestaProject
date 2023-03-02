@@ -1,27 +1,47 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using SaveAndLoadModule;
+using System.IO;
+using File = System.IO.File;
+using Directory = System.IO.Directory;
 
 public interface ILoader
 {
-    object Load(object data);
+    T Load<T>() where T : BaseData;
 }
 
 public interface ISaver
 {
-    void Save(object data);
+    void Save(ISavableData data);
 }
 
 public class LoadSubSystem : BaseSubSystem, ILoader, ISaver
 {
-    [SerializeField] private string _filePath = string.Empty;
-    [SerializeField] private string _fileName = string.Empty;
+    [SerializeField] private string _dataStorageFolder = string.Empty;
+    [SerializeField] private string _dataFileFormat = string.Empty;
+    [SerializeField] private string _separator = string.Empty;
 
     private Storage _storage = null;
 
+    private string _fullDataStoragePath = string.Empty;
+
     protected override void Awake()
     {
-        _storage = new Storage(_filePath, _fileName);   
+        _storage = new Storage();
+
+        _fullDataStoragePath = Path.Combine(Application.persistentDataPath, _dataStorageFolder);
+
+        CheckDirectoryAtExisting(_fullDataStoragePath);
+
+        //Save(new TestSavableData());
+        //var data = Load<TestLoadableData>();
+    }
+
+    private void CheckDirectoryAtExisting(string directory)
+    {
+        if (Directory.Exists(directory) == false)
+            Directory.CreateDirectory(directory);
     }
 
     public override void Initialize() { }
@@ -29,18 +49,25 @@ public class LoadSubSystem : BaseSubSystem, ILoader, ISaver
     public override void StartSystem() { }
 
 
-    public object Load(object data)
+    public T Load<T>() where T : BaseData
     {
+        var fileName = GenerateFileName(typeof(T).Name);
 
-
-
-
-        return null;
+        return _storage.Load<T>(fileName);
     }
 
-    public void Save(object data)
+    private string GenerateFileName(string fileName)
     {
-        
+        fileName = fileName + _separator + _dataFileFormat;
+
+        return Path.Combine(_fullDataStoragePath, fileName);
+    }
+
+    public void Save(ISavableData data)
+    {
+        var fileName = GenerateFileName(data.GetType().Name);
+
+        _storage.Save(fileName, data);
     }
 
     public override void Clear()

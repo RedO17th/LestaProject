@@ -1,64 +1,105 @@
+using System;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
-using UnityEngine.Windows;
 using Directory = System.IO.Directory;
 using File = System.IO.File;
 
-public class Storage
-{
-    private string _filePath = string.Empty;
-    private string _fileName = string.Empty;
-    private BinaryFormatter _formatter = null;
-
-    public Storage() { }
-
-    public Storage(string path, string file)
+namespace SaveAndLoadModule
+{ 
+    public class Storage
     {
-        _filePath = path;
-        _fileName = file;
+        private BinaryFormatter _formatter = null;
 
-        var directory = Path.Combine(Application.persistentDataPath, _filePath);
-
-        CheckDirectoryAtExisting(directory);
-
-        _filePath = Path.Combine(directory, _fileName);
-
-        _formatter = new BinaryFormatter();
-    }
-
-    private void CheckDirectoryAtExisting(string directory)
-    {
-        if (Directory.Exists(directory) == false)
-            Directory.CreateDirectory(directory);
-    }
-
-    public object Load(object saveDataByDefault)
-    {
-        if (File.Exists(_filePath) == false)
+        public Storage()
         {
-            if (saveDataByDefault != null)
-                Save(saveDataByDefault);
-
-            return saveDataByDefault;
+            _formatter = new BinaryFormatter();
         }
 
-        object loaded = null;
-
-        using (FileStream fs = new FileStream(_filePath, FileMode.Open))
+        public object Load(object saveDataByDefault)
         {
-            loaded = _formatter.Deserialize(fs);
+            //if (File.Exists(_dataStoragePath) == false)
+            //{
+            //    if (saveDataByDefault != null)
+            //        Save(saveDataByDefault);
+
+            //    return saveDataByDefault;
+            //}
+
+            //object loaded = null;
+
+            //using (FileStream fs = new FileStream(_dataStoragePath, FileMode.Open))
+            //{
+            //    loaded = _formatter.Deserialize(fs);
+            //}
+
+            //return loaded;
+            return null;
         }
 
-        return loaded;
+        public void Save(object saveData)
+        {
+            //using (FileStream fs = new FileStream(_dataStoragePath, FileMode.OpenOrCreate))
+            //{
+            //    _formatter.Serialize(fs, saveData);
+            //}
+        }
+
+        //New realisation
+        public T Load<T>(string fileName) where T : BaseData
+        {
+            T result = null;
+
+            if (File.Exists(fileName) == false)
+            {
+                result = Activator.CreateInstance(typeof(T)) as T;
+
+                SaveData(fileName, result);
+            }
+            else 
+            {
+                using (FileStream fs = new FileStream(fileName, FileMode.Open))
+                {
+                    result = _formatter.Deserialize(fs) as T; 
+                }
+            }
+
+            return result;
+        }
+
+        public void Save(string fileName, ISavableData data) => SaveData(fileName, data);
+
+        private void SaveData(string fileName, ISavableData data)
+        {
+            using (FileStream fs = new FileStream(fileName, FileMode.OpenOrCreate))
+            {
+                _formatter.Serialize(fs, data);
+            }
+        }
     }
 
-    public void Save(object saveData)
+    public interface ILoadableData { }
+    public interface ISavableData { }
+
+    [System.Serializable]
+    public class BaseData : ILoadableData, ISavableData 
     {
-        using (FileStream fs = new FileStream(_filePath, FileMode.OpenOrCreate))
-        {
-            _formatter.Serialize(fs, saveData);
-        }
+        public BaseData() { }
+    }
+
+    //Test
+    [System.Serializable]
+    public class TestLoadableData : BaseData
+    {
+        public TestLoadableData() { }
+    }
+
+    [System.Serializable]
+    public class TestSavableData : BaseData
+    {
+        public TestSavableData() { }
     }
 }
+
+
