@@ -16,7 +16,7 @@ public interface ISaver
     void Save(ISavableData data);
 }
 
-public class LoadSubSystem : BaseSubSystem, ILoader, ISaver
+public class SaveAndLoadSubSystem : BaseSubSystem, ILoader, ISaver
 {
     [SerializeField] private string _dataStorageFolder = string.Empty;
     [SerializeField] private string _dataFileFormat = string.Empty;

@@ -1,5 +1,7 @@
+using SaveAndLoadModule;
+
 [System.Serializable]
-public class PlayerInventoryData
+public class PlayerInventoryData : BaseData
 {
     public InventoryData PlayerInventory;
     public InventoryData PlayerEquipment;

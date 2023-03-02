@@ -9,25 +9,23 @@ public class PlayerInventory : MonoBehaviour
 
     [SerializeField] private UIQuickAccessMenuSlot[] _quickAccessMenuSlots;
 
-    public static PlayerInventory Instance => _instance;
-
     public InventoryWithSlots Inventory => _inventoryUI.Inventory;
     public InventoryWithSlots Equipment => _equipmentUI.Inventory;
     public UIQuickAccessMenuSlot[] QuickAccessMenuSlots => _quickAccessMenuSlots;
 
-    private static PlayerInventory _instance;
     private int _money;
     private GameDataContainer _gameData;
     private QuestSubSystem _questSubSystem = null;
 
-    private void Awake()
-    {
-        _instance = this;
-    }
+    //New SaveLoad logic - USE
+    private SaveAndLoadSubSystem _saveLoadSystem = null;
+    //
 
     private void Start()
     {
         _questSubSystem = ProjectSystem.GetSubSystem<QuestSubSystem>();
+        _saveLoadSystem = ProjectSystem.GetSubSystem<SaveAndLoadSubSystem>();
+
         _questSubSystem.OnQuestCompleted += ReceiveQuestReward;
     }
     private void OnDisable()
@@ -40,6 +38,15 @@ public class PlayerInventory : MonoBehaviour
         TryChangeMoney(quest.Reward.Money);
 
         AddItemsFromReward(quest);
+    }
+
+    private bool TryChangeMoney(int value)
+    {
+        if (_money + value < 0)
+            return false;
+
+        _money += value;
+        return true;
     }
 
     private void AddItemsFromReward(IQuestNote quest)
@@ -55,51 +62,6 @@ public class PlayerInventory : MonoBehaviour
         }
     }
 
-    public bool TryChangeMoney(int value)
-    {
-        if (_money + value < 0)
-            return false;
-
-        _money += value;
-        return true;
-    }
-
-    public void SaveInventory(GameDataContainer gameData)
-    {
-        Inventory.SaveData(gameData.PlayerInventoryData.PlayerInventory);
-    }
-
-    public void LoadInventory(GameDataContainer gameData)
-    {
-        Inventory.LoadData(gameData.PlayerInventoryData.PlayerInventory);
-    }
-
-    public void SaveEquipment(GameDataContainer gameData)
-    {
-        Inventory.SaveData(gameData.PlayerInventoryData.PlayerEquipment);
-    }
-
-    public void LoadEquipment(GameDataContainer gameData)
-    {
-        Inventory.LoadData(gameData.PlayerInventoryData.PlayerEquipment);
-    }
-
-    public void SaveQAM(GameDataContainer gameData)
-    {
-        for (int i = 0; i < QuickAccessMenuSlots.Length; i++)
-        {
-            gameData.PlayerInventoryData.QuickAccessMenuItems.Items[i] = QuickAccessMenuSlots[i].QuickAccessMenuItem.Item;
-        }
-    }
-
-    public void LoadQAM(GameDataContainer gameData)
-    {
-        for (int i = 0; i < QuickAccessMenuSlots.Length; i++)
-        {
-            QuickAccessMenuSlots[i].QuickAccessMenuItem.SetNewItem(gameData.PlayerInventoryData.QuickAccessMenuItems.Items[i]);
-        }
-    }
-
     public void Save()
     {
         PlayerInventoryData playerInventoryData = new PlayerInventoryData(Inventory.Capacity, Equipment.Capacity, QuickAccessMenuSlots.Length);
@@ -109,9 +71,30 @@ public class PlayerInventory : MonoBehaviour
         SaveInventory(_gameData);
         SaveEquipment(_gameData);
         SaveQAM(_gameData);
-       
-        Storage storage = new Storage();
-        storage.Save(_gameData);
+
+        //Storage storage = new Storage();
+        //storage.Save(_gameData);
+
+        var journalData = GameDataContainer.Instance.PlayerJournalData;
+        _saveLoadSystem.Save(journalData);
+    }
+
+    private void SaveInventory(GameDataContainer gameData)
+    {
+        Inventory.SaveData(gameData.PlayerInventoryData.PlayerInventory);
+    }
+
+    private void SaveEquipment(GameDataContainer gameData)
+    {
+        Inventory.SaveData(gameData.PlayerInventoryData.PlayerEquipment);
+    }
+
+    private void SaveQAM(GameDataContainer gameData)
+    {
+        for (int i = 0; i < QuickAccessMenuSlots.Length; i++)
+        {
+            gameData.PlayerInventoryData.QuickAccessMenuItems.Items[i] = QuickAccessMenuSlots[i].QuickAccessMenuItem.Item;
+        }
     }
 
     public void Load()
@@ -131,6 +114,24 @@ public class PlayerInventory : MonoBehaviour
         LoadInventory(_gameData);
         LoadEquipment(_gameData);
         LoadQAM(_gameData);
+    }
+
+    private void LoadInventory(GameDataContainer gameData)
+    {
+        Inventory.LoadData(gameData.PlayerInventoryData.PlayerInventory);
+    }
+
+    private void LoadEquipment(GameDataContainer gameData)
+    {
+        Inventory.LoadData(gameData.PlayerInventoryData.PlayerEquipment);
+    }
+
+    private void LoadQAM(GameDataContainer gameData)
+    {
+        for (int i = 0; i < QuickAccessMenuSlots.Length; i++)
+        {
+            QuickAccessMenuSlots[i].QuickAccessMenuItem.SetNewItem(gameData.PlayerInventoryData.QuickAccessMenuItems.Items[i]);
+        }
     }
 
     private void SetItemsInfo(InventoryItemInfo[] infoObjects, InventoryData data)

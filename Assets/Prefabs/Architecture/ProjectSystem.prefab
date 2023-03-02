@@ -1,49 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &620583098
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 620583099}
-  - component: {fileID: 620583100}
-  m_Layer: 0
-  m_Name: SaveSubSystem
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &620583099
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 620583098}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6294595696765306750}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &620583100
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 620583098}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59246b0f0e2a72b4b90a0c9ea03b534e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &928815536
 GameObject:
   m_ObjectHideFlags: 0
@@ -74,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6294595696765306750}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &928815538
 MonoBehaviour:
@@ -120,7 +76,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6294595696765306750}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1012111115
 MonoBehaviour:
@@ -167,7 +123,7 @@ GameObject:
   - component: {fileID: 1729848809}
   - component: {fileID: 1729848810}
   m_Layer: 0
-  m_Name: LoadSubSystem
+  m_Name: SaveAndLoadSubSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -200,7 +156,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 042271aeedff32340a7548d6d4bd7b5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fileName: Save.save
   _dataStorageFolder: Saves
   _dataFileFormat: bin
   _separator: .
@@ -234,7 +189,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6294595696765306750}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5193268257920135529
 MonoBehaviour:
@@ -279,7 +234,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6294595696765306750}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3664518248166713984
 MonoBehaviour:
@@ -331,7 +286,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6294595696765306750}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6210343897077397332
 MonoBehaviour:
@@ -428,7 +383,6 @@ Transform:
   - {fileID: 3171614495226804028}
   - {fileID: 1442134753910224679}
   - {fileID: 1729848809}
-  - {fileID: 620583099}
   - {fileID: 928815537}
   - {fileID: 1012111114}
   - {fileID: 4864089010427035292}
@@ -459,7 +413,6 @@ MonoBehaviour:
   - {fileID: 3044847298421545954}
   - {fileID: 928815538}
   - {fileID: 5663088256639769546}
-  - {fileID: 620583100}
   - {fileID: 3664518248166713984}
   - {fileID: 3670974318390832832}
   - {fileID: 5193268257920135529}
@@ -581,7 +534,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6294595696765306750}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3670974318390832832
 MonoBehaviour:

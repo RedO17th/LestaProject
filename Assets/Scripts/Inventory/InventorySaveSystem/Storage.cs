@@ -17,6 +17,7 @@ namespace SaveAndLoadModule
             _formatter = new BinaryFormatter();
         }
 
+        //[TODO] Remove
         public object Load(object saveDataByDefault)
         {
             //if (File.Exists(_dataStoragePath) == false)
@@ -37,7 +38,6 @@ namespace SaveAndLoadModule
             //return loaded;
             return null;
         }
-
         public void Save(object saveData)
         {
             //using (FileStream fs = new FileStream(_dataStoragePath, FileMode.OpenOrCreate))
@@ -45,6 +45,7 @@ namespace SaveAndLoadModule
             //    _formatter.Serialize(fs, saveData);
             //}
         }
+        //..
 
         //New realisation
         public T Load<T>(string fileName) where T : BaseData

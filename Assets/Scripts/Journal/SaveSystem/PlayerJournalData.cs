@@ -1,5 +1,7 @@
+using SaveAndLoadModule;
+
 [System.Serializable]
-public class PlayerJournalData
+public class PlayerJournalData : BaseData
 {
     public JournalData ActiveJournal { get; private set; }
     public JournalData CompleteJournal { get; private set; }
