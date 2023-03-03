@@ -124,7 +124,5 @@ public class BasePlayer : MonoBehaviour, IInteractor
         {
             _interactable.Interact();
         }
-
-        if (Input.GetKeyDown(KeyCode.Space)) Health.CurrentValue -= 10;
     }
 }

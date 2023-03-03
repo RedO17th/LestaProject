@@ -79,28 +79,6 @@ namespace SaveAndLoadModule
             }
         }
     }
-
-    public interface ILoadableData { }
-    public interface ISavableData { }
-
-    [System.Serializable]
-    public class BaseData : ILoadableData, ISavableData 
-    {
-        public BaseData() { }
-    }
-
-    //Test
-    [System.Serializable]
-    public class TestLoadableData : BaseData
-    {
-        public TestLoadableData() { }
-    }
-
-    [System.Serializable]
-    public class TestSavableData : BaseData
-    {
-        public TestSavableData() { }
-    }
 }
 
 

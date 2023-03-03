@@ -15,9 +15,6 @@ public class PlayerSubSystem : BaseSubSystem
     public override void Initialize()
     {
         InitializePlayer();
-
-        //Test: При этом данное значение необходимо откуда либо брать...
-        //_walletOfPoints = new WalletOfPoints(100);
     }
 
     private void InitializePlayer()
