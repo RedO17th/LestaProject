@@ -1,10 +1,7 @@
 using System;
 using System.IO;
-using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
-using Directory = System.IO.Directory;
-using File = System.IO.File;
 
 namespace SaveAndLoadModule
 { 
@@ -17,37 +14,6 @@ namespace SaveAndLoadModule
             _formatter = new BinaryFormatter();
         }
 
-        //[TODO] Remove
-        public object Load(object saveDataByDefault)
-        {
-            //if (File.Exists(_dataStoragePath) == false)
-            //{
-            //    if (saveDataByDefault != null)
-            //        Save(saveDataByDefault);
-
-            //    return saveDataByDefault;
-            //}
-
-            //object loaded = null;
-
-            //using (FileStream fs = new FileStream(_dataStoragePath, FileMode.Open))
-            //{
-            //    loaded = _formatter.Deserialize(fs);
-            //}
-
-            //return loaded;
-            return null;
-        }
-        public void Save(object saveData)
-        {
-            //using (FileStream fs = new FileStream(_dataStoragePath, FileMode.OpenOrCreate))
-            //{
-            //    _formatter.Serialize(fs, saveData);
-            //}
-        }
-        //..
-
-        //New realisation
         public T Load<T>(string fileName) where T : BaseData
         {
             T result = null;

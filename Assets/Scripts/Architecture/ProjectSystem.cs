@@ -1,3 +1,4 @@
+using SaveAndLoadModule;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -48,7 +49,6 @@ public class ProjectSystem : MonoBehaviour
         
         };
     }
-
     private void SetStandartGameState()
     {
         _currentGameState = GetGameStateBy(_standartGameState);
@@ -71,7 +71,7 @@ public class ProjectSystem : MonoBehaviour
         return result;
     }
 
-    public static T GetSubSystem<T>() where T : BaseSubSystem
+    public static T GetSubSystem<T>() where T : class
     {
         T system = null;
 
@@ -87,11 +87,13 @@ public class ProjectSystem : MonoBehaviour
         return system;
     }
 
-    //Start period
-    private void Start()
+    private void Start() => StartScene();
+    public void StartScene()
     {
         InitializeSubSystems();
         PrepareSubSystems();
+
+        LoadDataToSubSystems();
 
         StartSubSystems();
     }
@@ -106,6 +108,18 @@ public class ProjectSystem : MonoBehaviour
         foreach (var s in _subSystems)
             s.Prepare();
     }
+
+    private void LoadDataToSubSystems()
+    {
+        foreach (var system in _subSystems)
+        {
+            if (system is ILoader loader)
+            {
+                loader.Load();
+            }
+        }
+    }
+
     private void StartSubSystems()
     {
         foreach (var system in _subSystems)
@@ -120,6 +134,9 @@ public class ProjectSystem : MonoBehaviour
 
         //and more...
     }
+
+    //[TODO] Сигнал о выключении всех систем...
+    //..
 
     #region ProcessingGameStates
     private void ProcessingGameStates()

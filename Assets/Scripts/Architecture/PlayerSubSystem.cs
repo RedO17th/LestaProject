@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using SaveAndLoadModule;
 
-public class PlayerSubSystem : BaseSubSystem
+public class PlayerSubSystem : BaseSubSystem, ILoader
 {
     [SerializeField] private BasePlayer _player = null;
 
@@ -27,6 +28,11 @@ public class PlayerSubSystem : BaseSubSystem
         var settingsSystem = ProjectSystem.GetSubSystem<SettingsSubSystem>();
 
         _characteristics = settingsSystem?.GetDataContainer<CharacteristicsContainer>();
+    }
+
+    public void Load()
+    {
+        Debug.Log($"PlayerSubSystem.Load");
     }
 
     public T GetPlayerController<T>() where T : BasePlayerContoller

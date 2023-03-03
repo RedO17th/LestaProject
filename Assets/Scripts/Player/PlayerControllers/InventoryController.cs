@@ -69,7 +69,7 @@ public class InventoryController : BasePlayerContoller
         base.Initialize(player);
 
         _questSubSystem = ProjectSystem.GetSubSystem<QuestSubSystem>();
-        _saveLoadSystem = ProjectSystem.GetSubSystem<SaveAndLoadSubSystem>();
+        _saveLoadSystem = ProjectSystem.GetSubSystem<ISaveLoadSystem>();
     }
 
     public override void Prepare()

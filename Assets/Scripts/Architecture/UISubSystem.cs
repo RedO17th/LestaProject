@@ -1,8 +1,9 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System;
+using SaveAndLoadModule;
 
-public class UISubSystem : BaseSubSystem
+public class UISubSystem : BaseSubSystem, ILoader
 {
     [Header("Screens")]
     [SerializeField] private IngameScreen _HUDScreen = null;
@@ -22,10 +23,13 @@ public class UISubSystem : BaseSubSystem
         InitializeScreens(); 
     }
 
+    public void Load()
+    {
+        Debug.Log($"UISubSystem.Load");
+    }
+
     public override void StartSystem()
     {
-        base.StartSystem();
-
         _isInMenu = false;
         ShowScreen(_HUDScreen.ID);
     }
