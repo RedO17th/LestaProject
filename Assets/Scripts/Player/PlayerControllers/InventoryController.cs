@@ -2,16 +2,12 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using SaveAndLoadModule;
+using UnityEngine.Rendering.VirtualTexturing;
 
 public class InventoryController : BasePlayerContoller
 {
-    [SerializeField] private UIQuickAccessMenu _quickAccessMenu;
+    [SerializeField] private UIContainer _uiContainer = null;
 
-    [SerializeField] private UIQuickAccessMenu _quickAccessMenuhud;
-
-    [SerializeField] private UIInventoryController _uiInventoryController;
-
-    [Space]
     [SerializeField] private int _inventoryCapacity = 42;
     [SerializeField] private int _equipmentCapacity = 12;
 
@@ -48,12 +44,19 @@ public class InventoryController : BasePlayerContoller
     private InventoryWithSlots _equipment;
     private InventoryWithSlots _inventory;
 
-    //private GameDataContainer _gameData;
+    private UIQuickAccessMenu _quickAccessMenu;
+    private UIQuickAccessMenu _quickAccessMenuhud;
+    private UIInventoryController _uiInventoryController;
+
     private int _money;
 
-    private void Awake() 
+    private void Awake()
     {
         _instance = this;
+
+        _quickAccessMenu = _uiContainer.QuickAccessMenu;
+        _quickAccessMenuhud = _uiContainer.QuickAccessMenuhud;
+        _uiInventoryController = _uiContainer.UIInventoryController;
 
         _uiInventoryController.UIInventory.Initialize(Inventory);
         _uiInventoryController.UIEquipment.Initialize(Equipment);

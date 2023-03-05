@@ -5,14 +5,17 @@ using SaveAndLoadModule;
 
 public class UISubSystem : BaseSubSystem, ILoader
 {
-    [Header("Screens")]
-    [SerializeField] private IngameScreen _HUDScreen = null;
-    [SerializeField] private IngameScreen _inventoryScreen = null;
-    [SerializeField] private IngameScreen _clipboardScreen = null;
-    [SerializeField] private IngameScreen _skillsScreen = null;
-    [SerializeField] private IngameScreen _pauseMenuScreen = null;
-    [SerializeField] private IngameScreen _dialogueScreen = null;
-    [SerializeField] private IngameScreen _settingsScreen = null;
+    [SerializeField] private UIContainer _uiContainer = null;
+
+    public UIContainer UIContainer => _uiContainer;
+
+    private IngameScreen _HUDScreen = null;
+    private IngameScreen _inventoryScreen = null;
+    private IngameScreen _clipboardScreen = null;
+    private IngameScreen _skillsScreen = null;
+    private IngameScreen _pauseMenuScreen = null;
+    private IngameScreen _dialogueScreen = null;
+    private IngameScreen _settingsScreen = null;
     private List<IngameScreen> _screens = null;
 
     private bool _isInMenu = false;
@@ -21,6 +24,27 @@ public class UISubSystem : BaseSubSystem, ILoader
     public override void Initialize()
     {
         InitializeScreens(); 
+    }
+
+    private void InitializeScreens()
+    {
+        _screens = new List<IngameScreen>();
+
+        _HUDScreen = _uiContainer.HUDScreen;
+        _inventoryScreen = _uiContainer.InventoryScreen;
+        _clipboardScreen = _uiContainer.ClipboardScreen;
+        _skillsScreen = _uiContainer.SkillsScreen;
+        _pauseMenuScreen = _uiContainer.PauseMenuScreen;
+        _dialogueScreen = _uiContainer.DialogueScreen;
+        _settingsScreen = _uiContainer.SettingsScreen;
+
+        if (_HUDScreen != null) _screens.Add(_HUDScreen);
+        if (_inventoryScreen != null) _screens.Add(_inventoryScreen);
+        if (_clipboardScreen != null) _screens.Add(_clipboardScreen);
+        if (_skillsScreen != null) _screens.Add(_skillsScreen);
+        if (_dialogueScreen != null) _screens.Add(_dialogueScreen);
+        if (_pauseMenuScreen != null) _screens.Add(_pauseMenuScreen);
+        if (_settingsScreen != null) _screens.Add(_settingsScreen);
     }
 
     public void Load()
@@ -62,18 +86,6 @@ public class UISubSystem : BaseSubSystem, ILoader
                 EventSystem.UIEvents.InvokeOnPauseMenuCalled();
             }
         }
-    }
-
-    private void InitializeScreens()
-    {
-        _screens = new List<IngameScreen>();
-        if (_HUDScreen != null) _screens.Add(_HUDScreen);
-        if (_inventoryScreen != null) _screens.Add(_inventoryScreen);
-        if (_clipboardScreen != null) _screens.Add(_clipboardScreen);
-        if (_skillsScreen != null) _screens.Add(_skillsScreen);
-        if (_dialogueScreen != null) _screens.Add(_dialogueScreen);
-        if (_pauseMenuScreen != null) _screens.Add(_pauseMenuScreen);
-        if (_settingsScreen != null) _screens.Add(_settingsScreen);
     }
 
     public void ShowScreen(IngameScreenID screenID)

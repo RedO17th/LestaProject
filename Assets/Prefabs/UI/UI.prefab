@@ -15489,9 +15489,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bcde20dcb007014aa4710777cac0eab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _activeQuestsJournal: {fileID: 3908841370059381253}
-  _completeQuestsJournal: {fileID: 3908841370422250481}
-  _diaryJournal: {fileID: 3908841370795268357}
 --- !u!1 &3908841369964302559
 GameObject:
   m_ObjectHideFlags: 0
@@ -63966,6 +63963,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3908841371305541828}
+  - component: {fileID: 4458439712535970101}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -63992,6 +63990,31 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4458439712535970101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3908841371305541831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7312d0c096bb8f54e916067473a7e8e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _HUDScreen: {fileID: 3908841370471857844}
+  _inventoryScreen: {fileID: 3908841370351182525}
+  _clipboardScreen: {fileID: 3908841370658489251}
+  _skillsScreen: {fileID: 3908841369993471361}
+  _pauseMenuScreen: {fileID: 3908841370351336573}
+  _dialogueScreen: {fileID: 3908841370207964396}
+  _settingsScreen: {fileID: 3908841371499210837}
+  _activeQuestsJournal: {fileID: 3908841370059381253}
+  _completeQuestsJournal: {fileID: 3908841370422250481}
+  _diaryJournal: {fileID: 3908841370795268357}
+  _quickAccessMenu: {fileID: 3908841371360788496}
+  _quickAccessMenuhud: {fileID: 3908841370888206657}
+  _uiInventoryController: {fileID: 3908841370589281769}
 --- !u!1 &3908841371309270088
 GameObject:
   m_ObjectHideFlags: 0

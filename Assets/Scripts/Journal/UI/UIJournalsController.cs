@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.VirtualTexturing;
 
 public class UIJournalsController : MonoBehaviour
-{ 
-    [SerializeField] private JournalUI _activeQuestsJournal;
-    [SerializeField] private JournalUI _completeQuestsJournal;
-    [SerializeField] private JournalUI _diaryJournal;
+{
+    private JournalUI _activeQuestsJournal;
+    private JournalUI _completeQuestsJournal;
+    private JournalUI _diaryJournal;
 
     private QuestSubSystem _questSubSystem;
     private DialogSubSystem _dialogSubSystem;
@@ -19,6 +20,12 @@ public class UIJournalsController : MonoBehaviour
     public void Initialize(QuestSubSystem questSubSystem, DialogSubSystem dialogSubSystem)
     {
         _questSubSystem = questSubSystem;
+
+        var uiContainer = ProjectSystem.GetSubSystem<UISubSystem>().UIContainer;
+
+        _activeQuestsJournal = uiContainer.ActiveQuestsJournal;
+        _completeQuestsJournal = uiContainer.CompleteQuestsJournal;
+        _diaryJournal = uiContainer.DiaryJournal;
 
         _questSubSystem.OnQuestActivated += QuestActivated;
         _questSubSystem.OnQuestCompleted += QuestCompleted;
