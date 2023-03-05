@@ -6,10 +6,11 @@ using UnityEngine.UI;
 
 public class ChoiceButton : MonoBehaviour
 {
+    [SerializeField] private Button _button;
+
     private Choice _choice = null;
     private Story _story = null;
 
-    private Button _button = null;
     private TextMeshProUGUI _buttonCaption = null;
 
     public event Action OnClickEvent;
@@ -28,7 +29,6 @@ public class ChoiceButton : MonoBehaviour
 
     private void Awake()
     {
-        _button = GetComponent<Button>();
         _buttonCaption = _button.GetComponent<TextMeshProUGUI>();
         //Debug.Log(_buttonCaption.text);
     }

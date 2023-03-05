@@ -88,7 +88,7 @@ public class UISubSystem : BaseSubSystem, ILoader
         }
     }
 
-    public void ShowScreen(IngameScreenID screenID)
+    private void ShowScreen(IngameScreenID screenID)
     {
         if ((screenID == _HUDScreen.ID) && _isInMenu)
         {
@@ -134,7 +134,7 @@ public class UISubSystem : BaseSubSystem, ILoader
 
     public void OnDisable()
     {
-        EventSystem.UIEvents.OnScreenCalled -= ShowScreen;
+        //EventSystem.UIEvents.OnScreenCalled -= ShowScreen;
 
         EventSystem.UIEvents.OnPauseMenuCalled -= HandleOnPauseMenuCalled;
 

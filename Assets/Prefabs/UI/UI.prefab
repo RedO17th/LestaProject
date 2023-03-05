@@ -5016,6 +5016,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f822684d393ad3f46b8009fff77937a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _button: {fileID: 3908841369655243553}
 --- !u!114 &3908841369655243557
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12250,6 +12251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f822684d393ad3f46b8009fff77937a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _button: {fileID: 3908841369865790040}
 --- !u!114 &3908841369865790044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21107,6 +21109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f822684d393ad3f46b8009fff77937a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _button: {fileID: 3908841370092107675}
 --- !u!1 &3908841370092141217
 GameObject:
   m_ObjectHideFlags: 0
@@ -47035,6 +47038,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f822684d393ad3f46b8009fff77937a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _button: {fileID: 3908841370812488146}
 --- !u!114 &3908841370812488150
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -55282,6 +55286,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f822684d393ad3f46b8009fff77937a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _button: {fileID: 3908841371074079996}
 --- !u!114 &3908841371074079984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64007,8 +64012,8 @@ MonoBehaviour:
   _clipboardScreen: {fileID: 3908841370658489251}
   _skillsScreen: {fileID: 3908841369993471361}
   _pauseMenuScreen: {fileID: 3908841370351336573}
-  _dialogueScreen: {fileID: 3908841370207964396}
-  _settingsScreen: {fileID: 3908841371499210837}
+  _dialogueScreen: {fileID: 3908841371499210837}
+  _settingsScreen: {fileID: 3908841370207964396}
   _activeQuestsJournal: {fileID: 3908841370059381253}
   _completeQuestsJournal: {fileID: 3908841370422250481}
   _diaryJournal: {fileID: 3908841370795268357}
@@ -64208,6 +64213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f822684d393ad3f46b8009fff77937a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _button: {fileID: 3908841371319852478}
 --- !u!114 &3908841371319852466
 MonoBehaviour:
   m_ObjectHideFlags: 0
