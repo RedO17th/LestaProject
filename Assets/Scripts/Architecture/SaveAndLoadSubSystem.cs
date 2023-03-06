@@ -7,25 +7,9 @@ using Directory = System.IO.Directory;
 
 namespace SaveAndLoadModule
 {
-    public interface ILoadableData { }
-    public interface ISavableData { }
-
-    //Базовый тип данных, используемый как пустышка:
-    //Наследовать - можно.
-    //Исправлять - нельзя.
-
-    [System.Serializable]
-    public class BaseData : ILoadableData, ISavableData
-    {
-        public BaseData() { }
-    }
-    //..
-
     public interface ISaveLoadSystem : IObservableLoaderAndSaver
     {
-        //T Load<T>() where T : BaseData;
-        //void Save(ISavableData data);
-
+        IData Data { get; }
         void Load();
         void Save();
     }
@@ -36,8 +20,9 @@ namespace SaveAndLoadModule
         [SerializeField] private string _dataFileFormat = string.Empty;
         [SerializeField] private string _separator = string.Empty;
 
-        private Storage _storage = null;
+        public IData Data { get; private set; } = null;
 
+        private Storage _storage = null;
         private string _fullDataStoragePath = string.Empty;
 
         private List<IObserver> _observers = null;
@@ -57,34 +42,13 @@ namespace SaveAndLoadModule
                 Directory.CreateDirectory(directory);
         }
 
-        public override void Initialize() { }
+        public override void Initialize() 
+        {
+            _observers = new List<IObserver>();
+        }
         public override void Prepare() { }
         public override void StartSystem() { }
 
-        //Указываем необходимый тип для получения
-        public T Load<T>() where T : BaseData
-        {
-            var fileName = GenerateFileName(typeof(T).Name);
-
-            return _storage.Load<T>(fileName);
-        }
-
-        private string GenerateFileName(string fileName)
-        {
-            fileName = fileName + _separator + _dataFileFormat;
-
-            return Path.Combine(_fullDataStoragePath, fileName);
-        }
-
-        //Передаем сохраняемый контейнер наследованный от "BaseData"
-        public void Save(ISavableData data)
-        {
-            var fileName = GenerateFileName(data.GetType().Name);
-
-            _storage.Save(fileName, data);
-        }
-
-        //Observer functional
         public void AddObserver(IObserver o)
         {
             _observers.Add(o);
@@ -96,8 +60,23 @@ namespace SaveAndLoadModule
 
         public void Load()
         {
-            //PrepareData and...
+            Data = Load<ProjectDataContainer>();
+
             NotifyObserversToLoad();
+
+            //Data = null ?
+        }
+        private T Load<T>() where T : BaseData
+        {
+            var fileName = GenerateFileName(typeof(T).Name);
+
+            return _storage.Load<T>(fileName);
+        }
+        private string GenerateFileName(string fileName)
+        {
+            fileName = fileName + _separator + _dataFileFormat;
+
+            return Path.Combine(_fullDataStoragePath, fileName);
         }
         private void NotifyObserversToLoad()
         {
@@ -112,8 +91,12 @@ namespace SaveAndLoadModule
 
         public void Save()
         {
+            Data = new ProjectDataContainer();
+
             NotifyObserversToSave();
-            //Сохранить
+            SaveData(Data);
+
+            //Data = null ?
         }
         private void NotifyObserversToSave()
         {
@@ -125,10 +108,21 @@ namespace SaveAndLoadModule
                 }
             }
         }
+        private void SaveData(ISavableData data)
+        {
+            var fileName = GenerateFileName(data.GetType().Name);
+
+            _storage.Save(fileName, data);
+        }
 
         public override void Clear()
         {
+            _storage = null;
+            _fullDataStoragePath = string.Empty;
 
+            Data = null;
+
+            _observers.Clear();
         }
     }
 }

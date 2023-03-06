@@ -20,7 +20,6 @@ namespace SaveAndLoadModule
         void AddObserver(IObserver o);
         void RemoveObserver(IObserver o);
     }
-
     public interface IObservableLoaderAndSaver : IObservable { }   
 }
 

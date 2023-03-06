@@ -4,7 +4,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
 namespace SaveAndLoadModule
-{ 
+{
     public class Storage
     {
         private BinaryFormatter _formatter = null;
@@ -24,11 +24,11 @@ namespace SaveAndLoadModule
 
                 SaveData(fileName, result);
             }
-            else 
+            else
             {
                 using (FileStream fs = new FileStream(fileName, FileMode.Open))
                 {
-                    result = _formatter.Deserialize(fs) as T; 
+                    result = _formatter.Deserialize(fs) as T;
                 }
             }
 

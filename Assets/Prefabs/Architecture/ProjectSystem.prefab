@@ -90,13 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29ed9af017916774fa93c1f8e9ea6300, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _HUDScreen: {fileID: 0}
-  _inventoryScreen: {fileID: 0}
-  _clipboardScreen: {fileID: 0}
-  _skillsScreen: {fileID: 0}
-  _pauseMenuScreen: {fileID: 0}
-  _dialogueScreen: {fileID: 0}
-  _settingsScreen: {fileID: 0}
+  _uiContainer: {fileID: 0}
 --- !u!114 &4191074930287209820
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,9 +103,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bcde20dcb007014aa4710777cac0eab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _activeQuestsJournal: {fileID: 0}
-  _completeQuestsJournal: {fileID: 0}
-  _diaryJournal: {fileID: 0}
 --- !u!1 &1729848808
 GameObject:
   m_ObjectHideFlags: 0
@@ -128,7 +119,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1729848809
 Transform:
   m_ObjectHideFlags: 0

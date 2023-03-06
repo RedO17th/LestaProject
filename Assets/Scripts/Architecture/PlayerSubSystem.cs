@@ -13,6 +13,7 @@ public class PlayerSubSystem : BaseSubSystem, ILoaderObserver, ISaverObserver
     //[TODO] Remove
     private WalletOfPoints _walletOfPoints = null;
     private CharacteristicsContainer _characteristics = null;
+    //..
 
     public override void Initialize()
     {
@@ -30,7 +31,6 @@ public class PlayerSubSystem : BaseSubSystem, ILoaderObserver, ISaverObserver
 
         _characteristics = settingsSystem?.GetDataContainer<CharacteristicsContainer>();
 
-        //Добавить себя в Наблюдаемому
         var saveLoadSystem = ProjectSystem.GetSubSystem<ISaveLoadSystem>();
             saveLoadSystem.AddObserver(this);
     }
