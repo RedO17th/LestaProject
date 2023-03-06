@@ -10,11 +10,6 @@ public class PlayerSubSystem : BaseSubSystem, ILoaderObserver, ISaverObserver
 
     public BasePlayer Player => _player;
 
-    //[TODO] Remove
-    private WalletOfPoints _walletOfPoints = null;
-    private CharacteristicsContainer _characteristics = null;
-    //..
-
     public override void Initialize()
     {
         InitializePlayer();
@@ -27,10 +22,6 @@ public class PlayerSubSystem : BaseSubSystem, ILoaderObserver, ISaverObserver
 
     public override void Prepare()
     {
-        var settingsSystem = ProjectSystem.GetSubSystem<SettingsSubSystem>();
-
-        _characteristics = settingsSystem?.GetDataContainer<CharacteristicsContainer>();
-
         var saveLoadSystem = ProjectSystem.GetSubSystem<ISaveLoadSystem>();
             saveLoadSystem.AddObserver(this);
     }
@@ -40,38 +31,9 @@ public class PlayerSubSystem : BaseSubSystem, ILoaderObserver, ISaverObserver
         return _player.GetControllerBy<T>();
     }
 
-    #region Characteristics part
-    public BaseCharacteristic GetCharacteristicByType(CharacterisicType type)
-    {
-        return _characteristics.GetCharacteristicByType(type);
-    }
-    #endregion
-
-
-    #region Wallet part
-    [ContextMenu("TestAddPoints")]
-    public void TestAddPoints()
-    {
-        AddPoints(10);
-    }
-
-    public void AddPoints(int points)
-    {
-        _walletOfPoints.Add(points);
-    }
-    #endregion
-
     #region Clear part
-    public override void Clear()
-    {
-        ClearWallet();
-    }
+    public override void Clear() { }
 
-    private void ClearWallet()
-    {
-        _walletOfPoints.RemoveAll();
-        _walletOfPoints = null;
-    }
     #endregion
 
     #region SaveLoad part

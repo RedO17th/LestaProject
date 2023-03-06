@@ -24,7 +24,6 @@ public class ProjectSystem : MonoBehaviour
     private BaseGameState _currentGameState = null;
     private List<BaseGameState> _gameStates = null;
 
-    //Awake period
     private void Awake()
     {
         InitializeSystem();
@@ -53,7 +52,6 @@ public class ProjectSystem : MonoBehaviour
     {
         _currentGameState = GetGameStateBy(_standartGameState);
     }
-    //..
 
     private BaseGameState GetGameStateBy(GameStateType type) 
     {
@@ -108,30 +106,26 @@ public class ProjectSystem : MonoBehaviour
         foreach (var s in _subSystems)
             s.Prepare();
     }
-
     private void LoadDataToSubSystems()
     {
         var loadSystem = GetSubSystem<ISaveLoadSystem>();
             loadSystem.Load();  
     }
-
     private void StartSubSystems()
     {
         foreach (var system in _subSystems)
             system.StartSystem();
     }
-    //..
 
-    private void Update()
+    private void OnDisable() => StopSubSystems();
+    private void StopSubSystems()
     {
-        //ProcessingGameStates();
-
-
-        //and more...
+        foreach (var system in _subSystems)
+        {
+            system.StopSystem();
+            system.Clear();
+        }
     }
-
-    //[TODO] Сигнал о выключении всех систем...
-    //..
 
     #region ProcessingGameStates
     private void ProcessingGameStates()

@@ -3,6 +3,7 @@
     [System.Serializable]
     public class ProjectDataContainer : BaseData
     {
+        //[TODO] Ref
         public int ValueA => _valueA;
         public int ValueB => _valueB;
         public int ValueC => _valueC;

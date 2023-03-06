@@ -5,7 +5,6 @@ using UnityEngine;
 
 namespace SaveAndLoadModule
 {
-    public interface IObserver { }
     public interface ISaverObserver : IObserver 
     {
         void NotifyAboutSave();
