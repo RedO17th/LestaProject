@@ -169,6 +169,154 @@ public partial class @MainInputComponent : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""QuickAccessToolbar"",
+            ""id"": ""40943268-4181-4d73-96b6-e3621ea924c7"",
+            ""actions"": [
+                {
+                    ""name"": ""Z"",
+                    ""type"": ""Button"",
+                    ""id"": ""7491bc7b-f3ee-4051-813c-29ef84a7c531"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""X"",
+                    ""type"": ""Button"",
+                    ""id"": ""2552e980-c09d-4b85-b4b0-c3439231deec"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""C"",
+                    ""type"": ""Button"",
+                    ""id"": ""51a9e726-ddb9-4978-8fcf-30e05fd5205e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""V"",
+                    ""type"": ""Button"",
+                    ""id"": ""6a854bec-7781-40ff-83c9-086784901779"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""B"",
+                    ""type"": ""Button"",
+                    ""id"": ""4a63e278-04ce-4219-af60-a069de3ab2b6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""N"",
+                    ""type"": ""Button"",
+                    ""id"": ""372df6a4-ea90-4407-b011-9142e38f38e3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""M"",
+                    ""type"": ""Button"",
+                    ""id"": ""cc232785-738e-4588-a0e2-67215cc6c9f9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""47232ff9-5b95-4cb7-81e4-f9a31eef8f12"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""MouseAndKeyboard"",
+                    ""action"": ""Z"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cb55f132-c231-45c1-baa2-35bc560f08be"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""MouseAndKeyboard"",
+                    ""action"": ""X"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f592b975-9219-4d3a-9f4e-32270b1a6290"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""MouseAndKeyboard"",
+                    ""action"": ""C"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dfce6a58-77f1-4dc2-8a96-a05586605ac1"",
+                    ""path"": ""<Keyboard>/v"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""MouseAndKeyboard"",
+                    ""action"": ""V"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a966b11a-1b78-49dc-9c0f-c414b2594579"",
+                    ""path"": ""<Keyboard>/b"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""MouseAndKeyboard"",
+                    ""action"": ""B"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d4695045-4ab3-4f80-bbc1-703546f995a5"",
+                    ""path"": ""<Keyboard>/n"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""MouseAndKeyboard"",
+                    ""action"": ""N"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""08f67198-0686-4996-85c9-61d18109e5a1"",
+                    ""path"": ""<Keyboard>/m"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""MouseAndKeyboard"",
+                    ""action"": ""M"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -194,6 +342,15 @@ public partial class @MainInputComponent : IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Run = m_Player.FindAction("Run", throwIfNotFound: true);
+        // QuickAccessToolbar
+        m_QuickAccessToolbar = asset.FindActionMap("QuickAccessToolbar", throwIfNotFound: true);
+        m_QuickAccessToolbar_Z = m_QuickAccessToolbar.FindAction("Z", throwIfNotFound: true);
+        m_QuickAccessToolbar_X = m_QuickAccessToolbar.FindAction("X", throwIfNotFound: true);
+        m_QuickAccessToolbar_C = m_QuickAccessToolbar.FindAction("C", throwIfNotFound: true);
+        m_QuickAccessToolbar_V = m_QuickAccessToolbar.FindAction("V", throwIfNotFound: true);
+        m_QuickAccessToolbar_B = m_QuickAccessToolbar.FindAction("B", throwIfNotFound: true);
+        m_QuickAccessToolbar_N = m_QuickAccessToolbar.FindAction("N", throwIfNotFound: true);
+        m_QuickAccessToolbar_M = m_QuickAccessToolbar.FindAction("M", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -290,6 +447,87 @@ public partial class @MainInputComponent : IInputActionCollection2, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // QuickAccessToolbar
+    private readonly InputActionMap m_QuickAccessToolbar;
+    private IQuickAccessToolbarActions m_QuickAccessToolbarActionsCallbackInterface;
+    private readonly InputAction m_QuickAccessToolbar_Z;
+    private readonly InputAction m_QuickAccessToolbar_X;
+    private readonly InputAction m_QuickAccessToolbar_C;
+    private readonly InputAction m_QuickAccessToolbar_V;
+    private readonly InputAction m_QuickAccessToolbar_B;
+    private readonly InputAction m_QuickAccessToolbar_N;
+    private readonly InputAction m_QuickAccessToolbar_M;
+    public struct QuickAccessToolbarActions
+    {
+        private @MainInputComponent m_Wrapper;
+        public QuickAccessToolbarActions(@MainInputComponent wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Z => m_Wrapper.m_QuickAccessToolbar_Z;
+        public InputAction @X => m_Wrapper.m_QuickAccessToolbar_X;
+        public InputAction @C => m_Wrapper.m_QuickAccessToolbar_C;
+        public InputAction @V => m_Wrapper.m_QuickAccessToolbar_V;
+        public InputAction @B => m_Wrapper.m_QuickAccessToolbar_B;
+        public InputAction @N => m_Wrapper.m_QuickAccessToolbar_N;
+        public InputAction @M => m_Wrapper.m_QuickAccessToolbar_M;
+        public InputActionMap Get() { return m_Wrapper.m_QuickAccessToolbar; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(QuickAccessToolbarActions set) { return set.Get(); }
+        public void SetCallbacks(IQuickAccessToolbarActions instance)
+        {
+            if (m_Wrapper.m_QuickAccessToolbarActionsCallbackInterface != null)
+            {
+                @Z.started -= m_Wrapper.m_QuickAccessToolbarActionsCallbackInterface.OnZ;
+                @Z.performed -= m_Wrapper.m_QuickAccessToolbarActionsCallbackInterface.OnZ;
+                @Z.canceled -= m_Wrapper.m_QuickAccessToolbarActionsCallbackInterface.OnZ;
+                @X.started -= m_Wrapper.m_QuickAccessToolbarActionsCallbackInterface.OnX;
+                @X.performed -= m_Wrapper.m_QuickAccessToolbarActionsCallbackInterface.OnX;
+                @X.canceled -= m_Wrapper.m_QuickAccessToolbarActionsCallbackInterface.OnX;
+                @C.started -= m_Wrapper.m_QuickAccessToolbarActionsCallbackInterface.OnC;
+                @C.performed -= m_Wrapper.m_QuickAccessToolbarActionsCallbackInterface.OnC;
+                @C.canceled -= m_Wrapper.m_QuickAccessToolbarActionsCallbackInterface.OnC;
+                @V.started -= m_Wrapper.m_QuickAccessToolbarActionsCallbackInterface.OnV;
+                @V.performed -= m_Wrapper.m_QuickAccessToolbarActionsCallbackInterface.OnV;
+                @V.canceled -= m_Wrapper.m_QuickAccessToolbarActionsCallbackInterface.OnV;
+                @B.started -= m_Wrapper.m_QuickAccessToolbarActionsCallbackInterface.OnB;
+                @B.performed -= m_Wrapper.m_QuickAccessToolbarActionsCallbackInterface.OnB;
+                @B.canceled -= m_Wrapper.m_QuickAccessToolbarActionsCallbackInterface.OnB;
+                @N.started -= m_Wrapper.m_QuickAccessToolbarActionsCallbackInterface.OnN;
+                @N.performed -= m_Wrapper.m_QuickAccessToolbarActionsCallbackInterface.OnN;
+                @N.canceled -= m_Wrapper.m_QuickAccessToolbarActionsCallbackInterface.OnN;
+                @M.started -= m_Wrapper.m_QuickAccessToolbarActionsCallbackInterface.OnM;
+                @M.performed -= m_Wrapper.m_QuickAccessToolbarActionsCallbackInterface.OnM;
+                @M.canceled -= m_Wrapper.m_QuickAccessToolbarActionsCallbackInterface.OnM;
+            }
+            m_Wrapper.m_QuickAccessToolbarActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Z.started += instance.OnZ;
+                @Z.performed += instance.OnZ;
+                @Z.canceled += instance.OnZ;
+                @X.started += instance.OnX;
+                @X.performed += instance.OnX;
+                @X.canceled += instance.OnX;
+                @C.started += instance.OnC;
+                @C.performed += instance.OnC;
+                @C.canceled += instance.OnC;
+                @V.started += instance.OnV;
+                @V.performed += instance.OnV;
+                @V.canceled += instance.OnV;
+                @B.started += instance.OnB;
+                @B.performed += instance.OnB;
+                @B.canceled += instance.OnB;
+                @N.started += instance.OnN;
+                @N.performed += instance.OnN;
+                @N.canceled += instance.OnN;
+                @M.started += instance.OnM;
+                @M.performed += instance.OnM;
+                @M.canceled += instance.OnM;
+            }
+        }
+    }
+    public QuickAccessToolbarActions @QuickAccessToolbar => new QuickAccessToolbarActions(this);
     private int m_MouseAndKeyboardSchemeIndex = -1;
     public InputControlScheme MouseAndKeyboardScheme
     {
@@ -303,5 +541,15 @@ public partial class @MainInputComponent : IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
+    }
+    public interface IQuickAccessToolbarActions
+    {
+        void OnZ(InputAction.CallbackContext context);
+        void OnX(InputAction.CallbackContext context);
+        void OnC(InputAction.CallbackContext context);
+        void OnV(InputAction.CallbackContext context);
+        void OnB(InputAction.CallbackContext context);
+        void OnN(InputAction.CallbackContext context);
+        void OnM(InputAction.CallbackContext context);
     }
 }
