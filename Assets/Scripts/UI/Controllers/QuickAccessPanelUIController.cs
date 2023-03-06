@@ -17,10 +17,10 @@ public enum QuickAccessButtonID
 }
 
 
-public class QuickAccessPanelUIController : BaseUIController
+public class QuickAccessPanelUIController : OLDBaseUIController
 {
-    private BaseButton[] _consumablesButtons = null;
-    private BaseButton[] _skillsButtons = null;
+    private OLDBaseButton[] _consumablesButtons = null;
+    private OLDBaseButton[] _skillsButtons = null;
 
     public event Action<QuickAccessButtonID> OnConsumableCalled = null;
     public event Action<QuickAccessButtonID> OnSkillCalled = null;

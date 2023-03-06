@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public enum ValueChangerButtonType
+public enum ManipulatorButtonType
 {
     Default = -1,
     Increase = 0,
@@ -9,10 +9,10 @@ public enum ValueChangerButtonType
 
 public class CharacteristicsChangerButtonData : MonoBehaviour, IButtonData
 {
-    [SerializeField] private ValueChangerButtonType _buttonType = ValueChangerButtonType.Default;
+    [SerializeField] private ManipulatorButtonType _buttonType = ManipulatorButtonType.Default;
     [SerializeField] private CharacteristicType _linkedValueType = CharacteristicType.None;
 
-    public ValueChangerButtonType ButtonType => _buttonType;
+    public ManipulatorButtonType ButtonType => _buttonType;
 
     public CharacteristicType LinkedValueType => _linkedValueType;
 }

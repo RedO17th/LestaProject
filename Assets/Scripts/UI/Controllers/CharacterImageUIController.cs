@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CharacterImageUIController : BaseUIController
+public class CharacterImageUIController : OLDBaseUIController
 {
     [SerializeField] private Sprite[] _charactersSprites = null;
     private Dictionary<PrehistoryEnum, Sprite> _characterDict = null;

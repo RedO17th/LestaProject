@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 
-public class NavigationPanelUIController : BaseUIController
+public class NavigationPanelUIController : OLDBaseUIController
 {    
     [SerializeField] private ScreenNavigationButton[] _navButtons = null;
     
@@ -20,13 +20,13 @@ public class NavigationPanelUIController : BaseUIController
         }
     }
     
-    private void NavButtonClickListener(BaseButton sender)
+    private void NavButtonClickListener(OLDBaseButton sender)
     {
         if (sender is ScreenNavigationButton s)
         {
             if (s.Data is ScreenNavigationButtonData d)
             {
-                EventSystem.UIEvents.InvokeOnScreenCalled(d.ID);
+                EventSystem.OLDUIEvents.InvokeOnScreenCalled(d.ID);
             }
         }
     }

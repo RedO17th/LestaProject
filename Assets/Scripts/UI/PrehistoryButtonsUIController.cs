@@ -1,11 +1,11 @@
 ﻿using System;
 using UnityEngine;
 
-public class PrehistoryButtonsUIController : BaseUIController
+public class PrehistoryButtonsUIController : OLDBaseUIController
 {
     public static event Action<PrehistoryEnum> OnPrehistoryButtonClicked;
 
-    [SerializeField] private PrehistoryButton[] _buttons = null;
+    [SerializeField] private OLDPrehistoryButton[] _buttons = null;
 
     public void Start()
     {
@@ -20,7 +20,7 @@ public class PrehistoryButtonsUIController : BaseUIController
         }
     }
 
-    private void HandleOnPrehistoryButtonClicked(BaseButton sender)
+    private void HandleOnPrehistoryButtonClicked(OLDBaseButton sender)
     {
         foreach(var button in _buttons)
         {

@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 
 [RequireComponent(typeof(PrehistoryButtonData))]
-public class PrehistoryButton : BaseButton, IButtonWithData, IToggledButton
+public class OLDPrehistoryButton : OLDBaseButton, IButtonWithData, IToggledButton
 {
     public IButtonData Data => _data;
     [SerializeField] private PrehistoryButtonData _data = null;

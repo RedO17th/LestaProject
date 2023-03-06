@@ -32,15 +32,15 @@ public class UISubSystem : BaseSubSystem
 
     public void OnEnable()
     {
-        EventSystem.UIEvents.OnScreenCalled += ShowScreen;
+        EventSystem.OLDUIEvents.OnScreenCalled += ShowScreen;
 
-        EventSystem.UIEvents.OnPauseMenuCalled += HandleOnPauseMenuCalled;
+        EventSystem.OLDUIEvents.OnPauseMenuCalled += HandleOnPauseMenuCalled;
 
-        EventSystem.UIEvents.OnPlayerMenuExit += HandleOnPlayerMenuExit;
+        EventSystem.OLDUIEvents.OnPlayerMenuExit += HandleOnPlayerMenuExit;
 
-        EventSystem.UIEvents.OnDialogueMenuCalled += HandleOnDialogueMenuCalled;
+        EventSystem.OLDUIEvents.OnDialogueMenuCalled += HandleOnDialogueMenuCalled;
 
-        EventSystem.UIEvents.OnExitFromDialogueMenuCalled += HandleOnExitFromDialogueMenuCalled;
+        EventSystem.OLDUIEvents.OnExitFromDialogueMenuCalled += HandleOnExitFromDialogueMenuCalled;
     }
 
     void Update()
@@ -49,13 +49,11 @@ public class UISubSystem : BaseSubSystem
         {
             if (_isInMenu)
             {
-                Debug.Log("InvokeOnPlayerMenuExit");
-                EventSystem.UIEvents.InvokeOnPlayerMenuExit();
+                EventSystem.OLDUIEvents.InvokeOnPlayerMenuExit();
             }
             else
             {
-                Debug.Log("InvokeOnPauseMenuCalled");
-                EventSystem.UIEvents.InvokeOnPauseMenuCalled();
+                EventSystem.OLDUIEvents.InvokeOnPauseMenuCalled();
             }
         }
     }
@@ -118,12 +116,12 @@ public class UISubSystem : BaseSubSystem
 
     public void OnDisable()
     {
-        EventSystem.UIEvents.OnScreenCalled -= ShowScreen;
+        EventSystem.OLDUIEvents.OnScreenCalled -= ShowScreen;
 
-        EventSystem.UIEvents.OnPauseMenuCalled -= HandleOnPauseMenuCalled;
+        EventSystem.OLDUIEvents.OnPauseMenuCalled -= HandleOnPauseMenuCalled;
 
-        EventSystem.UIEvents.OnPlayerMenuExit -= HandleOnPlayerMenuExit;
+        EventSystem.OLDUIEvents.OnPlayerMenuExit -= HandleOnPlayerMenuExit;
 
-        EventSystem.UIEvents.OnDialogueMenuCalled -= HandleOnDialogueMenuCalled;
+        EventSystem.OLDUIEvents.OnDialogueMenuCalled -= HandleOnDialogueMenuCalled;
     }
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(PauseMenuButtonData))]
-public class PauseMenuButton : BaseButton, IToggledButton, IButtonWithData
+public class PauseMenuButton : OLDBaseButton, IToggledButton, IButtonWithData
 {
     public IButtonData Data => _data;
     [SerializeField] private PauseMenuButtonData _data = null;

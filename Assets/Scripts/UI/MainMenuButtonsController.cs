@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-public class MainMenuButtonsController : BaseUIController
+public class MainMenuButtonsController : OLDBaseUIController
 {
     [SerializeField] private CommonButton _newGameButton = null;
     [SerializeField] private CommonButton _loadGameButton = null;
@@ -30,33 +30,33 @@ public class MainMenuButtonsController : BaseUIController
     }
 
 
-    private void StartNewGame(BaseButton listener)
+    private void StartNewGame(OLDBaseButton listener)
     {
         OnScreenFromMainCalled?.Invoke(MainMenuScreenID.NewGameScreen);
     }
 
 
-    private void LoadGame(BaseButton listener)
+    private void LoadGame(OLDBaseButton listener)
     {
         SceneManager.LoadScene(1);
     }
 
 
-    private void ShowSettingsScreen(BaseButton listener)
+    private void ShowSettingsScreen(OLDBaseButton listener)
     {
         OnScreenFromMainCalled?.Invoke(MainMenuScreenID.Settings);
     }
 
 
-    private void ShowCreditsScreen(BaseButton listener)
+    private void ShowCreditsScreen(OLDBaseButton listener)
     {
         OnScreenFromMainCalled?.Invoke(MainMenuScreenID.Credits);
     }
 
 
-    private void Exit(BaseButton listener)
+    private void Exit(OLDBaseButton listener)
     {
         Application.Quit();
-        Debug.Log("Чат летит так быстро, что никто не узнает, что я никогда не выведусь ибо я лог после блять выхода...");
+        Debug.Log("Р§Р°С‚ Р»РµС‚РёС‚ С‚Р°Рє Р±С‹СЃС‚СЂРѕ, С‡С‚Рѕ РЅРёРєС‚Рѕ РЅРµ СѓР·РЅР°РµС‚, С‡С‚Рѕ СЏ РЅРёРєРѕРіРґР° РЅРµ РІС‹РІРµРґСѓСЃСЊ РёР±Рѕ СЏ Р»РѕРі РїРѕСЃР»Рµ Р±Р»СЏС‚СЊ РІС‹С…РѕРґР°...");
     }
 }

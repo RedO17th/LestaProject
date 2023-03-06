@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff483064b999164498223e3b5e29b228, type: 3}
+  m_Name: TishaPrehistory 3
+  m_EditorClassIdentifier: 
+  ActivePortrait: {fileID: 21300000, guid: 3fa8e93b1e3c67149b80732f3ef97e59, type: 3}
+  InactivePortrait: {fileID: 21300000, guid: 6631b5270dbbefc4fa43faa3ea1a25cc, type: 3}
+  FullLength: {fileID: 21300000, guid: 6631b5270dbbefc4fa43faa3ea1a25cc, type: 3}

@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(ScreenNavigationButtonData))]
-public class ScreenNavigationButton : BaseButton, IButtonWithData
+public class ScreenNavigationButton : OLDBaseButton, IButtonWithData
 {
     public IButtonData Data => _data;
 
@@ -14,7 +14,7 @@ public class ScreenNavigationButton : BaseButton, IButtonWithData
         _data = GetComponent<ScreenNavigationButtonData>();
     }
 
-    public override void Subscribe(UnityAction<BaseButton> listener)
+    public override void Subscribe(UnityAction<OLDBaseButton> listener)
     {
         onClick.AddListener(() => listener(this));
     }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MainMenuController : MonoBehaviour
+public class OLDMainMenuController : BaseUIController
 {
     [Header("Screens")]
     [SerializeField] private MainMenuScreen _mainScreen = null;
@@ -37,7 +37,7 @@ public class MainMenuController : MonoBehaviour
     {
         foreach(var b in _toMainButtons)
         {
-            b.Subscribe((BaseButton b) => ShowScreen(MainMenuScreenID.MainScreen));
+            b.Subscribe((OLDBaseButton b) => ShowScreen(MainMenuScreenID.MainScreen));
         }
     }
 

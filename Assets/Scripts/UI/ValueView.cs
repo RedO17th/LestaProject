@@ -6,7 +6,7 @@ public class ValueView : MonoBehaviour
 {
     private TextMeshProUGUI _textComponent = null;
 
-    public void Start()
+    public void OnEnable()
     {
         _textComponent = GetComponent<TextMeshProUGUI>();
     }
@@ -16,3 +16,4 @@ public class ValueView : MonoBehaviour
         _textComponent.text = value.ToString();
     }
 }
+

@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(TabButtonData))]
-public class TabButton : BaseButton, IButtonWithData, IToggledButton
+public class TabButton : OLDBaseButton, IButtonWithData, IToggledButton
 {
     public IButtonData Data => _data;
     [SerializeField] private TabButtonData _data = null;

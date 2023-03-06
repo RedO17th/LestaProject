@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PauseMenuUIController : BaseUIController
+public class PauseMenuUIController : OLDBaseUIController
 {
     [SerializeField] private PauseMenuButton[] _pauseButton = null;
 
@@ -16,32 +16,32 @@ public class PauseMenuUIController : BaseUIController
         }
     }
 
-    public void PauseButtonClickListener(BaseButton sender)
+    public void PauseButtonClickListener(OLDBaseButton sender)
     {
         PauseMenuButton button = sender as PauseMenuButton;
         PauseMenuButtonData data = button.Data as PauseMenuButtonData;
         switch (data.ButtonType)
         {
             case PauseMenuButtonsEnum.Resume:
-                EventSystem.UIEvents.InvokeOnPlayerMenuExit();
+                EventSystem.OLDUIEvents.InvokeOnPlayerMenuExit();
                 break;
                 
             case PauseMenuButtonsEnum.Save:
-                EventSystem.UIEvents.InvokeOnSaveCalled();
+                EventSystem.OLDUIEvents.InvokeOnSaveCalled();
                 Debug.Log("Save called");
                 break;
                 
             case PauseMenuButtonsEnum.Load:
-                EventSystem.UIEvents.InvokeOnLoadCalled();
+                EventSystem.OLDUIEvents.InvokeOnLoadCalled();
                 Debug.Log("Load called");
                 break;
                 
             case PauseMenuButtonsEnum.Settings:
-                EventSystem.UIEvents.InvokeOnScreenCalled(IngameScreenID.Settings);
+                EventSystem.OLDUIEvents.InvokeOnScreenCalled(IngameScreenID.Settings);
                 break;
                 
             case PauseMenuButtonsEnum.Exit:
-                //Да да, дедушке нужно вынести это в контроллер, но пусть пока так
+                //Р”Р° РґР°, РґРµРґСѓС€РєРµ РЅСѓР¶РЅРѕ РІС‹РЅРµСЃС‚Рё СЌС‚Рѕ РІ РєРѕРЅС‚СЂРѕР»Р»РµСЂ, РЅРѕ РїСѓСЃС‚СЊ РїРѕРєР° С‚Р°Рє
                 SceneManager.LoadScene(0);
                 break;
                 

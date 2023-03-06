@@ -50,13 +50,13 @@ public class DialogSubSystem : BaseSubSystem
 
     public void HandleOnDialogueStart()
     {
-        EventSystem.UIEvents.InvokeOnDialogueMenuCalled();
+        EventSystem.OLDUIEvents.InvokeOnDialogueMenuCalled();
     }
 
     public void HandleOnDialogueEnd()
     {
 
-        EventSystem.UIEvents.InvokeOnExitFromDialogueMenuCalled();
+        EventSystem.OLDUIEvents.InvokeOnExitFromDialogueMenuCalled();
     }
 
 

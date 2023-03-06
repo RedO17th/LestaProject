@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacteristicsChoiceUIController : BaseUIController
+public class CharacteristicsChoiceUIController : OLDBaseUIController
 {
     //TODO: Вынести настройки в SO
     [Header("Настройки")]
@@ -15,13 +15,12 @@ public class CharacteristicsChoiceUIController : BaseUIController
     [Header("Подконтрольные объекты")]
     [SerializeField] private ValueView _currentDistributionPointsView = null;
     [SerializeField] private CharacteristicValueView[] _valueViews = null;
-    [SerializeField] private CharacteristicsChangerButton[] _buttons = null;
+    [SerializeField] private ValueManipulatorButton[] _buttons = null;
     [Space]
 
     private int _currentDistributionPoints = 0;
 
     private Dictionary<CharacteristicType, int> _currentCharacteristics;
-    public static event Action<ValueChangerButtonType, CharacteristicType> OnCharacteristicValueChangeCalled;
 
     public void Start()
     {
@@ -63,9 +62,9 @@ public class CharacteristicsChoiceUIController : BaseUIController
         }
     }
 
-    private void HandleOnChangerButtonClicked(BaseButton sender)
+    private void HandleOnChangerButtonClicked(OLDBaseButton sender)
     {
-        var s = (CharacteristicsChangerButton)sender;
+        var s = (ValueManipulatorButton)sender;
         var data = (CharacteristicsChangerButtonData)s.Data;
 
         if (TryChangeCharacteristicValue(data.LinkedValueType, data.ButtonType))
@@ -82,7 +81,7 @@ public class CharacteristicsChoiceUIController : BaseUIController
     }
 
 
-    private bool TryChangeCharacteristicValue(CharacteristicType valueType, ValueChangerButtonType changeType)
+    private bool TryChangeCharacteristicValue(CharacteristicType valueType, ManipulatorButtonType changeType)
     {
         bool isSuccsessful = false;
         int value = 0;
@@ -90,7 +89,7 @@ public class CharacteristicsChoiceUIController : BaseUIController
         {
             switch (changeType)
             {
-                case ValueChangerButtonType.Increase:
+                case ManipulatorButtonType.Increase:
                     value += 1;
                     if (value < _higherValueBound + 1 && _currentDistributionPoints > 0)
                     {
@@ -99,7 +98,7 @@ public class CharacteristicsChoiceUIController : BaseUIController
                     }
                     break;
 
-                case ValueChangerButtonType.Decrease:
+                case ManipulatorButtonType.Decrease:
                     value -= 1;
                     if (value > _lowerValueBound - 1)
                     {
