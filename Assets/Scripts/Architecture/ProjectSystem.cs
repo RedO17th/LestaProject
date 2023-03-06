@@ -120,6 +120,8 @@ public class ProjectSystem : MonoBehaviour
     private void OnDisable() => StopSubSystems();
     private void StopSubSystems()
     {
+        Debug.Log($"ProjectSystem.StopSubSystems");
+
         foreach (var system in _subSystems)
         {
             system.StopSystem();

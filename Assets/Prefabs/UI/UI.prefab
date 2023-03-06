@@ -64020,6 +64020,7 @@ MonoBehaviour:
   _quickAccessMenu: {fileID: 3908841371360788496}
   _quickAccessMenuhud: {fileID: 3908841370888206657}
   _uiInventoryController: {fileID: 3908841370589281769}
+  _dialogueController: {fileID: 3908841369669275767}
 --- !u!1 &3908841371309270088
 GameObject:
   m_ObjectHideFlags: 0

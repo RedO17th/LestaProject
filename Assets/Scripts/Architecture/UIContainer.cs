@@ -24,6 +24,9 @@ public class UIContainer : MonoBehaviour
     [SerializeField] private UIQuickAccessMenu _quickAccessMenuhud;
     [SerializeField] private UIInventoryController _uiInventoryController;
 
+    [Header("Dialogue")]
+    [SerializeField] private DialogueSceneController _dialogueController;
+
     public IngameScreen HUDScreen => _HUDScreen;
     public IngameScreen InventoryScreen => _inventoryScreen;
     public IngameScreen ClipboardScreen => _clipboardScreen;
@@ -39,4 +42,6 @@ public class UIContainer : MonoBehaviour
     public UIQuickAccessMenu QuickAccessMenu => _quickAccessMenu;
     public UIQuickAccessMenu QuickAccessMenuhud => _quickAccessMenuhud;
     public UIInventoryController UIInventoryController =>_uiInventoryController;
+
+    public DialogueSceneController DialogueController => _dialogueController;
 }
