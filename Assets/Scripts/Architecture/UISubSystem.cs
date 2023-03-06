@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System;
 using SaveAndLoadModule;
 
-public class UISubSystem : BaseSubSystem, ILoader
+public class UISubSystem : BaseSubSystem
 {
     [SerializeField] private UIContainer _uiContainer = null;
 
@@ -45,11 +45,6 @@ public class UISubSystem : BaseSubSystem, ILoader
         if (_dialogueScreen != null) _screens.Add(_dialogueScreen);
         if (_pauseMenuScreen != null) _screens.Add(_pauseMenuScreen);
         if (_settingsScreen != null) _screens.Add(_settingsScreen);
-    }
-
-    public void Load()
-    {
-        Debug.Log($"UISubSystem.Load");
     }
 
     public override void StartSystem()

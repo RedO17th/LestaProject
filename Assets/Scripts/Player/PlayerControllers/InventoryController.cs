@@ -135,12 +135,12 @@ public class InventoryController : BasePlayerContoller
         //storage.Save(_gameData);
         //..
 
-        //Предположительное решение:
+        //Предположительное решение - тоже будет переписано
         SaveInventory(playerInventoryData);
         SaveEquipment(playerInventoryData);
         SaveQAM(playerInventoryData);
 
-        _saveLoadSystem.Save(playerInventoryData);
+        //_saveLoadSystem.Save(playerInventoryData);
     }
 
     public void SaveInventory(PlayerInventoryData data)
@@ -175,8 +175,9 @@ public class InventoryController : BasePlayerContoller
         //LoadQAM(_gameData);
         //..
 
-        //Предположительное решение:
-        var playerInventoryData = _saveLoadSystem.Load<PlayerInventoryData>();
+        //Предположительное решение - тоже будет переписано
+        //var playerInventoryData = _saveLoadSystem.Load<PlayerInventoryData>();
+        PlayerInventoryData playerInventoryData = null;
 
         InventoryItemInfo[] infoObjects = Resources.LoadAll<InventoryItemInfo>("Info");
 

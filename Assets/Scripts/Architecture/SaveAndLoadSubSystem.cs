@@ -21,20 +21,13 @@ namespace SaveAndLoadModule
     }
     //..
 
-    public interface ILoader
+    public interface ISaveLoadSystem : IObservableLoaderAndSaver
     {
+        //T Load<T>() where T : BaseData;
+        //void Save(ISavableData data);
+
         void Load();
-    }
-    public interface ISaver
-    {
         void Save();
-    }
-
-    public interface ISaveLoadSystem
-    {
-        T Load<T>() where T : BaseData;
-
-        void Save(ISavableData data);
     }
 
     public class SaveAndLoadSubSystem : BaseSubSystem, ISaveLoadSystem
@@ -46,6 +39,8 @@ namespace SaveAndLoadModule
         private Storage _storage = null;
 
         private string _fullDataStoragePath = string.Empty;
+
+        private List<IObserver> _observers = null;
 
         protected override void Awake()
         {
@@ -87,6 +82,48 @@ namespace SaveAndLoadModule
             var fileName = GenerateFileName(data.GetType().Name);
 
             _storage.Save(fileName, data);
+        }
+
+        //Observer functional
+        public void AddObserver(IObserver o)
+        {
+            _observers.Add(o);
+        }
+        public void RemoveObserver(IObserver o)
+        {
+            _observers.Remove(o);
+        }
+
+        public void Load()
+        {
+            //PrepareData and...
+            NotifyObserversToLoad();
+        }
+        private void NotifyObserversToLoad()
+        {
+            foreach (var observer in _observers)
+            {
+                if (observer is ILoaderObserver loader)
+                { 
+                    loader.NotifyAboutLoad();
+                }
+            }
+        }
+
+        public void Save()
+        {
+            NotifyObserversToSave();
+            //Сохранить
+        }
+        private void NotifyObserversToSave()
+        {
+            foreach (var observer in _observers)
+            {
+                if (observer is ISaverObserver saver)
+                {
+                    saver.NotifyAboutSave();
+                }
+            }
         }
 
         public override void Clear()

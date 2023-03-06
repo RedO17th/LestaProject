@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using SaveAndLoadModule;
+using System;
 
-public class PlayerSubSystem : BaseSubSystem, ILoader
+public class PlayerSubSystem : BaseSubSystem, ILoaderObserver, ISaverObserver
 {
     [SerializeField] private BasePlayer _player = null;
 
@@ -28,11 +29,10 @@ public class PlayerSubSystem : BaseSubSystem, ILoader
         var settingsSystem = ProjectSystem.GetSubSystem<SettingsSubSystem>();
 
         _characteristics = settingsSystem?.GetDataContainer<CharacteristicsContainer>();
-    }
 
-    public void Load()
-    {
-        Debug.Log($"PlayerSubSystem.Load");
+        //Добавить себя в Наблюдаемому
+        var saveLoadSystem = ProjectSystem.GetSubSystem<ISaveLoadSystem>();
+            saveLoadSystem.AddObserver(this);
     }
 
     public T GetPlayerController<T>() where T : BasePlayerContoller
@@ -71,6 +71,20 @@ public class PlayerSubSystem : BaseSubSystem, ILoader
     {
         _walletOfPoints.RemoveAll();
         _walletOfPoints = null;
+    }
+    #endregion
+
+    #region SaveLoad part
+    public void NotifyAboutLoad() => ProcessDataLoading();
+    private void ProcessDataLoading()
+    {
+        Debug.Log($"PlayerSubSystem.ProcessDataLoading");
+    }
+
+    public void NotifyAboutSave() => ProcessDataSaving();
+    private void ProcessDataSaving()
+    {
+        Debug.Log($"PlayerSubSystem.ProcessDataSaving");
     }
     #endregion
 }

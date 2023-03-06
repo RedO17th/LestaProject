@@ -93,7 +93,7 @@ public class ProjectSystem : MonoBehaviour
         InitializeSubSystems();
         PrepareSubSystems();
 
-        LoadDataToSubSystems();
+        //LoadDataToSubSystems();
 
         StartSubSystems();
     }
@@ -109,16 +109,16 @@ public class ProjectSystem : MonoBehaviour
             s.Prepare();
     }
 
-    private void LoadDataToSubSystems()
-    {
-        foreach (var system in _subSystems)
-        {
-            if (system is ILoader loader)
-            {
-                loader.Load();
-            }
-        }
-    }
+    //private void LoadDataToSubSystems()
+    //{
+    //    foreach (var system in _subSystems)
+    //    {
+    //        if (system is ILoader loader)
+    //        {
+    //            loader.Load();
+    //        }
+    //    }
+    //}
 
     private void StartSubSystems()
     {
