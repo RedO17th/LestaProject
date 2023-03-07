@@ -1,17 +1,21 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System;
+using SaveAndLoadModule;
 
 public class UISubSystem : BaseSubSystem
 {
-    [Header("Screens")]
-    [SerializeField] private IngameScreen _HUDScreen = null;
-    [SerializeField] private IngameScreen _inventoryScreen = null;
-    [SerializeField] private IngameScreen _clipboardScreen = null;
-    [SerializeField] private IngameScreen _skillsScreen = null;
-    [SerializeField] private IngameScreen _pauseMenuScreen = null;
-    [SerializeField] private IngameScreen _dialogueScreen = null;
-    [SerializeField] private IngameScreen _settingsScreen = null;
+    [SerializeField] private UIContainer _uiContainer = null;
+
+    public UIContainer UIContainer => _uiContainer;
+
+    private IngameScreen _HUDScreen = null;
+    private IngameScreen _inventoryScreen = null;
+    private IngameScreen _clipboardScreen = null;
+    private IngameScreen _skillsScreen = null;
+    private IngameScreen _pauseMenuScreen = null;
+    private IngameScreen _dialogueScreen = null;
+    private IngameScreen _settingsScreen = null;
     private List<IngameScreen> _screens = null;
 
     private bool _isInMenu = false;
@@ -22,10 +26,29 @@ public class UISubSystem : BaseSubSystem
         InitializeScreens(); 
     }
 
+    private void InitializeScreens()
+    {
+        _screens = new List<IngameScreen>();
+
+        _HUDScreen = _uiContainer.HUDScreen;
+        _inventoryScreen = _uiContainer.InventoryScreen;
+        _clipboardScreen = _uiContainer.ClipboardScreen;
+        _skillsScreen = _uiContainer.SkillsScreen;
+        _pauseMenuScreen = _uiContainer.PauseMenuScreen;
+        _dialogueScreen = _uiContainer.DialogueScreen;
+        _settingsScreen = _uiContainer.SettingsScreen;
+
+        if (_HUDScreen != null) _screens.Add(_HUDScreen);
+        if (_inventoryScreen != null) _screens.Add(_inventoryScreen);
+        if (_clipboardScreen != null) _screens.Add(_clipboardScreen);
+        if (_skillsScreen != null) _screens.Add(_skillsScreen);
+        if (_dialogueScreen != null) _screens.Add(_dialogueScreen);
+        if (_pauseMenuScreen != null) _screens.Add(_pauseMenuScreen);
+        if (_settingsScreen != null) _screens.Add(_settingsScreen);
+    }
+
     public override void StartSystem()
     {
-        base.StartSystem();
-
         _isInMenu = false;
         ShowScreen(_HUDScreen.ID);
     }
@@ -60,19 +83,7 @@ public class UISubSystem : BaseSubSystem
         }
     }
 
-    private void InitializeScreens()
-    {
-        _screens = new List<IngameScreen>();
-        if (_HUDScreen != null) _screens.Add(_HUDScreen);
-        if (_inventoryScreen != null) _screens.Add(_inventoryScreen);
-        if (_clipboardScreen != null) _screens.Add(_clipboardScreen);
-        if (_skillsScreen != null) _screens.Add(_skillsScreen);
-        if (_dialogueScreen != null) _screens.Add(_dialogueScreen);
-        if (_pauseMenuScreen != null) _screens.Add(_pauseMenuScreen);
-        if (_settingsScreen != null) _screens.Add(_settingsScreen);
-    }
-
-    public void ShowScreen(IngameScreenID screenID)
+    private void ShowScreen(IngameScreenID screenID)
     {
         if ((screenID == _HUDScreen.ID) && _isInMenu)
         {
@@ -118,7 +129,7 @@ public class UISubSystem : BaseSubSystem
 
     public void OnDisable()
     {
-        EventSystem.UIEvents.OnScreenCalled -= ShowScreen;
+        //EventSystem.UIEvents.OnScreenCalled -= ShowScreen;
 
         EventSystem.UIEvents.OnPauseMenuCalled -= HandleOnPauseMenuCalled;
 

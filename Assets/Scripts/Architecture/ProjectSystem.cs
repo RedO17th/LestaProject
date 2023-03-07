@@ -1,3 +1,4 @@
+using SaveAndLoadModule;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -23,7 +24,6 @@ public class ProjectSystem : MonoBehaviour
     private BaseGameState _currentGameState = null;
     private List<BaseGameState> _gameStates = null;
 
-    //Awake period
     private void Awake()
     {
         InitializeSystem();
@@ -48,12 +48,10 @@ public class ProjectSystem : MonoBehaviour
         
         };
     }
-
     private void SetStandartGameState()
     {
         _currentGameState = GetGameStateBy(_standartGameState);
     }
-    //..
 
     private BaseGameState GetGameStateBy(GameStateType type) 
     {
@@ -71,7 +69,7 @@ public class ProjectSystem : MonoBehaviour
         return result;
     }
 
-    public static T GetSubSystem<T>() where T : BaseSubSystem
+    public static T GetSubSystem<T>() where T : class
     {
         T system = null;
 
@@ -87,11 +85,13 @@ public class ProjectSystem : MonoBehaviour
         return system;
     }
 
-    //Start period
-    private void Start()
+    private void Start() => StartScene();
+    public void StartScene()
     {
         InitializeSubSystems();
         PrepareSubSystems();
+
+        LoadDataToSubSystems();
 
         StartSubSystems();
     }
@@ -106,19 +106,27 @@ public class ProjectSystem : MonoBehaviour
         foreach (var s in _subSystems)
             s.Prepare();
     }
+    private void LoadDataToSubSystems()
+    {
+        var loadSystem = GetSubSystem<ISaveLoadSystem>();
+            loadSystem.Load();  
+    }
     private void StartSubSystems()
     {
         foreach (var system in _subSystems)
             system.StartSystem();
     }
-    //..
 
-    private void Update()
+    private void OnDisable() => StopSubSystems();
+    private void StopSubSystems()
     {
-        //ProcessingGameStates();
+        Debug.Log($"ProjectSystem.StopSubSystems");
 
-
-        //and more...
+        foreach (var system in _subSystems)
+        {
+            system.StopSystem();
+            system.Clear();
+        }
     }
 
     #region ProcessingGameStates

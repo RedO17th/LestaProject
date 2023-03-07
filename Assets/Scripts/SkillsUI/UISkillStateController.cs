@@ -29,12 +29,12 @@ public class UISkillStateController : MonoBehaviour
         _skillSlotsStates = GetSkillSlotsStates(_skillSlots);
 
         UISkillStatesData skillStatesData = new UISkillStatesData(_skillSlotsStates);
-        GameData.Instance.AddUISkillStatesData(skillStatesData);
+        GameDataContainer.Instance.AddUISkillStatesData(skillStatesData);
     }
 
     public void LoadSkillStatesFromGameData()
     {
-        _skillSlotsStates = GameData.Instance.UISkillStatesData.SkillSlotStates;
+        _skillSlotsStates = GameDataContainer.Instance.UISkillStatesData.SkillSlotStates;
 
         for (int i = 0; i < _skillSlots.Length; i++)
         {

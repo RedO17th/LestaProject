@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class DialogSubSystem : BaseSubSystem
 {
-    [SerializeField] private DialogueSceneController _dialogueController;
-
     private DiceTwentySubSystem _diceTwentySubSystem = null;
 
     private CharactersContainer _charactersData = null;
@@ -19,6 +17,8 @@ public class DialogSubSystem : BaseSubSystem
 
     public event Action<object, INote> OnAddNote;
 
+    private DialogueSceneController _dialogueController = null;
+
     public BaseDialogue GetDialogueByName(string name)
     {
         return _dialogueData.GetDialogueByName(name);
@@ -26,6 +26,9 @@ public class DialogSubSystem : BaseSubSystem
 
     public override void Prepare()
     {
+        var uiSystem = ProjectSystem.GetSubSystem<UISubSystem>();
+
+        _dialogueController = uiSystem.UIContainer.DialogueController;
         _dialogueController.Initialize(this);
 
         _diceTwentySubSystem = ProjectSystem.GetSubSystem<DiceTwentySubSystem>();

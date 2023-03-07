@@ -1,23 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using SaveAndLoadModule;
+using System;
 
-public class PlayerSubSystem : BaseSubSystem
+public class PlayerSubSystem : BaseSubSystem, ILoaderObserver, ISaverObserver
 {
     [SerializeField] private BasePlayer _player = null;
 
     public BasePlayer Player => _player;
 
-    //[TODO] Remove
-    private WalletOfPoints _walletOfPoints = null;
-    private CharacteristicsContainer _characteristics = null;
-
     public override void Initialize()
     {
         InitializePlayer();
-
-        //Test: При этом данное значение необходимо откуда либо брать...
-        //_walletOfPoints = new WalletOfPoints(100);
     }
 
     private void InitializePlayer()
@@ -27,9 +22,8 @@ public class PlayerSubSystem : BaseSubSystem
 
     public override void Prepare()
     {
-        var settingsSystem = ProjectSystem.GetSubSystem<SettingsSubSystem>();
-
-        _characteristics = settingsSystem?.GetDataContainer<CharacteristicsContainer>();
+        var saveLoadSystem = ProjectSystem.GetSubSystem<ISaveLoadSystem>();
+            saveLoadSystem.AddObserver(this);
     }
 
     public T GetPlayerController<T>() where T : BasePlayerContoller
@@ -37,37 +31,22 @@ public class PlayerSubSystem : BaseSubSystem
         return _player.GetControllerBy<T>();
     }
 
-    #region Characteristics part
-    public BaseCharacteristic GetCharacteristicByType(CharacterisicType type)
-    {
-        return _characteristics.GetCharacteristicByType(type);
-    }
-    #endregion
-
-
-    #region Wallet part
-    [ContextMenu("TestAddPoints")]
-    public void TestAddPoints()
-    {
-        AddPoints(10);
-    }
-
-    public void AddPoints(int points)
-    {
-        _walletOfPoints.Add(points);
-    }
-    #endregion
-
     #region Clear part
-    public override void Clear()
+    public override void Clear() { }
+
+    #endregion
+
+    #region SaveLoad part
+    public void NotifyAboutLoad() => ProcessDataLoading();
+    private void ProcessDataLoading()
     {
-        ClearWallet();
+        Debug.Log($"PlayerSubSystem.ProcessDataLoading");
     }
 
-    private void ClearWallet()
+    public void NotifyAboutSave() => ProcessDataSaving();
+    private void ProcessDataSaving()
     {
-        _walletOfPoints.RemoveAll();
-        _walletOfPoints = null;
+        Debug.Log($"PlayerSubSystem.ProcessDataSaving");
     }
     #endregion
 }

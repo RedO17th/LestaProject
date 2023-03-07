@@ -39,7 +39,6 @@ public class BasePlayer : MonoBehaviour, IInteractor
         foreach (var controller in _controllers)
             controller.Initialize(this);
     }
-
     private void PreparingControllers()
     {
         foreach (var controller in _controllers)
@@ -91,21 +90,6 @@ public class BasePlayer : MonoBehaviour, IInteractor
         return controller;
     }
 
-    #region Health part
-    //TODO: Если не пригодится, то убрать...
-    public virtual void SetDamage() { }
-
-    #endregion
-
-    #region Wallet part
-    //TODO: Если не пригодится, то убрать...
-    public virtual void AddPoints(int points)
-    {
-        _playerSystem.AddPoints(points);
-    }
-
-    #endregion
-
     #region Interaction part
     public void SetInteractable(IInteractable encounter)
     {
@@ -124,7 +108,5 @@ public class BasePlayer : MonoBehaviour, IInteractor
         {
             _interactable.Interact();
         }
-
-        if (Input.GetKeyDown(KeyCode.Space)) Health.CurrentValue -= 10;
     }
 }
