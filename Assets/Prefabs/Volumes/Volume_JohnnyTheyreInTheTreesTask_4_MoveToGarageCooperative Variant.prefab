@@ -9,11 +9,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1750088062711063287, guid: 57da0b72aa7b1b34197951251c13bafc, type: 3}
       propertyPath: m_Size.x
-      value: 12
+      value: 21.00457
       objectReference: {fileID: 0}
     - target: {fileID: 1750088062711063287, guid: 57da0b72aa7b1b34197951251c13bafc, type: 3}
       propertyPath: m_Size.z
-      value: 11
+      value: 15.00614
+      objectReference: {fileID: 0}
+    - target: {fileID: 1750088062711063287, guid: 57da0b72aa7b1b34197951251c13bafc, type: 3}
+      propertyPath: m_Center.x
+      value: 6.665127
+      objectReference: {fileID: 0}
+    - target: {fileID: 1750088062711063287, guid: 57da0b72aa7b1b34197951251c13bafc, type: 3}
+      propertyPath: m_Center.z
+      value: 2.635892
       objectReference: {fileID: 0}
     - target: {fileID: 4171116248933726932, guid: 57da0b72aa7b1b34197951251c13bafc, type: 3}
       propertyPath: m_RootOrder
