@@ -11,4 +11,25 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 0}
   m_Name: CharacterSO
-  m_EditorClassIdentifier: Assembly-CSharp::CharacteerSO
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterSO
+  _name: Tisha
+  _class: {fileID: 11400000, guid: dfbb64e5d0bdca248ac8aceeeb7b6175, type: 2}
+  _levelTable: {fileID: 11400000, guid: fb8bb7a0c6eb2134b804afbdcd9e5df7, type: 2}
+  _experience: 0
+  _level: 1
+  _proficiencyBonus: 2
+  _chatacteristics:
+  - _value: 10
+    _name: 0
+  - _value: 10
+    _name: 1
+  - _value: 10
+    _name: 2
+  - _value: 10
+    _name: 3
+  - _value: 10
+    _name: 4
+  - _value: 10
+    _name: 5
+  _maxHealth: 6
+  _health: 6
