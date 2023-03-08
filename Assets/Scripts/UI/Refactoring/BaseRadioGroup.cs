@@ -16,11 +16,11 @@ public class BaseRadioGroup : MonoBehaviour, IHaveButtons
         SubscribeToButtonsEvents();
     }
 
+
     public virtual void Start()
     {
         ResetRadioGroup();
     }
-
 
     protected virtual void ResetRadioGroup()
     {

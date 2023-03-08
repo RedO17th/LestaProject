@@ -3,9 +3,8 @@ using UnityEngine;
 
 public class MainMenuUIController : BaseUIController
 {
-    public override void Start()
+    public void Start()
     {
-        base.Start();
         ShowWindow(nameof(MainMenuWindow));
     }
 }

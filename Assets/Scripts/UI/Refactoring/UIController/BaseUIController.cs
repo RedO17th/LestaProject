@@ -9,7 +9,7 @@ public class BaseUIController : MonoBehaviour
     [SerializeField] private BaseWindow[] _windows = null;
 
 
-    public virtual void Start()
+    public virtual void OnEnable()
     {
         EventSystem.UIEvents.OnScreenCalled += HandleOnScreenCalled;
     }

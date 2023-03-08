@@ -8,9 +8,6 @@ public interface IButtonWrapper
 {
     event Action<IButtonWrapper> OnButtonClicked;
     void HandleOnButtonClicked();
-
-    //Оставлен до лучших времён
-    //void Initialize()
 }
 
 
@@ -20,8 +17,13 @@ public abstract class BaseButtonWraper : MonoBehaviour, IButtonWrapper
 
     public event Action<IButtonWrapper> OnButtonClicked;
 
-    //While override use base method necessarily!
+
     public virtual void Awake()
+    {
+        Initialize();
+    }
+
+    public virtual void Initialize() 
     {
         if (_button == null)
         {
@@ -33,12 +35,9 @@ public abstract class BaseButtonWraper : MonoBehaviour, IButtonWrapper
             var imageAlphaCutoff = _button.gameObject.AddComponent(typeof(ImageAlphaCutoff)) as ImageAlphaCutoff;
             imageAlphaCutoff.AlphaLevel = 0.1f;
         }
-        Initialize();
     }
 
-    public virtual void Initialize() { }
 
-    //While override use base method necessarily!
     public virtual void HandleOnButtonClicked()
     {
         OnButtonClicked?.Invoke(this);

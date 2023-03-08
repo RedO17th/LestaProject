@@ -20,8 +20,6 @@ public interface IHaveButtons
 //TODO: After refactoring rename all window-names to screen
 public abstract class BaseWindow : MonoBehaviour, IWindow
 {
-    protected BaseUIController _holder = null;
-
     protected Dictionary<IButtonWrapper, Action> _buttonsAction = null;
 
     protected Dictionary<IButtonWrapper, string> _navigationButtonsScreenPair = null;

@@ -1,8 +1,10 @@
 ﻿using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class PrehistoryButtonWrapper : BaseToggledButtonWrapper
+public class PrehistoryButtonWrapper : BaseToggledButtonWrapper, ICallPopUp,
+    IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private Sprite _activeFrame;
     [SerializeField] private Sprite _inactiveFrame;
@@ -13,9 +15,21 @@ public class PrehistoryButtonWrapper : BaseToggledButtonWrapper
     [SerializeField] private Sprite _activePortrait;
     [SerializeField] private Sprite _inactivePortrait;
 
+    [SerializeField] private PopUpContentContainer _popUpContent = null;
+
     private Image _frame = null;
     private Image _background = null;
     private Image _portrait = null;
+
+    public void CallHidePopUp(PointerEventData eventData)
+    {
+        EventSystem.UIEvents.InvokeOnPopUpHideCalled(this, eventData, _popUpContent);
+    }
+
+    public void CallShowPopUp(PointerEventData eventData)
+    {
+        EventSystem.UIEvents.InvokeOnPopUpShowCalled(this, eventData, _popUpContent);
+    }
 
     public override void Initialize()
     {
@@ -23,11 +37,16 @@ public class PrehistoryButtonWrapper : BaseToggledButtonWrapper
         _frame = transform.Find("Frame").gameObject.GetComponent<Image>();
         _background = transform.Find("Background").gameObject.GetComponent<Image>();
         _portrait = transform.Find("Portrait").gameObject.GetComponent<Image>();
+    }
 
-        //ImageAlphaCutoff backgroundAlphaComponent = _background.gameObject.AddComponent(typeof(ImageAlphaCutoff)) as ImageAlphaCutoff;
-        //backgroundAlphaComponent.AlphaLevel = 0.1f;
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        CallShowPopUp(eventData);
+    }
 
-        //_button.targetGraphic = _background;
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        CallHidePopUp(eventData);
     }
 
     public override void SetActive()
