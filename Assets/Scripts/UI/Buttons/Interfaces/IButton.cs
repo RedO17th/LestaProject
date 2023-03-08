@@ -2,5 +2,5 @@
 
 public interface IButton
 {
-    void Subscribe(UnityAction<BaseButton> listener);
+    void Subscribe(UnityAction<OLDBaseButton> listener);
 }

@@ -1,7 +1,7 @@
 using UnityEngine;
 using TMPro;
 
-public class PlayerInfoPanelUIController : BaseUIController
+public class PlayerInfoPanelUIController : OLDBaseUIController
 {
     [SerializeField] private BaseBar _healthBar = null;
     [SerializeField] private BaseBar _energyBar = null;

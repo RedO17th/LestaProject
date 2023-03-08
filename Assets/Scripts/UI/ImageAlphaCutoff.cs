@@ -10,6 +10,9 @@ public class ImageAlphaCutoff : MonoBehaviour
     void Start()
     {
         _buttonImage = gameObject.GetComponent<Image>();
-        _buttonImage.alphaHitTestMinimumThreshold = AlphaLevel;
+        if (_buttonImage != null )
+        {
+            _buttonImage.alphaHitTestMinimumThreshold = AlphaLevel;
+        }
     }
 }

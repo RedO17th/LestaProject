@@ -12,7 +12,8 @@ public enum MainMenuScreenID
 {
     Default = -1,
     MainScreen = 0,
-    LoadChoice = 1,
-    Settings = 2,
-    Credits = 3
+    NewGameScreen = 1,
+    LoadChoice = 2,
+    Settings = 3,
+    Credits = 4
 }
