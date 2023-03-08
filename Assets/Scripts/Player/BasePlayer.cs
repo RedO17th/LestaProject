@@ -9,7 +9,13 @@ public interface IInteractor
     void RemoveInteractable(IInteractable encounter);
 }
 
-public class BasePlayer : MonoBehaviour, IInteractor
+public interface ITeleportable
+{
+    void TeleportTo(Vector3 position);
+}
+public interface IPlayer : IInteractor, ITeleportable { }
+
+public class BasePlayer : MonoBehaviour, IPlayer
 {
     [SerializeField] protected List<BasePlayerContoller> _controllers;
 
@@ -102,6 +108,11 @@ public class BasePlayer : MonoBehaviour, IInteractor
     }
     #endregion
 
+    public void TeleportTo(Vector3 position)
+    {
+        transform.position = position;
+    }
+
     private void Update()
     {
         if (_interactable != null && Input.GetKeyDown(KeyCode.E))
@@ -109,4 +120,6 @@ public class BasePlayer : MonoBehaviour, IInteractor
             _interactable.Interact();
         }
     }
+
+
 }

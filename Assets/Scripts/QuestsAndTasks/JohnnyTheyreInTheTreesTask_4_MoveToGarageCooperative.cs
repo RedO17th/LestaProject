@@ -12,14 +12,14 @@ public class JohnnyTheyreInTheTreesTask_4_MoveToGarageCooperative : BaseQuestTas
     [SerializeField] protected string _dogEncounterName = string.Empty;
     [SerializeField] protected Vector3 _dogPosition = Vector3.zero;
 
-    private IVolumeEncounter _distanationVolume = null;
+    private ITaskVolumeEncounter _distanationVolume = null;
 
     //[Remove]
     private Dog _dog = null;
 
     public override void Prepare()
     {
-        _distanationVolume = _quest.GetVolumeEncounterByName(_distanationVolumeName) as IVolumeEncounter;
+        _distanationVolume = _quest.GetVolumeEncounterByName(_distanationVolumeName) as ITaskVolumeEncounter;
         _distanationVolume.SetTask(this);
 
         //Remove

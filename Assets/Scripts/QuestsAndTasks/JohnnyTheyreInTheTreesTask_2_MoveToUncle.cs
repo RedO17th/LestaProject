@@ -14,14 +14,14 @@ public class JohnnyTheyreInTheTreesTask_2_MoveToUncle : BaseQuestTask
     [SerializeField] protected Vector3 _dogPosition = Vector3.zero;
 
     private IHintableEncounter _uncle = null;
-    private IVolumeEncounter _distanationVolume = null;
+    private ITaskVolumeEncounter _distanationVolume = null;
 
     //[Remove]
     private Dog _dog = null;
 
     public override void Prepare()
     {
-        _distanationVolume = _quest.GetVolumeEncounterByName(_distanationVolumeName) as IVolumeEncounter;
+        _distanationVolume = _quest.GetVolumeEncounterByName(_distanationVolumeName) as ITaskVolumeEncounter;
         _distanationVolume.SetTask(this);
 
         _uncle = _quest.GetNpcEncounterByName(_uncleEncounterName) as IHintableEncounter;

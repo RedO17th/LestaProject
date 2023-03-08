@@ -3,7 +3,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseTriggerVolume : MonoBehaviour
+public abstract class BaseVolume : MonoBehaviour 
+{
+    //Empty class - source
+}
+
+public interface IEnabable
+{
+    void Enable();
+}
+public interface IDisabable
+{
+    void Disable();
+}
+public interface ITriggerVolume : IEnabable, IDisabable { }
+
+public abstract class BaseTriggerVolume : BaseVolume, ITriggerVolume
 {
     protected Collider _trigger = null;
 

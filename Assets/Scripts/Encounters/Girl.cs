@@ -8,6 +8,8 @@ public class Girl : DialogueEncounter
 
     protected override void Awake()
     {
+        base.Awake();
+
         _stateMachine = GetComponent<GirlStateMachine>();
         _stateMachine.Initialize(this);
 
