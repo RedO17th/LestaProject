@@ -2,53 +2,70 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TeleportVolume : MonoBehaviour//FunctionalVolume
+public class TeleportVolume : FunctionalTriggerVolume
 {
+    [SerializeField] private BasePointer _pointer = null;
     [SerializeField] private Transform _teleportPoint = null;
 
-    //protected override void Awake() { }
-    //protected override void Start() { }
+    private IPlayer _teleportable = null;
 
-    //[ContextMenu("ActivateTeleport")]
-    //private void ActivateTeleport() => Activate();
+    protected override void Awake() 
+    {
+        base.Awake();
+    }
+    protected override void Start() { }
 
-    //public override void Activate() 
-    //{
-    //    PrepareTriggerVolume();
-    //}
+    [ContextMenu("ActivateTeleport")]
+    private void ActivateTeleport() => Activate();
 
-    //protected override void PrepareTriggerVolume()
-    //{
-    //    base.PrepareTriggerVolume();
-    //}
+    public override void Activate() 
+    {
+        base.Activate();
+    }
 
-    //protected override void PrepareToInteraction(IPlayer player)
-    //{
-    //    base.PrepareToInteraction(player);
-    //}
+    protected override void ProcessingEnter(Collider other)
+    {
+        _teleportable = other.attachedRigidbody.GetComponent<IPlayer>();
 
-    //public override void Interact() => ProcessTeleport();
+        if (_teleportable != null)
+        {
+            _pointer.Enable();
+            _teleportable.SetInteractable(this);
+        }
+    }
 
-    //private void ProcessTeleport()
-    //{
-    //    if (_player != null)
-    //    { 
-            
-    //    }
-    //}
+    protected override void ProcessingExit(Collider other) 
+    {
+        var teleportable = other.attachedRigidbody.GetComponent<IPlayer>();
 
-    //protected override void CancelInteraction(IPlayer player)
-    //{
-    //    base.CancelInteraction(player);
-    //}
+        if (teleportable != null && teleportable == _teleportable)
+        {
+            _pointer.Disable();
+            _teleportable.RemoveInteractable(this);
+            _teleportable = null;
+        }
+    }
 
-    //public override void Deactivate()
-    //{
-    //    ClearTriggerVolume();
-    //}
+    public override void Interact() => ProcessTeleport();
+    private void ProcessTeleport()
+    {
+        if (_teleportable != null)
+        {
+            Debug.Log($"ProcessTeleport: { _teleportPoint.position } ");
 
-    //protected override void ClearTriggerVolume()
-    //{
-    //    base.ClearTriggerVolume();
-    //}
+            _teleportable.TeleportTo(_teleportPoint.position);
+        }
+    }
+
+    public override void Deactivate()
+    {
+        base.Deactivate();
+
+        Clear();
+    }
+
+    protected override void Clear()
+    {
+        _teleportable = null;
+    }
 }

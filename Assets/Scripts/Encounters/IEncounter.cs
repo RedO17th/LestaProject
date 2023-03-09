@@ -42,10 +42,3 @@ public interface IDialogableEncounter : IHintableEncounter
 }
 
 public interface ITaskVolumeEncounter : IEncounter, IActivatable, ITaskable { }
-
-public interface IFunctionalEncounter : IActivatable 
-{
-    //Энкаунтер, который работает сам по себе.
-    //Все, что нужно - это только включить его.
-    //Он не реализует IEncounter...
-}
