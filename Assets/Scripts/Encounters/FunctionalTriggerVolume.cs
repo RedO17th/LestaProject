@@ -1,45 +1,42 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class BaseVolume : MonoBehaviour 
+public interface IFunctionalVolume : IActivatable
 {
-    //Empty class - source
+    //Энкаунтер, который работает сам по себе.
+    //Все, что нужно - это только включить его.
+    //Он не реализует IEncounter...
 }
 
-public interface IEnabable
-{
-    void Enable();
-}
-public interface IDisabable
-{
-    void Disable();
-}
-public interface ITriggerVolume : IEnabable, IDisabable { }
-
-public abstract class BaseTriggerVolume : BaseVolume, ITriggerVolume
+public class FunctionalTriggerVolume : BaseEncounter, IInteractable, IFunctionalVolume
 {
     protected Collider _trigger = null;
 
-    protected virtual void Awake()
+    protected virtual void Awake() 
     {
         _trigger = GetComponent<Collider>();
     }
 
-    public virtual void Enable()
+    protected virtual void Start() { }
+
+    public virtual void Activate() 
     {
         _trigger.enabled = true;
     }
 
+
     private void OnTriggerEnter(Collider other) => ProcessingEnter(other);
     protected virtual void ProcessingEnter(Collider other) { }
+
+    public virtual void Interact() { }
 
     private void OnTriggerExit(Collider other) => ProcessingExit(other);
     protected virtual void ProcessingExit(Collider other) { }
 
-    public virtual void Disable()
+    public virtual void Deactivate() 
     {
         _trigger.enabled = false;
     }
+    protected virtual void Clear() { }
 }

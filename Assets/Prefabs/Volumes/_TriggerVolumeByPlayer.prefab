@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2426111932774137521}
   - component: {fileID: 4153297800002324446}
   m_Layer: 0
-  m_Name: TriggerVolumeByPlayer
+  m_Name: _TriggerVolumeByPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

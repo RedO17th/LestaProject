@@ -12,6 +12,8 @@ public class Dog : BasePlayerAssistant
 
     protected override void Awake()
     {
+        base.Awake();   
+
         _stateMachine = GetComponent<AssistantStateMachine>();
         _stateMachine.Initialize(this);
 

@@ -5,9 +5,15 @@ using UnityEngine;
 public class VolumeDialogueInvoker : DialogueInvoker
 {
     [SerializeField] protected bool _isEnabled = false;
-    [SerializeField] protected TriggerVolumeByPlayer _triggerVolume = null;
 
-    private void Awake() => ProcessEnable();
+    protected ITriggerByPlayer _triggerVolumeByPlayer = null;
+
+    private void Awake()
+    {
+        _triggerVolumeByPlayer = GetComponent<ITriggerByPlayer>();
+
+        ProcessEnable();
+    }
 
     public override void Activate()
     {
@@ -22,12 +28,12 @@ public class VolumeDialogueInvoker : DialogueInvoker
         {
             _isEnabled = true;
 
-            _triggerVolume.Enable();
-            _triggerVolume.OnEnter += ProcessEnterInVolume;
+            _triggerVolumeByPlayer.Enable();
+            _triggerVolumeByPlayer.OnEnter += ProcessEnterInVolume;
         }
     }
 
-    protected virtual void ProcessEnterInVolume(BasePlayer obj)
+    protected virtual void ProcessEnterInVolume(IPlayer obj)
     {
         Invoke();
         Deactivate();
@@ -44,7 +50,7 @@ public class VolumeDialogueInvoker : DialogueInvoker
 
     protected override void Deactivate()
     {
-        _triggerVolume.OnEnter -= ProcessEnterInVolume;
-        _triggerVolume.Disable();
+        _triggerVolumeByPlayer.OnEnter -= ProcessEnterInVolume;
+        _triggerVolumeByPlayer.Disable();
     }
 }

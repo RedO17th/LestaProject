@@ -20,7 +20,7 @@ public class VolumeQuestInvoker : QuestInvoker
         }
     }
 
-    protected virtual void ProcessEnterInVolume(BasePlayer obj)
+    protected virtual void ProcessEnterInVolume(IPlayer obj)
     {
         Invoke();
         Deactivate();
