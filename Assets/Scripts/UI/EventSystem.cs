@@ -1,9 +1,10 @@
 using System;
+using UnityEngine.EventSystems;
 using static UISubSystem;
 
 public class EventSystem
 {
-    public class UIEvents
+    public class OLDUIEvents
     {
         public static event Action<IngameScreenID> OnScreenCalled;
         public static event Action OnPlayerMenuExit;
@@ -23,7 +24,33 @@ public class EventSystem
         public static void InvokeOnDialogueMenuCalled() => OnDialogueMenuCalled?.Invoke();
         public static void InvokeOnExitFromDialogueMenuCalled() => OnExitFromDialogueMenuCalled?.Invoke();
     }
- 
+
+
+    public class UIEvents
+    {
+        //The transmitted argument is nameof(*BaseWindow child*)
+        public static event Action<string, IWindow> OnScreenCalled;
+
+        public static event Action<ICallPopUp, PointerEventData, PopUpContentContainer> OnPopUpShowCalled;
+
+        public static event Action<ICallPopUp, PointerEventData, PopUpContentContainer> OnPopUpHideCalled;
+
+        public static void InvokeOnPopUpShowCalled(ICallPopUp caller,
+            PointerEventData eventData,
+            PopUpContentContainer popUpContent) =>
+            OnPopUpShowCalled?.Invoke(caller, eventData, popUpContent);
+
+        public static void InvokeOnPopUpHideCalled(ICallPopUp caller,
+            PointerEventData eventData,
+            PopUpContentContainer popUpContent) =>
+            OnPopUpHideCalled?.Invoke(caller, eventData, popUpContent);
+
+        public static void InvokeOnWindowCalled(string windowTypeName, IWindow caller) => 
+            OnScreenCalled?.Invoke(windowTypeName, caller);
+
+
+    }
+
     public static event Action OnPauseCalled;
     public static event Action OnResumeCalled;
     

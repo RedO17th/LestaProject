@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class TabGroupUIController : BaseUIController
+public class TabGroupUIController : OLDBaseUIController
 {
     [SerializeField] private TabButton[] _tabsHeads = null;
 
@@ -17,7 +17,7 @@ public class TabGroupUIController : BaseUIController
         OpenTab(_tabsHeads[0]);
     }
 
-    public void OpenTab(BaseButton sender)
+    public void OpenTab(OLDBaseButton sender)
     {
         var tabID = ((sender as TabButton).Data as TabButtonData).TabID;
 

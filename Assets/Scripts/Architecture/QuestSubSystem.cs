@@ -126,7 +126,7 @@ public class QuestAndEncounters
 {
     [SerializeField] private BaseQuest _questPrefab;
     [SerializeField] private List<BaseEncounter> _npcEncounters;
-    [SerializeField] private List<BaseVolumeEncounter> _volumeEncounters;
+    [SerializeField] private List<BaseVolume> _volumeEncounters;
     [SerializeField] private List<BaseContextInvoker> _invokerEncounters;
 
     public string QuestID => _questPrefab.IDName;
@@ -147,7 +147,10 @@ public class QuestAndEncounters
         List<IEncounter> result = new List<IEncounter>();
 
         foreach (var encounter in _volumeEncounters)
-            result.Add(encounter);
+        { 
+            if(encounter is IEncounter e)
+                result.Add(e);
+        }
 
         return result;
     }

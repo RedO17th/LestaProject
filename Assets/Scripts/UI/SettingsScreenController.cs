@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class SettingsScreenController : MonoBehaviour
 {
+
+    [SerializeField] private GameObject subscreensContainer = null;
+
+
     // Start is called before the first frame update
     void Start()
     {

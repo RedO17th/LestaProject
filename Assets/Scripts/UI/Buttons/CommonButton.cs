@@ -1,4 +1,4 @@
-﻿public class CommonButton : BaseButton
+﻿public class CommonButton : OLDBaseButton
 {
 
 }

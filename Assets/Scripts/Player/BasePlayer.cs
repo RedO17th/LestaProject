@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using UnityEngine;
+using UnityEngine.AI;
 
 //Возможно создать интерфейс IPlayer и объеденить его с IInteractor
 public interface IInteractor
@@ -9,7 +10,13 @@ public interface IInteractor
     void RemoveInteractable(IInteractable encounter);
 }
 
-public class BasePlayer : MonoBehaviour, IInteractor
+public interface ITeleportable
+{
+    void TeleportTo(Vector3 position);
+}
+public interface IPlayer : IInteractor, ITeleportable { }
+
+public class BasePlayer : MonoBehaviour, IPlayer
 {
     [SerializeField] protected List<BasePlayerContoller> _controllers;
 
@@ -23,6 +30,7 @@ public class BasePlayer : MonoBehaviour, IInteractor
 
     protected PlayerSubSystem _playerSystem = null;
     protected IInteractable _interactable = null;
+    protected MovementController _movementController = null;
 
     public virtual void Initialize(PlayerSubSystem system)
     {
@@ -30,6 +38,8 @@ public class BasePlayer : MonoBehaviour, IInteractor
 
         InitializeControllers();
         PreparingControllers();
+
+        _movementController = GetControllerBy<MovementController>();
     }
 
     #region Systems part
@@ -102,6 +112,14 @@ public class BasePlayer : MonoBehaviour, IInteractor
     }
     #endregion
 
+    public void TeleportTo(Vector3 position)
+    {
+        _movementController.Disable();
+        transform.position = position;
+        _movementController.Enable();
+
+    }
+
     private void Update()
     {
         if (_interactable != null && Input.GetKeyDown(KeyCode.E))
@@ -109,4 +127,6 @@ public class BasePlayer : MonoBehaviour, IInteractor
             _interactable.Interact();
         }
     }
+
+
 }

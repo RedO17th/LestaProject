@@ -1,5 +1,10 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Samples/Cinemachine/2.8.9/Cinemachine Example Scenes/Scenes/2D/2D Fighters.unity.meta
 guid: 879d480263d0a431b99a866e6d2e8342
+========
+guid: fe387f6944c31ee4689b04e9f2528399
+folderAsset: yes
+>>>>>>>> dev/feature/mazanov/UI:Assets/Prefabs/UI.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

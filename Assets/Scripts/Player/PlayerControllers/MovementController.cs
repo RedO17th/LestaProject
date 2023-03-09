@@ -46,7 +46,6 @@ public class MovementController : BasePlayerContoller
 
         _playerData = settingsSystem.GetDataContainer<PlayerDataContainer>();
     }
-
     private void InitializeMovementMechanics()
     {
         foreach (var mech in _movementMechanics)
@@ -54,6 +53,22 @@ public class MovementController : BasePlayerContoller
     }
 
     public override void Prepare() { }
+
+    public override void Enable()
+    {
+        base.Enable();
+
+        _navMeshAgent.enabled = true;
+        gameObject.SetActive(true);
+    }
+
+    public override void Disable()
+    {
+        base.Disable();
+
+        _navMeshAgent.enabled = false;
+        gameObject.SetActive(false);
+    }
 
     void Update()
     {

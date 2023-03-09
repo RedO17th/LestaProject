@@ -8,6 +8,8 @@ public class Uncle : DialogueEncounter
 
     protected override void Awake()
     {
+        base.Awake();
+
         _stateMachine = GetComponent<UncleStateMachine>();
         _stateMachine.Initialize(this);
 

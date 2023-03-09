@@ -4,14 +4,19 @@ using UnityEngine;
 public class SimpleEncounter : BaseEncounter, IInteractable
 {
     [SerializeField] protected BasePointer _pointer = null;
-    [SerializeField] protected TriggerVolumeByPlayer _triggerVolume;
 
     public event Action OnPlayerCameUp;
     public event Action OnPlayerMovedAway;
 
-    protected BasePlayer _player = null;
+    protected ITriggerByPlayer _triggerVolume = null;
 
-    protected virtual void Awake() { }
+    protected IPlayer _player = null;
+
+    protected virtual void Awake() 
+    {
+        _triggerVolume = GetComponent<ITriggerByPlayer>();
+    }
+
     protected virtual void Start() { }
 
     protected virtual void PrepareTriggerVolume()
@@ -22,7 +27,7 @@ public class SimpleEncounter : BaseEncounter, IInteractable
         _triggerVolume.OnExit += CancelInteraction;
     }
 
-    protected virtual void PrepareToInteraction(BasePlayer player)
+    protected virtual void PrepareToInteraction(IPlayer player)
     {
         _player = player;
         _player.SetInteractable(this);
@@ -35,7 +40,7 @@ public class SimpleEncounter : BaseEncounter, IInteractable
         Debug.Log($"SimpleEncounter.Interact");
     }
 
-    protected virtual void CancelInteraction(BasePlayer player)
+    protected virtual void CancelInteraction(IPlayer player)
     {
         _player.RemoveInteractable(this);
         _player = null;

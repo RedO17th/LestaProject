@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ARPanelUIController : BaseUIController
+public class ARPanelUIController : OLDBaseUIController
 {
     public event Action OnAREnableCalled = null;
     public event Action OnARDisableCalled = null;
@@ -14,7 +14,7 @@ public class ARPanelUIController : BaseUIController
 
     private bool isARButtonActive = false;
 
-    [SerializeField] private BaseButton _ARButton = null;
+    [SerializeField] private OLDBaseButton _ARButton = null;
 
     public void Awake()
     {
@@ -30,7 +30,7 @@ public class ARPanelUIController : BaseUIController
     }
 
 
-    private void OnARButtonClicked(BaseButton sender)
+    private void OnARButtonClicked(OLDBaseButton sender)
     {
         if (isARButtonActive)
         {

@@ -1,28 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public interface IVolumeEncounter : IEncounter, ITaskable
-{
-    void Activate();
-    void Deactivate();
-}
-
-public abstract class BaseVolumeEncounter : MonoBehaviour, IVolumeEncounter
-{
-    [SerializeField] protected string _name = string.Empty;
-    [SerializeField] protected TriggerVolumeByPlayer _triggerVolume = null;
-
-    public string Name => _name;
-
-    protected IQuestTask _questTask = null;
-
-    public virtual void SetTask(IQuestTask task) { _questTask = task; }
-
-    public virtual void Activate() { }
-    public virtual void Deactivate() { }
-}
-
-public class DistanationVolume : BaseVolumeEncounter
+public class DistanationVolume : BaseTaskVolume
 {
     public override void Activate()
     {
@@ -31,7 +10,7 @@ public class DistanationVolume : BaseVolumeEncounter
         _triggerVolume.OnEnter += PlayerCameUp;
     }
 
-    private void PlayerCameUp(BasePlayer player) => SendSignalByContext();
+    private void PlayerCameUp(IPlayer player) => SendSignalByContext();
 
     private void SendSignalByContext()
     {

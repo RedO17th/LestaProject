@@ -2,6 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public interface IActivatable
+{
+    void Activate();
+    void Deactivate();
+}
+
 public interface INamable
 {
     string Name { get; }
@@ -21,12 +27,9 @@ public interface ITaskable
     void SetTask(IQuestTask task);
 }
 
-public interface ITaskEncounter : IEncounter, ITaskable
+public interface ITaskEncounter : IEncounter, IActivatable, ITaskable
 {
     IQuestTask Task { get; }
-
-    void Activate();
-    void Deactivate();
 }
 
 public interface IHintableEncounter : ITaskEncounter
@@ -37,3 +40,5 @@ public interface IDialogableEncounter : IHintableEncounter
 {
     void InitializeDialog(string dialogName);
 }
+
+public interface ITaskVolumeEncounter : IEncounter, IActivatable, ITaskable { }
