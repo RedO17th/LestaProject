@@ -59,3 +59,4 @@ MonoBehaviour:
     _items: []
   _taskPrefabs:
   - {fileID: 8696648401828564429, guid: fb421a99deb74f644b1c056478b466f3, type: 3}
+  - {fileID: 33821565384268061, guid: 9bbe22240365fc04488e4d4aaba81bc0, type: 3}

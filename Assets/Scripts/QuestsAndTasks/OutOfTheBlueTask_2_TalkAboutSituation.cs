@@ -2,19 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OutOfTheBlueTask_1_TalkAboutGirl : BaseQuestTask
+public class OutOfTheBlueTask_2_TalkAboutSituation : BaseQuestTask
 {
     [Header("Encounter names")]
-    [SerializeField] protected string _girlName = string.Empty;
-    [SerializeField] protected string _dialogueName = string.Empty;
+    [SerializeField] protected string _dialogueAbout = string.Empty;
 
-    private DialogueEncounter _girl = null;
+    private IDialogueInvoker _dialogueVolume = null;
 
     public override void Prepare()
     {
-        _girl = _quest.GetNpcEncounterByName(_girlName) as DialogueEncounter;
-        _girl.SetTask(this);
-        _girl.InitializeDialog(_dialogueName);
+        _dialogueVolume = _quest.GetInvokerEncounterByName(_dialogueAbout) as IDialogueInvoker;
 
         DialogueSceneController.OnDialogueEnd += ProcessEndOfDialogue;
 
@@ -23,25 +20,21 @@ public class OutOfTheBlueTask_1_TalkAboutGirl : BaseQuestTask
 
     public override void Activate()
     {
-        _girl.Activate();
-        _girl.Hint();
-
         base.Activate();
+
+        _dialogueVolume.Activate();
+
     }
 
     private void ProcessEndOfDialogue(BaseDialogue dialogue)
     {
-        if (dialogue.Name == _dialogueName)
+        if (dialogue.Name == _dialogueVolume.DialogueName)
         {
             if (dialogue.CorrectCompletion)
             {
                 DialogueSceneController.OnDialogueEnd -= ProcessEndOfDialogue;
 
                 FinishTheCurrentTask();
-            }
-            else
-            {
-                _girl.OnPlayerMovedAway += PlayerMovedAway;
             }
         }
     }
@@ -55,21 +48,17 @@ public class OutOfTheBlueTask_1_TalkAboutGirl : BaseQuestTask
         ProjectBus.Instance.SendSignalByContext(context);
     }
 
-    private void PlayerMovedAway()
-    {
-        _girl.OnPlayerMovedAway -= PlayerMovedAway;
-        _girl.Hint();
-    }
-
     protected override void Complete()
     {
-        Debug.Log($"OutOfTheBlueTask_1_TalkAboutGirl.Complete");
+        Debug.Log($"OutOfTheBlueTask_2_TalkAboutSituation.Complete");
 
         base.Complete();
     }
 
     public override void Dectivate()
     {
+        _dialogueVolume.Deactivate();
+
         base.Dectivate();
 
         Clear();
@@ -77,6 +66,6 @@ public class OutOfTheBlueTask_1_TalkAboutGirl : BaseQuestTask
 
     protected override void Clear()
     {
-        _girl = null;
+        _dialogueVolume = null;
     }
 }

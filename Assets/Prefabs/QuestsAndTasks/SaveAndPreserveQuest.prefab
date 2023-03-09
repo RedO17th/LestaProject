@@ -58,4 +58,5 @@ MonoBehaviour:
     _experience: 40
     _money: 40
     _items: []
-  _taskPrefabs: []
+  _taskPrefabs:
+  - {fileID: 6528954828800015708, guid: 495b49dff5848df48a7ad141489f1e4f, type: 3}

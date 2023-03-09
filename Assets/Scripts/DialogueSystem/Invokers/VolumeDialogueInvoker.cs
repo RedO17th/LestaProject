@@ -48,7 +48,7 @@ public class VolumeDialogueInvoker : DialogueInvoker
         ProjectBus.Instance.SendSignalByContext(context);
     }
 
-    protected override void Deactivate()
+    public override void Deactivate()
     {
         _triggerVolumeByPlayer.OnEnter -= ProcessEnterInVolume;
         _triggerVolumeByPlayer.Disable();

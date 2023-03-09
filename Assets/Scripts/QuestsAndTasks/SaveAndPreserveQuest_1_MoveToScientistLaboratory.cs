@@ -2,32 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JohnnyTheyreInTheTreesTask_2_MoveToUncle : BaseQuestTask
+public class SaveAndPreserveQuest_1_MoveToScientistLaboratory : BaseQuestTask
 {
-    [Header("Encounter names")]
-    [SerializeField] protected string _uncleEncounterName = string.Empty;
     [SerializeField] protected string _distanationVolumeName = string.Empty;
+
+    private ITaskVolumeEncounter _distanationVolume = null;
 
     //[Remove]
     [Space]
     [SerializeField] protected string _dogEncounterName = string.Empty;
     [SerializeField] protected Vector3 _dogPosition = Vector3.zero;
-
-    private IHintableEncounter _uncle = null;
-    private ITaskVolumeEncounter _distanationVolume = null;
-
-    //[Remove]
     private Dog _dog = null;
+
+    [Space]
+    [SerializeField] protected string _girlEncounterName = string.Empty;
+    [SerializeField] protected Vector3 _girlPosition = Vector3.zero;
+    private Girl _girl = null;
+    //..
+
+    public override void Initialize(BaseQuest quest)
+    {
+        base.Initialize(quest);
+    }
 
     public override void Prepare()
     {
         _distanationVolume = _quest.GetVolumeEncounterByName(_distanationVolumeName) as ITaskVolumeEncounter;
         _distanationVolume.SetTask(this);
 
-        _uncle = _quest.GetNpcEncounterByName(_uncleEncounterName) as IHintableEncounter;
-
-        //Remove
+        //[Remove]
         _dog = _quest.GetNpcEncounterByName(_dogEncounterName) as Dog;
+        _girl = _quest.GetNpcEncounterByName(_girlEncounterName) as Girl;
+        //..
 
         base.Prepare();
     }
@@ -36,18 +42,17 @@ public class JohnnyTheyreInTheTreesTask_2_MoveToUncle : BaseQuestTask
     {
         _distanationVolume.Activate();
 
-        _uncle.Activate();
-        _uncle.Hint();
-
         //Remove
         _dog.transform.position = _dogPosition;
+        _girl.transform.position = _girlPosition;
+        //..
 
         base.Activate();
     }
 
     protected override void Complete()
     {
-        Debug.Log($"JohnnyTheyreInTheTreesTask_2_MoveToUncle.Complete");
+        Debug.Log($"SaveAndPreserveQuest_1_MoveToScientistLaboratory.Complete");
 
         base.Complete();
     }
@@ -55,7 +60,7 @@ public class JohnnyTheyreInTheTreesTask_2_MoveToUncle : BaseQuestTask
     public override void Dectivate()
     {
         base.Dectivate();
-
+        
         _distanationVolume.Deactivate();
 
         Clear();
@@ -64,7 +69,9 @@ public class JohnnyTheyreInTheTreesTask_2_MoveToUncle : BaseQuestTask
     protected override void Clear()
     {
         _distanationVolume = null;
-        _uncle = null;
+
+        //..
+        _girl = null;
         _dog = null;
     }
 }

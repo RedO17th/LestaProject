@@ -194,7 +194,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e006e1ca61bec7044821ca63e6cc6ee5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dialogueController: {fileID: 0}
 --- !u!1 &4927095735731968069
 GameObject:
   m_ObjectHideFlags: 0
@@ -558,5 +557,6 @@ MonoBehaviour:
     - {fileID: 0}
   - _questPrefab: {fileID: 8876499499370373682, guid: 97591ab76424a5d45ad3e88038181ad4, type: 3}
     _npcEncounters: []
-    _volumeEncounters: []
+    _volumeEncounters:
+    - {fileID: 0}
     _invokerEncounters: []
