@@ -42,8 +42,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6395891941848107155}
   - component: {fileID: 1285406782191307350}
-  - component: {fileID: 6395891941848107152}
-  - component: {fileID: 5114396300904967897}
+  - component: {fileID: 6208197841912900412}
+  - component: {fileID: 1835473956700978000}
+  - component: {fileID: 877344189224820674}
   m_Layer: 0
   m_Name: ScientistEncouner
   m_TagString: Untagged
@@ -80,21 +81,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b0ef49757a85c34d828868839e18c1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6395891941848107152
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6395891941848107153}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 734c761a8b03f274eb7514ee034d67b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _name: Uncle
+  _name: Scientist
   _pointer: {fileID: 6395891942199153863}
---- !u!114 &5114396300904967897
+--- !u!114 &6208197841912900412
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -103,9 +92,34 @@ MonoBehaviour:
   m_GameObject: {fileID: 6395891941848107153}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab4795194e2dc124a9824b11e34bc4f3, type: 3}
+  m_Script: {fileID: 11500000, guid: 886bc06665e98fb4e9e77afb45e7b656, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1835473956700978000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6395891941848107153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f83ebe4658a2324495491165aaf2296, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &877344189224820674
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6395891941848107153}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1001 &470288999339222525
 PrefabInstance:
   m_ObjectHideFlags: 0

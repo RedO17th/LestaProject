@@ -14,7 +14,7 @@
         ->scene_4_block_2
     *[О, сегодня вы без похмелья. Странно…] #Speaker.Tisha
         ->scene_4_block_3
-->END
+->CorrectCompletion
 
 == scene_4_block_1 ==
 Что случилось? #Speaker.Padlytch
@@ -29,16 +29,16 @@
     *[Ну не в помещении же…] #Speaker.Tisha
         Помещение мое? Мое. Вот и не раскрывай рот. Гланды простудишь. Лучше тащи ее на стол. #Speaker.Padlytch
         ++[>>]
-            ->DONE
+            ->CorrectCompletion
     *[Помоги мне, пожалуйста. Коммуникатор стащили, сети перегружены и вызвать наряд я не смог, я не хочу, чтобы она умерла.] #Speaker.Tisha
         Тащи ее на стол. #Speaker.Padlytch
             ++[>>]    
-                ->DONE
+                ->CorrectCompletion
     *[Ты можешь ей помочь? А я пока дозвонюсь до участка…] #Speaker.Tisha
         Тащи ее на стол. #Speaker.Padlytch
             ++[>>]    
-                ->DONE
-->END
+                ->CorrectCompletion
+->CorrectCompletion
 
 == scene_4_block_2 ==
 Поиски жилья затянулись. Бывает. Зато я всегда на месте и мне не надо тащиться через весь город на вызов - удобно. #Speaker.Padlytch
@@ -53,16 +53,16 @@
     *[Ну не в помещении же…] #Speaker.Tisha
         Помещение мое? Мое. Вот и не раскрывай рот. Гланды простудишь. Лучше тащи ее на стол. #Speaker.Padlytch
             ++[>>]
-                ->DONE
+                ->CorrectCompletion
     *[Помоги мне, пожалуйста. Коммуникатор стащили, сети перегружены и вызвать наряд я не смог, я не хочу, чтобы она умерла.] #Speaker.Tisha
         Тащи ее на стол. #Speaker.Padlytch
             ++[>>]
-                ->DONE
+                ->CorrectCompletion
     *[Ты можешь ей помочь? А я пока дозвонюсь до участка…] #Speaker.Tisha
             Тащи ее на стол. #Speaker.Padlytch
             ++[>>]    
-                ->DONE
-->DONE
+                ->CorrectCompletion
+->CorrectCompletion
 
 == scene_4_block_3 ==
 -Так, малой. Что за инсинуации? #Speaker.Padlytch
@@ -77,13 +77,21 @@
     *[Я ее нашел. Не смог дозвониться до участка и скорой, а помощь ей нужна сейчас. Палыч, ну…] #Speaker.Tisha
         Так, ладно. Тащи ее на стол. #Speaker.Padlytch
             ++[>>]
-                ->DONE
+                ->CorrectCompletion
     *[Я не похищал ее! Не смотри так на меня!] #Speaker.Tisha
         Ты уверен? А то, знаешь, всякие Темные Истории… #Speaker.Padlytch #Note.DarkStory
             ++[>>]
-                ->DONE
+                ->CorrectCompletion
     *[Может ты сначала поможешь, а потом задашь все вопросы?] #Speaker.Tisha
         Тащи ее на стол. Девочке и правда нужна помощь. #Speaker.Padlytch
             ++[>>]
-                ->DONE
-->DONE
+                ->CorrectCompletion
+->CorrectCompletion
+
+== CorrectCompletion ==
+    + #CorrectCompletion
+        ->DONE
+  
+ == IncorrectCompletion ==
+    + #IncorrectCompletion
+        ->END

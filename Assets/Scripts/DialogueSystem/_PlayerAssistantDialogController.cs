@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAssistantDialogController : BaseDialogController
+public class _PlayerAssistantDialogController : BaseDialogController
 {
     public override void ActivateDialog()
     {

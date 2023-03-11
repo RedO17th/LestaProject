@@ -5,17 +5,18 @@ using UnityEngine;
 
 public class DialogSubSystem : BaseSubSystem
 {
+
+    public static event Action OnDialogScreenCalled;
+    public static event Action OnExitFromDialogScreenCalled;
+
+    public event Action<object, INote> OnAddNote;
+
     private DiceTwentySubSystem _diceTwentySubSystem = null;
 
     private CharactersContainer _charactersData = null;
     private DialogueDataContainer _dialogueData = null;
 
     private DialogContext _currentContext = null;
-
-    public static event Action OnDialogScreenCalled;
-    public static event Action OnExitFromDialogScreenCalled;
-
-    public event Action<object, INote> OnAddNote;
 
     private DialogueSceneController _dialogueController = null;
 
