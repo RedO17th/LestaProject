@@ -19,7 +19,8 @@ public class DialogueSceneController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _replica = null;
 
     [Header("Tisha")]
-    [SerializeField] private Image _tishaShadow = null;
+    [SerializeField] private Image _playerPortrait = null;
+    [SerializeField] private Image _playerShadow = null;
 
     [Header("Buttons")]
     [SerializeField] private ChoiceButton[] _choiceButtons = null;
@@ -191,12 +192,14 @@ public class DialogueSceneController : MonoBehaviour
 
         if (name.Equals("Tisha"))
         {
-            _tishaShadow.enabled = false;
+            _playerShadow.enabled = false;
             _speakerShadow.enabled = true;
+
+            _playerPortrait.sprite = character.Portreit;
         }
         else
         {
-            _tishaShadow.enabled = true;
+            _playerShadow.enabled = true;
             _speakerShadow.enabled = false;
 
             _speakerPortrait.sprite = character.Portreit;
