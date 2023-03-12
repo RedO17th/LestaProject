@@ -38,6 +38,8 @@ public class JohnnyTheyreInTheTreesTask_1_TalkWithAssistant : BaseQuestTask
             }
             else 
             {
+                RestartTalkableEncounter();
+
                 _assistant.OnPlayerMovedAway += PlayerMovedAway;
             }
         }
@@ -45,7 +47,7 @@ public class JohnnyTheyreInTheTreesTask_1_TalkWithAssistant : BaseQuestTask
 
     private void StopTalkableEncounter()
     {
-        _assistant.StopDialogue();
+        _assistant.SuccessfulCompletionOfTheDialogue();
     }
 
     private void FinishTheCurrentTask()
@@ -59,9 +61,15 @@ public class JohnnyTheyreInTheTreesTask_1_TalkWithAssistant : BaseQuestTask
         //Можно использовать метод ProcessSignal() из BaseQuestTask
     }
 
+    private void RestartTalkableEncounter()
+    {
+        _assistant.UnsuccessfulCompletionOfTheDialog();
+    }
+
     private void PlayerMovedAway()
     {
         _assistant.OnPlayerMovedAway -= PlayerMovedAway;
+
         _assistant.Hint();
     }
 

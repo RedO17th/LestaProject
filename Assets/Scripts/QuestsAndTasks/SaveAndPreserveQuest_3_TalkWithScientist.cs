@@ -44,6 +44,8 @@ public class SaveAndPreserveQuest_3_TalkWithScientist : BaseQuestTask
             }
             else
             {
+                RestartTalkableEncounter();
+
                 _scientist.OnPlayerMovedAway += PlayerMovedAway;
             }
         }
@@ -51,7 +53,7 @@ public class SaveAndPreserveQuest_3_TalkWithScientist : BaseQuestTask
 
     private void StopTalkableEncounter()
     {
-        _scientist.StopDialogue();
+        _scientist.SuccessfulCompletionOfTheDialogue();
     }
 
     private void FinishTheCurrentTask()
@@ -63,6 +65,11 @@ public class SaveAndPreserveQuest_3_TalkWithScientist : BaseQuestTask
         ProjectBus.Instance.SendSignalByContext(context);
 
         //Можно использовать метод ProcessSignal() из BaseQuestTask
+    }
+
+    private void RestartTalkableEncounter()
+    {
+        _scientist.UnsuccessfulCompletionOfTheDialog();
     }
 
     private void PlayerMovedAway()

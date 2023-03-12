@@ -33,10 +33,16 @@ public class Girl : DialogueEncounter
             s.SetDialogueName(dialogName);
     }
 
-    public override void StopDialogue()
+    public override void SuccessfulCompletionOfTheDialogue()
     {
-        var s = _stateMachine.GetState<DialogueScientistState>();
-            s.Stop();
+        var s = _stateMachine.GetState<DialogueGirlState>();
+            s.SuccessfulStop();
+    }
+
+    public override void UnsuccessfulCompletionOfTheDialog()
+    {
+        var s = _stateMachine.GetState<DialogueGirlState>();
+            s.UnsuccessfulStop();
     }
 
     public override void Hint() => base.Hint();

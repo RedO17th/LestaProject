@@ -42,7 +42,8 @@ public class DialogueEncounter : SimpleEncounter, IDialogableEncounter
 
     public virtual void InitializeDialog(string dialogName) { }
 
-    public virtual void StopDialogue() { }
+    public virtual void SuccessfulCompletionOfTheDialogue() { }
+    public virtual void UnsuccessfulCompletionOfTheDialog() { }
 
     public virtual void Hint() { _pointer.Enable(); }
 
@@ -64,7 +65,5 @@ public class DialogueEncounter : SimpleEncounter, IDialogableEncounter
 
         _pointer.Disable();
     }
-
-
 }
 

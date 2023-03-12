@@ -32,10 +32,15 @@ public class Uncle : DialogueEncounter
         var s = _stateMachine.GetState<DialogueUncleState>();
             s.SetDialogueName(dialogName);
     }
-    public override void StopDialogue()
+    public override void SuccessfulCompletionOfTheDialogue()
     {
-        var s = _stateMachine.GetState<DialogueScientistState>();
-            s.Stop();
+        var s = _stateMachine.GetState<DialogueUncleState>();
+            s.SuccessfulStop();
+    }
+    public override void UnsuccessfulCompletionOfTheDialog()
+    {
+        var s = _stateMachine.GetState<DialogueUncleState>();
+            s.UnsuccessfulStop();
     }
 
     public override void Hint() => base.Hint();

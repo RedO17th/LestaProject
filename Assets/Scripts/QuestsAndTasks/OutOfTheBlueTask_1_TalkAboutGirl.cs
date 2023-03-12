@@ -42,6 +42,8 @@ public class OutOfTheBlueTask_1_TalkAboutGirl : BaseQuestTask
             }
             else
             {
+                RestartTalkableEncounter();
+
                 _girl.OnPlayerMovedAway += PlayerMovedAway;
             }
         }
@@ -49,7 +51,7 @@ public class OutOfTheBlueTask_1_TalkAboutGirl : BaseQuestTask
 
     private void StopTalkableEncounter()
     {
-        _girl.StopDialogue();
+        _girl.SuccessfulCompletionOfTheDialogue();
     }
 
     private void FinishTheCurrentTask()
@@ -59,6 +61,11 @@ public class OutOfTheBlueTask_1_TalkAboutGirl : BaseQuestTask
             context.SetID(_idName);
 
         ProjectBus.Instance.SendSignalByContext(context);
+    }
+
+    private void RestartTalkableEncounter()
+    {
+        _girl.UnsuccessfulCompletionOfTheDialog();
     }
 
     private void PlayerMovedAway()

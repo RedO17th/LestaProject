@@ -65,8 +65,6 @@ public class DialogueAssistantState : DialogueState, IQuestState
             _isStarted = true;
 
             SendSignalByDialogueContext();
-
-            //DialogueSceneController.OnDialogueEnd += ProcessEndOfDialogue;
         }
     }
 
@@ -79,11 +77,17 @@ public class DialogueAssistantState : DialogueState, IQuestState
         ProjectBus.Instance.SendSignalByContext(context);
     }
 
-    public override void Stop() => ProcessCorrectEndOfDialogue();
+    public override void SuccessfulStop() => ProcessCorrectEndOfDialogue();
     private void ProcessCorrectEndOfDialogue()
     {
         _dialogueName = string.Empty;
 
+        OnStateCompleted(this);
+    }
+
+    public override void UnsuccessfulStop() => ProcessUnCorrectEndOfDialogue();
+    private void ProcessUnCorrectEndOfDialogue()
+    {
         OnStateCompleted(this);
     }
 

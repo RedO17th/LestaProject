@@ -161,7 +161,8 @@ public abstract class BaseState : IState
 public interface IDialogueState
 {
     void SetDialogueName(string dialogName);
-    void Stop();
+    void SuccessfulStop();
+    void UnsuccessfulStop();
 }
 
 public abstract class DialogueState : BaseState, IDialogueState
@@ -174,5 +175,6 @@ public abstract class DialogueState : BaseState, IDialogueState
         _dialogueName = dialogueName;
     }
 
-    public virtual void Stop() { }
+    public virtual void SuccessfulStop() { }
+    public virtual void UnsuccessfulStop() { }
 }

@@ -39,7 +39,8 @@ public interface IHintableEncounter : ITaskEncounter
 public interface IDialogableEncounter : IHintableEncounter
 {
     void InitializeDialog(string dialogName);
-    void StopDialogue();
+    void SuccessfulCompletionOfTheDialogue();
+    void UnsuccessfulCompletionOfTheDialog();
 }
 
 public interface ITaskVolumeEncounter : IEncounter, IActivatable, ITaskable { }

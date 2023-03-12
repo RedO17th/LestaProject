@@ -38,6 +38,8 @@ public class JohnnyTheyreInTheTreesTask_5_TalkWithAssistant : BaseQuestTask
             }
             else
             {
+                RestartTalkableEncounter();
+
                 _assistant.OnPlayerMovedAway += PlayerMovedAway;
             }
         }
@@ -45,7 +47,7 @@ public class JohnnyTheyreInTheTreesTask_5_TalkWithAssistant : BaseQuestTask
 
     private void StopTalkableEncounter()
     {
-        _assistant.StopDialogue();
+        _assistant.SuccessfulCompletionOfTheDialogue();
     }
 
     private void FinishTheCurrentTask()
@@ -55,6 +57,11 @@ public class JohnnyTheyreInTheTreesTask_5_TalkWithAssistant : BaseQuestTask
             context.SetID(_idName);
 
         ProjectBus.Instance.SendSignalByContext(context);
+    }
+
+    private void RestartTalkableEncounter()
+    {
+        _assistant.UnsuccessfulCompletionOfTheDialog();
     }
 
     private void PlayerMovedAway()
