@@ -18,6 +18,7 @@ public class SaveAndPreserveQuest_3_TalkWithScientist : BaseQuestTask
         _scientist.InitializeDialog(_scientistEncounterDialogName);
         _scientist.Hint();
 
+        //Ключевой момент в отслеживании завершения разговора
         DialogueSceneController.OnDialogueEnd += ProcessEndOfDialogue;
 
         base.Prepare();
@@ -38,6 +39,7 @@ public class SaveAndPreserveQuest_3_TalkWithScientist : BaseQuestTask
             {
                 DialogueSceneController.OnDialogueEnd -= ProcessEndOfDialogue;
 
+                StopTalkableEncounter();
                 FinishTheCurrentTask();
             }
             else
@@ -45,6 +47,11 @@ public class SaveAndPreserveQuest_3_TalkWithScientist : BaseQuestTask
                 _scientist.OnPlayerMovedAway += PlayerMovedAway;
             }
         }
+    }
+
+    private void StopTalkableEncounter()
+    {
+        _scientist.StopDialogue();
     }
 
     private void FinishTheCurrentTask()

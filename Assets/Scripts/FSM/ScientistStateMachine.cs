@@ -49,8 +49,6 @@ public class DialogueScientistState : DialogueState, IQuestState
             _isStarted = true;
 
             SendSignalByDialogueContext();
-
-            DialogueSceneController.OnDialogueEnd += ProcessEndOfDialogue;
         }
     }
 
@@ -63,20 +61,26 @@ public class DialogueScientistState : DialogueState, IQuestState
         ProjectBus.Instance.SendSignalByContext(context);
     }
 
-    private void ProcessEndOfDialogue(BaseDialogue dialogue)
+    public override void Stop() => ProcessCorrectEndOfDialogue();
+    private void ProcessCorrectEndOfDialogue()
     {
-        if (dialogue.Name == _dialogueName)
-        {
-            DialogueSceneController.OnDialogueEnd -= ProcessEndOfDialogue;
+        _dialogueName = string.Empty;
 
-            if (dialogue.CorrectCompletion)
-            {
-                _dialogueName = string.Empty;
-            }
-
-            OnStateCompleted(this);
-        }
+        OnStateCompleted(this);
     }
+
+    //private void ProcessEndOfDialogue(BaseDialogue dialogue)
+    //{
+    //    if (dialogue.Name == _dialogueName)
+    //    {
+    //        if (dialogue.CorrectCompletion)
+    //        {
+    //            _dialogueName = string.Empty;
+    //        }
+
+    //        OnStateCompleted(this);
+    //    }
+    //}
 
     public override void Deactivate()
     {

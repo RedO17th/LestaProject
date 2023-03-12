@@ -33,6 +33,7 @@ public class JohnnyTheyreInTheTreesTask_1_TalkWithAssistant : BaseQuestTask
             {
                 DialogueSceneController.OnDialogueEnd -= ProcessEndOfDialogue;
 
+                StopTalkableEncounter();
                 FinishTheCurrentTask();
             }
             else 
@@ -40,6 +41,11 @@ public class JohnnyTheyreInTheTreesTask_1_TalkWithAssistant : BaseQuestTask
                 _assistant.OnPlayerMovedAway += PlayerMovedAway;
             }
         }
+    }
+
+    private void StopTalkableEncounter()
+    {
+        _assistant.StopDialogue();
     }
 
     private void FinishTheCurrentTask()

@@ -38,6 +38,7 @@ public class SaveAndPreserveQuest_4_ExaminationByAScientist : BaseQuestTask
         _girl = _quest.GetNpcEncounterByName(_girlEncounterName) as Girl;
         //..
 
+        //Ключевой момент в отслеживании завершения разговора
         DialogueSceneController.OnDialogueEnd += ProcessEndOfDialogue;
 
         base.Prepare();
@@ -62,6 +63,7 @@ public class SaveAndPreserveQuest_4_ExaminationByAScientist : BaseQuestTask
             {
                 DialogueSceneController.OnDialogueEnd -= ProcessEndOfDialogue;
 
+                StopTalkableEncounter();
                 FinishTheCurrentTask();
             }
             else
@@ -69,6 +71,11 @@ public class SaveAndPreserveQuest_4_ExaminationByAScientist : BaseQuestTask
                 _scientist.OnPlayerMovedAway += PlayerMovedAway;
             }
         }
+    }
+
+    private void StopTalkableEncounter()
+    {
+        _scientist.StopDialogue();
     }
 
     private void FinishTheCurrentTask()
@@ -90,7 +97,7 @@ public class SaveAndPreserveQuest_4_ExaminationByAScientist : BaseQuestTask
 
     protected override void Complete()
     {
-        Debug.Log($"SaveAndPreserveQuest_3_TalkWithScientist.Complete");
+        Debug.Log($"SaveAndPreserveQuest_4_ExaminationByAScientist.Complete");
 
         base.Complete();
     }

@@ -50,7 +50,7 @@ public class DialogueGirlState : DialogueState, IQuestState
 
             SendSignalByDialogueContext();
 
-            DialogueSceneController.OnDialogueEnd += ProcessEndOfDialogue;
+            //DialogueSceneController.OnDialogueEnd += ProcessEndOfDialogue;
         }
     }
 
@@ -63,20 +63,28 @@ public class DialogueGirlState : DialogueState, IQuestState
         ProjectBus.Instance.SendSignalByContext(context);
     }
 
-    private void ProcessEndOfDialogue(BaseDialogue dialogue)
+    public override void Stop() => ProcessCorrectEndOfDialogue();
+    private void ProcessCorrectEndOfDialogue()
     {
-        if (dialogue.Name == _dialogueName)
-        {
-            DialogueSceneController.OnDialogueEnd -= ProcessEndOfDialogue;
+        _dialogueName = string.Empty;
 
-            if (dialogue.CorrectCompletion)
-            {
-                _dialogueName = string.Empty;
-            }
-
-            OnStateCompleted(this);
-        }
+        OnStateCompleted(this);
     }
+
+    //private void ProcessEndOfDialogue(BaseDialogue dialogue)
+    //{
+    //    if (dialogue.Name == _dialogueName)
+    //    {
+    //        //DialogueSceneController.OnDialogueEnd -= ProcessEndOfDialogue;
+
+    //        if (dialogue.CorrectCompletion)
+    //        {
+    //            _dialogueName = string.Empty;
+    //        }
+
+    //        OnStateCompleted(this);
+    //    }
+    //}
 
     public override void Deactivate()
     {

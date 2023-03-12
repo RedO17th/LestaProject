@@ -161,6 +161,7 @@ public abstract class BaseState : IState
 public interface IDialogueState
 {
     void SetDialogueName(string dialogName);
+    void Stop();
 }
 
 public abstract class DialogueState : BaseState, IDialogueState
@@ -172,4 +173,6 @@ public abstract class DialogueState : BaseState, IDialogueState
     {
         _dialogueName = dialogueName;
     }
+
+    public virtual void Stop() { }
 }

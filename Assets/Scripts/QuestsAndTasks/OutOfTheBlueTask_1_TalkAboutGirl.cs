@@ -37,6 +37,7 @@ public class OutOfTheBlueTask_1_TalkAboutGirl : BaseQuestTask
             {
                 DialogueSceneController.OnDialogueEnd -= ProcessEndOfDialogue;
 
+                StopTalkableEncounter();
                 FinishTheCurrentTask();
             }
             else
@@ -44,6 +45,11 @@ public class OutOfTheBlueTask_1_TalkAboutGirl : BaseQuestTask
                 _girl.OnPlayerMovedAway += PlayerMovedAway;
             }
         }
+    }
+
+    private void StopTalkableEncounter()
+    {
+        _girl.StopDialogue();
     }
 
     private void FinishTheCurrentTask()
