@@ -15,22 +15,22 @@ MonoBehaviour:
   _characters:
   - _name: "\u0410\u0440\u0441\u0435\u043D"
     _tag: Arsen
-    _portreit: {fileID: 21300000, guid: e13af3fc717df414db4d5e940a4b7a86, type: 3}
+    _portreit: {fileID: 21300000, guid: 0f4dfe3496f9425499c0ef577ad19612, type: 3}
   - _name: "\u0414\u0435\u0432\u043E\u0447\u043A\u0430"
     _tag: Girl
-    _portreit: {fileID: 21300000, guid: aa707837b2929fb4894bc4daea4637ed, type: 3}
+    _portreit: {fileID: 21300000, guid: 960467326d088364f81de1b65fedd8eb, type: 3}
   - _name: "\u041C\u0443\u0445\u0442\u0430\u0440"
     _tag: Mukhtar
-    _portreit: {fileID: 21300000, guid: 0d320f55c5a712c4caa6cc284ad025cf, type: 3}
+    _portreit: {fileID: 21300000, guid: d09962983c696124abc668de3b85c10f, type: 3}
   - _name: "\u041F\u0430\u0434\u043B\u044B\u0447"
     _tag: Padlytch
-    _portreit: {fileID: 21300000, guid: 606d9f8070968714d84e56881108b80e, type: 3}
+    _portreit: {fileID: 21300000, guid: 9f9ea0b5b886bf546be39c56ed1e7af9, type: 3}
   - _name: "\u0420\u0430\u0441\u0441\u043A\u0430\u0437\u0447\u0438\u043A"
     _tag: Storyteller
-    _portreit: {fileID: 21300000, guid: 80ca4470baa508b40a351a65f8839c90, type: 3}
+    _portreit: {fileID: 21300000, guid: c996205f9a51ebc4c8b7b20c9fdfb391, type: 3}
   - _name: "\u0421\u0435\u043A\u0430\u0447"
     _tag: Sekach
-    _portreit: {fileID: 21300000, guid: 61af624513897ae44b79efccb758161e, type: 3}
+    _portreit: {fileID: 21300000, guid: 62b05eeb3b871af4c82759996dc1ef85, type: 3}
   - _name: "\u0422\u0438\u0448\u0430"
     _tag: Tisha
-    _portreit: {fileID: 21300000, guid: 31bc296a5c18a194f9c5abe4ba2fa9df, type: 3}
+    _portreit: {fileID: 21300000, guid: de2e621b04f99684c86b539eb1a36ffb, type: 3}
