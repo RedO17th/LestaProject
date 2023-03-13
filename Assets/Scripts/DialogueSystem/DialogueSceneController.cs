@@ -10,17 +10,21 @@ public class DialogueSceneController : MonoBehaviour
     #region UIComponents
     [SerializeField] private GameObject _dialogueScreen = null;
 
+    [Header("Player and opponent")]
+    [SerializeField] private DialogueOpponent _playerOpponent = null;
+    [SerializeField] private DialogueOpponent _dialogueOpponent = null;
+
+    [Header("Highlight and Unhighlight value")]
+    [Range(0f, 1f)]
+    [SerializeField] private float _minValue;
+
+    [Range(0f, 1f)]
+    [SerializeField] private float _maxValue;
+
     [Header("Speaker")]
     [SerializeField] private TextMeshProUGUI _speakerName = null;
-    [SerializeField] private Image _speakerPortrait = null;
-    [SerializeField] private Image _speakerShadow = null;
-
     [Header("Replica")]
     [SerializeField] private TextMeshProUGUI _replica = null;
-
-    [Header("Tisha")]
-    [SerializeField] private Image _playerPortrait = null;
-    [SerializeField] private Image _playerShadow = null;
 
     [Header("Buttons")]
     [SerializeField] private ChoiceButton[] _choiceButtons = null;
@@ -28,11 +32,14 @@ public class DialogueSceneController : MonoBehaviour
     #endregion
 
     //Мазанов А. - Для чего нужен этот ивент?
-    public static event Action<Story> OnCreateStory;
+    //public static event Action<Story> OnCreateStory;
 
     //Мазанов А.
     public static event Action<BaseDialogue> OnDialogueStart;
     public static event Action<BaseDialogue> OnDialogueEnd;
+
+    public float MinHighlightValue => _minValue;
+    public float MaxHighlightValue => _maxValue;
 
     private DialogSubSystem _dialogSubSystem = null;
 
@@ -47,19 +54,21 @@ public class DialogueSceneController : MonoBehaviour
             button.OnClickEvent += RefreshView;
 
         _nextButton.OnClickEvent += RefreshView;
+
+        _playerOpponent.Initialize(this);
+        _dialogueOpponent.Initialize(this);
     }
 
     // Creates a new Story object with the compiled story which we can then play!
     public void StartStory(BaseDialogue dialogue)
     {
-        //Мазанов А.
         OnDialogueStart?.Invoke(dialogue);
 
         _currentDialogue = dialogue;
 
         _story = new Story(_currentDialogue.File.text);
 
-        OnCreateStory?.Invoke(_story);
+        //OnCreateStory?.Invoke(_story);
 
         foreach (var button in _choiceButtons)
             button.SetStory(_story);
@@ -190,19 +199,22 @@ public class DialogueSceneController : MonoBehaviour
 
         _speakerName.text = character.Name;
 
+        _playerOpponent.UnhighLight();
+        _dialogueOpponent.UnhighLight();
+
         if (name.Equals("Tisha"))
         {
-            _playerShadow.enabled = false;
-            _speakerShadow.enabled = true;
+            _playerOpponent.SetSprite(character.Portreit);
 
-            _playerPortrait.sprite = character.Portreit;
+            _playerOpponent.HighLight();
+            _dialogueOpponent.UnhighLight();
         }
         else
         {
-            _playerShadow.enabled = true;
-            _speakerShadow.enabled = false;
+            _dialogueOpponent.SetSprite(character.Portreit);
 
-            _speakerPortrait.sprite = character.Portreit;
+            _dialogueOpponent.HighLight();
+            _playerOpponent.UnhighLight();
         }
     }
 
