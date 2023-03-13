@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed31aab87cfbeb943bf85d3fe4ae702e, type: 3}
+  m_Name: PrehistoryButtonCommonResourses
+  m_EditorClassIdentifier: 
+  ActiveFrame: {fileID: 21300000, guid: bb811e79527f2344a90022bd66a1c93f, type: 3}
+  InactiveFrame: {fileID: 21300000, guid: 267463ad388a3344b9820d30c96c3a09, type: 3}
+  ActiveBackground: {fileID: 21300000, guid: 2b489841f36e2134492ed661f7c68109, type: 3}
+  InactiveBackground: {fileID: 21300000, guid: ad6391f0727abfc40b0c2e30332bf2de, type: 3}

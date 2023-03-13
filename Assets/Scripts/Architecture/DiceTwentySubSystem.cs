@@ -20,7 +20,7 @@ public class DiceTwentySubSystem : BaseSubSystem
     [Header("For tests")]
     [SerializeField] private int _difficult = 10;
     [SerializeField] private CheckMode _checkMode = CheckMode.None;
-    [SerializeField] private CharacterisicType _characterisicType = CharacterisicType.None;
+    [SerializeField] private CharacteristicType _characterisicType = CharacteristicType.None;
     [SerializeField] private SkillType _skillType = SkillType.None;
 
     private CharacteristicsContainer _characteristics = null;
@@ -37,17 +37,17 @@ public class DiceTwentySubSystem : BaseSubSystem
     }
 
     #region Characteristics part
-    public bool CheckByCharacteristicType(CharacterisicType characterisic, int difficult)
+    public bool CheckByCharacteristicType(CharacteristicType characterisic, int difficult)
     {
         return (DiceRoller.D20() + GetCharacteristicModificator(characterisic)) >= difficult;
     }
     public bool CheckByCharacteristicName(string characteristicName, int difficult)
     {
-        CharacterisicType type = _characteristics.GetCharacterisicTypeByName(characteristicName);
+        CharacteristicType type = _characteristics.GetCharacterisicTypeByName(characteristicName);
         return CheckByCharacteristicType(type, difficult);
     }
 
-    private int GetCharacteristicModificator(CharacterisicType type)
+    private int GetCharacteristicModificator(CharacteristicType type)
     {
         var characteristic = _characteristics.GetCharacteristicByType(type);
 
@@ -104,7 +104,7 @@ public class DiceTwentySubSystem : BaseSubSystem
 
         if (_checkMode == CheckMode.Characteristics)
         {
-            if (_characterisicType == CharacterisicType.None)
+            if (_characterisicType == CharacteristicType.None)
             {
                 Debug.LogError("Ќе выбрана характеристика дл€ проверки");
                 return;
