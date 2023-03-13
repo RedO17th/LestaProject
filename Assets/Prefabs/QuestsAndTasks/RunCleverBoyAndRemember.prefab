@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8154809158385871371
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8154809158385871412}
+  - component: {fileID: 8154809158385871413}
+  m_Layer: 0
+  m_Name: RunCleverBoyAndRemember
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8154809158385871412
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8154809158385871371}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8154809158385871413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8154809158385871371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd4d2dd65e84f664d8c2b7bd9635d11b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _state: 0
+  _idName: RunCleverBoyAndRemember
+  _name: "\u0411\u0435\u0433\u0438, \u0443\u043C\u043D\u044B\u0439 \u043C\u0430\u043B\u044C\u0447\u0438\u043A,
+    \u0438 \u043F\u043E\u043C\u043D\u0438"
+  _description: "\u0421\u0438\u0442\u0443\u0430\u0446\u0438\u044F \u043D\u0430\u043A\u0430\u043B\u0438\u043B\u0430\u0441\u044C.
+    \u0417\u0430 \u0441\u043F\u0438\u043D\u043E\u0439 - \u043D\u0430\u0441\u0442\u0440\u043E\u0435\u043D\u043D\u044B\u0435
+    \u043D\u0435\u0434\u0440\u0443\u0436\u0435\u043B\u044E\u0431\u043D\u043E \u043B\u0438\u0447\u043D\u043E\u0441\u0442\u0438
+    (\u0438 \u044D\u0442\u043E \u043C\u044F\u0433\u043A\u043E \u0441\u043A\u0430\u0437\u0430\u043D\u043E!),
+    \u0432\u043F\u0435\u0440\u0435\u0434\u0438 - \u043D\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u043D\u043E\u0441\u0442\u044C,
+    \u0430 \u043D\u0430 \u0440\u0443\u043A\u0430\u0445 \u043C\u0430\u043B\u0435\u043D\u044C\u043A\u0438\u0439
+    \u0438 \u0431\u0435\u0437\u0437\u0430\u0449\u0438\u0442\u043D\u044B\u0439 \u0440\u0435\u0431\u0435\u043D\u043E\u043A\u2026
+    \u041D\u0438\u043A\u0442\u043E \u043D\u0435 \u0437\u043D\u0430\u0435\u0442, \u0447\u0442\u043E
+    \u0431\u0443\u0434\u0435\u0442 \u0434\u0430\u043B\u044C\u0448\u0435, \u043D\u043E
+    \u043E\u0434\u043D\u043E \u044F\u0441\u043D\u043E \u043A\u0430\u043A \u0434\u0435\u043D\u044C:
+    \u043D\u0443\u0436\u043D\u043E \u0431\u0435\u0436\u0430\u0442\u044C \u0438 \u043F\u0440\u044F\u0442\u0430\u0442\u044C\u0441\u044F,
+    \u0447\u0442\u043E\u0431\u044B \u0441\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C
+    \u0441\u0432\u043E\u044E \u0433\u043E\u043B\u043E\u0432\u0443 \u043D\u0430 \u043F\u043B\u0435\u0447\u0430\u0445.
+    \r\n\r\n\u0418 \u0442\u044B \u0431\u0435\u0433\u0438, \u0443\u043C\u043D\u044B\u0439
+    \u043C\u0430\u043B\u044C\u0447\u0438\u043A.\r\n\r\n\u0418 \u043F\u043E\u043C\u043D\u0438... "
+  _reward:
+    _experience: 0
+    _money: 0
+    _items: []
+  _taskPrefabs:
+  - {fileID: 1627554857115131007, guid: b6fa17e165a3b2a43b79d1b25df574d0, type: 3}
