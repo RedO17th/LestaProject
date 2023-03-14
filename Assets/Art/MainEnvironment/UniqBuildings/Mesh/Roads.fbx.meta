@@ -3,27 +3,7 @@ guid: f0c8b57b2140ed94e95e375331fb1f54
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Asphalt
-    second: {fileID: 2100000, guid: 470b0e003365e104798250346957528c, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Metal
-    second: {fileID: 2100000, guid: 0aea96c51a9dae449a56055a41e113a6, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: TramwayRoad
-    second: {fileID: 2100000, guid: ff2d602c74958c9428892210b0feb290, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: trotuar
-    second: {fileID: 2100000, guid: efca76dc0d8bc0f48b48c147908670bb, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
