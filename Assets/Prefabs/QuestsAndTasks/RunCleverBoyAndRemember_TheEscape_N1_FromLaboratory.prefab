@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1627554857115131004}
   - component: {fileID: 1627554857115131007}
   m_Layer: 0
-  m_Name: RunCleverBoyAndRemember_TheEscape_N1
+  m_Name: RunCleverBoyAndRemember_TheEscape_N1_FromLaboratory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,9 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _state: 0
-  _idName: RunCleverBoyAndRemember_TheEscape_N1
-  _name: RunCleverBoyAndRemember_TheEscape_N1Name
-  _description: RunCleverBoyAndRemember_TheEscape_N1Description
+  _idName: RunCleverBoyAndRemember_TheEscape_N1_FromLaboratory
+  _name: RunCleverBoyAndRemember_TheEscape_N1_FromLaboratoryName
+  _description: RunCleverBoyAndRemember_TheEscape_N1_FromLaboratoryDescription
   _distanationVolumeName: Volume_SaveAndPreserveQuest_1_MoveToScientistLaboratory
   _dogEncounterName: Dog
   _dogPosition: {x: -112, y: 7, z: 38}

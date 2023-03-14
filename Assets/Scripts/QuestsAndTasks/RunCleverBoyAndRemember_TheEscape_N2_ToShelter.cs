@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RunCleverBoyAndRemember_TheEscape_N2 : BaseQuestTask
+public class RunCleverBoyAndRemember_TheEscape_N2_ToShelter : BaseQuestTask
 {
     [Space]
     [SerializeField] protected string _distanationVolumeName = string.Empty;
